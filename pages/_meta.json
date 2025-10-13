@@ -1,0 +1,50 @@
+{
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "introduction": {
+    "title": "Introduction",
+    "type": "page"
+  },
+  "setup": {
+    "title": "Setup & Installation",
+    "type": "page"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "type": "page"
+  },
+  "ai-review": {
+    "title": "AI Code Review",
+    "type": "page"
+  },
+  "billing": {
+    "title": "Billing & Pricing",
+    "type": "page"
+  },
+  "performance": {
+    "title": "Performance",
+    "type": "page"
+  },
+  "api-reference": {
+    "title": "API Reference",
+    "type": "page"
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "page"
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "type": "page"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "type": "page"
+  }
+}
