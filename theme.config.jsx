@@ -28,9 +28,9 @@ export default {
       titleTemplate: 'Mesrai Documentation – AI-Powered Code Reviews'
     }
   },
-  head: () => {
-    const { asPath, defaultLocale, locale } = useRouter()
-    const { frontMatter, title } = useConfig()
+  head: function Head() {
+    const { asPath } = useRouter()
+    const { frontMatter, title } = useConfig() // Removed unused locale and defaultLocale
     const url = `https://docs.mesrai.com${asPath}`
 
     return (

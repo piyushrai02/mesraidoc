@@ -7,7 +7,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     unoptimized: true,
   },
