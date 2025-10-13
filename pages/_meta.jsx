@@ -1,50 +1,49 @@
-export default {
-  "index": {
-    "title": "Home",
-    "type": "page",
-    "display": "hidden",
-    "theme": {
-      "breadcrumb": false
-    }
+
+const meta = {
+  index: {
+    title: 'Home',
+    type: 'page'
   },
-  "introduction": {
-    "title": "Introduction",
-    "type": "page"
+  introduction: {
+    title: 'Introduction',
+    type: 'page'
   },
-  "setup": {
-    "title": "Setup & Installation",
-    "type": "page"
+  setup: {
+    title: 'Setup',
+    type: 'page'
   },
-  "integrations": {
-    "title": "Integrations",
-    "type": "page"
+  integrations: {
+    title: 'Integrations',
+    type: 'page'
   },
-  "ai-review": {
-    "title": "AI Code Review",
-    "type": "page"
+  'ai-review': {
+    title: 'AI Review',
+    type: 'page'
   },
-  "performance": {
-    "title": "Performance",
-    "type": "page"
+  performance: {
+    title: 'Performance',
+    type: 'page'
   },
-  "billing": {
-    "title": "Billing & Pricing",
-    "type": "page"
+  billing: {
+    title: 'Billing',
+    type: 'page'
   },
-  "api-reference": {
-    "title": "API Reference",
-    "type": "page"
+  'api-reference': {
+    title: 'API Reference',
+    type: 'page'
   },
-  "blog": {
-    "title": "Blog",
-    "type": "page"
+  blog: {
+    title: 'Blog',
+    type: 'page'
   },
-  "roadmap": {
-    "title": "Roadmap",
-    "type": "page"
+  roadmap: {
+    title: 'Roadmap',
+    type: 'page'
   },
-  "changelog": {
-    "title": "Changelog",
-    "type": "page"
+  changelog: {
+    title: 'Changelog',
+    type: 'page'
   }
 }
+
+export default meta

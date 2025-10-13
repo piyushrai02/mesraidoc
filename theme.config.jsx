@@ -2,6 +2,12 @@ import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 
 const logo = (
+  <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>
+    Mesrai Docs
+  </span>
+)
+
+const logo = (
   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
@@ -58,6 +64,31 @@ export default {
   sidebar: {
     titleComponent({ title, type }) {
       if (type === 'separator') {
+        return <span className="cursor-default">{title}</span>
+      }
+      return <>{title}</>
+    },
+    defaultMenuCollapseLevel: 1,
+    toggleButton: true
+  },
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} © Mesrai
+      </span>
+    )
+  },
+  editLink: {
+    component: null
+  },
+  feedback: {
+    content: null
+  },
+  toc: {
+    backToTop: true
+  },
+  primaryHue: 210,
+  darkMode: truerator') {
         return <div style={{ fontWeight: 700, fontSize: '0.875rem', marginTop: '1rem' }}>{title}</div>
       }
       return <>{title}</>
