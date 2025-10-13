@@ -15,6 +15,9 @@ export default withNextra({
   poweredByHeader: false,
   generateEtags: true,
   productionBrowserSourceMaps: false,
+  experimental: {
+    optimizePackageImports: ['nextra-theme-docs']
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },

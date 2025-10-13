@@ -18,42 +18,22 @@ export default {
   },
   docsRepositoryBase: 'https://github.com/mesrai/docs',
   useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath !== '/') {
-      return {
-        titleTemplate: '%s – Mesrai Documentation'
-      }
-    }
     return {
-      titleTemplate: 'Mesrai Documentation – AI-Powered Code Reviews'
+      titleTemplate: '%s – Mesrai Documentation'
     }
   },
-  head: function Head() {
-    const { asPath } = useRouter()
-    const { frontMatter, title } = useConfig() // Removed unused locale and defaultLocale
-    const url = `https://docs.mesrai.com${asPath}`
-
-    return (
-      <>
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content={frontMatter.title || title || 'Mesrai Documentation'} />
-        <meta
-          property="og:description"
-          content={frontMatter.description || 'AI-powered code review platform for modern engineering teams'}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@mesrai" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      </>
-    )
-  },
+  head: () => (
+    <>
+      <meta property="og:title" content="Mesrai Documentation" />
+      <meta property="og:description" content="AI-powered code review platform for modern engineering teams" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@mesrai" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    </>
+  ),
   banner: {
     key: 'mesrai-launch',
-    text: (
-      <a href="https://mesrai.com" target="_blank" rel="noopener noreferrer">
-        🚀 Ship Code 3x Faster with AI-Powered Reviews. Start Free Trial →
-      </a>
-    )
+    text: '🚀 Ship Code 3x Faster with AI-Powered Reviews. Start Free Trial →'
   },
   sidebar: {
     titleComponent({ title, type }) {
@@ -81,16 +61,7 @@ export default {
     next: true
   },
   footer: {
-    text: (
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-        <span>© 2025 Mesrai. All rights reserved.</span>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
-          <a href="https://mesrai.com/pricing" target="_blank" rel="noopener noreferrer">Pricing</a>
-          <a href="https://mesrai.com/about" target="_blank" rel="noopener noreferrer">About</a>
-          <a href="https://mesrai.com/blog" target="_blank" rel="noopener noreferrer">Blog</a>
-        </div>
-      </div>
-    )
+    text: '© 2025 Mesrai. All rights reserved.'
   },
   primaryHue: 210,
   darkMode: true,
