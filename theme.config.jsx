@@ -83,7 +83,7 @@ export default {
   footer: {
     text: (
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-        <span>© {new Date().getFullYear()} Mesrai. All rights reserved.</span>
+        <span>© 2025 Mesrai. All rights reserved.</span>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <a href="https://mesrai.com/pricing" target="_blank" rel="noopener noreferrer">Pricing</a>
           <a href="https://mesrai.com/about" target="_blank" rel="noopener noreferrer">About</a>

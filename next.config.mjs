@@ -18,6 +18,15 @@ export default withNextra({
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: ['**/node_modules', '**/.git', '**/.next'],
+      }
+    }
+    return config
+  },
   async headers() {
     return [
       {
