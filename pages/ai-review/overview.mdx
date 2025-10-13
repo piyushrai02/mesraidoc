@@ -37,15 +37,21 @@ Formatted comments and suggestions are posted directly to your PR on GitHub.
 Unlike traditional linters and static analysis tools, Mesrai provides:
 
 #### 🧠 Contextual Understanding
-```mermaid
-graph TD
-    A[Changed Code] --> B[Direct Dependencies]
-    B --> C[Indirect Dependencies]
-    C --> D[Type Definitions]
-    D --> E[Test Files]
-    E --> F[Full Context]
-    
-    style F fill:#007AFF
+
+We analyze code changes through multiple dependency layers:
+
+```
+Changed Code
+    ↓
+Direct Dependencies
+    ↓
+Indirect Dependencies
+    ↓
+Type Definitions
+    ↓
+Test Files
+    ↓
+Full Context ✨
 ```
 
 We don't just look at the diff—we understand:

@@ -3,8 +3,7 @@ title: Welcome to Mesrai Documentation
 description: AI-powered code review platform for modern engineering teams. Ship code 3x faster with intelligent PR reviews.
 ---
 
-import { Cards, Card } from 'nextra/components'
-import { Code, Zap, BookOpen, Rocket, Shield, BarChart } from 'lucide-react'
+import { Cards } from 'nextra/components'
 
 # Welcome to Mesrai Documentation
 
@@ -12,10 +11,10 @@ Mesrai is an AI-powered code review platform that helps engineering teams ship c
 
 <div className="mt-8 mb-8">
   <Cards>
-    <Card icon={<Rocket />} title="Quick Start" href="/introduction/what-is-mesrai" />
-    <Card icon={<Code />} title="API Reference" href="/api-reference/auth-api" />
-    <Card icon={<BookOpen />} title="Tutorials" href="/setup/installation" />
-    <Card icon={<Zap />} title="AI Review" href="/ai-review/overview" />
+    <Cards.Card title="🚀 Quick Start" href="/introduction/what-is-mesrai" />
+    <Cards.Card title="💻 API Reference" href="/api-reference/auth-api" />
+    <Cards.Card title="📖 Tutorials" href="/setup/installation" />
+    <Cards.Card title="⚡ AI Review" href="/ai-review/overview" />
   </Cards>
 </div>
 

@@ -1,4 +1,4 @@
-{
+export default {
   "index": {
     "title": "Home",
     "type": "page",
@@ -23,12 +23,12 @@
     "title": "AI Code Review",
     "type": "page"
   },
-  "billing": {
-    "title": "Billing & Pricing",
-    "type": "page"
-  },
   "performance": {
     "title": "Performance",
+    "type": "page"
+  },
+  "billing": {
+    "title": "Billing & Pricing",
     "type": "page"
   },
   "api-reference": {
