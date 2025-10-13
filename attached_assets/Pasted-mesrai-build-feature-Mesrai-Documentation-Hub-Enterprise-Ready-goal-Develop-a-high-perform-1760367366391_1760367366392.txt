@@ -1,0 +1,159 @@
+mesrai build feature "Mesrai Documentation Hub — Enterprise Ready" \
+--goal "
+Develop a high-performance, scalable documentation and knowledge hub for Mesrai, inspired by CodeAnt AI Docs.
+The system must include:
+- Full documentation site (Docs + API Reference + Blog)
+- <5ms load time with static generation and edge caching
+- Mesrai brand theme
+- Developer-friendly MDX-based writing
+- SEO optimized and easy to scale across multiple versions.
+" \
+--context "
+Mesrai CodePilot is a SaaS platform providing AI-powered code review, GitHub App integration, and automated PR insights.
+
+We already have:
+- Working backend and frontend (MERN + Redis + Stripe)
+- Stable deployment on Vercel and Cloudflare
+
+We now need:
+- A separate documentation repo 'mesrai-docs'
+- With enterprise structure like CodeAnt or Vercel Docs
+- Built using Next.js 15 + Nextra (MDX) for high performance
+" \
+--deliverables "
+### 1. Tech Stack
+- Framework: Next.js 15 + Nextra (nextra-theme-docs)
+- Styling: Tailwind CSS + Mesrai custom theme
+- Deployment: Vercel (Edge CDN)
+- Search: Algolia DocSearch or FlexSearch
+- MDX Components: Diagrams (Mermaid), callouts, tabs, code previews
+- Versioning: Built-in via folder convention (/v1, /v2)
+- Sitemap + SEO ready
+
+### 2. Folder Structure
+/docs
+  ├── index.mdx (Welcome)
+  ├── introduction/
+  │    ├── what-is-mesrai.mdx
+  │    ├── key-capabilities.mdx
+  │    └── core-architecture.mdx
+  ├── setup/
+  │    ├── installation.mdx
+  │    ├── environment.mdx
+  │    └── deployment.mdx
+  ├── integrations/
+  │    ├── github-login.mdx
+  │    ├── github-app-installation.mdx
+  │    └── webhook-testing.mdx
+  ├── ai-review/
+  │    ├── overview.mdx
+  │    ├── token-usage.mdx
+  │    ├── review-pipeline.mdx
+  │    ├── worker-architecture.mdx
+  │    └── context-quality.mdx
+  ├── billing/
+  │    ├── subscription-model.mdx
+  │    ├── stripe-integration.mdx
+  │    ├── plan-entitlements.mdx
+  │    ├── overage-billing.mdx
+  │    └── api-integration.mdx
+  ├── performance/
+  │    ├── edge-rendering.mdx
+  │    ├── caching-strategy.mdx
+  │    ├── db-optimization.mdx
+  │    └── scalability.mdx
+  ├── api-reference/
+  │    ├── auth-api.mdx
+  │    ├── github-api.mdx
+  │    ├── org-api.mdx
+  │    ├── billing-api.mdx
+  │    └── review-api.mdx
+  ├── blog/
+  │    ├── superhuman-context.mdx
+  │    ├── scaling-mesrai.mdx
+  │    └── pricing-philosophy.mdx
+  ├── roadmap.mdx
+  └── changelog.mdx
+
+### 3. UI & Layout
+- Left sidebar navigation (auto-generated)
+- Right-hand TOC (“On this page”)
+- Sticky header with Mesrai logo, search, dashboard link
+- Responsive layout (mobile optimized)
+- Built-in dark/light toggle
+- Blog section with hero image & author meta
+
+### 4. Performance & Deployment
+- Fully static export (Next.js `output: export`)
+- Edge caching (CDN, <5ms TTFB)
+- Minified assets & pre-rendered routes
+- Lazy-loaded images & diagrams
+- Lighthouse score > 95 for Performance, Accessibility, SEO
+- Deploy via Vercel with custom domain `docs.mesrai.com`
+
+### 5. Integration & Tooling
+- GitHub Action for auto-deploy docs on push to main
+- Analytics (Plausible or Google Analytics)
+- Algolia DocSearch integration
+- Mermaid.js for diagrams
+- Embed CodeSandbox or live code blocks
+
+### 6. Content Templates
+Each MDX page must include:
+  ---
+  title: "Page Title"
+  description: "Short summary for SEO"
+  sidebar_position: 1
+  ---
+  - Overview section
+  - Step-by-step guide
+  - Architecture diagram (Mermaid)
+  - API examples
+  - Performance & scalability notes
+  - Troubleshooting tips
+
+### 7. Mesrai Theme Customization
+- Primary color: #101820
+- Accent: #007AFF
+- Background: #FAFAFA (light), #0B0C0E (dark)
+- Typography: Inter + Space Grotesk
+- Rounded cards, shadows, hover animations
+- Logo: Mesrai (SVG from main app)
+
+### 8. Core Pages (initial draft content)
+- Introduction: overview of Mesrai’s mission & product scope
+- Architecture: explain GitHub integration, AI review pipeline
+- Billing: detailed explanation of Free, Pro, and Enterprise plans
+- Performance: caching, worker optimization, AI token management
+- API Reference: real endpoints and request/response structure
+- Blog: AI Review Insights, Context Quality, and Scaling Learnings
+
+### 9. Deployment Workflow
+- Deploy via Vercel:
+  • Environment: production (Edge Network)
+  • Automatic builds on merge
+  • Cache-Control headers set to 1 year
+- Backup CI/CD with GitHub Pages if needed
+" \
+--generate "
+Create Next.js + Nextra documentation app with Mesrai theme and full folder structure above.
+Generate sample content for introduction, billing, and ai-review sections.
+Configure sidebar, TOC, and Algolia search.
+Integrate Vercel deployment settings (vercel.json + CI workflow).
+" \
+--validation "
+1. Run 'pnpm dev' locally → verify docs UI, sidebar, and TOC.
+2. Build static export (pnpm build) → confirm pages render instantly.
+3. Deploy to Vercel → check TTFB < 5ms.
+4. Verify Lighthouse scores: Performance >95, SEO >90.
+5. Check dark/light mode, responsive layout, and search functionality.
+" \
+--notes "
+Best Practices:
+- Keep every section in MDX with frontmatter metadata.
+- Split large docs into smaller focused pages.
+- Include visual diagrams and flowcharts for complex concepts.
+- Focus on developer-first writing: short, precise, visual.
+- Keep load time minimal: static generation, edge cache, no client-side API calls.
+- Write content that doubles as onboarding material for developers & contributors.
+"
