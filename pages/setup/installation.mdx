@@ -1,0 +1,190 @@
+---
+title: Installation Guide
+description: Step-by-step guide to install and configure Mesrai for your GitHub repositories in under 30 seconds.
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Installation Guide
+
+Get Mesrai up and running in under 30 seconds. No configuration required to start.
+
+## Quick Start
+
+<Steps>
+
+### Install GitHub App
+Visit [mesrai.com/install](https://mesrai.com/install) and click "Install App"
+
+### Select Repositories
+Choose which repositories to enable Mesrai for (or select all)
+
+### Authorize Permissions
+Review and approve the required GitHub permissions
+
+### Start Reviewing
+Create a PR and get your first AI review automatically!
+
+</Steps>
+
+## Detailed Installation
+
+### Prerequisites
+- GitHub account (personal or organization)
+- Admin access to repositories you want to review
+- Modern browser (Chrome, Firefox, Safari, Edge)
+
+### Installation Steps
+
+#### 1. Install the GitHub App
+Navigate to the Mesrai GitHub App page:
+```
+https://github.com/apps/mesrai-code-review
+```
+
+Click the **Install** button.
+
+#### 2. Choose Installation Target
+Select where to install Mesrai:
+- **Personal Account**: For your personal repositories
+- **Organization**: For team/company repositories
+
+<Callout type="info">
+Organization installations require admin permissions.
+</Callout>
+
+#### 3. Configure Repository Access
+Choose repository access level:
+
+**Option A: All Repositories** (Recommended)
+- Mesrai will review all current and future repositories
+- Simplest setup for teams
+
+**Option B: Select Repositories**
+- Choose specific repositories to enable
+- More granular control
+- Can add more repositories later
+
+#### 4. Review Permissions
+Mesrai requests the following permissions:
+
+| Permission | Why We Need It |
+|------------|----------------|
+| **Read code** | To analyze PR changes and codebase context |
+| **Write comments** | To post review feedback on PRs |
+| **Read pull requests** | To detect new PRs and updates |
+| **Read repository** | To understand project structure |
+
+<Callout type="warning">
+**Privacy**: Mesrai never stores your code. All analysis happens in memory and is deleted after review.
+</Callout>
+
+#### 5. Complete Installation
+Click **Install & Authorize** to finish setup.
+
+## Post-Installation Setup
+
+### Configure Review Settings (Optional)
+Create a `.mesrai.yml` file in your repository root:
+
+```yaml
+# .mesrai.yml
+version: 1
+
+# Review configuration
+review:
+  depth: standard
+  auto_review: true
+  
+# What to check
+checks:
+  - bugs
+  - security
+  - performance
+  - style
+
+# Branch configuration
+branches:
+  main:
+    depth: deep
+    require_approval: true
+  develop:
+    depth: standard
+```
+
+### Test Your Installation
+Create a test PR to verify Mesrai is working:
+
+```bash
+# Create a test branch
+git checkout -b test-mesrai
+
+# Make a simple change
+echo "console.log('test')" >> test.js
+
+# Commit and push
+git add test.js
+git commit -m "Test Mesrai installation"
+git push origin test-mesrai
+
+# Create PR on GitHub
+# Mesrai will automatically review it!
+```
+
+## Verification
+
+### Check Installation Status
+Visit your Mesrai dashboard:
+```
+https://app.mesrai.com/installations
+```
+
+You should see:
+- ✅ Installation status: Active
+- ✅ Repositories: X repositories enabled
+- ✅ Last review: Within last 24 hours (after first PR)
+
+### Webhook Verification
+Ensure webhooks are configured:
+
+1. Go to GitHub repository settings
+2. Navigate to **Webhooks**
+3. Verify Mesrai webhook exists:
+   - URL: `https://api.mesrai.com/webhooks/github`
+   - Events: Pull requests, Push
+   - Status: ✅ Recent deliveries successful
+
+## Troubleshooting
+
+### Common Issues
+
+#### Reviews Not Appearing
+**Problem**: No review comments on PR  
+**Solutions**:
+1. Check webhook deliveries in GitHub settings
+2. Verify repository is enabled in Mesrai dashboard
+3. Ensure PR is not from a fork (configure fork reviews separately)
+4. Check if PR author is in the skip list
+
+#### Permission Errors
+**Problem**: "Insufficient permissions" error  
+**Solutions**:
+1. Reinstall the GitHub App
+2. Verify admin access to repository
+3. Check organization security settings
+
+#### Webhook Failures
+**Problem**: Webhook delivery fails  
+**Solutions**:
+1. Verify webhook URL is correct
+2. Check GitHub webhook recent deliveries
+3. Re-install the GitHub App
+
+### Get Help
+- 📚 [Documentation](https://docs.mesrai.com)
+- 💬 [Discord Community](https://discord.gg/mesrai)
+- 📧 [Email Support](mailto:support@mesrai.com)
+
+---
+
+**Next Steps**: Learn about [environment setup](/setup/environment) →

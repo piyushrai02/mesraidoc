@@ -1,0 +1,141 @@
+---
+title: Authentication API
+description: API endpoints for user authentication, GitHub OAuth, and session management in Mesrai.
+---
+
+import { Callout } from 'nextra/components'
+
+# Authentication API
+
+Mesrai uses GitHub OAuth for authentication and JWT tokens for API access.
+
+## Endpoints
+
+### GitHub OAuth Flow
+
+#### `GET /api/auth/github`
+Initiates GitHub OAuth flow.
+
+**Response:**
+```json
+{
+  "redirect_url": "https://github.com/login/oauth/authorize?client_id=..."
+}
+```
+
+#### `GET /api/auth/github/callback`
+Handles GitHub OAuth callback.
+
+**Query Parameters:**
+- `code` (string, required): GitHub authorization code
+- `state` (string, required): CSRF protection token
+
+**Response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "usr_123",
+    "github_id": 12345,
+    "username": "johndoe",
+    "email": "john@example.com",
+    "avatar_url": "https://avatars.githubusercontent.com/..."
+  }
+}
+```
+
+### API Token Management
+
+#### `POST /api/auth/tokens`
+Create a new API token.
+
+**Headers:**
+```
+Authorization: Bearer <jwt_token>
+```
+
+**Request Body:**
+```json
+{
+  "name": "CI/CD Token",
+  "scopes": ["review:read", "review:write"],
+  "expires_in": 2592000
+}
+```
+
+**Response:**
+```json
+{
+  "token": "msr_live_abc123...",
+  "id": "tok_xyz789",
+  "name": "CI/CD Token",
+  "scopes": ["review:read", "review:write"],
+  "created_at": "2025-10-13T20:00:00Z",
+  "expires_at": "2025-11-13T20:00:00Z"
+}
+```
+
+<Callout type="warning">
+**Security**: Store API tokens securely. They grant full access to your Mesrai account.
+</Callout>
+
+#### `GET /api/auth/tokens`
+List all API tokens.
+
+**Response:**
+```json
+{
+  "tokens": [
+    {
+      "id": "tok_xyz789",
+      "name": "CI/CD Token",
+      "scopes": ["review:read", "review:write"],
+      "last_used": "2025-10-13T19:30:00Z",
+      "created_at": "2025-10-13T20:00:00Z",
+      "expires_at": "2025-11-13T20:00:00Z"
+    }
+  ]
+}
+```
+
+#### `DELETE /api/auth/tokens/:token_id`
+Revoke an API token.
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Token revoked successfully"
+}
+```
+
+## Authentication Methods
+
+### JWT Bearer Token
+```bash
+curl -H "Authorization: Bearer <your_jwt_token>" \
+  https://api.mesrai.com/v1/reviews
+```
+
+### API Key
+```bash
+curl -H "X-API-Key: msr_live_..." \
+  https://api.mesrai.com/v1/reviews
+```
+
+## Error Responses
+
+```json
+{
+  "error": {
+    "code": "unauthorized",
+    "message": "Invalid or expired token",
+    "status": 401
+  }
+}
+```
+
+**Error Codes:**
+- `401` - Unauthorized (invalid/expired token)
+- `403` - Forbidden (insufficient permissions)
+- `429` - Rate limit exceeded
