@@ -21,14 +21,27 @@ export default withNextra({
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, isServer }) => {
     if (dev) {
       config.watchOptions = {
         ...config.watchOptions,
         ignored: ['**/node_modules', '**/.git', '**/.next'],
+        poll: false,
+        aggregateTimeout: 300
+      }
+      // Reduce Fast Refresh sensitivity
+      if (!isServer) {
+        config.optimization = {
+          ...config.optimization,
+          moduleIds: 'deterministic'
+        }
       }
     }
     return config
+  },
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 5,
   },
   async headers() {
     return [

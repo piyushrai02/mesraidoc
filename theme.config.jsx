@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
-
 const logo = (
   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -17,20 +14,8 @@ export default {
     link: 'https://github.com/mesrai',
   },
   docsRepositoryBase: 'https://github.com/mesrai/docs',
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s – Mesrai Documentation'
-    }
-  },
-  head: () => (
-    <>
-      <meta property="og:title" content="Mesrai Documentation" />
-      <meta property="og:description" content="AI-powered code review platform for modern engineering teams" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@mesrai" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    </>
-  ),
+  titleSuffix: ' – Mesrai Documentation',
+  description: 'AI-powered code review platform for modern engineering teams',
   banner: {
     key: 'mesrai-launch',
     text: '🚀 Ship Code 3x Faster with AI-Powered Reviews. Start Free Trial →'
