@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://docs.mesrai.com</loc><lastmod>2025-10-30T12:58:34.284Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/ai-review/overview</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/api-reference/auth-api</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/billing/subscription-model</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/blog/superhuman-context</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/changelog</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/integrations/overview</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/introduction/core-architecture</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/introduction/key-capabilities</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/introduction/what-is-mesrai</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/performance/overview</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/roadmap</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://docs.mesrai.com/setup/installation</loc><lastmod>2025-10-30T12:58:34.285Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

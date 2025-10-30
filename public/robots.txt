@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://docs.mesrai.com
+
+# Sitemaps
+Sitemap: https://docs.mesrai.com/sitemap.xml

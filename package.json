@@ -17,6 +17,7 @@
   "author": "Mesrai",
   "license": "MIT",
   "dependencies": {
+    "@theguild/remark-mermaid": "^0.3.0",
     "autoprefixer": "^10.4.21",
     "flexsearch": "^0.8.212",
     "lucide-react": "^0.545.0",
