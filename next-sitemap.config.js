@@ -13,8 +13,5 @@ module.exports = {
         allow: '/',
       },
     ],
-    additionalSitemaps: [
-      'https://docs.mesrai.com/sitemap.xml',
-    ],
   },
 }
