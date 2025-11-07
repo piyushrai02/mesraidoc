@@ -1,0 +1,439 @@
+---
+title: Managing Team Members
+description: Add, remove, and manage team member roles and permissions
+---
+
+# Managing Team Members
+
+Comprehensive guide to managing team members, roles, and permissions.
+
+## Team Member Overview
+
+View all team members in one place:
+
+- Member name and email
+- Role and permissions
+- Join date
+- Last active
+- Activity stats
+
+## Adding Members
+
+### Via Invitation
+
+1. Go to team page
+2. Click "Invite Members"
+3. Enter email addresses
+4. Assign roles
+5. Send invitations
+
+[Learn more about invitations →](/features/teams/invitations)
+
+### Via Direct Add
+
+For existing Mesrai users:
+
+1. Go to "Add Member"
+2. Search by email
+3. Select user
+4. Assign role
+5. Click "Add"
+
+## Removing Members
+
+### Remove Individual Member
+
+1. Go to team members list
+2. Find member to remove
+3. Click options menu (⋮)
+4. Select "Remove from Team"
+5. Confirm removal
+
+### Consequences of Removal
+
+When member is removed:
+
+- Loses access to team repositories
+- Can't view team analytics
+- Removed from team notifications
+- Activity history preserved
+
+### Bulk Removal
+
+Remove multiple members:
+
+1. Select members (checkboxes)
+2. Click "Bulk Actions"
+3. Choose "Remove Selected"
+4. Confirm removal
+
+## Managing Roles
+
+### Role Overview
+
+| Role   | Permissions        | Use Cases             |
+| ------ | ------------------ | --------------------- |
+| Owner  | Full team control  | Team creator, CTO     |
+| Admin  | Team management    | Team leads, managers  |
+| Member | Read/review access | Engineers, developers |
+
+### Changing Member Roles
+
+1. Find member in list
+2. Click current role badge
+3. Select new role from dropdown
+4. Confirm change
+
+Role changes take effect immediately.
+
+### Role Permissions
+
+#### Owner Permissions
+
+- ✅ All Admin permissions
+- ✅ Delete team
+- ✅ Transfer ownership
+- ✅ Manage billing
+- ✅ Change team settings
+
+#### Admin Permissions
+
+- ✅ All Member permissions
+- ✅ Add/remove members
+- ✅ Change member roles
+- ✅ Connect repositories
+- ✅ View team analytics
+
+#### Member Permissions
+
+- ✅ View team information
+- ✅ Access repositories
+- ✅ Review pull requests
+- ✅ View analytics (read-only)
+- ❌ Manage members
+- ❌ Change settings
+
+## Transferring Ownership
+
+### Why Transfer Ownership?
+
+Transfer when:
+
+- Original owner leaving team
+- Organizational changes
+- Better fit for responsibility
+
+### Transfer Process
+
+1. Current owner goes to Team Settings
+2. Click "Transfer Ownership"
+3. Select new owner (must be existing member)
+4. Confirm transfer
+5. New owner receives notification
+
+**Important**: This action cannot be undone. Original owner becomes Admin after transfer.
+
+## Member Activity
+
+### Tracking Member Activity
+
+View activity metrics:
+
+- **PRs Reviewed**: Pull requests analyzed
+- **Comments Made**: Review feedback given
+- **Last Active**: Most recent action
+- **Tokens Used**: AI token consumption
+
+### Activity Timeline
+
+See chronological member actions:
+
+```
+2025-01-15 10:30 - Reviewed PR #234
+2025-01-14 15:45 - Added comment on PR #230
+2025-01-14 09:15 - Connected repository
+```
+
+### Inactive Members
+
+Identify inactive members:
+
+- No activity in 30+ days
+- No PRs reviewed
+- Never logged in
+
+Consider removing or reaching out.
+
+## Member Settings
+
+### Per-Member Configuration
+
+Customize settings for individuals:
+
+**Notification Preferences**
+
+- Email frequency
+- Slack mentions
+- In-app alerts
+
+**Review Settings**
+
+- Auto-assign reviews
+- Preferred review focus
+- Token budgets
+
+**Access Restrictions**
+
+- Repository access
+- Feature permissions
+- API access
+
+## Bulk Operations
+
+### Bulk Role Changes
+
+Update roles for multiple members:
+
+1. Select members
+2. Click "Bulk Actions" → "Change Role"
+3. Choose new role
+4. Apply to selected
+
+### Bulk Notifications
+
+Send message to multiple members:
+
+1. Select members
+2. Click "Send Message"
+3. Compose message
+4. Send notification
+
+## Member Search & Filters
+
+### Search Members
+
+Find members quickly:
+
+- Search by name
+- Search by email
+- Search by role
+
+### Filter Members
+
+Apply filters:
+
+- **By Role**: Owner, Admin, Member
+- **By Status**: Active, Inactive, Invited
+- **By Join Date**: Last 7/30/90 days
+- **By Activity**: Active, Low activity, Inactive
+
+## Member Permissions
+
+### Repository Access
+
+Control which repos members can access:
+
+**Team-Level Access**
+
+- All repositories (default)
+- Specific repositories only
+
+**Member-Level Override**
+
+- Grant additional repo access
+- Restrict specific repos
+- Temporary access grants
+
+Example:
+
+```yaml
+member: john@example.com
+repositories:
+  - repo-a (read)
+  - repo-b (write)
+  - repo-c (admin)
+```
+
+### Feature Access
+
+Control feature availability:
+
+| Feature         | Owner | Admin | Member  |
+| --------------- | ----- | ----- | ------- |
+| View Analytics  | ✅    | ✅    | ✅      |
+| Export Data     | ✅    | ✅    | ❌      |
+| Manage Settings | ✅    | ✅    | ❌      |
+| API Access      | ✅    | ✅    | Limited |
+| Webhooks        | ✅    | ✅    | ❌      |
+
+## Member Onboarding
+
+### Onboarding Checklist
+
+When new member joins:
+
+1. ✅ Send welcome email
+2. ✅ Share team guidelines
+3. ✅ Connect relevant repositories
+4. ✅ Schedule intro call
+5. ✅ Assign first review task
+
+### Welcome Template
+
+Example welcome message:
+
+```
+Welcome to the Engineering Team!
+
+Getting Started:
+- Review our guidelines: [link]
+- Join our Slack: #engineering
+- First PR to review: #123
+- Questions? DM me!
+
+Happy reviewing! 🚀
+```
+
+## Offboarding
+
+### Offboarding Checklist
+
+When member leaves:
+
+1. ✅ Remove from team
+2. ✅ Revoke repository access
+3. ✅ Cancel invitations
+4. ✅ Archive activity logs
+5. ✅ Update team roster
+
+### Exit Process
+
+1. Announce departure to team
+2. Reassign open review tasks
+3. Export member's activity data
+4. Remove access
+5. Update documentation
+
+## Troubleshooting
+
+### Member Can't Access Repository
+
+**Problem**: Member sees "Access Denied"
+
+**Solutions**:
+
+1. Verify team connected to repository
+2. Check member's role permissions
+3. Ensure repository is public or team has access
+4. Refresh member's session
+
+### Role Change Not Applied
+
+**Problem**: Permissions didn't update after role change
+
+**Solutions**:
+
+1. Member logs out and back in
+2. Clear browser cache
+3. Verify role change saved
+4. Contact support
+
+### Can't Remove Member
+
+**Problem**: "Remove Member" button disabled
+
+**Solutions**:
+
+1. Check your role (need Owner or Admin)
+2. Can't remove last Owner
+3. Transfer ownership first if needed
+4. Check member isn't in pending state
+
+## Best Practices
+
+### 1. Regular Review
+
+Audit members quarterly:
+
+- Remove inactive members
+- Update roles as needed
+- Verify permissions
+- Check repository access
+
+### 2. Clear Communication
+
+When making changes:
+
+- Notify affected members
+- Explain reasons
+- Document decisions
+- Allow feedback
+
+### 3. Role Minimization
+
+Apply least privilege principle:
+
+- Start with Member role
+- Promote when needed
+- Regular role reviews
+- Document promotions
+
+### 4. Succession Planning
+
+Prepare for transitions:
+
+- Multiple Owners (2-3)
+- Cross-train Admins
+- Document processes
+- Regular backups
+
+## API Reference
+
+### List Team Members
+
+```bash
+GET /v1/teams/{teamId}/members
+
+Response:
+{
+  "members": [
+    {
+      "id": "user_123",
+      "email": "alice@example.com",
+      "role": "ADMIN",
+      "joinedAt": "2025-01-01T00:00:00Z",
+      "lastActive": "2025-01-15T10:30:00Z"
+    }
+  ]
+}
+```
+
+### Update Member Role
+
+```bash
+PATCH /v1/teams/{teamId}/members/{memberId}
+{
+  "role": "ADMIN"
+}
+```
+
+### Remove Member
+
+```bash
+DELETE /v1/teams/{teamId}/members/{memberId}
+```
+
+## Next Steps
+
+- [Team Invitations](/features/teams/invitations)
+- [Team Analytics](/features/teams/team-analytics)
+- [Activity Logs](/features/teams/activity-logs)
+- [Creating Teams](/features/teams/creating-teams)
+
+## Support
+
+Need help managing members?
+
+- [Discord Community](https://discord.com/users/mesrai)
+- [Email Support](mailto:contact@mesrai.com)
+- [Documentation](/features/teams/introduction)

@@ -1,0 +1,348 @@
+# GitHub Integration
+
+Mesrai integrates seamlessly with GitHub to provide AI-powered code reviews directly in your pull requests.
+
+## Overview
+
+The GitHub integration enables:
+
+- **Automatic PR Reviews**: AI analyzes every pull request
+- **Inline Comments**: Contextual suggestions on specific code lines
+- **Status Checks**: Review results appear in PR checks
+- **Review Summaries**: High-level analysis of changes
+- **Security Scanning**: Identify vulnerabilities automatically
+
+## Quick Start
+
+Get started with GitHub integration in 3 steps:
+
+1. **Install the App**: [Install Mesrai GitHub App](https://github.com/apps/mesrai)
+2. **Select Repositories**: Choose which repos to enable
+3. **Start Reviewing**: Open a PR and get instant feedback
+
+## Features
+
+### Automatic Code Review
+
+Every pull request triggers an automatic review:
+
+- **Smart Analysis**: Understands your entire codebase context
+- **Fast Results**: Reviews complete in under 60 seconds
+- **Detailed Feedback**: Architecture, security, and performance insights
+
+### Inline Comments
+
+Mesrai posts comments directly on relevant code lines:
+
+```javascript
+// Mesrai will comment on issues like this:
+function processData(data) {
+  // ⚠️ Missing input validation
+  return data.map((x) => x * 2);
+}
+```
+
+### Review Status Checks
+
+GitHub status checks show review results:
+
+- ✅ **Passed**: No critical issues found
+- ⚠️ **Warning**: Non-blocking suggestions
+- ❌ **Failed**: Critical issues require attention
+
+## Configuration
+
+### Repository Settings
+
+Configure per-repository via `.mesrai.yml`:
+
+```yaml
+# .mesrai.yml
+version: 1
+github:
+  enabled: true
+  auto_review: true
+
+  # Review triggers
+  on:
+    pull_request: true
+    push_to_main: false
+
+  # Comment settings
+  comments:
+    style: conversational
+    inline: true
+    summary: true
+```
+
+### Ignored Files
+
+Exclude files from reviews:
+
+```yaml
+ignore:
+  - "**/*.test.js"
+  - "dist/**"
+  - "node_modules/**"
+  - "*.md"
+```
+
+## Integration Types
+
+### GitHub App (Recommended)
+
+Best for teams and organizations:
+
+- Easy one-click installation
+- Granular repository permissions
+- Automatic webhook configuration
+- No manual API key management
+
+[Install GitHub App →](/integrations/github-app-installation)
+
+### GitHub Actions
+
+For custom workflows:
+
+```yaml
+# .github/workflows/mesrai.yml
+name: Mesrai Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: mesrai/review-action@v1
+        with:
+          api-key: ${{ secrets.MESRAI_API_KEY }}
+```
+
+## Permissions
+
+Mesrai requires these GitHub permissions:
+
+| Permission    | Access     | Why Needed                |
+| ------------- | ---------- | ------------------------- |
+| Pull requests | Read/Write | Post reviews and comments |
+| Contents      | Read       | Analyze code and files    |
+| Metadata      | Read       | Access repo information   |
+| Checks        | Write      | Update PR status checks   |
+
+## Review Types
+
+### Full Review
+
+Comprehensive analysis of all changes:
+
+```
+@mesrai review --full
+```
+
+- Deep architectural analysis
+- Performance profiling
+- Security audit
+- Best practices check
+
+### Quick Review
+
+Fast feedback on critical issues only:
+
+```
+@mesrai review --quick
+```
+
+- Syntax errors
+- Critical security issues
+- Breaking changes
+
+### Focused Review
+
+Target specific concerns:
+
+```
+@mesrai review security
+@mesrai review performance
+@mesrai review style
+```
+
+## Best Practices
+
+### 1. Enable Auto-Review
+
+Let Mesrai review every PR automatically:
+
+```yaml
+# .mesrai.yml
+auto_review: true
+```
+
+### 2. Set Up Branch Protection
+
+Require Mesrai checks before merging:
+
+1. Go to **Settings** → **Branches**
+2. Add rule for `main` branch
+3. Enable **Require status checks to pass**
+4. Select `mesrai/review`
+
+### 3. Configure Review Depth
+
+Balance speed vs thoroughness:
+
+```yaml
+reviews:
+  context_depth: medium # quick | medium | deep
+  max_files: 50
+  include_dependencies: true
+```
+
+### 4. Use Labels
+
+Trigger specific reviews with labels:
+
+- `mesrai:security` - Security-focused review
+- `mesrai:performance` - Performance analysis
+- `mesrai:skip` - Skip automatic review
+
+## Advanced Features
+
+### Custom Rules
+
+Define team-specific rules:
+
+```yaml
+rules:
+  - name: No console.log
+    pattern: "console\\.log"
+    severity: warning
+    message: "Remove console.log before merging"
+
+  - name: TODO comments
+    pattern: "TODO:"
+    severity: info
+    message: "Create a GitHub issue for this TODO"
+```
+
+### Review Templates
+
+Create consistent review formats:
+
+```yaml
+templates:
+  default:
+    sections:
+      - summary
+      - security
+      - performance
+      - suggestions
+
+  security_focused:
+    sections:
+      - security
+      - vulnerabilities
+      - best_practices
+```
+
+### Metrics & Analytics
+
+Track review effectiveness:
+
+- **Review Coverage**: % of PRs reviewed
+- **Issue Detection**: Critical bugs caught
+- **Time Savings**: Hours saved on manual review
+- **Code Quality Trends**: Quality improvements over time
+
+## Webhook Events
+
+Mesrai listens to these GitHub webhooks:
+
+- `pull_request` (opened, synchronize, reopened)
+- `pull_request_review` (submitted, edited)
+- `pull_request_review_comment` (created)
+- `push` (to protected branches)
+- `issue_comment` (for manual triggers)
+
+## Rate Limits
+
+GitHub API rate limits:
+
+- **Authenticated**: 5,000 requests/hour
+- **GitHub App**: 15,000 requests/hour (Mesrai uses this)
+- **Webhooks**: No rate limit
+
+Mesrai optimizes API usage to stay within limits.
+
+## Troubleshooting
+
+### Reviews Not Triggering
+
+1. Check webhook deliveries in repo settings
+2. Verify repository is in app installation
+3. Confirm `.mesrai.yml` is valid YAML
+4. Check [Status Page](https://status.mesrai.com)
+
+### Permission Issues
+
+1. Reinstall GitHub App with required permissions
+2. Verify organization allows third-party apps
+3. Check if repo is in private mode
+
+### Slow Reviews
+
+1. Reduce `max_files` in configuration
+2. Use `--quick` mode for faster results
+3. Check if repo has very large files
+
+## Security & Privacy
+
+Mesrai takes security seriously:
+
+- **Code Privacy**: Your code never leaves our secure servers
+- **Encrypted Transfer**: All data encrypted in transit (TLS 1.3)
+- **No Storage**: Code is analyzed in memory only
+- **SOC 2 Certified**: Annual compliance audits
+- **GDPR Compliant**: EU data protection standards
+
+[Read full security policy →](https://mesrai.com/security)
+
+## Migration Guide
+
+### From Other Tools
+
+Migrating from other code review tools:
+
+#### From CodeRabbit
+
+1. Uninstall CodeRabbit GitHub App
+2. Install Mesrai GitHub App
+3. Copy configuration to `.mesrai.yml`
+4. Test on a sample PR
+
+#### From GitHub Copilot Reviews
+
+1. Keep Copilot for code completion
+2. Add Mesrai for PR reviews
+3. Both tools work together seamlessly
+
+## Next Steps
+
+- [Complete Installation Guide](/integrations/github-app-installation)
+- [Configure Review Settings](/ai-review/overview)
+- [View API Reference](/api-reference/auth-api)
+- [Join Discord Community](https://discord.com/users/mesrai)
+
+## Support
+
+Need help with GitHub integration?
+
+- [Documentation](/introduction/what-is-mesrai)
+- [Discord Community](https://discord.com/users/mesrai)
+- [Email Support](mailto:contact@mesrai.com)
+- [Status Page](https://status.mesrai.com)

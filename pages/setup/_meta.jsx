@@ -1,6 +1,7 @@
 
 const meta = {
-  "installation": "Installation"
+  "installation": "Installation",
+  "environment": "Environment Setup"
 }
 
 export default meta

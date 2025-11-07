@@ -1,0 +1,234 @@
+---
+title: Team Analytics
+description: Monitor team performance and resource usage
+---
+
+# Team Analytics
+
+Team Analytics provides real-time insights into your team's code review activity and AI usage.
+
+## Available Metrics
+
+### Core Metrics
+
+#### Team Members
+Total number of active team members. Updated automatically when members join or leave.
+
+#### Repositories
+Number of connected repositories your team has access to.
+
+#### Pull Requests Reviewed
+Total PRs that have been analyzed by Mesrai's AI reviewer.
+
+#### Comments Generated
+Total AI-generated review comments across all PRs.
+
+#### Tokens Consumed
+Total AI tokens used for code analysis. Helps track usage against plan quotas.
+
+### Efficiency Metrics
+
+The analytics dashboard calculates efficiency indicators:
+
+```typescript
+// Average Comments per PR
+avgCommentsPerPR = commentsGenerated / pullRequestsReviewed
+
+// Average Tokens per PR
+avgTokensPerPR = tokensConsumed / pullRequestsReviewed
+
+// PRs per Member
+prsPerMember = pullRequestsReviewed / memberCount
+```
+
+## Viewing Analytics
+
+1. Go to Teams in your dashboard
+2. Hover over a team card
+3. Click the Analytics icon
+4. View real-time metrics
+
+## Recalculating Analytics
+
+If you notice discrepancies, you can manually recalculate:
+
+1. Click the "Recalculate" button in the analytics page
+2. Wait for the recalculation to complete
+3. Refresh the page to see updated metrics
+
+## Understanding the Dashboard
+
+### Metrics Grid
+
+The analytics page displays metrics in an organized grid:
+
+| Metric | Description | Purpose |
+|--------|-------------|---------|
+| Member Count | Active team members | Team size tracking |
+| Repository Count | Connected repos | Scope of coverage |
+| PRs Reviewed | Total analyzed PRs | Activity volume |
+| Comments Generated | AI review comments | Feedback quantity |
+| Tokens Consumed | AI token usage | Cost tracking |
+
+### Activity Timeline
+
+View team activity over time:
+- Daily PR review counts
+- Token consumption trends
+- Peak usage periods
+- Member contribution patterns
+
+### Performance Indicators
+
+Key performance indicators (KPIs) help assess team efficiency:
+
+- **Review Velocity**: PRs reviewed per day
+- **Comment Density**: Average comments per PR
+- **Token Efficiency**: Tokens used per PR
+- **Member Productivity**: PRs per member
+
+## Exporting Analytics
+
+Export team analytics for reporting:
+
+1. Click "Export" button
+2. Select date range
+3. Choose format (CSV, JSON, or PDF)
+4. Download report
+
+### Export Formats
+
+#### CSV Export
+Comma-separated values for spreadsheet analysis:
+```csv
+Date,PRs Reviewed,Comments,Tokens,Members
+2025-01-01,45,234,12500,8
+2025-01-02,52,287,15200,8
+```
+
+#### JSON Export
+Structured data for programmatic access:
+```json
+{
+  "team": "Engineering",
+  "period": "2025-01",
+  "metrics": {
+    "prsReviewed": 450,
+    "comments": 2340,
+    "tokens": 125000
+  }
+}
+```
+
+## Setting Up Alerts
+
+Configure alerts for metric thresholds:
+
+1. Go to Team Settings → Alerts
+2. Set threshold values
+3. Choose notification channels (email, Slack)
+4. Save alert configuration
+
+### Alert Examples
+
+**High Token Usage**
+```yaml
+alert:
+  name: Token Quota Warning
+  condition: tokens > 80% of quota
+  action: email + slack notification
+```
+
+**Low Activity**
+```yaml
+alert:
+  name: Inactive Team
+  condition: prsReviewed < 10 in 7 days
+  action: email to team owner
+```
+
+## Analytics Best Practices
+
+### 1. Regular Monitoring
+Check analytics weekly to track:
+- Team productivity trends
+- Resource utilization
+- Potential bottlenecks
+
+### 2. Set Baselines
+Establish baseline metrics for:
+- Expected PRs per week
+- Average tokens per PR
+- Target comment density
+
+### 3. Review Anomalies
+Investigate unusual patterns:
+- Sudden token spikes
+- Drop in PR reviews
+- Member inactivity
+
+### 4. Share with Team
+Use analytics to:
+- Celebrate milestones
+- Identify improvement areas
+- Justify resource allocation
+
+## Troubleshooting
+
+### Metrics Not Updating
+
+**Problem**: Analytics showing stale data
+
+**Solutions**:
+1. Refresh the page
+2. Click "Recalculate Analytics"
+3. Check webhook status
+4. Verify repository connections
+
+### Incorrect Token Counts
+
+**Problem**: Token usage doesn't match expectations
+
+**Solutions**:
+1. Recalculate analytics
+2. Check for failed reviews
+3. Verify PR scope settings
+4. Contact support if persists
+
+### Missing PR Data
+
+**Problem**: Some PRs not showing in analytics
+
+**Solutions**:
+1. Verify PR was reviewed by Mesrai
+2. Check date range filters
+3. Ensure repository is connected
+4. Refresh analytics data
+
+## API Access
+
+Access analytics programmatically via API:
+
+```bash
+# Get team analytics
+curl -H "Authorization: Bearer $TOKEN" \
+  https://api.mesrai.com/v1/teams/{teamId}/analytics
+
+# Response
+{
+  "teamId": "team_123",
+  "memberCount": 8,
+  "repositoryCount": 12,
+  "pullRequestsReviewed": 450,
+  "commentsGenerated": 2340,
+  "tokensConsumed": 125000,
+  "lastActivity": "2025-01-15T10:30:00Z"
+}
+```
+
+## Next Steps
+
+- [Managing Team Members](/features/teams/team-members)
+- [Activity Logs](/features/teams/activity-logs)
+- [Team Invitations](/features/teams/invitations)
+- [Creating Teams](/features/teams/creating-teams)

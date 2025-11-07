@@ -1,0 +1,533 @@
+---
+title: Managing Organization Members
+description: Add, remove, and manage organization member roles and permissions
+---
+
+# Managing Organization Members
+
+Comprehensive guide to managing organization members, roles, and permissions.
+
+## Member Overview
+
+View all organization members:
+- Member name and email
+- Organization role
+- Team memberships
+- Join date
+- Last active
+- Activity stats
+
+## Organization Roles
+
+### Role Hierarchy
+
+```
+Owner (highest privilege)
+  ↓
+Admin
+  ↓
+Member (lowest privilege)
+```
+
+### Owner Permissions
+
+Full administrative control:
+- ✅ All Admin permissions
+- ✅ Delete organization
+- ✅ Transfer ownership
+- ✅ Manage billing and subscription
+- ✅ Change organization settings
+- ✅ Promote/demote admins
+- ✅ Remove any member including admins
+
+**Limitation**: Must have at least one Owner
+
+### Admin Permissions
+
+Team and repository management:
+- ✅ All Member permissions
+- ✅ Invite/remove members (except Owners)
+- ✅ Create/delete teams
+- ✅ Connect/disconnect repositories
+- ✅ View organization analytics
+- ✅ Configure integrations
+- ✅ Manage webhooks
+- ❌ Change billing settings
+- ❌ Delete organization
+- ❌ Promote to Owner
+
+### Member Permissions
+
+Basic access:
+- ✅ View organization information
+- ✅ Join teams (if invited)
+- ✅ Access assigned repositories
+- ✅ View team analytics (read-only)
+- ❌ Invite other members
+- ❌ Create teams
+- ❌ Change settings
+- ❌ Connect repositories
+
+## Adding Members
+
+### Via Email Invitation
+
+1. Go to **Organization Settings** → **Members**
+2. Click **Invite Members**
+3. Enter email addresses (comma-separated)
+4. Select organization role
+5. Optionally assign to teams
+6. Add invitation message
+7. Click **Send Invitations**
+
+Example:
+```
+Emails: alice@acme.com, bob@acme.com
+Role: Member
+Teams: Engineering, Frontend
+Message: Welcome to ACME Engineering!
+```
+
+### Via Domain Auto-Join
+
+Enterprise feature - automatic joining:
+
+```yaml
+auto_join:
+  enabled: true
+  domains:
+    - acme.com
+    - acme.io
+  default_role: MEMBER
+  auto_assign_teams:
+    - all-hands
+```
+
+Anyone with verified `@acme.com` email automatically joins.
+
+### Via SSO Provisioning
+
+SCIM-based automatic provisioning:
+
+```yaml
+sso:
+  provider: okta
+  scim:
+    enabled: true
+    endpoint: https://api.mesrai.com/scim/v2
+    token: scim_xxxxxxxxxxxxx
+```
+
+Members sync automatically from identity provider.
+
+### Bulk Import
+
+Import multiple members via CSV:
+
+1. Prepare CSV file:
+```csv
+email,role,teams
+alice@acme.com,ADMIN,"Engineering,Backend"
+bob@acme.com,MEMBER,"Engineering,Frontend"
+charlie@acme.com,MEMBER,"QA"
+```
+
+2. Go to **Members** → **Bulk Import**
+3. Upload CSV file
+4. Review and confirm
+5. Invitations sent automatically
+
+## Removing Members
+
+### Remove Individual Member
+
+1. Go to **Organization Settings** → **Members**
+2. Find member to remove
+3. Click options menu (⋮)
+4. Select **Remove from Organization**
+5. Confirm removal
+
+### Consequences of Removal
+
+When member is removed from organization:
+- ✅ Loses access to all organization repositories
+- ✅ Removed from all organization teams
+- ✅ Can't view organization analytics
+- ✅ Removed from organization notifications
+- ✅ Activity history preserved for audit
+- ✅ Personal account remains active
+
+### Bulk Removal
+
+Remove multiple members:
+
+1. Go to **Members** page
+2. Select members (checkboxes)
+3. Click **Bulk Actions** → **Remove Selected**
+4. Confirm removal
+5. All selected members removed
+
+### Offboarding Checklist
+
+When member leaves:
+
+1. ✅ Remove from organization
+2. ✅ Revoke API keys
+3. ✅ Remove from external integrations
+4. ✅ Transfer ownership of resources
+5. ✅ Archive activity logs
+6. ✅ Update documentation
+
+## Managing Roles
+
+### Changing Member Roles
+
+Update organization role:
+
+1. Find member in list
+2. Click current role badge
+3. Select new role from dropdown
+4. Confirm change
+5. Member notified of role change
+
+Role changes take effect immediately.
+
+### Role Change Restrictions
+
+- ❌ Can't remove last Owner
+- ❌ Members can't promote themselves
+- ❌ Admins can't promote to Owner
+- ✅ Owners can change any role
+- ✅ Admins can change Member roles
+
+### Transferring Ownership
+
+Transfer organization ownership:
+
+1. Current Owner goes to **Settings** → **Ownership**
+2. Click **Transfer Ownership**
+3. Select new Owner (must be existing Admin)
+4. Confirm transfer with password
+5. New Owner receives confirmation email
+6. Original Owner becomes Admin
+
+**Warning**: This action cannot be undone.
+
+## Team Membership
+
+Organization members can join teams:
+
+### Direct Team Assignment
+
+Add member to teams:
+
+1. Go to member profile
+2. Click **Team Membership**
+3. Select teams to add
+4. Optionally assign team role
+5. Save changes
+
+### Team Invitation
+
+Teams can invite organization members:
+
+1. Team admin sends invitation
+2. Member receives notification
+3. Member accepts/declines
+4. Added to team upon acceptance
+
+[Learn more about teams →](/features/teams/introduction)
+
+## Member Activity Tracking
+
+### Activity Metrics
+
+Track member activity:
+- **Reviews Participated**: PRs reviewed
+- **Comments Made**: Feedback given
+- **Repositories Accessed**: Repos viewed
+- **Teams Joined**: Team memberships
+- **Last Active**: Most recent action
+- **Token Usage**: AI token consumption
+
+### Activity Timeline
+
+View chronological actions:
+```
+2025-01-15 10:30 - Joined Engineering team
+2025-01-15 11:45 - Reviewed PR #234
+2025-01-15 14:20 - Added comment on PR #230
+2025-01-16 09:15 - Connected repository
+```
+
+### Inactive Members
+
+Identify inactive members:
+- No activity in 30+ days
+- No reviews participated
+- No teams joined
+- Never accessed repositories
+
+Consider removing or reaching out.
+
+## Member Permissions
+
+### Repository Access
+
+Control repository access:
+
+**Organization-Level**
+- All members can access all repos (default)
+- Restrict to team-based access only
+
+**Member-Level Override**
+```yaml
+member: alice@acme.com
+repositories:
+  - repo-a: admin
+  - repo-b: write
+  - repo-c: read
+```
+
+### Feature Access
+
+Control feature availability:
+
+| Feature | Owner | Admin | Member |
+|---------|-------|-------|--------|
+| View Analytics | ✅ | ✅ | ✅ (read-only) |
+| Export Data | ✅ | ✅ | ❌ |
+| Manage Teams | ✅ | ✅ | ❌ |
+| Connect Repos | ✅ | ✅ | ❌ |
+| API Access | ✅ | ✅ | Limited |
+| Webhooks | ✅ | ✅ | ❌ |
+| Billing | ✅ | ❌ | ❌ |
+
+### API Key Management
+
+Per-member API keys:
+
+```bash
+# Generate API key for member
+POST /v1/organizations/{orgId}/members/{memberId}/keys
+{
+  "name": "CI/CD Pipeline",
+  "scopes": ["reviews:read", "repositories:write"],
+  "expiresIn": "90d"
+}
+```
+
+## Member Settings
+
+### Per-Member Configuration
+
+**Notification Preferences**
+- Email frequency: Real-time, Daily, Weekly
+- Slack mentions: Enabled/Disabled
+- In-app alerts: Enabled/Disabled
+
+**Review Settings**
+- Auto-assign reviews: Yes/No
+- Review focus areas: Security, Performance, etc.
+- Daily token limit: 1000 tokens
+
+**Access Restrictions**
+- Allowed repositories: All or specific
+- API access level: Full, Limited, None
+- IP whitelist: Optional
+
+## Search & Filtering
+
+### Search Members
+
+Find members quickly:
+- Search by name
+- Search by email
+- Search by team
+- Search by role
+
+### Filter Members
+
+Apply filters:
+- **By Role**: Owner, Admin, Member
+- **By Status**: Active, Inactive, Invited
+- **By Team**: Engineering, Product, etc.
+- **By Join Date**: Last 7/30/90 days
+- **By Activity**: Active, Low activity, Inactive
+
+## Bulk Operations
+
+### Bulk Role Changes
+
+Update roles for multiple members:
+
+1. Select members
+2. Click **Bulk Actions** → **Change Role**
+3. Choose new role
+4. Apply to selected
+5. Confirm changes
+
+### Bulk Team Assignment
+
+Add multiple members to teams:
+
+1. Select members
+2. Click **Bulk Actions** → **Add to Teams**
+3. Select teams
+4. Optionally assign team roles
+5. Apply changes
+
+### Bulk Notifications
+
+Send message to multiple members:
+
+1. Select members
+2. Click **Send Message**
+3. Compose notification
+4. Choose delivery method (email, in-app, Slack)
+5. Send
+
+## Troubleshooting
+
+### Member Can't Access Organization
+
+**Problem**: Member sees "Access Denied"
+
+**Solutions**:
+1. Verify member accepted invitation
+2. Check member's email matches invitation
+3. Ensure member is not removed
+4. Verify organization visibility settings
+
+### Can't Change Member Role
+
+**Problem**: Role dropdown disabled
+
+**Solutions**:
+1. Check your role (need Owner or Admin)
+2. Can't demote last Owner
+3. Admins can't promote to Owner
+4. Contact organization Owner
+
+### Member Receiving Too Many Notifications
+
+**Problem**: Member overwhelmed with notifications
+
+**Solutions**:
+1. Update notification preferences
+2. Configure email digest instead of real-time
+3. Disable certain notification types
+4. Use team-level notification settings
+
+### SSO User Can't Join
+
+**Problem**: SSO enabled but user can't join
+
+**Solutions**:
+1. Verify SSO configuration
+2. Check user email domain matches verified domains
+3. Ensure user authenticated via SSO
+4. Check SCIM provisioning status
+
+## Best Practices
+
+### 1. Least Privilege Principle
+
+Start with minimal access:
+- New members → Member role
+- Promote based on needs
+- Regular role audits
+- Document promotion criteria
+
+### 2. Regular Audits
+
+Quarterly review:
+- Remove inactive members
+- Verify role appropriateness
+- Check team memberships
+- Review API key usage
+
+### 3. Clear Onboarding
+
+When new member joins:
+1. ✅ Send welcome email
+2. ✅ Share organization guidelines
+3. ✅ Assign to relevant teams
+4. ✅ Schedule intro meeting
+5. ✅ Grant necessary access
+
+### 4. Proper Offboarding
+
+When member leaves:
+1. ✅ Remove organization access
+2. ✅ Transfer resource ownership
+3. ✅ Revoke API keys
+4. ✅ Remove from external integrations
+5. ✅ Export activity logs
+
+## API Reference
+
+### List Members
+
+```bash
+GET /v1/organizations/{orgId}/members
+
+Response:
+{
+  "members": [
+    {
+      "id": "user_123",
+      "email": "alice@acme.com",
+      "role": "ADMIN",
+      "joinedAt": "2025-01-01T00:00:00Z",
+      "lastActive": "2025-01-15T10:30:00Z",
+      "teams": ["team_eng", "team_backend"]
+    }
+  ]
+}
+```
+
+### Update Member Role
+
+```bash
+PATCH /v1/organizations/{orgId}/members/{memberId}
+{
+  "role": "ADMIN"
+}
+```
+
+### Remove Member
+
+```bash
+DELETE /v1/organizations/{orgId}/members/{memberId}
+```
+
+### Bulk Invite
+
+```bash
+POST /v1/organizations/{orgId}/members/bulk-invite
+{
+  "invitations": [
+    {
+      "email": "alice@acme.com",
+      "role": "ADMIN",
+      "teams": ["team_eng"]
+    }
+  ]
+}
+```
+
+## Next Steps
+
+- [Organization Settings](/features/organizations/settings)
+- [Creating Teams](/features/teams/creating-teams)
+- [Team Member Management](/features/teams/team-members)
+- [Organization Billing](/features/organizations/billing)
+
+## Support
+
+Need help managing members?
+
+- [Discord Community](https://discord.gg/mesrai)
+- [Email Support](mailto:support@mesrai.com)
+- [Documentation](/features/organizations/introduction)

@@ -1,0 +1,468 @@
+---
+title: API Overview
+description: Complete guide to the Mesrai REST API - authentication, rate limits, error handling, and getting started.
+---
+
+import { Callout, Tabs, Steps } from 'nextra/components'
+
+# Mesrai API Overview
+
+The Mesrai API allows you to programmatically interact with Mesrai's code review platform. Build custom integrations, automate workflows, and extend Mesrai's capabilities.
+
+## Base URL
+
+All API requests should be made to:
+
+```
+https://api.mesrai.com/v1
+```
+
+## Authentication
+
+Mesrai API uses API keys for authentication. Include your API key in the `Authorization` header:
+
+```bash
+curl https://api.mesrai.com/v1/reviews \
+  -H "Authorization: Bearer msr_live_abc123..."
+```
+
+<Callout type="info">
+Get your API key from the [Mesrai Dashboard](https://app.mesrai.com/settings/api) under Settings → API Keys.
+</Callout>
+
+### Creating an API Key
+
+<Steps>
+### Navigate to API Settings
+Go to [Dashboard Settings](https://app.mesrai.com/settings/api)
+
+### Generate New Key
+Click "Create API Key"
+
+### Configure Permissions
+Select the scopes your key needs:
+- `review:read` - Read review data
+- `review:write` - Create and update reviews
+- `org:read` - Read organization data
+- `org:write` - Manage organizations
+- `team:read` - Read team data
+- `team:write` - Manage teams
+
+### Save Securely
+Copy and store your API key securely. You won't be able to see it again!
+</Steps>
+
+## API Versioning
+
+The Mesrai API is versioned. The current version is `v1`. The version is included in the URL path:
+
+```
+https://api.mesrai.com/v1/...
+```
+
+We maintain backward compatibility within major versions. Breaking changes will result in a new major version.
+
+## Request Format
+
+### Headers
+
+All requests should include:
+
+```http
+Content-Type: application/json
+Authorization: Bearer msr_live_abc123...
+X-Mesrai-Version: 2025-01-01
+```
+
+### Request Body
+
+POST and PUT requests should include a JSON body:
+
+```json
+{
+  "pull_request_url": "https://github.com/owner/repo/pull/123",
+  "auto_review": true
+}
+```
+
+## Response Format
+
+All responses are returned in JSON format with this structure:
+
+### Successful Response
+
+```json
+{
+  "data": {
+    "id": "rev_abc123",
+    "status": "completed",
+    "score": 92
+  },
+  "meta": {
+    "request_id": "req_xyz789",
+    "timestamp": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+### Error Response
+
+```json
+{
+  "error": {
+    "type": "validation_error",
+    "message": "Invalid pull request URL",
+    "code": "invalid_pr_url",
+    "status": 400,
+    "details": {
+      "field": "pull_request_url",
+      "issue": "URL format is invalid"
+    }
+  },
+  "meta": {
+    "request_id": "req_xyz789",
+    "timestamp": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+## HTTP Status Codes
+
+| Status Code | Description |
+|-------------|-------------|
+| `200 OK` | Request successful |
+| `201 Created` | Resource created successfully |
+| `204 No Content` | Request successful, no content returned |
+| `400 Bad Request` | Invalid request parameters |
+| `401 Unauthorized` | Missing or invalid API key |
+| `403 Forbidden` | Insufficient permissions |
+| `404 Not Found` | Resource not found |
+| `422 Unprocessable Entity` | Validation failed |
+| `429 Too Many Requests` | Rate limit exceeded |
+| `500 Internal Server Error` | Server error |
+| `503 Service Unavailable` | Service temporarily unavailable |
+
+## Error Codes
+
+Common error codes you might encounter:
+
+| Code | Description |
+|------|-------------|
+| `invalid_api_key` | API key is invalid or expired |
+| `insufficient_permissions` | API key lacks required scopes |
+| `rate_limit_exceeded` | You've exceeded your rate limit |
+| `invalid_request` | Request format is invalid |
+| `validation_error` | Request validation failed |
+| `resource_not_found` | Requested resource doesn't exist |
+| `conflict` | Resource conflict (e.g., duplicate) |
+| `internal_error` | Internal server error |
+
+## Rate Limiting
+
+API requests are rate limited based on your plan:
+
+| Plan | Rate Limit |
+|------|------------|
+| Free | 100 requests/hour |
+| Pro | 1,000 requests/hour |
+| Enterprise | 10,000 requests/hour |
+
+Rate limit information is included in response headers:
+
+```http
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1642377600
+```
+
+<Callout type="warning">
+When you exceed your rate limit, you'll receive a `429 Too Many Requests` response. Wait until the reset time before making more requests.
+</Callout>
+
+## Pagination
+
+List endpoints support pagination using cursor-based pagination:
+
+### Request
+
+```bash
+curl "https://api.mesrai.com/v1/reviews?limit=25&after=rev_abc123" \
+  -H "Authorization: Bearer msr_live_..."
+```
+
+### Response
+
+```json
+{
+  "data": [
+    { "id": "rev_def456", ... },
+    { "id": "rev_ghi789", ... }
+  ],
+  "pagination": {
+    "has_more": true,
+    "next_cursor": "rev_ghi789"
+  }
+}
+```
+
+### Parameters
+
+- `limit` (optional): Number of items per page (default: 25, max: 100)
+- `after` (optional): Cursor for next page
+- `before` (optional): Cursor for previous page
+
+## Filtering and Sorting
+
+Many list endpoints support filtering and sorting:
+
+```bash
+# Filter by status and sort by created date
+curl "https://api.mesrai.com/v1/reviews?status=completed&sort=-created_at" \
+  -H "Authorization: Bearer msr_live_..."
+```
+
+### Common Query Parameters
+
+- `status`: Filter by status
+- `created_after`: Filter by creation date
+- `created_before`: Filter by creation date
+- `sort`: Sort results (prefix with `-` for descending)
+
+## Idempotency
+
+POST requests support idempotency to safely retry requests:
+
+```bash
+curl -X POST https://api.mesrai.com/v1/reviews \
+  -H "Authorization: Bearer msr_live_..." \
+  -H "Idempotency-Key: unique-key-123" \
+  -d '{"pull_request_url": "..."}'
+```
+
+If you retry a request with the same `Idempotency-Key` within 24 hours, you'll receive the same response as the original request.
+
+## Webhooks
+
+Subscribe to real-time events via webhooks. See [Webhooks API](/api-reference/webhooks) for details.
+
+## SDK Libraries
+
+Official SDKs are available for popular languages:
+
+<Tabs items={['JavaScript', 'Python', 'Go', 'Ruby']}>
+  <Tabs.Tab>
+```bash
+npm install @mesrai/sdk
+```
+
+```javascript
+import { Mesrai } from '@mesrai/sdk'
+
+const mesrai = new Mesrai({
+  apiKey: 'msr_live_...'
+})
+
+const review = await mesrai.reviews.create({
+  pullRequestUrl: 'https://github.com/owner/repo/pull/123'
+})
+```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+```bash
+pip install mesrai
+```
+
+```python
+import mesrai
+
+client = mesrai.Client(api_key='msr_live_...')
+
+review = client.reviews.create(
+    pull_request_url='https://github.com/owner/repo/pull/123'
+)
+```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+```bash
+go get github.com/mesrai/mesrai-go
+```
+
+```go
+import "github.com/mesrai/mesrai-go"
+
+client := mesrai.NewClient("msr_live_...")
+
+review, err := client.Reviews.Create(&mesrai.ReviewParams{
+    PullRequestURL: "https://github.com/owner/repo/pull/123",
+})
+```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+```bash
+gem install mesrai
+```
+
+```ruby
+require 'mesrai'
+
+client = Mesrai::Client.new(api_key: 'msr_live_...')
+
+review = client.reviews.create(
+  pull_request_url: 'https://github.com/owner/repo/pull/123'
+)
+```
+  </Tabs.Tab>
+</Tabs>
+
+## Testing
+
+Use the test API key for development:
+
+```
+msr_test_abc123...
+```
+
+Test mode features:
+- No charges applied
+- Use test data
+- Predictable responses
+- No side effects
+
+<Callout type="info">
+Test API keys are prefixed with `msr_test_` while live keys use `msr_live_`.
+</Callout>
+
+## Best Practices
+
+### 1. Store API Keys Securely
+
+```bash
+# Use environment variables
+export MESRAI_API_KEY="msr_live_..."
+
+# Never commit API keys to version control
+echo "MESRAI_API_KEY=msr_live_..." >> .env
+echo ".env" >> .gitignore
+```
+
+### 2. Handle Errors Gracefully
+
+```javascript
+try {
+  const review = await mesrai.reviews.create(params)
+} catch (error) {
+  if (error.status === 429) {
+    // Rate limit exceeded - wait and retry
+    await sleep(error.retryAfter * 1000)
+    return retry()
+  }
+
+  if (error.status >= 500) {
+    // Server error - log and alert
+    logger.error('Mesrai API error', error)
+    alertOncall()
+  }
+
+  // Handle other errors
+  throw error
+}
+```
+
+### 3. Use Idempotency Keys
+
+```javascript
+const idempotencyKey = generateUUID()
+
+const review = await mesrai.reviews.create({
+  pullRequestUrl: prUrl,
+  idempotencyKey
+})
+```
+
+### 4. Implement Exponential Backoff
+
+```javascript
+async function retryWithBackoff(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn()
+    } catch (error) {
+      if (i === maxRetries - 1) throw error
+
+      const delay = Math.pow(2, i) * 1000
+      await sleep(delay)
+    }
+  }
+}
+```
+
+### 5. Monitor API Usage
+
+Track your API usage and set up alerts:
+
+```javascript
+const usage = await mesrai.account.usage()
+
+if (usage.rate_limit.remaining < 100) {
+  alert('Low API quota remaining')
+}
+```
+
+## Support and Resources
+
+### Documentation
+
+- [Authentication](/api-reference/auth-api)
+- [Reviews API](/api-reference/reviews)
+- [Organizations API](/api-reference/organizations)
+- [Teams API](/api-reference/teams)
+- [Webhooks](/api-reference/webhooks)
+
+### Help
+
+- 📧 Email: api@mesrai.com
+- 💬 Discord: [Join our community](https://discord.gg/mesrai)
+- 📖 API Status: [status.mesrai.com](https://status.mesrai.com)
+
+### Changelog
+
+Stay updated with API changes:
+- [API Changelog](/changelog)
+- [Breaking Changes](/api-reference/breaking-changes)
+
+## Quick Start Example
+
+Here's a complete example to get started:
+
+```javascript
+import { Mesrai } from '@mesrai/sdk'
+
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY
+})
+
+// Create a review
+const review = await mesrai.reviews.create({
+  pullRequestUrl: 'https://github.com/owner/repo/pull/123',
+  autoReview: true
+})
+
+console.log(`Review created: ${review.id}`)
+console.log(`Status: ${review.status}`)
+console.log(`Score: ${review.score}`)
+
+// Wait for completion
+while (review.status !== 'completed') {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  review = await mesrai.reviews.retrieve(review.id)
+}
+
+// Get review comments
+const comments = await mesrai.reviews.comments.list(review.id)
+console.log(`Found ${comments.data.length} issues`)
+```
+
+Ready to build with Mesrai? [Get your API key →](https://app.mesrai.com/settings/api)

@@ -1,0 +1,208 @@
+# GitHub App Installation
+
+Configure Mesrai's GitHub integration to enable automatic AI-powered code reviews on your repositories.
+
+## Prerequisites
+
+Before installing the Mesrai GitHub App, ensure you have:
+
+- A Mesrai account ([Sign up](https://mesrai.com/signup))
+- Admin access to the GitHub organization or repositories
+- Active subscription plan ([View plans](/billing/subscription-model))
+
+## Installation Steps
+
+### 1. Install the GitHub App
+
+Navigate to the [Mesrai GitHub App](https://github.com/apps/mesrai) installation page:
+
+1. Click **Install** or **Configure**
+2. Select the organization or account
+3. Choose repositories:
+   - **All repositories** (recommended for teams)
+   - **Only select repositories** (for testing)
+
+### 2. Grant Permissions
+
+The Mesrai GitHub App requires the following permissions:
+
+| Permission | Access Level | Purpose |
+|-----------|--------------|---------|
+| Pull requests | Read & Write | Post review comments and suggestions |
+| Repository contents | Read | Analyze code changes and file structure |
+| Commit statuses | Read & Write | Report review status on PRs |
+| Repository metadata | Read | Access repository information |
+
+### 3. Configure Repository Settings
+
+After installation, configure per-repository settings:
+
+```yaml
+# .mesrai.yml
+version: 1
+reviews:
+  enabled: true
+  auto_review: true
+  review_on:
+    - pull_request
+    - push_to_main
+
+  ignore_patterns:
+    - "*.md"
+    - "docs/**"
+    - "test/fixtures/**"
+
+  context:
+    include_dependencies: true
+    max_context_files: 50
+
+  feedback:
+    style: conversational
+    severity_threshold: medium
+```
+
+### 4. Test the Integration
+
+Create a test pull request to verify the setup:
+
+1. Make a small code change
+2. Create a pull request
+3. Mesrai will automatically analyze and comment within 30 seconds
+
+## Repository Configuration
+
+### Enable/Disable Reviews
+
+Toggle AI reviews per repository in your [Mesrai Dashboard](https://app.mesrai.com/repositories):
+
+- Go to **Repositories** → Select repo → **Settings**
+- Enable/disable **Automatic Reviews**
+- Configure review triggers
+
+### Custom Review Rules
+
+Create custom rules for your team's workflow:
+
+```yaml
+# .mesrai.yml
+rules:
+  security:
+    enabled: true
+    block_on: critical
+
+  performance:
+    enabled: true
+    monitor_complexity: true
+
+  style:
+    enabled: true
+    follow_conventions: true
+```
+
+## Webhook Configuration
+
+Mesrai automatically configures webhooks. If you need to manually verify:
+
+1. Go to **Repository Settings** → **Webhooks**
+2. Find the Mesrai webhook
+3. Verify **Recent Deliveries** show successful responses
+
+### Webhook Events
+
+Mesrai listens to these GitHub events:
+
+- `pull_request` (opened, synchronized, reopened)
+- `pull_request_review` (submitted)
+- `push` (to protected branches)
+- `issue_comment` (for manual review triggers)
+
+## Manual Review Triggers
+
+Trigger reviews manually by commenting on a PR:
+
+```
+@mesrai review
+@mesrai review --full
+@mesrai review security
+```
+
+## Troubleshooting
+
+### Reviews Not Appearing
+
+**Symptom**: No comments from Mesrai on new PRs
+
+**Solutions**:
+1. Verify webhook deliveries in repository settings
+2. Check Mesrai dashboard for repository status
+3. Ensure `.mesrai.yml` config is valid
+4. Confirm subscription is active
+
+### Permission Errors
+
+**Symptom**: "Mesrai doesn't have access to this repository"
+
+**Solutions**:
+1. Reinstall the GitHub App with correct permissions
+2. Verify repository is included in app installation
+3. Check organization permissions if using GitHub Enterprise
+
+### Slow Review Times
+
+**Symptom**: Reviews take longer than 2 minutes
+
+**Solutions**:
+1. Check [Status Page](https://status.mesrai.com)
+2. Reduce context size in `.mesrai.yml`
+3. Contact support if issue persists
+
+## Advanced Configuration
+
+### Branch Protection Rules
+
+Integrate Mesrai with GitHub branch protection:
+
+1. Go to **Repository Settings** → **Branches**
+2. Edit protection rule for `main`
+3. Enable **Require status checks to pass**
+4. Select **mesrai/review** check
+
+### Custom Workflow Integration
+
+Use Mesrai in GitHub Actions:
+
+```yaml
+name: Code Review
+on: [pull_request]
+
+jobs:
+  mesrai:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mesrai/review-action@v1
+        with:
+          api-key: ${{ secrets.MESRAI_API_KEY }}
+          pr-number: ${{ github.event.pull_request.number }}
+```
+
+## Uninstallation
+
+To remove Mesrai from your repositories:
+
+1. Go to **GitHub Settings** → **Applications** → **Installed GitHub Apps**
+2. Find **Mesrai** → Click **Configure**
+3. Scroll down and click **Uninstall**
+
+Your data will be retained for 30 days as per our [privacy policy](https://mesrai.com/privacy).
+
+## Next Steps
+
+- [Understand AI Review Process](/ai-review/overview)
+- [Configure Token Usage](/ai-review/token-usage)
+- [View Performance Metrics](/performance/overview)
+
+## Need Help?
+
+- [Join our Discord](https://discord.gg/mesrai)
+- [Email support](mailto:support@mesrai.com)
+- [View API Documentation](/api-reference/auth-api)

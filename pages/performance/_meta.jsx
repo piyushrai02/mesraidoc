@@ -1,3 +1,4 @@
 export default {
-  "overview": "Overview"
+  "overview": "Overview",
+  "scaling": "Performance & Scaling"
 }

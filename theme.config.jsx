@@ -9,9 +9,13 @@ export default {
     <>
       {/* Viewport and Basic Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Mesrai Documentation - AI-powered development platform for modern applications" />
-      <meta name="keywords" content="Mesrai, AI, development, platform, documentation, API, integration" />
+      <meta name="description" content="Complete documentation for Mesrai - AI-powered code review platform. Learn to integrate GitHub, manage teams, automate reviews, and ship code 3x faster." />
+      <meta name="keywords" content="Mesrai, AI code review, automated code review, GitHub integration, code quality, continuous integration, pull request review, developer tools, team collaboration, code analysis, security scanning, performance optimization" />
       <meta name="author" content="Mesrai" />
+      <meta name="language" content="English" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="distribution" content="global" />
+      <meta name="rating" content="general" />
 
       {/* Favicon Links */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -41,18 +45,24 @@ export default {
 
       {/* Open Graph Meta Tags */}
       <meta property="og:type" content="website" />
-      <meta property="og:title" content="Mesrai Documentation" />
-      <meta property="og:description" content="AI-powered development platform for modern applications" />
-      <meta property="og:site_name" content="Mesrai Docs" />
+      <meta property="og:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
+      <meta property="og:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
+      <meta property="og:site_name" content="Mesrai Documentation" />
       <meta property="og:url" content="https://docs.mesrai.com" />
-      <meta property="og:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
+      <meta property="og:image" content="https://docs.mesrai.com/og-image.png" />
+      <meta property="og:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:locale" content="en_US" />
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@mesrai" />
-      <meta name="twitter:title" content="Mesrai Documentation" />
-      <meta name="twitter:description" content="AI-powered development platform for modern applications" />
-      <meta name="twitter:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
+      <meta name="twitter:creator" content="@mesrai" />
+      <meta name="twitter:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
+      <meta name="twitter:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
+      <meta name="twitter:image" content="https://docs.mesrai.com/og-image.png" />
+      <meta name="twitter:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
 
       {/* Additional SEO */}
       <meta name="robots" content="index, follow" />

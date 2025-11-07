@@ -3,7 +3,7 @@ title: Key Capabilities
 description: Explore Mesrai's core capabilities including AI-powered reviews, GitHub integration, performance optimization, and enterprise billing.
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # Key Capabilities
 
@@ -12,6 +12,7 @@ Mesrai provides enterprise-grade capabilities designed for modern software devel
 ## 🧠 AI-Powered Code Reviews
 
 ### Superhuman Context Understanding
+
 Unlike basic linters, Mesrai builds a complete mental model of your codebase:
 
 - **Call Graph Analysis**: Maps function dependencies across your entire repository
@@ -20,6 +21,7 @@ Unlike basic linters, Mesrai builds a complete mental model of your codebase:
 - **Historical Context**: Learns from your team's coding patterns and conventions
 
 ### Advanced LLM Integration
+
 We use state-of-the-art language models optimized for code:
 
 ```mermaid
@@ -32,12 +34,15 @@ graph LR
 ```
 
 <Callout type="info">
-**Smart Token Management**: Mesrai optimizes context to fit within token limits while maintaining review quality. We prioritize the most relevant code sections.
+  **Smart Token Management**: Mesrai optimizes context to fit within token
+  limits while maintaining review quality. We prioritize the most relevant code
+  sections.
 </Callout>
 
 ## 🔗 GitHub Integration
 
 ### Seamless Setup
+
 Install Mesrai as a GitHub App in less than 30 seconds:
 
 1. **One-Click Installation**: Add to your organization or personal account
@@ -46,12 +51,14 @@ Install Mesrai as a GitHub App in less than 30 seconds:
 4. **Instant Reviews**: Start getting AI reviews on your next PR
 
 ### Powerful Automation
+
 - **Auto-Review on Push**: Every commit triggers intelligent analysis
 - **Inline Comments**: Suggestions appear directly on code lines
 - **Status Checks**: Block merges for critical issues
 - **Team Mentions**: Tag specific developers for human review
 
 ### Webhook Architecture
+
 ```javascript
 // Mesrai listens to GitHub webhook events
 {
@@ -68,42 +75,49 @@ Install Mesrai as a GitHub App in less than 30 seconds:
 ## ⚡ Performance & Scalability
 
 ### Edge-First Architecture
+
 - **Sub-5ms TTFB**: Content served from edge locations worldwide
 - **Redis Caching**: Instant results for frequently accessed data
 - **Worker Queues**: Asynchronous processing for complex reviews
 - **Load Balancing**: Automatic scaling during traffic spikes
 
 ### Optimization Features
-| Feature | Impact | Details |
-|---------|--------|---------|
-| **Smart Caching** | 90% faster | Cache review results, dependencies, and call graphs |
-| **Incremental Analysis** | 70% reduction | Only analyze changed files and their dependencies |
-| **Token Compression** | 60% savings | Optimize context without losing quality |
-| **Parallel Processing** | 3x throughput | Review multiple PRs simultaneously |
+
+| Feature                  | Impact        | Details                                             |
+| ------------------------ | ------------- | --------------------------------------------------- |
+| **Smart Caching**        | 90% faster    | Cache review results, dependencies, and call graphs |
+| **Incremental Analysis** | 70% reduction | Only analyze changed files and their dependencies   |
+| **Token Compression**    | 60% savings   | Optimize context without losing quality             |
+| **Parallel Processing**  | 3x throughput | Review multiple PRs simultaneously                  |
 
 <Callout type="warning">
-**Performance Tip**: For large PRs (>50 files), enable incremental review mode to focus on critical changes first.
+  **Performance Tip**: For large PRs (>50 files), enable incremental review mode
+  to focus on critical changes first.
 </Callout>
 
 ## 💳 Enterprise Billing
 
 ### Flexible Plans
+
 Choose the plan that fits your team:
 
 **Free Tier**
-- 50 reviews/month
+
+- 10 reviews/month
 - Public repositories
 - Community support
 - Basic features
 
 **Pro Plan** ($49/user/month)
+
 - Unlimited reviews
 - Private repositories
 - Priority support
 - Advanced features
 - Custom integrations
 
-**Enterprise** (Custom pricing)
+**Enterprise** (Custom pricing) (Still In Progress)
+
 - Dedicated infrastructure
 - SLA guarantees
 - On-premise deployment
@@ -111,6 +125,7 @@ Choose the plan that fits your team:
 - Compliance certifications
 
 ### Usage-Based Billing
+
 Pay only for what you use:
 
 ```typescript
@@ -122,6 +137,7 @@ const bill = (49 * 10) + (150 * 0.50) = $565
 ```
 
 ### Stripe Integration
+
 - **Secure Payments**: PCI-compliant processing
 - **Auto-Billing**: Automatic monthly charges
 - **Usage Alerts**: Notifications before overages
@@ -130,13 +146,15 @@ const bill = (49 * 10) + (150 * 0.50) = $565
 ## 🔒 Security & Compliance
 
 ### Code Security
+
 - **Private by Default**: Your code never leaves your infrastructure (Enterprise)
 - **Encrypted Transit**: TLS 1.3 for all communications
 - **Zero Data Retention**: Reviews are not stored long-term
 - **Access Controls**: Fine-grained permission management
 
-### Compliance Ready
-- SOC 2 Type II certified
+### Compliance Ready (Certification & Implementation in progress)
+
+- SOC 2 Type II certified (Not )
 - GDPR compliant
 - HIPAA available (Enterprise)
 - ISO 27001 in progress
@@ -144,48 +162,13 @@ const bill = (49 * 10) + (150 * 0.50) = $565
 ## 📊 Analytics & Insights
 
 ### Review Metrics
+
 Track team performance and code quality trends:
 
 - **Review Coverage**: Percentage of PRs reviewed
 - **Issue Detection**: Types and severity of issues found
 - **Time to Review**: Average review completion time
 - **Team Velocity**: PRs merged per week
-
-### Custom Dashboards
-```jsx
-// Access analytics via API
-const analytics = await mesrai.getAnalytics({
-  repo: 'my-org/my-repo',
-  dateRange: 'last_30_days',
-  metrics: ['coverage', 'issues', 'velocity']
-})
-```
-
-## 🛠 Developer Experience
-
-### Rich API
-Integrate Mesrai into your workflow:
-
-- **REST API**: Full-featured HTTP API
-- **GraphQL**: Flexible data querying
-- **Webhooks**: Real-time event notifications
-- **CLI Tool**: Command-line interface
-
-### Custom Rules
-Define your own review criteria:
-
-```yaml
-# mesrai.yml
-rules:
-  - name: "No console.log in production"
-    pattern: "console\\.log"
-    severity: error
-    files: "src/**/*.js"
-  
-  - name: "Required tests for services"
-    require: "*.test.js"
-    for: "services/**/*.js"
-```
 
 ---
 

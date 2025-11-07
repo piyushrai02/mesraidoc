@@ -1,0 +1,569 @@
+---
+title: Organization Settings
+description: Configure organization profile, security, integrations, and preferences
+---
+
+# Organization Settings
+
+Comprehensive guide to configuring your organization settings.
+
+## Accessing Settings
+
+1. Navigate to your organization
+2. Click **Settings** in the sidebar
+3. Or click organization name → **Settings**
+
+## Profile Settings
+
+### Basic Information
+
+**Organization Name**
+- Unique identifier
+- 3-50 characters
+- Cannot be changed after creation
+- Used in URLs and API calls
+
+**Display Name**
+- Human-readable name
+- Can be changed anytime
+- Shown in UI and emails
+
+**Description**
+- Brief organization purpose
+- Max 500 characters
+- Visible to all members
+
+**Website**
+- Organization website URL
+- Optional
+- Displayed in profile
+
+Example:
+```yaml
+name: acme-engineering
+display_name: ACME Engineering Team
+description: Engineering department for ACME Corporation
+website: https://engineering.acme.com
+```
+
+### Organization Logo
+
+Upload custom branding:
+
+**Logo Requirements**
+- Recommended size: 512x512 px
+- Formats: PNG, JPG, SVG
+- Max file size: 2 MB
+- Transparent background recommended
+
+**Upload Process**
+1. Click **Change Logo**
+2. Select image file
+3. Crop/adjust if needed
+4. Save changes
+5. Logo updates across platform
+
+### Organization Metadata
+
+Additional information:
+
+```yaml
+metadata:
+  industry: Software Development
+  company_size: 50-100
+  location: San Francisco, CA
+  timezone: America/Los_Angeles
+  language: en-US
+```
+
+## Member Settings
+
+### Default Role
+
+Set default role for new members:
+- **Owner**: Full control (not recommended)
+- **Admin**: Management access
+- **Member**: Read access (recommended)
+
+### Member Approval
+
+Control how members join:
+
+**Auto-Approval**
+- Members join immediately upon invitation acceptance
+- Recommended for trusted domains
+
+**Manual Approval**
+- Require Owner/Admin approval before granting access
+- Extra security for sensitive organizations
+
+**Domain-Based Auto-Join**
+```yaml
+auto_join:
+  enabled: true
+  domains:
+    - acme.com
+    - acme.io
+  default_role: MEMBER
+  require_approval: false
+```
+
+### Member Limits
+
+Configure member limits:
+
+```yaml
+limits:
+  max_members: 100
+  warn_at: 90  # Send warning at 90% capacity
+  enforce: true  # Block new members at limit
+```
+
+## Security Settings
+
+### Two-Factor Authentication
+
+**Require 2FA for all members**
+- Enforcement level: Required/Optional
+- Grace period: 7/14/30 days
+- Bypass for SSO users: Yes/No
+
+```yaml
+two_factor:
+  required: true
+  enforcement: strict
+  grace_period_days: 7
+  exempt_sso_users: true
+```
+
+### Session Management
+
+**Session Timeout**
+- Idle timeout: 15/30/60/120 minutes
+- Absolute timeout: 8/12/24 hours
+- Remember device: 30 days
+
+**Concurrent Sessions**
+- Max sessions per user: 1/3/5/unlimited
+- Force logout on password change: Yes/No
+
+### IP Whitelist
+
+Restrict access by IP address:
+
+```yaml
+ip_whitelist:
+  enabled: true
+  allowed_ranges:
+    - 203.0.113.0/24  # Office network
+    - 198.51.100.0/24  # VPN
+  block_all_others: true
+```
+
+**Bypass for Owners**: Optional
+
+### API Security
+
+**API Key Restrictions**
+```yaml
+api:
+  require_ip_whitelist: true
+  max_keys_per_member: 5
+  default_expiration: 90d
+  allow_permanent_keys: false
+```
+
+**Rate Limiting**
+- Global: 1000 requests/hour
+- Per-key: 100 requests/hour
+- Burst: 50 requests/minute
+
+## Integration Settings
+
+### GitHub Integration
+
+**GitHub App Configuration**
+```yaml
+github:
+  installation_id: 12345678
+  organization: acme-corp
+  repositories: all  # or specific list
+  permissions:
+    - pull_requests: read_write
+    - contents: read
+    - issues: write
+```
+
+**Auto-Review Settings**
+```yaml
+auto_review:
+  enabled: true
+  on_events:
+    - pull_request.opened
+    - pull_request.synchronize
+  exclude_branches:
+    - main
+    - production
+  exclude_paths:
+    - "*.md"
+    - "docs/**"
+```
+
+[Configure GitHub integration →](/integrations/github-app-installation)
+
+### Slack Integration
+
+**Workspace Connection**
+```yaml
+slack:
+  workspace_id: T01234567
+  workspace_name: acme-team
+  default_channel: "#code-reviews"
+
+  notifications:
+    review_completed: true
+    member_joined: true
+    high_usage: true
+```
+
+**Custom Notifications**
+- Review completed → #code-reviews
+- Security issues → #security
+- High token usage → #engineering-leads
+
+### Webhook Configuration
+
+**Organization Webhooks**
+```yaml
+webhooks:
+  - name: "Production Events"
+    url: "https://api.acme.com/webhooks/mesrai"
+    events:
+      - review.completed
+      - review.failed
+      - member.added
+      - repository.connected
+    secret: "whsec_xxxxxxxxxxxxx"
+    active: true
+```
+
+**Webhook Events**
+- `review.started`
+- `review.completed`
+- `review.failed`
+- `member.added`
+- `member.removed`
+- `team.created`
+- `repository.connected`
+- `repository.disconnected`
+
+### Other Integrations
+
+**Jira**
+```yaml
+jira:
+  site: acme.atlassian.net
+  project_key: ENG
+  link_reviews_to_issues: true
+```
+
+**PagerDuty**
+```yaml
+pagerduty:
+  service_key: xxxxxxxxxxxxx
+  alert_on_security_issues: true
+```
+
+## Notification Settings
+
+### Email Notifications
+
+**Notification Frequency**
+- Real-time (immediate)
+- Hourly digest
+- Daily digest
+- Weekly digest
+
+**Notification Types**
+```yaml
+email:
+  review_completed: real-time
+  member_joined: daily
+  high_token_usage: real-time
+  security_issues: real-time
+  billing_alerts: real-time
+  weekly_summary: weekly
+```
+
+### In-App Notifications
+
+Configure in-app alerts:
+- Enable/disable per event type
+- Show desktop notifications
+- Play sound on notifications
+- Badge count on icon
+
+### Slack Notifications
+
+**Channel Routing**
+```yaml
+slack_routing:
+  default: "#code-reviews"
+  security_issues: "#security"
+  billing: "#finance"
+  member_changes: "#admin"
+```
+
+## Billing Settings
+
+### Subscription Plan
+
+Current plan information:
+- Plan name: Team/Enterprise
+- Monthly cost: $X/month
+- Billing cycle: Monthly/Annual
+- Next billing date: YYYY-MM-DD
+
+**Change Plan**
+1. Click **Upgrade/Downgrade**
+2. Select new plan
+3. Review changes
+4. Confirm
+
+[Learn more about billing →](/features/organizations/billing)
+
+### Payment Methods
+
+**Add Payment Method**
+- Credit/Debit card
+- ACH transfer (Enterprise)
+- Invoice billing (Enterprise)
+
+**Primary Payment Method**
+- Set default payment method
+- Backup payment methods
+- Auto-update expiring cards
+
+### Usage Limits
+
+**Token Limits**
+```yaml
+usage_limits:
+  monthly_tokens: 1000000
+  warn_at: 800000  # 80%
+  hard_limit: true
+  overage_allowed: false
+```
+
+**Notifications**
+- 50% usage warning
+- 80% usage alert
+- 100% usage limit reached
+
+### Invoices & Receipts
+
+- View past invoices
+- Download receipts
+- Export for accounting
+- Set invoice email
+
+## Advanced Settings
+
+### Single Sign-On (SSO)
+
+**Configure SSO Provider**
+
+**SAML 2.0**
+```yaml
+sso:
+  enabled: true
+  provider: okta
+  entity_id: https://acme.okta.com
+  sso_url: https://acme.okta.com/app/mesrai/sso
+  certificate: "-----BEGIN CERTIFICATE-----..."
+  enforce: true  # Require SSO for all members
+```
+
+**OIDC**
+```yaml
+oidc:
+  enabled: true
+  provider: auth0
+  client_id: xxxxxxxxxxxxx
+  client_secret: xxxxxxxxxxxxx
+  domain: acme.auth0.com
+```
+
+**SCIM Provisioning**
+```yaml
+scim:
+  enabled: true
+  endpoint: https://api.mesrai.com/scim/v2/organizations/{orgId}
+  token: scim_xxxxxxxxxxxxx
+  sync_frequency: hourly
+```
+
+### Custom Domain
+
+**Setup Custom Domain**
+
+1. Choose subdomain: `reviews.acme.com`
+2. Add DNS records:
+```
+CNAME reviews.acme.com → mesrai.com
+TXT   reviews.acme.com → mesrai-verification=xxxxx
+```
+3. Verify domain ownership
+4. Enable SSL certificate
+5. Domain active in 24-48 hours
+
+**SSL Certificate**
+- Auto-provisioned via Let's Encrypt
+- Auto-renewal every 90 days
+- Custom certificate upload (Enterprise)
+
+### Audit Logging
+
+**Enable Audit Logs**
+```yaml
+audit_logging:
+  enabled: true
+  retention: 365  # days
+  events:
+    - all  # or specific events
+  export:
+    format: json
+    destination: s3://acme-audit-logs/
+```
+
+**Logged Events**
+- Member additions/removals
+- Role changes
+- Settings changes
+- Repository connections
+- Review activity
+- API key usage
+
+**Export Audit Logs**
+- Download as JSON/CSV
+- Export to SIEM
+- Schedule automatic exports
+- Webhook delivery
+
+### Data Residency
+
+**Choose Data Region**
+- US East (Virginia)
+- US West (Oregon)
+- EU (Frankfurt)
+- Asia Pacific (Singapore)
+
+**Data Transfer**
+- Request data export
+- Transfer between regions
+- Delete organization data
+
+### API Configuration
+
+**API Access**
+```yaml
+api:
+  enabled: true
+  version: v1
+  rate_limit: 1000/hour
+
+  allowed_ips:
+    - 203.0.113.0/24
+
+  webhooks:
+    max_endpoints: 10
+    retry_policy: exponential
+```
+
+**API Keys**
+- Organization-level keys
+- Member-level keys
+- Service account keys
+- Key rotation policy
+
+## Danger Zone
+
+### Transfer Ownership
+
+Transfer organization to another Owner:
+1. Select new Owner
+2. Confirm with password
+3. New Owner must accept
+4. Original Owner becomes Admin
+
+### Delete Organization
+
+**Permanent deletion** - cannot be undone:
+
+1. Click **Delete Organization**
+2. Type organization name to confirm
+3. Enter password
+4. Confirm deletion
+5. Organization deleted immediately
+
+**What Gets Deleted**
+- ✅ All teams
+- ✅ All repositories connections
+- ✅ All members (removed from org)
+- ✅ All settings
+- ✅ All analytics data
+- ✅ All billing data
+
+**What Remains**
+- ❌ Member personal accounts
+- ❌ GitHub repositories (not deleted)
+- ❌ Past invoices (available for download for 90 days)
+
+## Settings API
+
+### Get Settings
+
+```bash
+GET /v1/organizations/{orgId}/settings
+
+Response:
+{
+  "profile": {
+    "name": "acme-engineering",
+    "displayName": "ACME Engineering"
+  },
+  "security": {
+    "twoFactorRequired": true,
+    "sessionTimeout": 3600
+  }
+}
+```
+
+### Update Settings
+
+```bash
+PATCH /v1/organizations/{orgId}/settings
+{
+  "profile": {
+    "displayName": "ACME Engineering Team"
+  },
+  "security": {
+    "twoFactorRequired": true
+  }
+}
+```
+
+## Next Steps
+
+- [Manage Members](/features/organizations/managing-members)
+- [Configure Billing](/features/organizations/billing)
+- [Set Up Integrations](/integrations/overview)
+- [Create Teams](/features/teams/creating-teams)
+
+## Support
+
+Need help with settings?
+
+- [Discord Community](https://discord.gg/mesrai)
+- [Email Support](mailto:support@mesrai.com)
+- [Documentation](/features/organizations/introduction)

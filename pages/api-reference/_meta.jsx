@@ -1,3 +1,5 @@
 export default {
-  "auth-api": "Authentication API"
+  "overview": "API Overview",
+  "auth-api": "Authentication",
+  "reviews": "Reviews"
 }

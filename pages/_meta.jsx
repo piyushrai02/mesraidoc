@@ -12,6 +12,10 @@ const meta = {
     title: 'Setup',
     type: 'page'
   },
+  features: {
+    title: 'Features',
+    type: 'page'
+  },
   integrations: {
     title: 'Integrations',
     type: 'page'
@@ -30,6 +34,10 @@ const meta = {
   },
   'api-reference': {
     title: 'API Reference',
+    type: 'page'
+  },
+  faq: {
+    title: 'FAQ',
     type: 'page'
   },
   blog: {

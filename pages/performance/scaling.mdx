@@ -1,0 +1,526 @@
+# Performance & Scaling
+
+Learn how Mesrai achieves sub-second response times and scales to handle thousands of concurrent reviews.
+
+## Performance Overview
+
+Mesrai delivers exceptional performance:
+
+- **Review Speed**: &lt;5 seconds for standard PRs
+- **Throughput**: 10,000+ reviews/hour
+- **Availability**: 99.9% uptime SLA
+- **Latency**: Sub-5ms API responses
+
+## Architecture
+
+### Edge Network
+
+Global CDN distribution:
+
+```
+User Request
+    ↓
+Cloudflare Edge (100+ locations)
+    ↓
+Nearest Regional Cluster
+    ↓
+Mesrai Workers
+```
+
+**Benefits**:
+- Reduced latency by 60-80%
+- Automatic failover
+- DDoS protection
+
+### Worker Architecture
+
+Distributed processing model:
+
+```
+GitHub Webhook
+    ↓
+Load Balancer
+    ↓
+Worker Pool (100+ workers)
+    ├─ Code Analysis Workers
+    ├─ LLM Request Workers
+    └─ Post-Processing Workers
+```
+
+**Horizontal Scaling**:
+- Auto-scales based on load
+- Handles 10x traffic spikes
+- Zero-downtime deployments
+
+### Caching Strategy
+
+Multi-layer caching:
+
+```
+L1: CDN Edge Cache (100ms TTL)
+    ↓
+L2: Redis Cluster (1hr TTL)
+    ↓
+L3: Database Cache (24hr TTL)
+```
+
+**Cache Hit Rates**:
+- Static assets: 99%
+- API responses: 85%
+- Code analysis: 70%
+
+## Review Performance
+
+### Processing Pipeline
+
+Optimized review stages:
+
+| Stage | Time | % of Total |
+|-------|------|------------|
+| 1. Webhook Receipt | &lt;10ms | 0.5% |
+| 2. Code Fetch | 200-500ms | 10% |
+| 3. Context Building | 500-1000ms | 20% |
+| 4. LLM Analysis | 2-4s | 70% |
+| 5. Comment Posting | 100-300ms | 5% |
+| **Total** | **3-6s** | **100%** |
+
+### Optimization Techniques
+
+#### 1. Parallel Processing
+
+Multiple workers process simultaneously:
+
+```javascript
+await Promise.all([
+  fetchCodeChanges(),
+  buildCallGraph(),
+  analyzeDependencies(),
+  loadContextFiles()
+]);
+```
+
+**Speed Improvement**: 3x faster
+
+#### 2. Incremental Analysis
+
+Only analyze changed code:
+
+- **First Review**: Full codebase scan (10s)
+- **Subsequent Reviews**: Delta only (3s)
+
+**Token Savings**: 60-80%
+
+#### 3. Smart Context Selection
+
+Prioritized file loading:
+
+```
+High Priority (always loaded):
+  - Changed files
+  - Direct imports
+  - Test files
+
+Medium Priority (if time permits):
+  - Related utilities
+  - Type definitions
+
+Low Priority (cached or skipped):
+  - Vendor code
+  - Documentation
+```
+
+#### 4. Streaming Responses
+
+Stream results as they're ready:
+
+```
+1. Security issues → Post immediately
+2. Critical bugs → Post next
+3. Suggestions → Post last
+```
+
+**User Experience**: See results 2x faster
+
+## Scalability
+
+### Auto-Scaling
+
+Dynamic resource allocation:
+
+```yaml
+scaling:
+  min_workers: 10
+  max_workers: 500
+
+  scale_up:
+    metric: queue_depth
+    threshold: 100
+    increment: 50
+
+  scale_down:
+    metric: idle_time
+    threshold: 300s
+    decrement: 10
+```
+
+**Result**: Handle traffic spikes without manual intervention
+
+### Load Balancing
+
+Intelligent request distribution:
+
+- **Round Robin**: Even distribution
+- **Least Connections**: Avoid overload
+- **Geographic**: Route to nearest region
+- **Health Checks**: Skip unhealthy workers
+
+### Database Scaling
+
+#### Read Replicas
+
+Multiple read replicas for queries:
+
+```
+Primary (Write)
+  ├─ Replica 1 (Read - US East)
+  ├─ Replica 2 (Read - US West)
+  ├─ Replica 3 (Read - EU)
+  └─ Replica 4 (Read - Asia)
+```
+
+**Query Performance**: 4x faster reads
+
+#### Sharding
+
+Data partitioned by organization:
+
+```
+Shard 1: Orgs 1-1000
+Shard 2: Orgs 1001-2000
+Shard 3: Orgs 2001-3000
+...
+```
+
+**Scalability**: Support millions of organizations
+
+### Queue Management
+
+Async job processing:
+
+```
+Priority Queues:
+  1. Critical (security issues)
+  2. High (active PRs)
+  3. Normal (standard reviews)
+  4. Low (background tasks)
+```
+
+**Fair Processing**: No queue starvation
+
+## Performance Monitoring
+
+### Metrics Dashboard
+
+Real-time performance tracking:
+
+```
+Review Metrics:
+  - P50 latency: 3.2s
+  - P95 latency: 6.1s
+  - P99 latency: 12.4s
+  - Success rate: 99.8%
+
+System Metrics:
+  - CPU usage: 45%
+  - Memory usage: 62%
+  - Queue depth: 23
+  - Active workers: 87
+```
+
+### Alerting
+
+Automated alerts for issues:
+
+```yaml
+alerts:
+  - name: High Latency
+    condition: p95 > 10s
+    action: Scale up workers
+
+  - name: Error Rate
+    condition: errors > 1%
+    action: Notify on-call
+
+  - name: Queue Backup
+    condition: queue_depth > 500
+    action: Emergency scale
+```
+
+## Optimization Best Practices
+
+### 1. Reduce PR Size
+
+Smaller PRs = faster reviews:
+
+- **Optimal**: 50-200 lines changed
+- **Good**: 200-500 lines
+- **Acceptable**: 500-1000 lines
+- **Slow**: 1000+ lines
+
+**Recommendation**: Split large PRs into smaller chunks
+
+### 2. Optimize Context
+
+Control what gets analyzed:
+
+```yaml
+# .mesrai.yml
+context:
+  max_files: 30
+  max_file_size: 100000
+  exclude:
+    - "dist/**"
+    - "node_modules/**"
+```
+
+### 3. Use Quick Reviews
+
+For minor changes:
+
+```
+@mesrai review --quick
+```
+
+**Speed**: 2-3x faster than standard reviews
+
+### 4. Enable Caching
+
+Let Mesrai cache common patterns:
+
+```yaml
+caching:
+  enabled: true
+  ttl: 3600
+```
+
+**Performance Gain**: 40-60% faster repeat reviews
+
+### 5. Parallel PRs
+
+Don't wait for reviews to complete:
+
+- Open multiple PRs simultaneously
+- Mesrai processes in parallel
+- No queue blocking
+
+## Regional Performance
+
+### Data Centers
+
+Global presence for low latency:
+
+| Region | Location | Latency (P95) |
+|--------|----------|---------------|
+| US East | Virginia | 45ms |
+| US West | Oregon | 52ms |
+| Europe | Frankfurt | 38ms |
+| Asia Pacific | Singapore | 61ms |
+| South America | São Paulo | 78ms |
+
+### Geographic Routing
+
+Automatic routing to nearest region:
+
+```
+User in California
+  → US West (Oregon)
+  → 52ms latency
+
+User in London
+  → Europe (Frankfurt)
+  → 38ms latency
+```
+
+## Load Testing Results
+
+### Stress Test
+
+Recent load test results:
+
+```
+Duration: 1 hour
+Concurrent Users: 10,000
+Total Reviews: 250,000
+
+Results:
+  - Average latency: 3.8s
+  - Max latency: 11.2s
+  - Success rate: 99.95%
+  - Throughput: 4,167 reviews/min
+```
+
+### Spike Test
+
+Handling sudden traffic:
+
+```
+Normal Load: 100 reviews/min
+Spike: 2,000 reviews/min (20x increase)
+
+Auto-scaling response:
+  - Detection time: 15s
+  - Scale-up time: 45s
+  - Recovery: Full capacity in 60s
+```
+
+## Performance Comparison
+
+### Vs. Manual Review
+
+| Metric | Manual | Mesrai | Improvement |
+|--------|--------|--------|-------------|
+| Review Time | 30-60 min | 3-6s | 300-600x |
+| Cost | $50/review | $0.08/review | 625x |
+| Consistency | Variable | 100% | ∞ |
+| Availability | 8hr/day | 24/7 | 3x |
+
+### Vs. Competitors
+
+| Feature | Mesrai | Competitor A | Competitor B |
+|---------|--------|--------------|--------------|
+| Review Speed | 3-6s | 10-30s | 5-15s |
+| Context Quality | Excellent | Good | Fair |
+| Throughput | 10K/hr | 2K/hr | 5K/hr |
+| Uptime | 99.9% | 99.5% | 99.0% |
+
+## Troubleshooting
+
+### Slow Reviews
+
+**Symptoms**: Reviews taking >10 seconds
+
+**Causes**:
+- Large PR size (1000+ lines)
+- Many context files
+- Deep dependency tree
+- Rate limiting
+
+**Solutions**:
+1. Split large PRs
+2. Reduce `max_files` in config
+3. Use `--quick` mode
+4. Contact support if persists
+
+### Timeout Errors
+
+**Symptoms**: "Review timed out" error
+
+**Causes**:
+- Extremely large PR
+- Complex codebase
+- Network issues
+
+**Solutions**:
+1. Retry review
+2. Use `@mesrai review --quick`
+3. Exclude large files
+4. Check [Status Page](https://status.mesrai.com)
+
+### Queue Delays
+
+**Symptoms**: Review pending for >5 minutes
+
+**Causes**:
+- High system load
+- Many concurrent reviews
+- Regional outage
+
+**Solutions**:
+1. Check status page
+2. Wait for auto-scaling
+3. Retry after 5 minutes
+4. Contact support if urgent
+
+## Future Optimizations
+
+Planned improvements:
+
+### Q1 2025
+- **Streaming Reviews**: Real-time results
+- **Edge Computing**: 50% latency reduction
+- **Smart Caching**: 80% cache hit rate
+
+### Q2 2025
+- **Multi-Model**: Multiple LLMs in parallel
+- **Predictive Scaling**: ML-based auto-scaling
+- **WebSockets**: Real-time updates
+
+### Q3 2025
+- **Local Processing**: On-premise option
+- **Offline Mode**: Cache-based reviews
+- **Custom Models**: BYOM support
+
+## API Performance
+
+### Rate Limits
+
+Generous API limits:
+
+| Plan | Requests/min | Burst |
+|------|--------------|-------|
+| Starter | 60 | 100 |
+| Pro | 300 | 500 |
+| Team | 1000 | 2000 |
+| Enterprise | Unlimited | Unlimited |
+
+### Response Times
+
+Typical API latencies:
+
+```
+GET /api/v1/reviews      → <5ms
+POST /api/v1/review      → 3-6s
+GET /api/v1/usage        → <10ms
+POST /api/v1/webhook     → <50ms
+```
+
+## SLA & Guarantees
+
+### Uptime SLA
+
+Service level agreement:
+
+- **Standard**: 99.5% uptime
+- **Pro**: 99.9% uptime
+- **Enterprise**: 99.99% uptime
+
+### Performance SLA
+
+Response time guarantees:
+
+- **P95 Latency**: &lt;10 seconds
+- **P99 Latency**: &lt;20 seconds
+- **API Response**: &lt;100ms
+
+### Credits
+
+SLA violations result in service credits:
+
+```
+Uptime < 99.9%: 10% credit
+Uptime < 99.5%: 25% credit
+Uptime < 99.0%: 50% credit
+```
+
+## Monitoring & Status
+
+- [Status Page](https://status.mesrai.com)
+- [Performance Dashboard](https://app.mesrai.com/performance)
+- [Incident History](https://status.mesrai.com/history)
+
+## Next Steps
+
+- [View Performance Dashboard](https://app.mesrai.com/performance)
+- [Read Architecture Overview](/introduction/core-architecture)
+- [Configure Optimization](/ai-review/overview)
+- [Contact Performance Team](mailto:performance@mesrai.com)

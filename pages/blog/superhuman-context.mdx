@@ -14,6 +14,7 @@ The bottleneck in AI code review isn't the LLM—it's the **context**. Here's ho
 LLMs are incredibly powerful at understanding code, but they have a critical limitation: **token limits**. When reviewing a pull request, you can't just feed the entire codebase into the model.
 
 Traditional approaches:
+
 - ❌ **Just the diff**: Misses important context
 - ❌ **Entire repo**: Exceeds token limits
 - ❌ **Random sampling**: Loses critical dependencies
@@ -48,22 +49,24 @@ Instead of guessing what's relevant, we **know** exactly which functions are cal
 ## Real-World Impact
 
 ### Before Call Graphs
+
 ```typescript
 // AI only sees the diff
 async function checkout(cartId: string) {
-  const cart = await getCart(cartId)
-  return processPayment(cart.total)  // ⚠️ AI doesn't know what processPayment does
+  const cart = await getCart(cartId);
+  return processPayment(cart.total); // ⚠️ AI doesn't know what processPayment does
 }
 ```
 
 **Result**: Shallow review, missing critical issues
 
 ### After Call Graphs
+
 ```typescript
 // AI sees the full context
 async function checkout(cartId: string) {
-  const cart = await getCart(cartId)
-  return processPayment(cart.total)
+  const cart = await getCart(cartId);
+  return processPayment(cart.total);
 }
 
 // AI also knows about:
@@ -78,6 +81,7 @@ async function checkout(cartId: string) {
 ## Performance
 
 Our call graph system is **fast**:
+
 - Initial build: ~2 seconds for 100K LOC
 - Incremental updates: ~200ms per PR
 - Graph traversal: ~50ms
@@ -86,6 +90,7 @@ Our call graph system is **fast**:
 ## The Results
 
 Since implementing call graphs:
+
 - 📈 **60% better issue detection**
 - 🎯 **45% fewer false positives**
 - ⚡ **30% reduction in token usage**
@@ -93,4 +98,4 @@ Since implementing call graphs:
 
 ---
 
-**Want to experience superhuman code review?** [Try Mesrai free](https://mesrai.com/signup)
+**Want to experience superhuman code review?** [Try Mesrai free](https://app.mesrai.com/login)

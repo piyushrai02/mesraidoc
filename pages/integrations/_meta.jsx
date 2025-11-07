@@ -1,3 +1,5 @@
 export default {
-  "overview": "Overview"
+  "overview": "Overview",
+  "github": "GitHub Integration",
+  "github-app-installation": "GitHub App Setup"
 }

@@ -1,0 +1,547 @@
+---
+title: Organization Billing
+description: Manage subscriptions, payments, and usage for your organization
+---
+
+# Organization Billing
+
+Complete guide to managing organization billing, subscriptions, and usage tracking.
+
+## Billing Overview
+
+Each organization has independent billing:
+- Separate subscription
+- Individual payment method
+- Dedicated usage tracking
+- Isolated invoices
+
+## Subscription Plans
+
+### Plan Tiers
+
+| Feature | Starter | Pro | Team | Enterprise |
+|---------|---------|-----|------|------------|
+| **Price/month** | $29 | $99 | $299 | Custom |
+| **Members** | 5 | 20 | 100 | Unlimited |
+| **Teams** | 1 | 5 | 20 | Unlimited |
+| **Repositories** | 10 | 50 | 200 | Unlimited |
+| **Monthly Tokens** | 100K | 500K | 2M | Custom |
+| **Support** | Email | Priority | Dedicated | Enterprise |
+| **SSO** | ❌ | ❌ | ✅ | ✅ |
+| **Audit Logs** | 30 days | 90 days | 1 year | Unlimited |
+
+### Choosing a Plan
+
+**Starter Plan** - Best for:
+- Small teams (2-5 people)
+- Personal projects
+- Proof of concept
+- Limited repositories
+
+**Pro Plan** - Best for:
+- Growing teams (10-20 people)
+- Multiple projects
+- Increased usage
+- Priority support
+
+**Team Plan** - Best for:
+- Large teams (50-100 people)
+- Enterprise features
+- High volume usage
+- Compliance requirements
+
+**Enterprise Plan** - Best for:
+- 100+ developers
+- Custom requirements
+- Dedicated support
+- SLA guarantees
+
+## Viewing Billing Information
+
+### Access Billing Dashboard
+
+1. Switch to organization
+2. Go to **Settings** → **Billing**
+3. View billing overview
+
+### Billing Dashboard
+
+```
+┌─────────────────────────────────────────┐
+│ Current Plan: Team Plan                 │
+│ $299/month • Billed annually            │
+│                                         │
+│ Next billing date: Feb 15, 2025        │
+│ Payment method: •••• 4242               │
+│                                         │
+│ [Change Plan] [Update Payment] [Invoices]│
+└─────────────────────────────────────────┘
+
+Current Usage (Jan 2025):
+├── Tokens: 1.2M / 2M (60%)
+├── Members: 45 / 100 (45%)
+├── Teams: 12 / 20 (60%)
+└── Repositories: 89 / 200 (45%)
+```
+
+## Payment Methods
+
+### Adding Payment Method
+
+**Credit/Debit Card**
+1. Go to **Billing** → **Payment Methods**
+2. Click **Add Payment Method**
+3. Enter card details:
+   - Card number
+   - Expiration date
+   - CVV
+   - Billing ZIP code
+4. Click **Add Card**
+
+**Supported Cards**
+- Visa
+- Mastercard
+- American Express
+- Discover
+
+### Bank Transfer (ACH)
+
+Enterprise feature:
+1. Contact sales team
+2. Provide bank account details
+3. Verify account ownership
+4. Enable ACH payments
+
+**Processing Time**: 3-5 business days
+
+### Invoice Billing
+
+For Enterprise customers:
+- Net-30/60/90 payment terms
+- Purchase order support
+- Wire transfer option
+- Custom billing cycle
+
+### Multiple Payment Methods
+
+Configure backup payments:
+- **Primary**: Main payment method
+- **Backup**: Used if primary fails
+- **Auto-update**: Update expiring cards
+
+## Subscription Management
+
+### Changing Plans
+
+**Upgrade Plan**
+1. Go to **Billing** → **Change Plan**
+2. Select higher tier plan
+3. Review changes and pricing
+4. Confirm upgrade
+5. Prorated credit applied
+6. Takes effect immediately
+
+**Downgrade Plan**
+1. Select lower tier plan
+2. Review feature changes
+3. Verify limits (members, teams, repos)
+4. Confirm downgrade
+5. Takes effect at end of billing cycle
+
+### Billing Cycle
+
+**Monthly Billing**
+- Billed on same day each month
+- Cancel anytime
+- No long-term commitment
+
+**Annual Billing**
+- 20% discount vs monthly
+- Billed once per year
+- Commitment required
+- Refunds prorated
+
+**Change Billing Cycle**
+1. Go to **Billing** → **Billing Cycle**
+2. Select Monthly or Annual
+3. Review pricing difference
+4. Confirm change
+5. Applied at next renewal
+
+### Cancellation
+
+**Cancel Subscription**
+1. Go to **Billing** → **Cancel Plan**
+2. Select cancellation reason
+3. Confirm cancellation
+4. Access continues until end of billing period
+5. Data retained for 30 days
+6. No automatic renewal
+
+**After Cancellation**
+- Read-only access to data
+- Export data available
+- 30-day reactivation window
+- Full access restored upon reactivation
+
+## Usage Tracking
+
+### Token Usage
+
+Track AI token consumption:
+
+```
+Token Usage (January 2025):
+├── Total: 1,234,567 tokens
+├── Limit: 2,000,000 tokens
+├── Remaining: 765,433 tokens
+└── Usage: 62%
+
+By Team:
+├── Engineering: 456,789 (37%)
+├── Product: 234,567 (19%)
+└── QA: 543,211 (44%)
+
+By Member:
+├── alice@acme.com: 123,456 (10%)
+├── bob@acme.com: 98,765 (8%)
+└── Others: 1,012,346 (82%)
+```
+
+**Token Alerts**
+- 50% usage → Email notification
+- 80% usage → Warning alert
+- 100% usage → Limit reached
+
+### Overage Handling
+
+**When Limit Reached**
+
+**Soft Limit** (default)
+- Reviews continue
+- Overage billed at $0.10/1K tokens
+- Notification sent
+
+**Hard Limit**
+- Reviews stop
+- Upgrade required
+- No additional charges
+
+**Configure in Settings** → **Billing** → **Usage Limits**
+
+### Usage Analytics
+
+**Monthly Usage Report**
+```
+Usage Report - January 2025
+
+Reviews Completed: 1,234
+Tokens Consumed: 1,234,567
+Average tokens/review: 1,001
+Most active repository: backend-api (456 reviews)
+
+Cost Breakdown:
+├── Base subscription: $299.00
+├── Overage (234,567 tokens): $23.46
+└── Total: $322.46
+```
+
+**Export Usage Data**
+- CSV export
+- JSON API
+- Custom date ranges
+- Per-team breakdown
+
+## Invoices & Receipts
+
+### Viewing Invoices
+
+Access all invoices:
+1. Go to **Billing** → **Invoices**
+2. See chronological list
+3. Filter by date/status
+4. Download as PDF
+
+**Invoice Information**
+- Invoice number
+- Issue date
+- Due date
+- Amount
+- Payment status
+- Download link
+
+### Invoice Details
+
+```
+Invoice #INV-2025-001
+Date: January 1, 2025
+Due: January 15, 2025
+Status: Paid
+
+Items:
+├── Team Plan (Monthly) .......... $299.00
+├── Overage (234K tokens) ........ $23.46
+├── Additional member (5 users) .. $50.00
+│
+├── Subtotal ..................... $372.46
+├── Tax (10%) .................... $37.25
+└── Total ........................ $409.71
+
+Paid: January 1, 2025
+Payment Method: Visa •••• 4242
+```
+
+### Receipt Download
+
+Download receipts:
+- PDF format
+- Includes tax information
+- Company details
+- Itemized breakdown
+
+### Email Receipts
+
+Auto-send receipts to:
+- Billing contact email
+- Finance team email
+- Custom recipient
+
+Configure in **Billing** → **Email Settings**
+
+## Budget Management
+
+### Setting Budget Limits
+
+Configure spending limits:
+
+```yaml
+budget:
+  monthly_limit: 500  # USD
+  warn_at: 400        # 80%
+  hard_limit: true    # Stop at limit
+
+  alerts:
+    - threshold: 50%
+      recipients:
+        - finance@acme.com
+    - threshold: 80%
+      recipients:
+        - finance@acme.com
+        - cto@acme.com
+```
+
+### Budget Alerts
+
+Receive alerts when:
+- 50% budget consumed
+- 80% budget consumed
+- 100% budget reached
+- Unusual spending detected
+
+### Cost Optimization
+
+**Reduce Costs**
+1. **Review token usage** - Identify high consumers
+2. **Optimize reviews** - Reduce context size
+3. **Remove inactive members** - Reduce seat costs
+4. **Downgrade plan** - If under-utilized
+5. **Annual billing** - Save 20%
+
+**Token Optimization**
+```yaml
+optimization:
+  max_context_files: 20      # Reduce from 50
+  exclude_patterns:
+    - "*.test.js"
+    - "dist/**"
+  quick_review_mode: true    # Use for minor PRs
+```
+
+## Multi-Organization Billing
+
+### Separate Billing
+
+Each organization has:
+- Independent subscription
+- Separate payment method
+- Isolated usage tracking
+- Individual invoices
+
+### Consolidated Billing
+
+Enterprise feature - single bill for all organizations:
+
+```
+Billing Group: ACME Corporation
+
+Organizations:
+├── acme-engineering: Team Plan ($299)
+├── acme-product: Pro Plan ($99)
+└── acme-data: Starter Plan ($29)
+
+Total: $427/month
+Payment: Corporate Amex •••• 1234
+```
+
+**Benefits**
+- Single invoice
+- Centralized payment
+- Unified budgeting
+- Simplified accounting
+
+### Billing Hierarchy
+
+```
+Parent Organization (ACME Corp)
+├── Engineering Org
+│   ├── Subscription: Team
+│   └── Billing: Consolidated
+├── Product Org
+│   ├── Subscription: Pro
+│   └── Billing: Consolidated
+└── Client Projects Org
+    ├── Subscription: Pro
+    └── Billing: Separate (client-paid)
+```
+
+## Tax & Compliance
+
+### Tax Information
+
+**VAT/GST**
+- Automatically calculated
+- Based on billing address
+- Shown on invoices
+- Remitted per regulations
+
+**Tax ID**
+Add company tax ID:
+1. Go to **Billing** → **Tax Information**
+2. Enter tax ID/VAT number
+3. Save changes
+4. Appears on all invoices
+
+### Compliance
+
+**SOC 2 Type II** - Available for Team/Enterprise
+**GDPR Compliant** - All plans
+**PCI DSS** - Payment processing
+
+### Billing Address
+
+Update billing address:
+```
+ACME Corporation
+123 Engineering Way
+San Francisco, CA 94105
+United States
+
+Tax ID: XX-XXXXXXX
+```
+
+Used for:
+- Tax calculation
+- Invoice generation
+- Compliance reporting
+
+## Troubleshooting
+
+### Payment Failed
+
+**Problem**: "Payment method declined"
+
+**Solutions**:
+1. Verify card details correct
+2. Check sufficient funds
+3. Contact bank about international transactions
+4. Add backup payment method
+5. Update to different card
+
+### Unexpected Charges
+
+**Problem**: Invoice higher than expected
+
+**Solutions**:
+1. Review invoice breakdown
+2. Check token overage
+3. Verify added members/teams
+4. Review plan changes
+5. Contact support for clarification
+
+### Can't Change Plan
+
+**Problem**: Downgrade option disabled
+
+**Solutions**:
+1. Check current usage vs new plan limits
+2. Remove excess members/teams/repos
+3. Wait until end of billing cycle
+4. Contact support for assistance
+
+### Invoice Not Received
+
+**Problem**: Missing invoice email
+
+**Solutions**:
+1. Check spam/junk folder
+2. Verify billing email address
+3. Download from dashboard
+4. Request resend via support
+
+## API Reference
+
+### Get Billing Information
+
+```bash
+GET /v1/organizations/{orgId}/billing
+
+Response:
+{
+  "plan": "TEAM",
+  "billingCycle": "ANNUAL",
+  "nextBillingDate": "2025-02-15",
+  "amount": 299.00,
+  "currency": "USD"
+}
+```
+
+### Get Usage
+
+```bash
+GET /v1/organizations/{orgId}/usage?month=2025-01
+
+Response:
+{
+  "tokens": {
+    "used": 1234567,
+    "limit": 2000000,
+    "percentage": 62
+  }
+}
+```
+
+### Update Payment Method
+
+```bash
+POST /v1/organizations/{orgId}/billing/payment-method
+{
+  "type": "card",
+  "token": "tok_xxxxxxxxxxxxx"
+}
+```
+
+## Next Steps
+
+- [Upgrade Plan](https://app.mesrai.com/billing/upgrade)
+- [Usage Dashboard](/features/organizations/settings#usage-limits)
+- [Organization Settings](/features/organizations/settings)
+- [Contact Sales](mailto:sales@mesrai.com)
+
+## Support
+
+Need help with billing?
+
+- [Email Billing](mailto:billing@mesrai.com)
+- [Contact Sales](mailto:sales@mesrai.com)
+- [Documentation](/features/organizations/introduction)
+- [Schedule Demo](https://mesrai.com/demo)

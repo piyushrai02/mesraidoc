@@ -1,0 +1,344 @@
+---
+title: Creating Teams
+description: Step-by-step guide to creating and configuring your first team
+---
+
+# Creating Teams
+
+Learn how to create and configure teams for collaborative code review workflows.
+
+## Prerequisites
+
+Before creating a team, ensure you have:
+
+- Active Mesrai account
+- Subscription plan (Starter or higher)
+- Repository access (optional, can add later)
+
+## Creating Your First Team
+
+### Step 1: Access Teams Page
+
+1. Log in to your Mesrai dashboard
+2. Click **Teams** in the sidebar
+3. Click **Create Team** button
+
+### Step 2: Basic Information
+
+Provide team details:
+
+**Team Name** (required)
+
+- Clear, descriptive name
+- Examples: "Frontend Team", "Backend Engineers"
+
+**Team Description** (optional)
+
+- Brief purpose or scope
+- Visible to all members
+
+Example:
+
+```
+Name: Mobile Engineering
+Description: iOS and Android development team
+```
+
+### Step 3: Initial Settings
+
+Configure team preferences:
+
+**Default Role for New Members**
+
+- Owner (full control)
+- Admin (management access)
+- Member (read access)
+
+**Notification Settings**
+
+- Email notifications
+- Slack integration
+- In-app alerts
+
+### Step 4: Add Team Members
+
+Invite initial members:
+
+1. Enter email addresses
+2. Assign roles
+3. Add invitation message
+4. Send invitations
+
+Can be done later if preferred.
+
+### Step 5: Connect Repositories
+
+Link repositories to team:
+
+1. Click "Connect Repository"
+2. Select from your GitHub organizations
+3. Choose specific repos
+4. Set access permissions
+5. Save connections
+
+### Step 6: Review and Create
+
+Review configuration:
+
+- Team name and description
+- Member invitations
+- Connected repositories
+- Settings
+
+Click **Create Team** to finish.
+
+## Team Configuration
+
+### Notification Preferences
+
+Configure how team is notified:
+
+```yaml
+notifications:
+  email:
+    enabled: true
+    events:
+      - member_joined
+      - pr_reviewed
+      - high_token_usage
+
+  slack:
+    enabled: true
+    webhook_url: https://hooks.slack.com/...
+    channel: "#engineering"
+
+  in_app:
+    enabled: true
+```
+
+### Repository Settings
+
+Control repository access:
+
+**Access Levels**
+
+- **Read**: View code and reviews
+- **Write**: Trigger reviews manually
+- **Admin**: Manage repository settings
+
+**Auto-Review Settings**
+
+```yaml
+auto_review:
+  enabled: true
+  on:
+    - pull_request
+    - push_to_main
+  exclude_branches:
+    - staging
+    - develop
+```
+
+### Team Limits
+
+Understand plan limits:
+
+| Plan       | Max Teams | Members/Team | Repos/Team |
+| ---------- | --------- | ------------ | ---------- |
+| Starter    | 1         | 5            | 10         |
+| Pro        | 3         | 15           | 50         |
+| Team       | Unlimited | 50           | 200        |
+| Enterprise | Unlimited | Unlimited    | Unlimited  |
+
+## Best Practices
+
+### 1. Clear Team Structure
+
+Organize teams by:
+
+- **Product**: Frontend, Backend, Mobile
+- **Project**: Project A, Project B
+- **Function**: DevOps, QA, Security
+
+### 2. Descriptive Names
+
+Use clear naming conventions:
+
+- ✅ "iOS Engineering Team"
+- ✅ "Backend API Team"
+- ❌ "Team 1"
+- ❌ "Dev Group"
+
+### 3. Start Small
+
+Begin with core members:
+
+- 3-5 initial members
+- Add more as team grows
+- Test workflows first
+
+### 4. Document Guidelines
+
+Create team documentation:
+
+- Code review standards
+- Response time expectations
+- Escalation procedures
+- Communication channels
+
+## Team Templates
+
+Use templates for common setups:
+
+### Startup Template
+
+```yaml
+team:
+  name: Engineering
+  members: 3-10
+  repositories: all
+  roles:
+    - 1 owner
+    - 2 admins
+    - rest members
+```
+
+### Enterprise Template
+
+```yaml
+team:
+  name: Platform Engineering
+  members: 20-50
+  repositories: by-domain
+  roles:
+    - 2 owners
+    - 5 admins
+    - rest members
+  settings:
+    sso_required: true
+    audit_logging: true
+```
+
+## Migrating Existing Teams
+
+Import from other platforms:
+
+### From GitHub Teams
+
+1. Export GitHub team members
+2. Create Mesrai team
+3. Bulk invite members
+4. Connect repositories
+5. Map permissions
+
+### From GitLab Groups
+
+1. List GitLab group members
+2. Create equivalent Mesrai team
+3. Invite members with roles
+4. Link repositories
+
+## Managing Multiple Teams
+
+### Team Hierarchy
+
+Organize related teams:
+
+```
+Organization
+├── Frontend Team
+│   ├── Web Team
+│   └── Mobile Team
+├── Backend Team
+│   ├── API Team
+│   └── Database Team
+└── DevOps Team
+```
+
+### Cross-Team Collaboration
+
+Enable collaboration:
+
+- Shared repositories across teams
+- Cross-team member access
+- Unified analytics dashboard
+- Consolidated billing
+
+## Troubleshooting
+
+### Can't Create Team
+
+**Problem**: "Create Team" button disabled
+
+**Solutions**:
+
+1. Check subscription plan limits
+2. Verify account permissions
+3. Complete account setup
+4. Contact support
+
+### Members Can't See Team
+
+**Problem**: Invitees don't see team after accepting
+
+**Solutions**:
+
+1. Verify invitation was accepted
+2. Check member's email matches invitation
+3. Ensure member logged in
+4. Refresh dashboard
+
+### Repository Connection Failed
+
+**Problem**: Can't connect repository to team
+
+**Solutions**:
+
+1. Verify GitHub/GitLab access
+2. Check organization permissions
+3. Ensure repository isn't already connected
+4. Re-authenticate connection
+
+## Next Steps
+
+- [Inviting Team Members](/features/teams/invitations)
+- [Managing Members](/features/teams/team-members)
+- [Understanding Analytics](/features/teams/team-analytics)
+- [Viewing Activity Logs](/features/teams/activity-logs)
+
+## API Reference
+
+Create teams programmatically:
+
+```bash
+POST /v1/teams
+{
+  "name": "Engineering Team",
+  "description": "Main engineering team",
+  "settings": {
+    "defaultRole": "MEMBER",
+    "autoReview": true
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "id": "team_123",
+  "name": "Engineering Team",
+  "createdAt": "2025-01-15T10:30:00Z",
+  "memberCount": 1,
+  "owner": "user@example.com"
+}
+```
+
+## Support
+
+Need help creating teams?
+
+- [Documentation](/features/teams/introduction)
+- [Discord Community](https://discord.com/users/mesrai))
+- [Email Support](mailto:contact@mesrai.com)
+- [Video Tutorials](https://mesrai.com)
