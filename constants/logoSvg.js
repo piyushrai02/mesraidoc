@@ -49,15 +49,15 @@ export const LOGO_TEXT = {
 // Brand colors
 export const LOGO_COLORS = {
   light: {
-    circle: "#FFFFFF", // off-white circle
-    icon: "#0A0A0A",   // black leaf icon
-    text: "#FFFFFF",   // white text
+    circle: "#0A0A0A", // black circle for light theme
+    icon: "#FFFFFF",   // white leaf icon for contrast
+    text: "#1F2937",   // dark text for light theme
     iconOpacity: 1,
   },
   dark: {
-    circle: "#FFFFFF",
-    icon: "#0A0A0A",
-    text: "#FFFFFF",
+    circle: "#FFFFFF", // white circle for dark theme
+    icon: "#0A0A0A",   // black leaf icon
+    text: "#FFFFFF",   // white text for dark theme
     iconOpacity: 1,
   },
 };
@@ -78,8 +78,9 @@ export const LOGO_CLASSES = {
   iconPath: "logo-icon-path",
 };
 
-// Injected CSS (dark mode styles)
+// Injected CSS (theme-aware styles)
 export const LOGO_DARK_MODE_CSS = `
+  /* Light theme (default) */
   .${LOGO_CLASSES.circle},
   .${LOGO_CLASSES.iconCircle} {
     fill: ${LOGO_COLORS.light.circle} !important;
@@ -90,6 +91,19 @@ export const LOGO_DARK_MODE_CSS = `
   }
   .${LOGO_CLASSES.text} {
     fill: ${LOGO_COLORS.light.text} !important;
+  }
+
+  /* Dark theme */
+  :root.dark .${LOGO_CLASSES.circle},
+  :root.dark .${LOGO_CLASSES.iconCircle} {
+    fill: ${LOGO_COLORS.dark.circle} !important;
+  }
+  :root.dark .${LOGO_CLASSES.icon},
+  :root.dark .${LOGO_CLASSES.iconPath} {
+    fill: ${LOGO_COLORS.dark.icon} !important;
+  }
+  :root.dark .${LOGO_CLASSES.text} {
+    fill: ${LOGO_COLORS.dark.text} !important;
   }
 `;
 
