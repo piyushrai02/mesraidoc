@@ -1,0 +1,147 @@
+/**
+ * Custom styles for Mesrai Documentation
+ * Enhances header layout, search positioning, and overall UX
+ */
+
+/* Header enhancements */
+.nextra-nav-container {
+  max-width: 100% !important;
+  padding: 0 2rem !important;
+}
+
+.nextra-nav-container-blur {
+  backdrop-filter: blur(12px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(229, 231, 235, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+:root.dark .nextra-nav-container-blur {
+  background-color: rgba(17, 24, 39, 0.95) !important;
+  border-bottom: 1px solid rgba(55, 65, 81, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Better navigation layout */
+.nextra-nav-container > nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+  min-height: 64px;
+}
+
+/* Logo styling */
+.nextra-nav-container a:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Search bar enhancements */
+.nextra-search {
+  flex: 1;
+  max-width: 36rem !important;
+  margin: 0 auto;
+}
+
+.nextra-search input {
+  width: 100% !important;
+  height: 40px !important;
+  border-radius: 0.5rem !important;
+  border: 1.5px solid rgb(229, 231, 235) !important;
+  background-color: rgb(249, 250, 251) !important;
+  padding-left: 2.5rem !important;
+  padding-right: 3rem !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+}
+
+:root.dark .nextra-search input {
+  border-color: rgb(55, 65, 81) !important;
+  background-color: rgb(31, 41, 55) !important;
+}
+
+.nextra-search input:hover {
+  border-color: rgb(209, 213, 219) !important;
+  background-color: rgb(255, 255, 255) !important;
+}
+
+:root.dark .nextra-search input:hover {
+  border-color: rgb(75, 85, 99) !important;
+  background-color: rgb(37, 47, 63) !important;
+}
+
+.nextra-search input:focus {
+  border-color: rgb(59, 130, 246) !important;
+  background-color: rgb(255, 255, 255) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  outline: none !important;
+}
+
+:root.dark .nextra-search input:focus {
+  background-color: rgb(31, 41, 55) !important;
+}
+
+/* Theme toggle button styling */
+button[aria-label*="theme"] {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  background-color: rgb(243, 244, 246);
+}
+
+:root.dark button[aria-label*="theme"] {
+  background-color: rgb(31, 41, 55);
+}
+
+button[aria-label*="theme"]:hover {
+  background-color: rgb(229, 231, 235);
+}
+
+:root.dark button[aria-label*="theme"]:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+/* Sidebar improvements */
+.nextra-sidebar-container {
+  border-right: 1px solid rgb(229, 231, 235);
+}
+
+:root.dark .nextra-sidebar-container {
+  border-right-color: rgb(55, 65, 81);
+}
+
+/* Footer enhancements */
+footer {
+  margin-top: 4rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .nextra-search {
+    max-width: 100% !important;
+  }
+
+  .nextra-nav-container {
+    padding: 0 1rem !important;
+  }
+
+  .nextra-nav-container > nav {
+    gap: 1rem;
+  }
+}
+
+/* Improve focus states */
+:focus-visible {
+  outline: 2px solid rgb(59, 130, 246);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
