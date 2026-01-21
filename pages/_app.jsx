@@ -1,20 +1,15 @@
 import '../styles/globals.css'
-import '../styles/custom.css'
-import Head from 'next/head'
-import { OrganizationSchema, ProductSchema, WebSiteSchema } from '../components/seo/JsonLd'
-import { Analytics } from '@vercel/analytics/react'
+import { Space_Grotesk } from 'next/font/google'
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+})
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
-      <Head>
-        {/* Global JSON-LD Structured Data */}
-        <OrganizationSchema />
-        <ProductSchema />
-        <WebSiteSchema />
-      </Head>
+    <main className={`${spaceGrotesk.variable} font-sans`}>
       <Component {...pageProps} />
-      <Analytics />
-    </>
+    </main>
   )
 }

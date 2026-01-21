@@ -15,10 +15,19 @@ module.exports = {
           light: '#FAFAFA',
           dark: '#0B0C0E',
         },
+        mesrai: {
+          bg: '#020617', // Slate 950 for deep background
+          primary: '#6366f1', // Indigo 500
+          secondary: '#ec4899', // Pink 500
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        display: ['var(--font-space-grotesk)', 'Space Grotesk', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg)',
       },
       typography: {
         DEFAULT: {
