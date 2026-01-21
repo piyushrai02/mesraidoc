@@ -1,80 +1,71 @@
 ---
-title: Mesrai Documentation - AI-Powered Code Review Platform
-description: Complete documentation for Mesrai, the AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation, GitHub integration, and real-time analysis.
+title: Mesrai - AI-Powered Code Review Platform
 ---
 
+import { Hero } from "../components/Hero";
 import { Cards } from "nextra/components";
 
-# Welcome to Mesrai Documentation
+<Hero />
 
-Mesrai is an AI-powered code review platform that helps engineering teams ship code 3x faster. Our intelligent system analyzes your entire codebase, spots architectural issues, and provides intelligent feedback—not just pattern matching.
+<div className="container mx-auto px-6 py-12 max-w-7xl">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <Cards.Card title="🚀 Quick Start" href="/introduction/what-is-mesrai" arrow>
+      Get up and running with Mesrai in minutes.
+    </Cards.Card>
+    <Cards.Card title="💻 API Reference" href="/api-reference/auth-api" arrow>
+      Integrate Mesrai into your custom workflows.
+    </Cards.Card>
+    <Cards.Card title="📖 Tutorials" href="/setup/installation" arrow>
+      Step-by-step guides for common scenarios.
+    </Cards.Card>
+    <Cards.Card title="⚡ AI Review" href="/ai-review/overview" arrow>
+      Learn how our AI engine analyzes code.
+    </Cards.Card>
+  </div>
 
-<div className="mt-8 mb-8">
-  <Cards>
-    <Cards.Card title="🚀 Quick Start" href="/introduction/what-is-mesrai" />
-    <Cards.Card title="💻 API Reference" href="/api-reference/auth-api" />
-    <Cards.Card title="📖 Tutorials" href="/setup/installation" />
-    <Cards.Card title="⚡ AI Review" href="/ai-review/overview" />
-  </Cards>
-</div>
+  <div className="mt-20">
+    <h2 className="text-3xl font-bold mb-8 text-center">Why Engineering Teams Choose Mesrai</h2>
 
-## Why Mesrai?
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <span className="text-2xl">🚀</span> Ship 3x Faster
+        </h3>
+        <div className="text-gray-600 dark:text-gray-400">
+          AI-powered PR reviews that analyze your entire codebase in seconds, not hours.
+          Get architectural insights and spot issues before they reach production, allowing your team to focus on building features.
+        </div>
+      </div>
 
-### 🚀 Ship Faster
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <span className="text-2xl">🎯</span> Context-Aware Analysis
+        </h3>
+        <div className="text-gray-600 dark:text-gray-400">
+          Unlike simple pattern matchers or linters, Mesrai understands your codebase architecture,
+          dependencies, and relationships between components to provide deep, meaningful insights.
+        </div>
+      </div>
 
-AI-powered PR reviews that analyze your entire codebase in seconds, not hours. Get architectural insights and spot issues before they reach production.
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <span className="text-2xl">💡</span> Intelligent Feedback
+        </h3>
+        <div className="text-gray-600 dark:text-gray-400">
+          Receive actionable suggestions based on industry best practices, security vulnerabilities,
+          and performance optimizations tailored to your specific tech stack.
+        </div>
+      </div>
 
-### 🎯 Context-Aware
-
-Unlike simple pattern matchers, Mesrai understands your codebase architecture, dependencies, and relationships between components.
-
-### 💡 Intelligent Feedback
-
-Receive actionable suggestions based on best practices, security vulnerabilities, and performance optimizations.
-
-### 📊 Built for Scale
-
-From startups to enterprises, Mesrai scales with your team. Handle hundreds of PRs per day with sub-5ms response times.
-
-## Core Capabilities
-
-- **GitHub Integration**: Seamless integration with GitHub Apps for automatic PR reviews
-- **AI-Powered Analysis**: Advanced LLM-based code understanding with call graph mapping
-- **Token Optimization**: Smart context selection to maximize review quality while minimizing costs
-- **Enterprise Billing**: Flexible subscription plans with usage-based pricing via Stripe
-- **High Performance**: Edge rendering, Redis caching, and optimized worker architecture
-
-## Get Started in 30 Seconds
-
-1. **Install GitHub App**: Add Mesrai to your repositories
-2. **Create PR**: Open a pull request as usual
-3. **Get AI Review**: Mesrai automatically analyzes and comments within seconds
-
-```bash
-# Or use our CLI
-npx mesrai init
-npx mesrai review --pr 123
-```
-
-## What's New
-
-- 🎉 **Enhanced Context Quality**: New call graph system for superhuman code understanding
-- ⚡ **Faster Reviews**: 40% performance improvement with edge workers
-- 💳 **Flexible Billing**: New Pro and Enterprise plans with overage protection
-- 🔒 **Security First**: SOC 2 Type II compliance and advanced threat detection
-
-<div className="mt-12">
-  <a
-    href="https://app.mesrai.com/login"
-    className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-accent rounded-lg hover:opacity-90 transition-opacity"
-    target="_blank"
-  >
-    Start Free Trial →
-  </a>
-</div>
-
----
-
-<div className="mt-8 text-sm text-gray-600 dark:text-gray-400">
-  **Built for modern engineering teams** • Startups • Scale-ups • Enterprises
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <span className="text-2xl">📊</span> Built for Scale
+        </h3>
+        <div className="text-gray-600 dark:text-gray-400">
+          From startups to enterprises, Mesrai scales with your team.
+          Handle hundreds of PRs per day with sub-5ms response times and enterprise-grade security.
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

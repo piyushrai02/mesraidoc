@@ -2,55 +2,80 @@
 const meta = {
   index: {
     title: 'Home',
-    type: 'page'
+    type: 'page',
+    display: 'hidden'
   },
-  introduction: {
-    title: 'Introduction',
-    type: 'page'
+  docs: {
+    title: 'Documentation',
+    type: 'page',
+    display: 'hidden' // Hide from navbar, but its children will be linked via menus
   },
-  setup: {
-    title: 'Setup',
-    type: 'page'
-  },
-  features: {
-    title: 'Features',
-    type: 'page'
-  },
-  integrations: {
-    title: 'Integrations',
-    type: 'page'
-  },
-  'ai-review': {
-    title: 'AI Review',
-    type: 'page'
-  },
-  performance: {
-    title: 'Performance',
-    type: 'page'
-  },
-  billing: {
-    title: 'Billing',
-    type: 'page'
-  },
-  'api-reference': {
-    title: 'API Reference',
-    type: 'page'
-  },
-  faq: {
-    title: 'FAQ',
-    type: 'page'
+  products: {
+    title: 'Products',
+    type: 'menu',
+    items: {
+      features: {
+        title: 'Features',
+        href: '/docs/features'
+      },
+      'ai-review': {
+        title: 'AI Review',
+        href: '/docs/ai-review'
+      },
+      integrations: {
+        title: 'Integrations',
+        href: '/docs/integrations'
+      },
+      performance: {
+        title: 'Performance',
+        href: '/docs/performance'
+      }
+    }
   },
   blog: {
     title: 'Blog',
     type: 'page'
   },
-  roadmap: {
-    title: 'Roadmap',
-    type: 'page'
+  about: {
+    title: 'About',
+    type: 'page',
+    href: 'https://mesrai.com/about',
+    newWindow: true
   },
-  changelog: {
-    title: 'Changelog',
-    type: 'page'
+  pricing: { // Mapped to docs/billing or a separate page. For now let's link to docs/billing
+    title: 'Pricing',
+    type: 'page',
+    href: '/docs/billing'
+  },
+  resources: {
+    title: 'Resources',
+    type: 'menu',
+    items: {
+      introduction: {
+        title: 'Introduction',
+        href: '/docs/introduction'
+      },
+      setup: {
+        title: 'Setup',
+        href: '/docs/setup'
+      },
+      'api-reference': {
+        title: 'API Reference',
+        href: '/docs/api-reference'
+      },
+      faq: {
+        title: 'FAQ',
+        href: '/docs/faq'
+      },
+      roadmap: {
+        title: 'Roadmap',
+        href: '/docs/roadmap'
+      },
+      changelog: {
+        title: 'Changelog',
+        href: '/docs/changelog'
+      }
+    }
   }
 }
 
