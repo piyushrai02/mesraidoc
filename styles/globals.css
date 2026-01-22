@@ -15,6 +15,16 @@ html {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+body {
+  background-color: var(--bg-light);
+  color: var(--primary);
+}
+
+.dark body {
+  background-color: var(--bg-dark);
+  color: #ffffff;
+}
+
 .nextra-nav-container {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }

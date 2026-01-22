@@ -1,7 +1,7 @@
 
 const meta = {
   introduction: {
-    title: 'Introduction',
+    title: 'Start Here',
     type: 'page'
   },
   setup: {
@@ -9,15 +9,15 @@ const meta = {
     type: 'page'
   },
   features: {
-    title: 'Features',
-    type: 'page'
-  },
-  integrations: {
-    title: 'Integrations',
+    title: 'Pull Request Review',
     type: 'page'
   },
   'ai-review': {
     title: 'AI Review',
+    type: 'page'
+  },
+  integrations: {
+    title: 'Integrations',
     type: 'page'
   },
   performance: {
