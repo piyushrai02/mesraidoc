@@ -1,0 +1,353 @@
+---
+title: CI/CD Pipelines
+description: Integrate Mesrai into your CI/CD pipelines for automated code review on every build.
+---
+
+import { Callout } from 'nextra/components'
+
+# CI/CD Pipelines
+
+Integrate Mesrai directly into your CI/CD pipeline to automate code reviews as part of your build process.
+
+## Overview
+
+Running Mesrai in your CI/CD pipeline enables:
+
+- **Automated reviews** on every PR/MR
+- **Quality gates** that block merges for critical issues
+- **Consistent standards** across all code changes
+- **Detailed reports** as build artifacts
+
+## GitHub Actions
+
+### Basic Setup
+
+```yaml
+# .github/workflows/mesrai.yml
+name: Mesrai Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better context
+
+      - name: Run Mesrai Review
+        uses: mesrai/action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          mesrai-token: ${{ secrets.MESRAI_TOKEN }}
+```
+
+### Advanced Configuration
+
+```yaml
+name: Mesrai Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Mesrai Review
+        uses: mesrai/action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          mesrai-token: ${{ secrets.MESRAI_TOKEN }}
+          severity-threshold: medium
+          fail-on-issues: true
+          config-file: .mesrai.yaml
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: mesrai-report
+          path: mesrai-report.json
+```
+
+## GitLab CI
+
+```yaml
+# .gitlab-ci.yml
+stages:
+  - review
+  - test
+  - deploy
+
+mesrai-review:
+  stage: review
+  image: mesrai/cli:latest
+  script:
+    - |
+      mesrai review \
+        --mr $CI_MERGE_REQUEST_IID \
+        --project $CI_PROJECT_ID \
+        --output report.json
+  artifacts:
+    reports:
+      codequality: report.json
+    paths:
+      - report.json
+  only:
+    - merge_requests
+  variables:
+    MESRAI_TOKEN: $MESRAI_API_TOKEN
+```
+
+## Bitbucket Pipelines
+
+```yaml
+# bitbucket-pipelines.yml
+image: mesrai/cli:latest
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Mesrai Code Review
+          script:
+            - mesrai review --bitbucket
+          artifacts:
+            - mesrai-report.json
+
+definitions:
+  caches:
+    mesrai: ~/.mesrai/cache
+```
+
+## Jenkins
+
+### Jenkinsfile (Declarative)
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        MESRAI_TOKEN = credentials('mesrai-api-token')
+    }
+
+    stages {
+        stage('Code Review') {
+            when {
+                changeRequest()
+            }
+            steps {
+                script {
+                    docker.image('mesrai/cli:latest').inside {
+                        sh '''
+                            mesrai review \
+                                --pr ${CHANGE_ID} \
+                                --repo ${GIT_URL} \
+                                --output mesrai-report.json
+                        '''
+                    }
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'mesrai-report.json'
+                    publishHTML target: [
+                        reportDir: '.',
+                        reportFiles: 'mesrai-report.html',
+                        reportName: 'Mesrai Review Report'
+                    ]
+                }
+            }
+        }
+    }
+}
+```
+
+## Azure DevOps
+
+```yaml
+# azure-pipelines.yml
+trigger: none
+
+pr:
+  - main
+  - develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: Docker@2
+    displayName: 'Run Mesrai Review'
+    inputs:
+      command: 'run'
+      arguments: |
+        --rm
+        -v $(Build.SourcesDirectory):/code
+        -e MESRAI_TOKEN=$(MESRAI_TOKEN)
+        mesrai/cli:latest
+        review --path /code --output /code/report.json
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: 'report.json'
+      artifactName: 'MesraiReport'
+```
+
+## CircleCI
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+orbs:
+  mesrai: mesrai/code-review@1.0
+
+workflows:
+  review:
+    jobs:
+      - mesrai/review:
+          context: mesrai-credentials
+          filters:
+            branches:
+              ignore: main
+```
+
+### Manual Configuration
+
+```yaml
+version: 2.1
+
+jobs:
+  mesrai-review:
+    docker:
+      - image: mesrai/cli:latest
+    steps:
+      - checkout
+      - run:
+          name: Run Code Review
+          command: |
+            mesrai review \
+              --pr $CIRCLE_PULL_REQUEST \
+              --output report.json
+      - store_artifacts:
+          path: report.json
+
+workflows:
+  pr-review:
+    jobs:
+      - mesrai-review:
+          filters:
+            branches:
+              ignore: main
+```
+
+## CLI Reference
+
+### Common Commands
+
+```bash
+# Review a pull request
+mesrai review --pr 123
+
+# Review local changes
+mesrai review --local
+
+# Generate report only (no comments)
+mesrai review --report-only --output report.json
+
+# Set severity threshold
+mesrai review --severity-threshold high
+
+# Fail on issues
+mesrai review --fail-on-issues
+```
+
+### Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| 0 | Review passed |
+| 1 | Review found issues above threshold |
+| 2 | Configuration error |
+| 3 | Authentication error |
+| 4 | Network error |
+
+## Quality Gates
+
+<Callout type="info">
+  Quality gates can block merges until issues are resolved, ensuring code quality standards are met.
+</Callout>
+
+### Configuring Gates
+
+```yaml
+# mesrai.config.yaml
+quality_gates:
+  enabled: true
+
+  rules:
+    - name: "No Critical Issues"
+      condition: "critical_count == 0"
+      block: true
+
+    - name: "Security Check"
+      condition: "security_issues == 0"
+      block: true
+
+    - name: "Coverage Threshold"
+      condition: "coverage >= 80"
+      block: false  # Warning only
+```
+
+### Gate Results
+
+```
+Quality Gate Results
+━━━━━━━━━━━━━━━━━━━━━
+✅ No Critical Issues      PASSED
+✅ Security Check          PASSED
+⚠️ Coverage Threshold      FAILED (75% < 80%)
+
+Overall: ✅ PASSED (warnings present)
+```
+
+## Caching
+
+Speed up reviews by caching analysis data:
+
+```yaml
+# GitHub Actions
+- uses: actions/cache@v3
+  with:
+    path: ~/.mesrai/cache
+    key: mesrai-${{ hashFiles('**/package-lock.json') }}
+
+# GitLab CI
+cache:
+  paths:
+    - .mesrai/cache/
+```
+
+## Next Steps
+
+- [Configure Webhooks](/api-reference/webhooks)
+- [Use the SDK](/api-reference/sdks)
+- [View API Reference](/api-reference/overview)

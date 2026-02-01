@@ -1,57 +1,20 @@
-
 const meta = {
   index: {
     title: 'Home',
-    type: 'page'
+    display: 'hidden'
   },
-  introduction: {
-    title: 'Introduction',
-    type: 'page'
-  },
-  setup: {
-    title: 'Setup',
-    type: 'page'
-  },
-  features: {
-    title: 'Features',
-    type: 'page'
-  },
-  integrations: {
-    title: 'Integrations',
-    type: 'page'
-  },
-  'ai-review': {
-    title: 'AI Review',
-    type: 'page'
-  },
-  performance: {
-    title: 'Performance',
-    type: 'page'
-  },
-  billing: {
-    title: 'Billing',
-    type: 'page'
-  },
-  'api-reference': {
-    title: 'API Reference',
-    type: 'page'
-  },
-  faq: {
-    title: 'FAQ',
-    type: 'page'
-  },
-  blog: {
-    title: 'Blog',
-    type: 'page'
-  },
-  roadmap: {
-    title: 'Roadmap',
-    type: 'page'
-  },
-  changelog: {
-    title: 'Changelog',
-    type: 'page'
-  }
+  introduction: 'Introduction',
+  setup: 'Setup',
+  features: 'Features',
+  'ai-review': 'AI Review',
+  performance: 'Performance',
+  integrations: 'Integrations',
+  'api-reference': 'API Reference',
+  billing: 'Billing',
+  faq: 'FAQ',
+  blog: 'Blog',
+  roadmap: 'Roadmap',
+  changelog: 'Changelog'
 }
 
 export default meta

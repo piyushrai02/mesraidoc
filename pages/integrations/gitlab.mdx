@@ -1,0 +1,171 @@
+---
+title: GitLab Integration
+description: Connect Mesrai to your GitLab repositories for automated AI code reviews.
+---
+
+import { Callout } from 'nextra/components'
+
+# GitLab Integration
+
+Connect Mesrai to your GitLab repositories and receive AI-powered code reviews on every merge request.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+- A GitLab account with owner or maintainer access to the target repository
+- A Mesrai account with an active subscription
+
+## Setup Steps
+
+### 1. Create a GitLab Access Token
+
+1. Navigate to **Settings → Access Tokens** in GitLab
+2. Click **Add new token**
+3. Configure the token:
+   - **Name**: `Mesrai Code Review`
+   - **Expiration**: Set according to your security policy
+   - **Scopes**: Select the following:
+     - `api` - Full API access
+     - `read_repository` - Read repository content
+     - `write_repository` - Write merge request comments
+
+4. Click **Create personal access token**
+5. Copy the token (you won't be able to see it again)
+
+### 2. Connect to Mesrai
+
+1. Go to [Mesrai Dashboard](https://app.mesrai.com) → **Integrations**
+2. Click **Add GitLab Repository**
+3. Enter your GitLab instance URL (or use `gitlab.com` for GitLab.com)
+4. Paste your access token
+5. Select the repositories you want to connect
+
+### 3. Configure Webhooks
+
+Mesrai will automatically configure webhooks, or you can set them up manually:
+
+```
+Webhook URL: https://api.mesrai.com/webhooks/gitlab
+Events:
+  - Merge request events
+  - Push events
+  - Comment events
+```
+
+## Configuration
+
+### Repository Settings
+
+Create a `.mesrai.yaml` file in your repository root:
+
+```yaml
+# GitLab-specific configuration
+gitlab:
+  # Comment on merge requests
+  comment_on_mr: true
+
+  # Add inline comments
+  inline_comments: true
+
+  # Set merge request labels based on review
+  auto_label: true
+  labels:
+    needs_review: "needs-changes"
+    approved: "ready-to-merge"
+
+  # Block merge until approved
+  block_merge: false
+```
+
+### Merge Request Integration
+
+Mesrai adds comments directly to your merge requests:
+
+```markdown
+## Mesrai Code Review
+
+### Summary
+This MR adds user authentication with some suggestions for improvement.
+
+### Issues Found
+
+#### 🔴 Critical (1)
+- **SQL Injection Risk** - `src/auth.py:45`
+
+#### 🟡 Suggestions (3)
+- Consider adding input validation - `src/auth.py:32`
+- Add error handling for database connection - `src/auth.py:58`
+- Missing docstring - `src/auth.py:20`
+
+### Metrics
+- Files changed: 5
+- Lines added: 120
+- Lines removed: 45
+- Estimated review time saved: 25 minutes
+```
+
+## GitLab CI/CD Integration
+
+Add Mesrai to your CI/CD pipeline:
+
+```yaml
+# .gitlab-ci.yml
+stages:
+  - review
+  - test
+  - deploy
+
+mesrai-review:
+  stage: review
+  image: mesrai/cli:latest
+  script:
+    - mesrai review --mr $CI_MERGE_REQUEST_IID
+  only:
+    - merge_requests
+  variables:
+    MESRAI_TOKEN: $MESRAI_API_TOKEN
+```
+
+## Self-Managed GitLab
+
+<Callout type="info">
+  Self-managed GitLab instances are supported on Enterprise plans.
+</Callout>
+
+For self-managed GitLab:
+
+1. Ensure your GitLab instance is accessible from Mesrai's servers
+2. Or deploy Mesrai self-hosted within your network
+3. Configure custom webhook endpoints if needed
+
+### Network Requirements
+
+Allow outbound connections to:
+- `api.mesrai.com:443`
+- `webhooks.mesrai.com:443`
+
+## Troubleshooting
+
+### Token Issues
+
+**Error: Invalid token**
+- Ensure the token has not expired
+- Verify the token has required scopes
+- Check if the token was revoked
+
+**Error: Insufficient permissions**
+- Confirm maintainer or owner access to the repository
+- Verify token scopes include `api` and `read_repository`
+
+### Webhook Issues
+
+**Merge requests not triggering reviews**
+1. Check webhook configuration in GitLab → Settings → Webhooks
+2. Verify the webhook URL is correct
+3. Check webhook delivery logs for errors
+
+## Next Steps
+
+- [Configure Bitbucket Integration](/integrations/bitbucket)
+- [Set up CI/CD Pipelines](/integrations/cicd-pipelines)
+- [View API Reference](/api-reference/overview)

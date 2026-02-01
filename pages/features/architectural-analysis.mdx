@@ -1,0 +1,201 @@
+---
+title: Architectural Analysis
+description: Analyze code architecture, detect anti-patterns, and enforce architectural boundaries with Mesrai.
+---
+
+import { Callout } from 'nextra/components'
+
+# Architectural Analysis
+
+<Callout type="info">
+  **New in v2.0** - Architectural Analysis has been completely rebuilt with improved detection algorithms and visualization tools.
+</Callout>
+
+Mesrai's Architectural Analysis helps you maintain clean, scalable code architecture by detecting anti-patterns and enforcing architectural boundaries.
+
+## Overview
+
+Architectural Analysis goes beyond line-by-line code review to evaluate:
+
+- **Layer violations** - Ensuring proper separation of concerns
+- **Circular dependencies** - Detecting and preventing dependency cycles
+- **Coupling analysis** - Identifying tightly coupled components
+- **Cohesion metrics** - Ensuring modules have focused responsibilities
+
+## Key Features
+
+### Dependency Graph Visualization
+
+Mesrai generates interactive dependency graphs:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Application Layer                     │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐          │
+│  │Controllers│───▶│ Services │───▶│   API    │          │
+│  └──────────┘    └──────────┘    └──────────┘          │
+│        │              │                                  │
+│        ▼              ▼                                  │
+│  ┌─────────────────────────────────────┐               │
+│  │          Domain Layer               │               │
+│  │  ┌─────────┐    ┌─────────┐        │               │
+│  │  │ Entities│    │  Rules  │        │               │
+│  │  └─────────┘    └─────────┘        │               │
+│  └─────────────────────────────────────┘               │
+│                      │                                  │
+│                      ▼                                  │
+│  ┌─────────────────────────────────────┐               │
+│  │        Infrastructure Layer          │               │
+│  │  ┌─────────┐    ┌─────────┐        │               │
+│  │  │Database │    │ External│        │               │
+│  │  └─────────┘    └─────────┘        │               │
+│  └─────────────────────────────────────┘               │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Layer Boundary Enforcement
+
+Define and enforce architectural layers:
+
+```yaml
+# mesrai.config.yaml
+architecture:
+  layers:
+    - name: presentation
+      paths:
+        - "src/components/**"
+        - "src/pages/**"
+      can_depend_on:
+        - application
+
+    - name: application
+      paths:
+        - "src/services/**"
+        - "src/hooks/**"
+      can_depend_on:
+        - domain
+        - infrastructure
+
+    - name: domain
+      paths:
+        - "src/models/**"
+        - "src/entities/**"
+      can_depend_on: []  # Domain should have no dependencies
+
+    - name: infrastructure
+      paths:
+        - "src/db/**"
+        - "src/api/**"
+      can_depend_on:
+        - domain
+```
+
+### Anti-Pattern Detection
+
+Mesrai detects common architectural anti-patterns:
+
+| Anti-Pattern | Description | Severity |
+|--------------|-------------|----------|
+| God Class | Class with too many responsibilities | High |
+| Circular Dependency | Modules that depend on each other | High |
+| Feature Envy | Class using another class's data excessively | Medium |
+| Shotgun Surgery | Changes requiring many small edits | Medium |
+| Long Parameter List | Functions with too many parameters | Low |
+
+## Usage
+
+### Automatic Analysis
+
+Architectural analysis runs automatically on every PR:
+
+```bash
+PR #123: Add user management feature
+
+Architecture Analysis Results:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Layer boundaries respected
+✅ No circular dependencies introduced
+⚠️  UserService cohesion score: 0.45 (threshold: 0.6)
+   Consider splitting authentication logic into AuthService
+❌ Layer violation: presentation → infrastructure
+   src/components/UserList.jsx imports src/db/queries.js
+```
+
+### CLI Commands
+
+Analyze architecture locally:
+
+```bash
+# Full architecture analysis
+npx mesrai architecture analyze
+
+# Check specific layer
+npx mesrai architecture check --layer domain
+
+# Generate dependency graph
+npx mesrai architecture graph --output deps.svg
+
+# Validate against rules
+npx mesrai architecture validate
+```
+
+### IDE Integration
+
+View architecture insights directly in your IDE:
+
+- VS Code extension shows layer violations inline
+- Hover over imports to see dependency chain
+- Quick fixes for common violations
+
+## Configuration
+
+### Threshold Settings
+
+Customize detection thresholds:
+
+```yaml
+architecture:
+  thresholds:
+    max_file_dependencies: 10
+    max_function_length: 50
+    min_cohesion: 0.6
+    max_coupling: 0.3
+    max_depth: 4
+```
+
+### Ignore Patterns
+
+Exclude specific patterns from analysis:
+
+```yaml
+architecture:
+  ignore:
+    patterns:
+      - "**/*.test.js"
+      - "**/__mocks__/**"
+    violations:
+      - rule: "circular-dependency"
+        paths: ["src/legacy/**"]  # Legacy code exemption
+```
+
+## Best Practices
+
+1. **Start with defaults** - Begin with standard thresholds and adjust based on your codebase
+2. **Incremental adoption** - Don't try to fix all violations at once
+3. **Document exceptions** - When ignoring violations, add comments explaining why
+4. **Review regularly** - Run full architecture analysis monthly
+
+## Metrics Dashboard
+
+Track architectural health over time:
+
+- **Dependency count** - Total and per-module dependencies
+- **Cohesion trend** - How focused your modules remain
+- **Coupling score** - Inter-module dependency strength
+- **Layer violations** - Count and trend over time
+
+## Next Steps
+
+- [Configure Privacy & Security](/features/privacy-security)
+- [Set up CI/CD Integration](/integrations/cicd-pipelines)
+- [View API Reference](/api-reference/overview)

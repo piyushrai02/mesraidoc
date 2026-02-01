@@ -1,0 +1,351 @@
+---
+title: SDKs
+description: Official SDK libraries for integrating Mesrai into your applications.
+---
+
+import { Callout } from 'nextra/components'
+
+# SDKs
+
+Mesrai provides official SDK libraries for popular programming languages, making it easy to integrate AI code reviews into your applications and workflows.
+
+## Available SDKs
+
+| Language | Package | Status |
+|----------|---------|--------|
+| Node.js | `@mesrai/sdk` | ✅ Stable |
+| Python | `mesrai` | ✅ Stable |
+| Go | `github.com/mesrai/go-sdk` | ✅ Stable |
+| Ruby | `mesrai` | ⏳ Beta |
+| Java | `com.mesrai:sdk` | ⏳ Coming Soon |
+
+## Node.js SDK
+
+### Installation
+
+```bash
+npm install @mesrai/sdk
+# or
+yarn add @mesrai/sdk
+# or
+pnpm add @mesrai/sdk
+```
+
+### Quick Start
+
+```javascript
+import { Mesrai } from '@mesrai/sdk';
+
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY,
+});
+
+// Trigger a review
+const review = await mesrai.reviews.create({
+  repository: 'my-org/my-repo',
+  pullRequest: 42,
+});
+
+console.log(`Review started: ${review.id}`);
+
+// Get review status
+const status = await mesrai.reviews.get(review.id);
+console.log(`Status: ${status.status}`);
+
+// List all reviews
+const reviews = await mesrai.reviews.list({
+  repository: 'my-org/my-repo',
+  limit: 10,
+});
+```
+
+### TypeScript Support
+
+The SDK includes full TypeScript definitions:
+
+```typescript
+import { Mesrai, Review, ReviewStatus } from '@mesrai/sdk';
+
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY!,
+});
+
+async function getReviewStatus(reviewId: string): Promise<ReviewStatus> {
+  const review: Review = await mesrai.reviews.get(reviewId);
+  return review.status;
+}
+```
+
+## Python SDK
+
+### Installation
+
+```bash
+pip install mesrai
+# or
+poetry add mesrai
+```
+
+### Quick Start
+
+```python
+from mesrai import Mesrai
+import os
+
+client = Mesrai(api_key=os.environ["MESRAI_API_KEY"])
+
+# Trigger a review
+review = client.reviews.create(
+    repository="my-org/my-repo",
+    pull_request=42
+)
+
+print(f"Review started: {review.id}")
+
+# Get review status
+status = client.reviews.get(review.id)
+print(f"Status: {status.status}")
+
+# List all reviews
+reviews = client.reviews.list(
+    repository="my-org/my-repo",
+    limit=10
+)
+```
+
+### Async Support
+
+```python
+import asyncio
+from mesrai import AsyncMesrai
+
+async def main():
+    client = AsyncMesrai(api_key=os.environ["MESRAI_API_KEY"])
+
+    review = await client.reviews.create(
+        repository="my-org/my-repo",
+        pull_request=42
+    )
+
+    # Poll for completion
+    while True:
+        status = await client.reviews.get(review.id)
+        if status.status == "completed":
+            break
+        await asyncio.sleep(5)
+
+    print(f"Review completed: {status.issues_found} issues found")
+
+asyncio.run(main())
+```
+
+## Go SDK
+
+### Installation
+
+```bash
+go get github.com/mesrai/go-sdk
+```
+
+### Quick Start
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+
+    "github.com/mesrai/go-sdk/mesrai"
+)
+
+func main() {
+    client := mesrai.NewClient(os.Getenv("MESRAI_API_KEY"))
+
+    ctx := context.Background()
+
+    // Trigger a review
+    review, err := client.Reviews.Create(ctx, &mesrai.CreateReviewRequest{
+        Repository:  "my-org/my-repo",
+        PullRequest: 42,
+    })
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("Review started: %s\n", review.ID)
+
+    // Get review status
+    status, err := client.Reviews.Get(ctx, review.ID)
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("Status: %s\n", status.Status)
+}
+```
+
+## Common Operations
+
+### Create a Review
+
+<Callout type="info">
+  Reviews are automatically triggered on PRs when the GitHub/GitLab app is installed. Use the SDK to trigger reviews manually or for custom integrations.
+</Callout>
+
+```javascript
+// Node.js
+const review = await mesrai.reviews.create({
+  repository: 'my-org/my-repo',
+  pullRequest: 42,
+  options: {
+    focus: ['security', 'performance'],
+    severity: 'medium',
+  },
+});
+```
+
+```python
+# Python
+review = client.reviews.create(
+    repository="my-org/my-repo",
+    pull_request=42,
+    options={
+        "focus": ["security", "performance"],
+        "severity": "medium"
+    }
+)
+```
+
+### Get Review Results
+
+```javascript
+// Node.js
+const review = await mesrai.reviews.get('rev_123');
+
+console.log('Summary:', review.summary);
+console.log('Issues:', review.issues);
+
+for (const issue of review.issues) {
+  console.log(`[${issue.severity}] ${issue.message}`);
+  console.log(`  File: ${issue.file}:${issue.line}`);
+}
+```
+
+### List Reviews
+
+```javascript
+// Node.js
+const reviews = await mesrai.reviews.list({
+  repository: 'my-org/my-repo',
+  status: 'completed',
+  since: '2024-01-01',
+  limit: 50,
+});
+
+for (const review of reviews.data) {
+  console.log(`PR #${review.pullRequest}: ${review.issuesFound} issues`);
+}
+```
+
+### Webhook Handling
+
+```javascript
+// Node.js - Express example
+import { Mesrai, verifyWebhookSignature } from '@mesrai/sdk';
+
+app.post('/webhooks', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['x-mesrai-signature'];
+
+  if (!verifyWebhookSignature(req.body, signature, process.env.WEBHOOK_SECRET)) {
+    return res.status(401).send('Invalid signature');
+  }
+
+  const event = JSON.parse(req.body);
+
+  switch (event.type) {
+    case 'review.completed':
+      handleReviewCompleted(event.data);
+      break;
+    case 'security.alert':
+      handleSecurityAlert(event.data);
+      break;
+  }
+
+  res.status(200).send('OK');
+});
+```
+
+## Error Handling
+
+All SDKs provide typed errors:
+
+```javascript
+// Node.js
+import { MesraiError, RateLimitError, AuthenticationError } from '@mesrai/sdk';
+
+try {
+  const review = await mesrai.reviews.get('invalid_id');
+} catch (error) {
+  if (error instanceof AuthenticationError) {
+    console.error('Invalid API key');
+  } else if (error instanceof RateLimitError) {
+    console.error(`Rate limited. Retry after: ${error.retryAfter}s`);
+  } else if (error instanceof MesraiError) {
+    console.error(`API error: ${error.message}`);
+  }
+}
+```
+
+```python
+# Python
+from mesrai.exceptions import MesraiError, RateLimitError, AuthenticationError
+
+try:
+    review = client.reviews.get("invalid_id")
+except AuthenticationError:
+    print("Invalid API key")
+except RateLimitError as e:
+    print(f"Rate limited. Retry after: {e.retry_after}s")
+except MesraiError as e:
+    print(f"API error: {e.message}")
+```
+
+## Configuration Options
+
+### Timeouts
+
+```javascript
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY,
+  timeout: 30000, // 30 seconds
+  maxRetries: 3,
+});
+```
+
+### Custom Base URL
+
+For self-hosted installations:
+
+```javascript
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY,
+  baseUrl: 'https://mesrai.internal.company.com/api',
+});
+```
+
+### Logging
+
+```javascript
+const mesrai = new Mesrai({
+  apiKey: process.env.MESRAI_API_KEY,
+  debug: true, // Logs all API calls
+});
+```
+
+## Next Steps
+
+- [View API Overview](/api-reference/overview)
+- [Configure Webhooks](/api-reference/webhooks)
+- [Set up CI/CD](/integrations/cicd-pipelines)

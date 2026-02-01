@@ -1,0 +1,155 @@
+---
+title: Context Awareness
+description: Understand how Mesrai builds contextual understanding of your entire codebase.
+---
+
+# Context Awareness
+
+Mesrai's context awareness system goes beyond simple pattern matching. It builds a deep understanding of your codebase structure, relationships, and patterns.
+
+## How Context Works
+
+### Codebase Indexing
+
+When you connect a repository, Mesrai:
+
+1. **Scans your codebase** - Indexes all source files and their relationships
+2. **Builds a call graph** - Maps how functions and classes interact
+3. **Identifies patterns** - Learns your coding conventions and architecture
+4. **Tracks dependencies** - Understands external library usage
+
+### Real-Time Updates
+
+The context is continuously updated:
+- New PRs add to the understanding
+- Merged changes update the codebase model
+- Deleted code is removed from context
+
+## Context Types
+
+### File Context
+
+Understanding of individual file structure:
+
+```
+File: src/services/auth.js
+├── Imports: jwt, bcrypt, UserModel
+├── Exports: login, logout, validateToken
+├── Functions:
+│   ├── login(email, password) -> Promise<Token>
+│   ├── logout(token) -> void
+│   └── validateToken(token) -> User | null
+└── Dependencies:
+    └── Called by: routes/api.js, middleware/auth.js
+```
+
+### Project Context
+
+Understanding of overall project architecture:
+
+```
+Project Structure:
+├── Architecture: Microservices
+├── Framework: Express.js + React
+├── Database: PostgreSQL
+├── Auth: JWT-based
+└── Key Patterns:
+    ├── Repository pattern for data access
+    ├── Service layer for business logic
+    └── Controller layer for API endpoints
+```
+
+### Historical Context
+
+Learning from past reviews:
+
+- Common issues in your codebase
+- Patterns that were previously approved
+- Rejected patterns and why
+
+## Benefits
+
+### Smarter Reviews
+
+With full context, Mesrai can:
+
+- **Catch breaking changes** - Knows when a function signature change affects callers
+- **Suggest consistent patterns** - Recommends code that matches existing style
+- **Identify dead code** - Finds unused functions and variables
+- **Predict impact** - Estimates the risk level of changes
+
+### Reduced False Positives
+
+Context awareness dramatically reduces noise:
+
+```javascript
+// Without context: ⚠️ Unused variable 'config'
+// With context: ✅ 'config' is used in a conditional import elsewhere
+
+const config = require('./config');
+```
+
+## Configuration
+
+### Context Depth
+
+Control how much context is gathered:
+
+```yaml
+# mesrai.config.yaml
+context:
+  depth: full  # Options: minimal, standard, full
+
+  include:
+    - "src/**/*"
+    - "lib/**/*"
+
+  exclude:
+    - "node_modules/**"
+    - "dist/**"
+    - "*.test.js"
+```
+
+### Privacy Controls
+
+Sensitive files can be excluded from context:
+
+```yaml
+context:
+  privacy:
+    exclude_patterns:
+      - "**/*.env*"
+      - "**/secrets/**"
+      - "**/*.key"
+```
+
+## Context in Action
+
+### Example: API Endpoint Review
+
+When reviewing a new API endpoint, Mesrai considers:
+
+1. **Authentication patterns** - How other endpoints handle auth
+2. **Error handling** - Standard error response format
+3. **Validation** - Input validation patterns used elsewhere
+4. **Database access** - How similar queries are structured
+
+```javascript
+// New endpoint being reviewed
+app.post('/api/users', async (req, res) => {
+  const user = await User.create(req.body);
+  res.json(user);
+});
+
+// Mesrai suggests (based on context):
+// - Add authentication middleware (used on all other /api routes)
+// - Add input validation (pattern from /api/products)
+// - Wrap in try-catch (pattern from /api/orders)
+// - Sanitize output (remove password field like /api/profile)
+```
+
+## Next Steps
+
+- [Explore Architectural Analysis](/features/architectural-analysis)
+- [Configure Privacy Settings](/features/privacy-security)
+- [Set up GitHub Integration](/integrations/github)

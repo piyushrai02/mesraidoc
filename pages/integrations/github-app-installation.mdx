@@ -14,7 +14,7 @@ Before installing the Mesrai GitHub App, ensure you have:
 
 ### 1. Install the GitHub App
 
-Navigate to the [Mesrai GitHub App](https://github.com/apps/mesrai) installation page:
+Navigate to the [Mesrai GitHub App](https://github.com/apps/mesraipilot) installation page:
 
 1. Click **Install** or **Configure**
 2. Select the organization or account
@@ -26,12 +26,12 @@ Navigate to the [Mesrai GitHub App](https://github.com/apps/mesrai) installation
 
 The Mesrai GitHub App requires the following permissions:
 
-| Permission | Access Level | Purpose |
-|-----------|--------------|---------|
-| Pull requests | Read & Write | Post review comments and suggestions |
-| Repository contents | Read | Analyze code changes and file structure |
-| Commit statuses | Read & Write | Report review status on PRs |
-| Repository metadata | Read | Access repository information |
+| Permission          | Access Level | Purpose                                 |
+| ------------------- | ------------ | --------------------------------------- |
+| Pull requests       | Read & Write | Post review comments and suggestions    |
+| Repository contents | Read         | Analyze code changes and file structure |
+| Commit statuses     | Read & Write | Report review status on PRs             |
+| Repository metadata | Read         | Access repository information           |
 
 ### 3. Configure Repository Settings
 
@@ -133,6 +133,7 @@ Trigger reviews manually by commenting on a PR:
 **Symptom**: No comments from Mesrai on new PRs
 
 **Solutions**:
+
 1. Verify webhook deliveries in repository settings
 2. Check Mesrai dashboard for repository status
 3. Ensure `.mesrai.yml` config is valid
@@ -143,6 +144,7 @@ Trigger reviews manually by commenting on a PR:
 **Symptom**: "Mesrai doesn't have access to this repository"
 
 **Solutions**:
+
 1. Reinstall the GitHub App with correct permissions
 2. Verify repository is included in app installation
 3. Check organization permissions if using GitHub Enterprise
@@ -152,6 +154,7 @@ Trigger reviews manually by commenting on a PR:
 **Symptom**: Reviews take longer than 2 minutes
 
 **Solutions**:
+
 1. Check [Status Page](https://status.mesrai.com)
 2. Reduce context size in `.mesrai.yml`
 3. Contact support if issue persists

@@ -1,0 +1,208 @@
+---
+title: Privacy & Security
+description: Learn about Mesrai's security practices, data handling, and privacy controls.
+---
+
+import { Callout } from 'nextra/components'
+
+# Privacy & Security
+
+Mesrai is built with security and privacy as core principles. We understand that your code is your most valuable intellectual property.
+
+## Security Overview
+
+### SOC 2 Type II Certified
+
+<Callout type="info">
+  Mesrai has achieved SOC 2 Type II certification, demonstrating our commitment to security, availability, and confidentiality.
+</Callout>
+
+Our security program includes:
+- Annual third-party security audits
+- Continuous compliance monitoring
+- Incident response procedures
+- Employee security training
+
+### Infrastructure Security
+
+| Component | Security Measure |
+|-----------|------------------|
+| Data at Rest | AES-256 encryption |
+| Data in Transit | TLS 1.3 |
+| Authentication | OAuth 2.0 + SAML |
+| Access Control | Role-based (RBAC) |
+| Logging | Immutable audit logs |
+
+## Data Handling
+
+### What We Access
+
+When you connect a repository, Mesrai accesses:
+
+- ✅ Source code in pull requests
+- ✅ PR metadata (title, description, author)
+- ✅ File change history for context
+- ❌ We never access credentials or secrets
+- ❌ We never store your code permanently
+
+### Data Retention
+
+| Data Type | Retention Period |
+|-----------|-----------------|
+| PR Analysis | 90 days |
+| Review Comments | Until PR closed |
+| Usage Metrics | 1 year |
+| Audit Logs | 7 years |
+
+### Code Storage
+
+Your code is processed in memory and is **never permanently stored**:
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Your PR   │────▶│   Analysis   │────▶│   Review    │
+│   (GitHub)  │     │   (Memory)   │     │  Comments   │
+└─────────────┘     └──────────────┘     └─────────────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │   Deleted    │
+                    │   After PR   │
+                    └──────────────┘
+```
+
+## Privacy Controls
+
+### Repository-Level Settings
+
+Control what Mesrai can access:
+
+```yaml
+# mesrai.config.yaml
+privacy:
+  # Exclude sensitive directories
+  exclude_paths:
+    - "secrets/**"
+    - "config/credentials/**"
+    - "*.env*"
+
+  # Disable analysis for sensitive files
+  sensitive_patterns:
+    - "**/*password*"
+    - "**/*secret*"
+    - "**/*key*"
+```
+
+### Team Privacy Settings
+
+Administrators can configure organization-wide privacy:
+
+- **Data residency** - Choose US or EU data centers
+- **IP allowlisting** - Restrict access to specific IPs
+- **SSO enforcement** - Require SSO for all team members
+- **Audit logging** - Enable detailed access logs
+
+## Compliance
+
+### Supported Frameworks
+
+| Framework | Status |
+|-----------|--------|
+| SOC 2 Type II | ✅ Certified |
+| GDPR | ✅ Compliant |
+| CCPA | ✅ Compliant |
+| HIPAA | ⏳ In Progress |
+| ISO 27001 | ⏳ In Progress |
+
+### Data Processing Agreement
+
+Enterprise customers can request a custom DPA:
+- Standard contractual clauses (SCCs)
+- Custom data retention policies
+- Specific security requirements
+
+## Security Features
+
+### Vulnerability Detection
+
+Mesrai scans for security vulnerabilities in your code:
+
+```javascript
+// ❌ SQL Injection vulnerability detected
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+
+// ✅ Suggested fix
+const query = 'SELECT * FROM users WHERE id = $1';
+const result = await db.query(query, [userId]);
+```
+
+### Secret Detection
+
+Automatic detection of accidentally committed secrets:
+
+- API keys and tokens
+- Database credentials
+- Private keys
+- OAuth secrets
+
+### Dependency Scanning
+
+Check dependencies for known vulnerabilities:
+
+```bash
+Dependency Analysis:
+━━━━━━━━━━━━━━━━━━━
+⚠️ lodash@4.17.15 - Prototype Pollution (CVE-2020-8203)
+   Upgrade to: lodash@4.17.21
+
+❌ express@4.17.0 - Critical vulnerability (CVE-2022-24999)
+   Upgrade to: express@4.18.2
+```
+
+## Enterprise Security
+
+### Self-Hosted Option
+
+For maximum security, deploy Mesrai in your own infrastructure:
+
+- Run on your own Kubernetes cluster
+- Keep all data within your network
+- Full control over updates and configuration
+
+### SSO Integration
+
+Support for enterprise identity providers:
+- Okta
+- Azure AD
+- Google Workspace
+- OneLogin
+- Custom SAML 2.0
+
+### Audit Logging
+
+Comprehensive audit trail:
+
+```json
+{
+  "timestamp": "2024-01-15T10:30:00Z",
+  "actor": "user@company.com",
+  "action": "repository.connect",
+  "resource": "org/repo",
+  "ip_address": "192.168.1.1",
+  "user_agent": "Mozilla/5.0..."
+}
+```
+
+## Reporting Vulnerabilities
+
+Found a security issue? We appreciate responsible disclosure:
+
+- Email: security@mesrai.com
+- PGP Key: Available on our [security page](https://mesrai.com/security)
+- Bug Bounty: Active program for qualified researchers
+
+## Next Steps
+
+- [Configure GitHub Integration](/integrations/github)
+- [Set up SSO](/features/organizations/settings)
+- [Contact Sales for Enterprise](https://mesrai.com/contact)

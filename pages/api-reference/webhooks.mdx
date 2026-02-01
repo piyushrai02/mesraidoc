@@ -1,0 +1,290 @@
+---
+title: Webhooks
+description: Receive real-time notifications when code reviews are completed or updated.
+---
+
+import { Callout } from 'nextra/components'
+
+# Webhooks
+
+Webhooks allow you to receive real-time HTTP notifications when events occur in Mesrai, such as completed reviews or detected security issues.
+
+## Overview
+
+When an event occurs, Mesrai sends an HTTP POST request to your configured webhook URL with event details in the request body.
+
+## Setting Up Webhooks
+
+### Via Dashboard
+
+1. Go to [Mesrai Dashboard](https://app.mesrai.com) → **Settings** → **Webhooks**
+2. Click **Add Webhook**
+3. Configure:
+   - **URL**: Your endpoint URL (must be HTTPS)
+   - **Events**: Select which events to receive
+   - **Secret**: Optional secret for signature verification
+
+### Via API
+
+```bash
+curl -X POST https://api.mesrai.com/v1/webhooks \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://your-server.com/webhooks/mesrai",
+    "events": ["review.completed", "security.alert"],
+    "secret": "your-webhook-secret"
+  }'
+```
+
+## Available Events
+
+| Event | Description |
+|-------|-------------|
+| `review.started` | Code review has started |
+| `review.completed` | Code review finished |
+| `review.failed` | Review failed due to error |
+| `security.alert` | Security vulnerability detected |
+| `pr.approved` | PR auto-approved by Mesrai |
+| `pr.changes_requested` | Changes requested on PR |
+| `config.updated` | Repository configuration changed |
+
+## Webhook Payload
+
+### Headers
+
+All webhook requests include these headers:
+
+| Header | Description |
+|--------|-------------|
+| `Content-Type` | `application/json` |
+| `X-Mesrai-Event` | Event type (e.g., `review.completed`) |
+| `X-Mesrai-Delivery` | Unique delivery ID |
+| `X-Mesrai-Signature` | HMAC-SHA256 signature (if secret set) |
+| `User-Agent` | `Mesrai-Webhook/1.0` |
+
+### Body Structure
+
+```json
+{
+  "id": "evt_1234567890",
+  "type": "review.completed",
+  "created_at": "2024-01-15T10:30:00Z",
+  "data": {
+    // Event-specific data
+  }
+}
+```
+
+## Event Payloads
+
+### review.completed
+
+```json
+{
+  "id": "evt_abc123",
+  "type": "review.completed",
+  "created_at": "2024-01-15T10:30:00Z",
+  "data": {
+    "review_id": "rev_xyz789",
+    "repository": {
+      "id": "repo_123",
+      "name": "my-org/my-repo",
+      "provider": "github"
+    },
+    "pull_request": {
+      "number": 42,
+      "title": "Add user authentication",
+      "url": "https://github.com/my-org/my-repo/pull/42"
+    },
+    "summary": {
+      "status": "completed",
+      "issues_found": 5,
+      "critical": 0,
+      "high": 1,
+      "medium": 3,
+      "low": 1
+    },
+    "review_url": "https://app.mesrai.com/reviews/rev_xyz789"
+  }
+}
+```
+
+### security.alert
+
+```json
+{
+  "id": "evt_def456",
+  "type": "security.alert",
+  "created_at": "2024-01-15T10:35:00Z",
+  "data": {
+    "alert_id": "alert_789",
+    "severity": "critical",
+    "type": "sql_injection",
+    "repository": {
+      "id": "repo_123",
+      "name": "my-org/my-repo"
+    },
+    "file": "src/database/queries.js",
+    "line": 45,
+    "description": "SQL injection vulnerability detected in user query",
+    "recommendation": "Use parameterized queries instead of string concatenation",
+    "cwe": "CWE-89",
+    "cvss_score": 9.8
+  }
+}
+```
+
+## Signature Verification
+
+<Callout type="warning">
+  Always verify webhook signatures in production to ensure requests are from Mesrai.
+</Callout>
+
+### Verification Steps
+
+1. Get the signature from `X-Mesrai-Signature` header
+2. Compute HMAC-SHA256 of the raw request body using your secret
+3. Compare signatures using timing-safe comparison
+
+### Example (Node.js)
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhookSignature(payload, signature, secret) {
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(payload, 'utf8')
+    .digest('hex');
+
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(`sha256=${expectedSignature}`)
+  );
+}
+
+// Express middleware
+app.post('/webhooks/mesrai', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['x-mesrai-signature'];
+  const isValid = verifyWebhookSignature(req.body, signature, process.env.WEBHOOK_SECRET);
+
+  if (!isValid) {
+    return res.status(401).json({ error: 'Invalid signature' });
+  }
+
+  const event = JSON.parse(req.body);
+  // Process event...
+
+  res.status(200).json({ received: true });
+});
+```
+
+### Example (Python)
+
+```python
+import hmac
+import hashlib
+
+def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
+    expected = hmac.new(
+        secret.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+
+    return hmac.compare_digest(signature, f'sha256={expected}')
+
+# Flask example
+@app.route('/webhooks/mesrai', methods=['POST'])
+def handle_webhook():
+    signature = request.headers.get('X-Mesrai-Signature')
+    payload = request.get_data()
+
+    if not verify_signature(payload, signature, os.environ['WEBHOOK_SECRET']):
+        return {'error': 'Invalid signature'}, 401
+
+    event = request.get_json()
+    # Process event...
+
+    return {'received': True}, 200
+```
+
+## Retry Policy
+
+Mesrai retries failed webhook deliveries with exponential backoff:
+
+| Attempt | Delay |
+|---------|-------|
+| 1 | Immediate |
+| 2 | 1 minute |
+| 3 | 5 minutes |
+| 4 | 30 minutes |
+| 5 | 2 hours |
+
+After 5 failed attempts, the webhook is marked as failed and disabled.
+
+### Expected Response
+
+Return a 2xx status code to acknowledge receipt:
+- `200 OK`
+- `201 Created`
+- `202 Accepted`
+- `204 No Content`
+
+Any other status code is treated as a failure.
+
+## Testing Webhooks
+
+### Test Event
+
+Send a test event from the dashboard:
+
+1. Go to **Settings** → **Webhooks**
+2. Click **...** next to your webhook
+3. Select **Send Test Event**
+
+### Local Development
+
+Use a tunneling service for local testing:
+
+```bash
+# Using ngrok
+ngrok http 3000
+
+# Configure webhook with ngrok URL
+https://abc123.ngrok.io/webhooks/mesrai
+```
+
+## Managing Webhooks
+
+### List Webhooks
+
+```bash
+curl https://api.mesrai.com/v1/webhooks \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Update Webhook
+
+```bash
+curl -X PATCH https://api.mesrai.com/v1/webhooks/whk_123 \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "events": ["review.completed", "review.failed"]
+  }'
+```
+
+### Delete Webhook
+
+```bash
+curl -X DELETE https://api.mesrai.com/v1/webhooks/whk_123 \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+## Next Steps
+
+- [Explore SDKs](/api-reference/sdks)
+- [View API Overview](/api-reference/overview)
+- [Configure CI/CD](/integrations/cicd-pipelines)

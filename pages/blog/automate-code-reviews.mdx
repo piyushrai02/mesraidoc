@@ -5,7 +5,7 @@ date: 2025-01-08
 author: Mesrai Team
 ---
 
-import { ArticleSchema } from '../../components/seo/JsonLd'
+import { ArticleSchema } from "../../components/seo/JsonLd";
 
 <ArticleSchema
   title="How to Automate Code Reviews and Save 20 Hours Per Week"
@@ -29,10 +29,10 @@ const reviewCost = {
   hourlyRate: 100, // developer cost
 
   // Calculations
-  weeklyReviewHours: (50 * 30) / 60,  // 25 hours
-  weeklyReviewCost: (50 * 30 / 60) * 100,  // $2,500
-  annualReviewCost: (50 * 30 / 60) * 100 * 52  // $130,000
-}
+  weeklyReviewHours: (50 * 30) / 60, // 25 hours
+  weeklyReviewCost: ((50 * 30) / 60) * 100, // $2,500
+  annualReviewCost: ((50 * 30) / 60) * 100 * 52, // $130,000
+};
 
 // What you could save with 70% automation:
 // Time saved: 17.5 hours/week
@@ -48,54 +48,67 @@ const reviewCost = {
 These tasks are perfect for automation:
 
 #### 1. Code Style and Formatting
+
 ```javascript
 // Automated checks can enforce:
-const badStyle = function( x,y ){return x+y;}  // ❌
-const goodStyle = function(x, y) { return x + y; }  // ✅
+const badStyle = function (x, y) {
+  return x + y;
+}; // ❌
+const goodStyle = function (x, y) {
+  return x + y;
+}; // ✅
 
 // Indentation
 function nested() {
-if(true) {  // ❌ Wrong indentation
-  console.log('test')
-}
+  if (true) {
+    // ❌ Wrong indentation
+    console.log("test");
+  }
 }
 
 function nested() {
-  if (true) {  // ✅ Correct indentation
-    console.log('test')
+  if (true) {
+    // ✅ Correct indentation
+    console.log("test");
   }
 }
 ```
 
 #### 2. Common Security Vulnerabilities
+
 ```javascript
 // SQL Injection
-const query = `SELECT * FROM users WHERE id = ${userId}`  // ❌
+const query = `SELECT * FROM users WHERE id = ${userId}`; // ❌
 
 // XSS
-element.innerHTML = userInput  // ❌
+element.innerHTML = userInput; // ❌
 
 // Hardcoded Secrets
-const apiKey = "sk_live_abc123"  // ❌
+const apiKey = "sk_live_abc123"; // ❌
 ```
 
 #### 3. Performance Issues
+
 ```javascript
 // N+1 Queries
-users.forEach(user => {  // ❌
-  db.query(`SELECT * FROM posts WHERE user_id = ${user.id}`)
-})
+users.forEach((user) => {
+  // ❌
+  db.query(`SELECT * FROM posts WHERE user_id = ${user.id}`);
+});
 
 // Inefficient Loops
-for (let i = 0; i < array.length; i++) {  // ❌
-  expensiveOperation(array[i])
+for (let i = 0; i < array.length; i++) {
+  // ❌
+  expensiveOperation(array[i]);
 }
 ```
 
 #### 4. Code Complexity
+
 ```javascript
 // Cyclomatic Complexity
-function tooComplex(a, b, c, d, e) {  // ❌ Complexity: 15
+function tooComplex(a, b, c, d, e) {
+  // ❌ Complexity: 15
   if (a) {
     if (b) {
       if (c) {
@@ -139,6 +152,7 @@ Start with simple automated checks:
 #### Static Analysis Tools
 
 **For JavaScript/TypeScript:**
+
 ```bash
 # Install ESLint
 npm install --save-dev eslint @eslint/js
@@ -158,6 +172,7 @@ npm run lint
 ```
 
 **For Python:**
+
 ```bash
 # Install pylint
 pip install pylint
@@ -173,6 +188,7 @@ pylint src/
 ```
 
 **For Go:**
+
 ```bash
 # golangci-lint covers multiple linters
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
@@ -320,7 +336,7 @@ Add intelligent AI review:
 
 ```bash
 # 1. Install Mesrai GitHub App
-# Visit: https://github.com/apps/mesrai
+# Visit: https://github.com/apps/mesraipilot
 
 # 2. Configure automated review
 cat > .mesrai/config.yml << EOF
@@ -411,59 +427,59 @@ Create team-specific rules:
 module.exports = {
   rules: {
     // Enforce API versioning
-    'api-versioning': {
+    "api-versioning": {
       test: (file) => {
-        if (file.path.includes('/api/')) {
-          const hasVersion = /\/v\d+\//.test(file.content)
+        if (file.path.includes("/api/")) {
+          const hasVersion = /\/v\d+\//.test(file.content);
           if (!hasVersion) {
             return {
               passed: false,
-              message: 'API endpoints must include version (e.g., /v1/)',
-              severity: 'error'
-            }
+              message: "API endpoints must include version (e.g., /v1/)",
+              severity: "error",
+            };
           }
         }
-        return { passed: true }
-      }
+        return { passed: true };
+      },
     },
 
     // Require error logging
-    'error-logging': {
+    "error-logging": {
       test: (file) => {
-        const hasTryCatch = /try\s*\{[\s\S]*?\}\s*catch/.test(file.content)
-        const hasLogging = /logger\.(error|warn)/.test(file.content)
+        const hasTryCatch = /try\s*\{[\s\S]*?\}\s*catch/.test(file.content);
+        const hasLogging = /logger\.(error|warn)/.test(file.content);
 
         if (hasTryCatch && !hasLogging) {
           return {
             passed: false,
-            message: 'Error handling must include logging',
-            severity: 'warning'
-          }
+            message: "Error handling must include logging",
+            severity: "warning",
+          };
         }
-        return { passed: true }
-      }
+        return { passed: true };
+      },
     },
 
     // Database migration must have rollback
-    'migration-rollback': {
+    "migration-rollback": {
       test: (file) => {
-        if (file.path.includes('/migrations/')) {
-          const hasUp = /\.up\(/.test(file.content)
-          const hasDown = /\.down\(/.test(file.content)
+        if (file.path.includes("/migrations/")) {
+          const hasUp = /\.up\(/.test(file.content);
+          const hasDown = /\.down\(/.test(file.content);
 
           if (hasUp && !hasDown) {
             return {
               passed: false,
-              message: 'Migration must include rollback (down) method',
-              severity: 'error'
-            }
+              message: "Migration must include rollback (down) method",
+              severity: "error",
+            };
           }
         }
-        return { passed: true }
-      }
-    }
-  }
-}
+        return { passed: true };
+      },
+    },
+  },
+};
 ```
 
 #### Integration with Project Management
@@ -476,27 +492,27 @@ module.exports = {
   jira: {
     enabled: true,
     // Auto-create tickets for issues
-    createTicketsFor: ['security_critical', 'performance_regression'],
+    createTicketsFor: ["security_critical", "performance_regression"],
     // Update story status on PR
-    updateStoryOnPR: true
+    updateStoryOnPR: true,
   },
 
   slack: {
     enabled: true,
     // Notify on critical issues
     channels: {
-      critical: '#code-review-urgent',
-      standard: '#code-review',
-      approved: '#deployments'
-    }
+      critical: "#code-review-urgent",
+      standard: "#code-review",
+      approved: "#deployments",
+    },
   },
 
   pagerduty: {
     enabled: true,
     // Alert on critical security issues
-    alertOn: ['security_critical']
-  }
-}
+    alertOn: ["security_critical"],
+  },
+};
 ```
 
 ## Measuring Automation ROI
@@ -509,24 +525,24 @@ Track these metrics to measure success:
 // Before automation
 const before = {
   prsPerWeek: 50,
-  avgManualReviewTime: 30,  // minutes
-  totalWeeklyHours: (50 * 30) / 60  // 25 hours
-}
+  avgManualReviewTime: 30, // minutes
+  totalWeeklyHours: (50 * 30) / 60, // 25 hours
+};
 
 // After automation
 const after = {
   prsPerWeek: 50,
-  autoApproved: 35,  // 70%
-  humanReviewNeeded: 15,  // 30%
-  avgReviewTime: 20,  // minutes (focused review)
-  totalWeeklyHours: (15 * 20) / 60  // 5 hours
-}
+  autoApproved: 35, // 70%
+  humanReviewNeeded: 15, // 30%
+  avgReviewTime: 20, // minutes (focused review)
+  totalWeeklyHours: (15 * 20) / 60, // 5 hours
+};
 
 const savings = {
-  hoursSaved: before.totalWeeklyHours - after.totalWeeklyHours,  // 20 hours
-  percentReduction: ((25 - 5) / 25) * 100,  // 80%
-  annualHoursSaved: (25 - 5) * 52  // 1,040 hours
-}
+  hoursSaved: before.totalWeeklyHours - after.totalWeeklyHours, // 20 hours
+  percentReduction: ((25 - 5) / 25) * 100, // 80%
+  annualHoursSaved: (25 - 5) * 52, // 1,040 hours
+};
 ```
 
 ### Quality Improvements
@@ -534,17 +550,17 @@ const savings = {
 ```javascript
 const qualityMetrics = {
   before: {
-    bugsInProduction: 45,  // per quarter
+    bugsInProduction: 45, // per quarter
     securityVulnerabilities: 12,
-    performanceIssues: 23
+    performanceIssues: 23,
   },
 
   after: {
-    bugsInProduction: 15,  // 67% reduction
-    securityVulnerabilities: 2,  // 83% reduction
-    performanceIssues: 7  // 70% reduction
-  }
-}
+    bugsInProduction: 15, // 67% reduction
+    securityVulnerabilities: 2, // 83% reduction
+    performanceIssues: 7, // 70% reduction
+  },
+};
 ```
 
 Use [Mesrai's Team Analytics](/features/teams/team-analytics) to track these automatically.
@@ -609,6 +625,7 @@ automation:
 **Solution**: Implemented Mesrai + GitHub Actions
 
 **Results**:
+
 - ⏱️ Review time reduced from 6 hours → 1.5 hours average
 - 🐛 Production bugs reduced by 60%
 - 💰 Saved $75,000/year in engineering time
@@ -621,6 +638,7 @@ automation:
 **Solution**: Three-tier automation (linting → AI → human)
 
 **Results**:
+
 - ⏱️ 70% of PRs auto-approved
 - 👥 Senior developers freed up 40 hours/week
 - 📈 Code quality scores improved 45%
@@ -629,24 +647,28 @@ automation:
 ## Your Automation Roadmap
 
 ### Month 1: Foundation
+
 - ✅ Setup linting and formatting
 - ✅ Add pre-commit hooks
 - ✅ Configure CI/CD checks
 - ✅ Establish baseline metrics
 
 ### Month 2: AI Integration
+
 - ✅ Install Mesrai GitHub App
 - ✅ Configure automated review rules
 - ✅ Setup auto-approve for simple PRs
 - ✅ Train team on new workflow
 
 ### Month 3: Optimization
+
 - ✅ Analyze automation effectiveness
 - ✅ Tune rules and thresholds
 - ✅ Add custom rules for your domain
 - ✅ Integrate with PM tools
 
 ### Month 4+: Scale and Improve
+
 - ✅ Expand to all repositories
 - ✅ Create team-specific configurations
 - ✅ Implement advanced integrations
@@ -655,6 +677,7 @@ automation:
 ## Tools and Resources
 
 ### Linting and Formatting
+
 - **ESLint** - JavaScript/TypeScript
 - **Pylint** - Python
 - **RuboCop** - Ruby
@@ -662,16 +685,19 @@ automation:
 - **Prettier** - Universal formatter
 
 ### Security Scanning
+
 - **Snyk** - Dependency vulnerabilities
 - **CodeQL** - Semantic code analysis
 - **SonarQube** - Code quality and security
 
 ### AI-Powered Review
+
 - **Mesrai** - Comprehensive AI code review (recommended)
 - **GitHub Copilot** - Code suggestions
 - **Codacy** - Automated code review
 
 ### CI/CD Integration
+
 - **GitHub Actions** - GitHub native
 - **GitLab CI** - GitLab native
 - **CircleCI** - Cloud CI/CD
@@ -703,6 +729,7 @@ Ready to automate your code reviews?
 ---
 
 **Related Articles**:
+
 - [Complete GitHub Integration Guide](/blog/github-integration-guide)
 - [Code Review Best Practices](/blog/code-review-best-practices)
 - [AI vs Traditional Code Review](/blog/ai-vs-traditional-code-review)

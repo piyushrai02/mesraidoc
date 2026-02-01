@@ -10,10 +10,28 @@ module.exports = {
     extend: {
       colors: {
         primary: '#101820',
-        accent: '#007AFF',
+        accent: {
+          DEFAULT: '#6366F1',
+          light: '#818CF8',
+        },
         background: {
+          DEFAULT: '#0B0C0E',
+          card: '#141517',
+          elevated: '#1A1B1E',
           light: '#FAFAFA',
           dark: '#0B0C0E',
+        },
+        surface: {
+          DEFAULT: '#1A1A1A',
+          hover: '#252525',
+        },
+        muted: {
+          DEFAULT: '#71717A',
+          light: '#A1A1AA',
+        },
+        border: {
+          DEFAULT: '#27272A',
+          light: '#3F3F46',
         },
       },
       fontFamily: {
@@ -26,13 +44,44 @@ module.exports = {
             maxWidth: 'none',
             color: '#374151',
             a: {
-              color: '#007AFF',
+              color: '#6366F1',
               '&:hover': {
-                color: '#0051D5',
+                color: '#818CF8',
               },
             },
           },
         },
+      },
+      animation: {
+        'gradient-x': 'gradient-x 3s ease infinite',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'slide-up': 'slide-up 0.5s ease-out',
+      },
+      keyframes: {
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-gradient': 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
+        'card-gradient': 'linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 100%)',
+        'border-gradient': 'linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899)',
       },
     },
   },

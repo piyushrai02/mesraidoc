@@ -1,0 +1,105 @@
+---
+title: AI Review Engine
+description: Learn how Mesrai's AI Review Engine analyzes your code and provides intelligent feedback.
+---
+
+# AI Review Engine
+
+Mesrai's AI Review Engine is the core of our code review platform. It uses advanced language models to understand your code at a deep level and provide actionable feedback.
+
+## How It Works
+
+The AI Review Engine processes your pull requests in three phases:
+
+### 1. Code Understanding
+
+When you open a PR, Mesrai:
+- Parses the changed files and extracts the abstract syntax tree (AST)
+- Maps function calls and dependencies across your codebase
+- Builds a contextual understanding of what your code does
+
+### 2. Analysis
+
+The engine then performs multiple analysis passes:
+- **Security Analysis**: Identifies potential vulnerabilities and security anti-patterns
+- **Performance Analysis**: Detects inefficient code patterns and optimization opportunities
+- **Architecture Analysis**: Evaluates code organization and adherence to best practices
+- **Style Analysis**: Checks for consistency with your team's coding standards
+
+### 3. Feedback Generation
+
+Finally, the engine generates human-readable feedback:
+- Specific line-by-line comments with suggested fixes
+- Summary of overall PR quality
+- Prioritized list of issues by severity
+
+## Key Features
+
+### Context-Aware Reviews
+
+Unlike simple linters, Mesrai understands the broader context of your changes:
+
+```javascript
+// Mesrai understands this function is called from an async context
+// and suggests appropriate error handling
+function fetchUserData(userId) {
+  return database.query(`SELECT * FROM users WHERE id = ${userId}`);
+  // ⚠️ Mesrai: SQL injection vulnerability detected
+  // Suggestion: Use parameterized queries
+}
+```
+
+### Language Support
+
+The AI Review Engine supports:
+- JavaScript / TypeScript
+- Python
+- Go
+- Java
+- Ruby
+- Rust
+- And more...
+
+### Custom Rules
+
+Define custom review rules that match your team's standards:
+
+```yaml
+# mesrai.config.yaml
+rules:
+  custom:
+    - name: "no-console-log"
+      pattern: "console.log"
+      message: "Remove console.log statements before merging"
+      severity: "warning"
+```
+
+## Configuration
+
+Enable or customize the AI Review Engine in your `mesrai.config.yaml`:
+
+```yaml
+review:
+  ai_engine:
+    enabled: true
+    model: "advanced"  # Options: basic, standard, advanced
+
+  analysis:
+    security: strict
+    performance: moderate
+    architecture: enabled
+    style: enabled
+```
+
+## Best Practices
+
+1. **Start with default settings** - The engine is pre-configured for common use cases
+2. **Add custom rules gradually** - Begin with a few critical rules and expand over time
+3. **Review AI suggestions** - While highly accurate, always verify suggestions match your intent
+4. **Provide feedback** - Use the 👍/👎 buttons to help improve the engine's accuracy
+
+## Next Steps
+
+- [Configure Context Awareness](/features/context-awareness)
+- [Set up Architectural Analysis](/features/architectural-analysis)
+- [Integrate with GitHub](/integrations/github)

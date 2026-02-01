@@ -4,18 +4,7 @@
  * Reusable SVG logo component with configurable size and styling.
  * Supports dark mode and accessibility features.
  * Uses centralized SVG constants for maintainability.
- *
- * @example
- * // Default usage
- * <Logo />
- *
- * @example
- * // Custom size
- * <Logo width={200} height={50} />
- *
- * @example
- * // With custom className
- * <Logo className="my-custom-class" />
+ * Includes "DOCS" suffix for documentation site branding.
  */
 
 import React from 'react';
@@ -32,10 +21,8 @@ import {
   LOGO_ICON_STROKE,
 } from '@/constants/logoSvg';
 
-
-
 /**
- * Mesrai Logo SVG Component
+ * Mesrai Logo SVG Component with DOCS suffix
  * Zero external dependencies, inline SVG for optimal performance
  */
 export const Logo = ({
@@ -43,16 +30,21 @@ export const Logo = ({
   height = LOGO_DIMENSIONS.full.height,
   className = '',
   enableHover = true,
-  ariaLabel = 'Mesrai Logo'
+  ariaLabel = 'Mesrai Documentation Logo',
+  showDocs = true,
 }) => {
   const hoverClass = enableHover ? 'transition-transform hover:scale-105 duration-300 ease-out' : '';
   const combinedClassName = `${hoverClass} ${className}`.trim();
 
+  // Adjust viewBox width to accommodate DOCS suffix
+  const adjustedViewBox = showDocs ? "0 0 360 65" : LOGO_VIEWBOX.full;
+  const adjustedWidth = showDocs ? width * 1.3 : width;
+
   return (
     <svg
-      width={width}
+      width={adjustedWidth}
       height={height}
-      viewBox={LOGO_VIEWBOX.full}
+      viewBox={adjustedViewBox}
       xmlns="http://www.w3.org/2000/svg"
       className={combinedClassName}
       role="img"
@@ -98,6 +90,34 @@ export const Logo = ({
         >
           {LOGO_TEXT.content}
         </text>
+
+        {/* DOCS suffix */}
+        {showDocs && (
+          <>
+            {/* Separator line */}
+            <line
+              x1="200"
+              y1="18"
+              x2="200"
+              y2="48"
+              stroke="#6366F1"
+              strokeWidth="2"
+              opacity="0.5"
+            />
+            {/* DOCS text */}
+            <text
+              x="216"
+              y={LOGO_TEXT.y}
+              fontFamily={LOGO_TEXT.fontFamily}
+              fontSize="24"
+              fontWeight="600"
+              fill="#6366F1"
+              letterSpacing="2"
+            >
+              DOCS
+            </text>
+          </>
+        )}
       </g>
     </svg>
   );

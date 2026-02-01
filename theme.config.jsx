@@ -36,12 +36,12 @@ export default {
 
       {/* Microsoft Tiles */}
       <meta name="msapplication-config" content="/browserconfig.xml" />
-      <meta name="msapplication-TileColor" content="#3b82f6" />
+      <meta name="msapplication-TileColor" content="#6366F1" />
 
       {/* Theme Color */}
-      <meta name="theme-color" content="#3b82f6" />
+      <meta name="theme-color" content="#0B0C0E" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111827" />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0C0E" />
 
       {/* Open Graph Meta Tags */}
       <meta property="og:type" content="website" />
@@ -72,7 +72,7 @@ export default {
   ),
 
   search: {
-    placeholder: 'Search documentation...',
+    placeholder: 'Search docs... ⌘K',
   },
 
   project: {},
@@ -87,8 +87,27 @@ export default {
   },
 
   sidebar: {
-    defaultMenuCollapseLevel: 1,
-    toggleButton: true
+    defaultMenuCollapseLevel: 2,
+    toggleButton: true,
+    titleComponent({ title, type, route }) {
+      // Custom badge rendering for NEW/BETA items
+      const badges = {
+        '/features/architectural-analysis': 'NEW',
+        '/integrations/bitbucket': 'BETA',
+      };
+      const badge = badges[route];
+
+      if (badge) {
+        return (
+          <span className="flex items-center gap-2">
+            {title}
+            <span className={`sidebar-badge-${badge.toLowerCase()}`}>{badge}</span>
+          </span>
+        );
+      }
+
+      return title;
+    }
   },
 
   toc: {
@@ -109,9 +128,9 @@ export default {
   // Enable dark mode toggle
   darkMode: true,
 
-  // Theme configuration
-  primaryHue: 210,
-  primarySaturation: 100,
+  // Theme configuration - Indigo primary color
+  primaryHue: 239,
+  primarySaturation: 84,
 
   // Next Themes configuration
   nextThemes: {
@@ -124,9 +143,15 @@ export default {
     extraContent: <NavbarExtra />
   },
 
-  // Banner (optional - can be used for announcements)
+  // Banner for announcements
   banner: {
     dismissible: true,
-    key: 'mesrai-banner'
+    key: 'mesrai-v2-banner',
+    content: (
+      <a href="/features/architectural-analysis" className="flex items-center justify-center gap-2 text-sm">
+        🎉 <span>Architectural Analysis v2.0 is now available!</span>
+        <span className="font-medium underline">Learn more →</span>
+      </a>
+    )
   }
 }
