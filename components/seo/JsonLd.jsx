@@ -245,7 +245,7 @@ export function HowToSchema({ title, description, steps, totalTime }) {
 }
 
 // Speakable schema for voice search and LLM optimization
-export function SpeakableSchema({ cssSelectors = ["h1", "h2", ".summary", ".description"] }) {
+export function SpeakableSchema({ cssSelectors = ["h1", "h2", "h3", "article p:first-of-type"] }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
