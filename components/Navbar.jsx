@@ -89,7 +89,7 @@ const NavDropdown = ({ label, items }) => {
 
 const GitHubStars = () => (
   <a
-    href="https://github.com/mesrai/mesrai"
+    href="https://github.com/mesraiofficial"
     target="_blank"
     rel="noopener noreferrer"
     className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-[#1A1A1A] hover:bg-gray-200 dark:hover:bg-[#252525] border border-gray-200 dark:border-[#27272A] rounded-lg transition-colors"

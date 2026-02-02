@@ -57,17 +57,48 @@ export default {
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@mesrai" />
-      <meta name="twitter:creator" content="@mesrai" />
+      <meta name="twitter:site" content="@mesraiofficial" />
+      <meta name="twitter:creator" content="@mesraiofficial" />
       <meta name="twitter:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
       <meta name="twitter:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
       <meta name="twitter:image" content="https://docs.mesrai.com/og-image.png" />
       <meta name="twitter:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <link rel="canonical" href="https://docs.mesrai.com" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="bingbot" content="index, follow" />
+
+      {/* LLM and AI Discovery Meta Tags */}
+      <meta name="ai-content-declaration" content="human-written" />
+      <meta name="citation_title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
+      <meta name="citation_author" content="Mesrai" />
+      <meta name="citation_publisher" content="Mesrai" />
+      <meta name="citation_online_date" content="2024" />
+      <meta name="dc.title" content="Mesrai Documentation" />
+      <meta name="dc.creator" content="Mesrai" />
+      <meta name="dc.subject" content="AI code review, automated code review, GitHub integration, developer tools" />
+      <meta name="dc.description" content="Complete documentation for Mesrai - AI-powered code review platform that helps engineering teams ship code 3x faster." />
+      <meta name="dc.publisher" content="Mesrai" />
+      <meta name="dc.type" content="Documentation" />
+      <meta name="dc.format" content="text/html" />
+      <meta name="dc.language" content="en" />
+
+      {/* Additional Discovery */}
+      <meta name="application-name" content="Mesrai Documentation" />
+      <meta name="apple-mobile-web-app-title" content="Mesrai Docs" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+      {/* Geo and Language Tags */}
+      <meta name="geo.region" content="US" />
+      <meta name="geo.placename" content="United States" />
+      <meta httpEquiv="content-language" content="en-US" />
+
+      {/* Cache Control for Freshness */}
+      <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
     </>
   ),
 

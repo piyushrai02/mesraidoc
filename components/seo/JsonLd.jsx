@@ -18,9 +18,9 @@ export function OrganizationSchema() {
       "email": "support@mesrai.com"
     },
     "sameAs": [
-      "https://twitter.com/mesrai",
+      "https://twitter.com/mesraiofficial",
       "https://linkedin.com/company/mesrai",
-      "https://github.com/mesrai"
+      "https://github.com/mesraiofficial"
     ]
   };
 
@@ -46,11 +46,6 @@ export function ProductSchema() {
       "price": "0",
       "priceCurrency": "USD",
       "description": "Free tier available with paid plans"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "250"
     },
     "featureList": [
       "AI-powered code reviews",
@@ -151,14 +146,135 @@ export function WebSiteSchema() {
     "name": "Mesrai Documentation",
     "url": "https://docs.mesrai.com",
     "description": "Complete documentation for Mesrai - AI-powered code review platform",
+    "inLanguage": "en-US",
     "publisher": {
       "@type": "Organization",
       "name": "Mesrai"
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://docs.mesrai.com/search?q={search_term_string}",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://docs.mesrai.com/search?q={search_term_string}"
+      },
       "query-input": "required name=search_term_string"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// Technical documentation schema for better LLM/AI discovery
+export function TechArticleSchema({ title, description, datePublished, dateModified, keywords = [] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": title,
+    "description": description,
+    "datePublished": datePublished,
+    "dateModified": dateModified || datePublished,
+    "inLanguage": "en-US",
+    "author": {
+      "@type": "Organization",
+      "name": "Mesrai",
+      "url": "https://docs.mesrai.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mesrai",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://docs.mesrai.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://docs.mesrai.com"
+    },
+    "keywords": keywords.length > 0 ? keywords : [
+      "AI code review",
+      "automated code review",
+      "GitHub integration",
+      "code quality",
+      "developer tools"
+    ],
+    "proficiencyLevel": "Beginner",
+    "dependencies": "GitHub account"
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// HowTo schema for step-by-step guides
+export function HowToSchema({ title, description, steps, totalTime }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": title,
+    "description": description,
+    "totalTime": totalTime || "PT10M",
+    "tool": {
+      "@type": "HowToTool",
+      "name": "GitHub Account"
+    },
+    "step": steps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text,
+      "url": step.url || `https://docs.mesrai.com#step-${index + 1}`
+    }))
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// Speakable schema for voice search and LLM optimization
+export function SpeakableSchema({ cssSelectors = ["h1", "h2", ".summary", ".description"] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": cssSelectors
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// Software documentation schema for better categorization
+export function SoftwareSourceCodeSchema({ name, codeRepository, programmingLanguage, runtimePlatform }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": name || "Mesrai Integration",
+    "codeRepository": codeRepository || "https://github.com/mesraiofficial",
+    "programmingLanguage": programmingLanguage || ["JavaScript", "TypeScript", "Python"],
+    "runtimePlatform": runtimePlatform || "Node.js",
+    "author": {
+      "@type": "Organization",
+      "name": "Mesrai"
     }
   };
 

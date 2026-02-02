@@ -3,86 +3,108 @@ title: Frequently Asked Questions (FAQ)
 description: Find answers to common questions about Mesrai, including setup, features, billing, integrations, and troubleshooting.
 ---
 
-import { FAQPageSchema } from '../components/seo/JsonLd'
+import { FAQPageSchema } from "../components/seo/JsonLd";
 
-<FAQPageSchema faqs={[
-  {
-    question: "What is Mesrai?",
-    answer: "Mesrai is an AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and seamless GitHub integration. It provides automated code reviews, team collaboration tools, and performance analytics."
-  },
-  {
-    question: "How does Mesrai integrate with GitHub?",
-    answer: "Mesrai integrates with GitHub through our official GitHub App. Once installed, it automatically reviews pull requests, provides inline comments, and tracks code quality metrics. The integration is secure and requires only the necessary permissions to function."
-  },
-  {
-    question: "Is Mesrai free to use?",
-    answer: "Mesrai offers both free and paid plans. The free tier includes basic code review features for small teams. Paid plans provide advanced features like unlimited reviews, priority support, custom rules, and organization management."
-  },
-  {
-    question: "How do I install Mesrai?",
-    answer: "Installing Mesrai is simple: 1) Sign up for an account at mesrai.com, 2) Install the Mesrai GitHub App from the GitHub Marketplace, 3) Authorize the app for your repositories, 4) Configure your review settings, and 5) Start receiving AI-powered code reviews on your pull requests."
-  },
-  {
-    question: "What programming languages does Mesrai support?",
-    answer: "Mesrai supports all major programming languages including JavaScript, TypeScript, Python, Java, Go, Ruby, PHP, C++, C#, Rust, Swift, Kotlin, and more. Our AI models are trained on millions of code samples across multiple languages."
-  },
-  {
-    question: "How accurate are Mesrai's AI code reviews?",
-    answer: "Mesrai's AI models achieve over 95% accuracy in identifying code issues, security vulnerabilities, and performance bottlenecks. Our models are continuously trained on millions of code samples and real-world scenarios to improve accuracy."
-  },
-  {
-    question: "Can I customize the review rules?",
-    answer: "Yes, Mesrai allows you to customize review rules based on your team's coding standards. You can configure severity levels, enable/disable specific checks, create custom rules, and set review thresholds for your organization."
-  },
-  {
-    question: "What is the difference between Organizations and Teams in Mesrai?",
-    answer: "Organizations are top-level entities that represent your company or department, containing multiple teams and managing billing. Teams are smaller groups within an organization that work on specific projects or repositories. Organizations provide company-wide settings and analytics, while teams focus on collaboration and project-specific workflows."
-  },
-  {
-    question: "How does billing work for Organizations?",
-    answer: "Organizations in Mesrai use Stripe for secure payment processing. You can manage subscriptions, update payment methods, view invoices, and track usage at the organization level. Billing is consolidated for all teams within an organization, and you can upgrade or downgrade plans at any time."
-  },
-  {
-    question: "Can I invite team members to Mesrai?",
-    answer: "Yes, you can invite team members via email. Invited members receive an invitation link and can join your team or organization. You can manage member roles (Admin, Member, Viewer) and permissions, and track member activity through the dashboard."
-  },
-  {
-    question: "What security measures does Mesrai implement?",
-    answer: "Mesrai implements strong security practices including encrypted communications (TLS 1.3), secure OAuth authentication via GitHub, role-based access control, and isolated sandbox environments for code analysis. Most importantly, we never store your source code - it's processed in memory and deleted immediately after review."
-  },
-  {
-    question: "How do I switch between Organizations?",
-    answer: "You can easily switch between organizations using the organization switcher in the top navigation bar. Click on the current organization name, and select the organization you want to switch to from the dropdown menu."
-  },
-  {
-    question: "What analytics does Mesrai provide?",
-    answer: "Mesrai provides comprehensive analytics including review metrics, code quality trends, team performance, response time analysis, and issue detection rates. Analytics are available at both team and organization levels."
-  },
-  {
-    question: "Can I export my data from Mesrai?",
-    answer: "Yes, Mesrai allows you to export your review history, analytics reports, and team data. You can export data in various formats including CSV, JSON, and PDF for reporting and compliance purposes."
-  },
-  {
-    question: "What happens if I exceed my plan limits?",
-    answer: "If you exceed your plan limits, you'll receive a notification. You can either upgrade to a higher plan for more capacity, or wait until your next billing cycle for the limits to reset. We provide grace periods to ensure uninterrupted service."
-  },
-  {
-    question: "Does Mesrai support webhooks?",
-    answer: "Yes, Mesrai supports webhooks for real-time notifications. You can configure webhooks to receive events for new reviews, completed reviews, issue detections, and more. Webhooks are useful for integrating Mesrai with your existing CI/CD pipeline and tools."
-  },
-  {
-    question: "How do I troubleshoot GitHub integration issues?",
-    answer: "If you're experiencing GitHub integration issues: 1) Verify the GitHub App is installed, 2) Check repository permissions, 3) Ensure webhooks are properly configured, 4) Review the activity logs for errors, and 5) Contact support if the issue persists. Most issues are resolved by reinstalling the GitHub App or updating permissions."
-  },
-  {
-    question: "What is the review turnaround time?",
-    answer: "Mesrai typically processes code reviews within seconds to minutes, depending on the size and complexity of the pull request. Most reviews complete in under 60 seconds. Large pull requests or complex codebases may take longer."
-  },
-  {
-    question: "Can I use Mesrai with private repositories?",
-    answer: "Yes, Mesrai fully supports private repositories. Our GitHub App integration works seamlessly with both public and private repositories, maintaining the same level of security and privacy for all your code."
-  }
-]} />
+<FAQPageSchema
+  faqs={[
+    {
+      question: "What is Mesrai?",
+      answer:
+        "Mesrai is an AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and seamless GitHub integration. It provides automated code reviews, team collaboration tools, and performance analytics.",
+    },
+    {
+      question: "How does Mesrai integrate with GitHub?",
+      answer:
+        "Mesrai integrates with GitHub through our official GitHub App. Once installed, it automatically reviews pull requests, provides inline comments, and tracks code quality metrics. The integration is secure and requires only the necessary permissions to function.",
+    },
+    {
+      question: "Is Mesrai free to use?",
+      answer:
+        "Mesrai offers both free and paid plans. The free tier includes basic code review features for small teams. Paid plans provide advanced features like unlimited reviews, priority support, custom rules, and organization management.",
+    },
+    {
+      question: "How do I install Mesrai?",
+      answer:
+        "Installing Mesrai is simple: 1) Sign up for an account at mesrai.com, 2) Install the Mesrai GitHub App from the GitHub Marketplace, 3) Authorize the app for your repositories, 4) Configure your review settings, and 5) Start receiving AI-powered code reviews on your pull requests.",
+    },
+    {
+      question: "What programming languages does Mesrai support?",
+      answer:
+        "Mesrai supports all major programming languages including JavaScript, TypeScript, Python, Java, Go, Ruby, PHP, C++, C#, Rust, Swift, Kotlin, and more. Our AI models are trained on millions of code samples across multiple languages.",
+    },
+    {
+      question: "How accurate are Mesrai's AI code reviews?",
+      answer:
+        "Mesrai's AI models achieve over 95% accuracy in identifying code issues, security vulnerabilities, and performance bottlenecks. Our models are continuously trained on millions of code samples and real-world scenarios to improve accuracy.",
+    },
+    {
+      question: "Can I customize the review rules?",
+      answer:
+        "Yes, Mesrai allows you to customize review rules based on your team's coding standards. You can configure severity levels, enable/disable specific checks, create custom rules, and set review thresholds for your organization.",
+    },
+    {
+      question:
+        "What is the difference between Organizations and Teams in Mesrai?",
+      answer:
+        "Organizations are top-level entities that represent your company or department, containing multiple teams and managing billing. Teams are smaller groups within an organization that work on specific projects or repositories. Organizations provide company-wide settings and analytics, while teams focus on collaboration and project-specific workflows.",
+    },
+    {
+      question: "How does billing work for Organizations?",
+      answer:
+        "Organizations in Mesrai use Stripe for secure payment processing. You can manage subscriptions, update payment methods, view invoices, and track usage at the organization level. Billing is consolidated for all teams within an organization, and you can upgrade or downgrade plans at any time.",
+    },
+    {
+      question: "Can I invite team members to Mesrai?",
+      answer:
+        "Yes, you can invite team members via email. Invited members receive an invitation link and can join your team or organization. You can manage member roles (Admin, Member, Viewer) and permissions, and track member activity through the dashboard.",
+    },
+    {
+      question: "What security measures does Mesrai implement?",
+      answer:
+        "Mesrai implements strong security practices including encrypted communications (TLS 1.3), secure OAuth authentication via GitHub, role-based access control, and isolated sandbox environments for code analysis. Most importantly, we never store your source code - it's processed in memory and deleted immediately after review.",
+    },
+    {
+      question: "How do I switch between Organizations?",
+      answer:
+        "You can easily switch between organizations using the organization switcher in the top navigation bar. Click on the current organization name, and select the organization you want to switch to from the dropdown menu.",
+    },
+    {
+      question: "What analytics does Mesrai provide?",
+      answer:
+        "Mesrai provides comprehensive analytics including review metrics, code quality trends, team performance, response time analysis, and issue detection rates. Analytics are available at both team and organization levels.",
+    },
+    {
+      question: "Can I export my data from Mesrai?",
+      answer:
+        "Yes, Mesrai allows you to export your review history, analytics reports, and team data. You can export data in various formats including CSV, JSON, and PDF for reporting and compliance purposes.",
+    },
+    {
+      question: "What happens if I exceed my plan limits?",
+      answer:
+        "If you exceed your plan limits, you'll receive a notification. You can either upgrade to a higher plan for more capacity, or wait until your next billing cycle for the limits to reset. We provide grace periods to ensure uninterrupted service.",
+    },
+    {
+      question: "Does Mesrai support webhooks?",
+      answer:
+        "Yes, Mesrai supports webhooks for real-time notifications. You can configure webhooks to receive events for new reviews, completed reviews, issue detections, and more. Webhooks are useful for integrating Mesrai with your existing CI/CD pipeline and tools.",
+    },
+    {
+      question: "How do I troubleshoot GitHub integration issues?",
+      answer:
+        "If you're experiencing GitHub integration issues: 1) Verify the GitHub App is installed, 2) Check repository permissions, 3) Ensure webhooks are properly configured, 4) Review the activity logs for errors, and 5) Contact support if the issue persists. Most issues are resolved by reinstalling the GitHub App or updating permissions.",
+    },
+    {
+      question: "What is the review turnaround time?",
+      answer:
+        "Mesrai typically processes code reviews within seconds to minutes, depending on the size and complexity of the pull request. Most reviews complete in under 60 seconds. Large pull requests or complex codebases may take longer.",
+    },
+    {
+      question: "Can I use Mesrai with private repositories?",
+      answer:
+        "Yes, Mesrai fully supports private repositories. Our GitHub App integration works seamlessly with both public and private repositories, maintaining the same level of security and privacy for all your code.",
+    },
+  ]}
+/>
 
 # Frequently Asked Questions
 
@@ -107,6 +129,7 @@ Mesrai offers both free and paid plans. The free tier includes basic code review
 ### How do I install Mesrai?
 
 Installing Mesrai is simple:
+
 1. Sign up for an account at mesrai.com
 2. Install the Mesrai GitHub App from the GitHub Marketplace
 3. Authorize the app for your repositories
@@ -118,6 +141,7 @@ See our [Installation Guide](/setup/installation) for detailed instructions.
 ### What are the system requirements?
 
 Mesrai is a cloud-based platform that requires:
+
 - GitHub account with repository access
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Internet connection
@@ -136,6 +160,7 @@ Mesrai's AI models achieve over 95% accuracy in identifying code issues, securit
 ### Can I customize the review rules?
 
 Yes! Mesrai allows you to customize review rules based on your team's coding standards. You can:
+
 - Configure severity levels
 - Enable/disable specific checks
 - Create custom rules
@@ -147,12 +172,14 @@ Yes! Mesrai allows you to customize review rules based on your team's coding sta
 ### What is the difference between Organizations and Teams?
 
 **Organizations** are top-level entities that represent your company or department. They:
+
 - Contain multiple teams
 - Manage billing centrally
 - Provide company-wide settings
 - Offer consolidated analytics
 
 **Teams** are smaller groups within an organization that:
+
 - Work on specific projects
 - Collaborate on repositories
 - Have project-specific settings
@@ -177,6 +204,7 @@ You can easily switch between organizations using the organization switcher in t
 ### How does billing work?
 
 Organizations in Mesrai use Stripe for secure payment processing. You can:
+
 - Manage subscriptions
 - Update payment methods
 - View invoices
@@ -188,6 +216,7 @@ See our [Stripe Integration Guide](/billing/stripe-integration) for more informa
 ### What happens if I exceed my plan limits?
 
 If you exceed your plan limits, you'll receive a notification. You can either:
+
 - Upgrade to a higher plan for more capacity
 - Wait until your next billing cycle for limits to reset
 
@@ -198,6 +227,7 @@ We provide grace periods to ensure uninterrupted service.
 ### How does Mesrai integrate with GitHub?
 
 Mesrai integrates with GitHub through our official GitHub App. Once installed, it:
+
 - Automatically reviews pull requests
 - Provides inline comments
 - Tracks code quality metrics
@@ -212,6 +242,7 @@ Yes, Mesrai fully supports private repositories. Our GitHub App integration work
 ### How do I troubleshoot GitHub integration issues?
 
 If you're experiencing GitHub integration issues:
+
 1. Verify the GitHub App is installed
 2. Check repository permissions
 3. Ensure webhooks are properly configured
@@ -225,6 +256,7 @@ Most issues are resolved by reinstalling the GitHub App or updating permissions.
 ### Is my code secure?
 
 Yes! Mesrai implements strong security practices:
+
 - Encrypted communications (TLS 1.3)
 - Secure OAuth authentication via GitHub
 - Role-based access control
@@ -235,6 +267,7 @@ Most importantly, we **never store your source code** — it's processed in memo
 ### What permissions does Mesrai need?
 
 Mesrai requires minimal GitHub permissions:
+
 - Read access to repository code
 - Write access for comments on pull requests
 - Webhook access for event notifications
@@ -254,6 +287,7 @@ Mesrai typically processes code reviews within seconds to minutes, depending on 
 ### Are there any rate limits?
 
 Yes, rate limits depend on your plan:
+
 - **Free tier**: 50 reviews per month
 - **Pro tier**: 500 reviews per month
 - **Enterprise**: Unlimited reviews
@@ -269,6 +303,7 @@ Mesrai is built on cloud infrastructure that automatically scales to handle your
 ### What analytics does Mesrai provide?
 
 Mesrai provides comprehensive analytics including:
+
 - Review metrics and trends
 - Code quality scores
 - Team performance data
@@ -280,6 +315,7 @@ Analytics are available at both team and organization levels. See [Team Analytic
 ### Can I export my data?
 
 Yes, Mesrai allows you to export:
+
 - Review history
 - Analytics reports
 - Team data
@@ -292,6 +328,7 @@ You can export data in various formats including CSV, JSON, and PDF for reportin
 ### What integrations are available?
 
 Currently, Mesrai integrates with:
+
 - **GitHub** (fully supported)
 - GitLab (coming soon)
 - Bitbucket (coming soon)
@@ -305,6 +342,7 @@ Check our [Integrations](/integrations) page for the latest integrations.
 ### Why are my reviews taking longer than expected?
 
 Reviews may take longer due to:
+
 - Large pull request size
 - Complex codebase
 - High system load
@@ -315,6 +353,7 @@ If reviews consistently take longer than 5 minutes, please contact support.
 ### Why am I not receiving review notifications?
 
 Check the following:
+
 1. Notification settings are enabled
 2. GitHub App webhooks are configured
 3. Email notifications aren't blocked
@@ -325,6 +364,7 @@ See [Team Activity Logs](/features/teams/activity-logs) for troubleshooting.
 ### How do I report a bug or request a feature?
 
 You can:
+
 - Email support@mesrai.com
 - Submit a GitHub issue (if public)
 - Contact us through the dashboard
@@ -339,6 +379,6 @@ If you couldn't find the answer you were looking for, please:
 - Check our [complete documentation](/introduction/what-is-mesrai)
 - Contact our support team at support@mesrai.com
 - Join our community Discord server
-- Follow us on [Twitter](https://twitter.com/mesrai) for updates
+- Follow us on [Twitter](https://twitter.com/mesraiofficial) for updates
 
 We're here to help you get the most out of Mesrai!

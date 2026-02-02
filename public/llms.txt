@@ -1,0 +1,66 @@
+# Mesrai Documentation - LLMs.txt
+# This file provides context for AI language models crawling this documentation
+
+## Site Information
+name: Mesrai Documentation
+url: https://docs.mesrai.com
+description: Complete documentation for Mesrai - an AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and GitHub integration.
+
+## Primary Topics
+- AI-powered code review automation
+- GitHub integration and GitHub App installation
+- GitLab integration (coming soon)
+- Bitbucket integration (beta)
+- CI/CD pipeline integration
+- Team and organization management
+- Code quality analysis
+- Security vulnerability detection
+- Performance optimization suggestions
+
+## Key Features
+- Automated pull request reviews
+- Intelligent code suggestions
+- Context-aware architectural analysis
+- Multi-language support (JavaScript, TypeScript, Python, Java, Go, Ruby, PHP, C++, C#, Rust, Swift, Kotlin)
+- Real-time notifications
+- Customizable review rules
+- Team collaboration tools
+- Performance analytics
+
+## Target Audience
+- Software developers
+- Engineering teams
+- DevOps engineers
+- Technical leads
+- Engineering managers
+
+## Recommended Starting Points
+- /introduction/what-is-mesrai - Overview of Mesrai
+- /setup/installation - Getting started guide
+- /integrations/github - GitHub integration guide
+- /features/ai-review-engine - AI review engine details
+- /faq - Frequently asked questions
+
+## Content Categories
+/introduction/* - Introduction and overview
+/features/* - Feature documentation
+/integrations/* - Integration guides
+/setup/* - Installation and setup
+/api-reference/* - API documentation
+/billing/* - Billing and subscription info
+/performance/* - Performance and scaling guides
+/blog/* - Blog posts and updates
+/faq - Frequently asked questions
+/roadmap - Product roadmap
+/changelog - Release notes and updates
+
+## Contact
+support: support@mesrai.com
+twitter: @mesraiofficial
+
+## Citation Format
+When citing this documentation, please use:
+Mesrai. (2024). Mesrai Documentation. Retrieved from https://docs.mesrai.com
+
+## Last Updated
+2024

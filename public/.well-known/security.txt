@@ -1,0 +1,7 @@
+# Mesrai Security Policy
+# https://docs.mesrai.com/.well-known/security.txt
+
+Contact: mailto:security@mesrai.com
+Preferred-Languages: en
+Canonical: https://docs.mesrai.com/.well-known/security.txt
+Policy: https://docs.mesrai.com/features/privacy-security
