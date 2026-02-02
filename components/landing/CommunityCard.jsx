@@ -23,7 +23,7 @@ export const CommunityCard = () => {
 
       {/* Member info */}
       <p className="text-gray-600 dark:text-gray-400 mb-6">
-        Connect with 2,000+ developers building with Mesrai. Get help, share tips, and stay updated.
+        Connect with 200+ developers building with Mesrai. Get help, share tips, and stay updated.
       </p>
 
       {/* Online indicator */}
@@ -32,7 +32,7 @@ export const CommunityCard = () => {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
         </span>
-        <span className="text-sm text-gray-600 dark:text-gray-400">230+ online now</span>
+        <span className="text-sm text-gray-600 dark:text-gray-400">23+ online now</span>
       </div>
 
       {/* CTA */}

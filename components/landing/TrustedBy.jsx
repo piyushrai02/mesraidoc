@@ -7,11 +7,11 @@
 import React from 'react';
 
 const companies = [
-  'ACME Corp',
-  'Vercel',
-  'Stripe',
-  'Linear',
-  'Shopify',
+  'Open-Source',
+  'Developer-First',
+  'Privacy-Safe',
+  'AI-Native',
+  'Early-Access',
 ];
 
 export const TrustedBy = () => {
@@ -19,7 +19,7 @@ export const TrustedBy = () => {
     <section className="py-16 px-6 border-y border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#0F0F12]">
       <div className="max-w-6xl mx-auto">
         <p className="text-center text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-500 uppercase mb-8">
-          Trusted by engineering teams at
+           Built for developers who care about code quality
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">

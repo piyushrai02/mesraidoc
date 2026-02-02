@@ -3,6 +3,8 @@ title: AI Review Engine
 description: Learn how Mesrai's AI Review Engine analyzes your code and provides intelligent feedback.
 ---
 
+import { Callout } from 'nextra/components'
+
 # AI Review Engine
 
 Mesrai's AI Review Engine is the core of our code review platform. It uses advanced language models to understand your code at a deep level and provide actionable feedback.
@@ -14,13 +16,13 @@ The AI Review Engine processes your pull requests in three phases:
 ### 1. Code Understanding
 
 When you open a PR, Mesrai:
-- Parses the changed files and extracts the abstract syntax tree (AST)
-- Maps function calls and dependencies across your codebase
+- Analyzes the changed files and understands the code structure
+- Maps relationships and dependencies across your codebase
 - Builds a contextual understanding of what your code does
 
 ### 2. Analysis
 
-The engine then performs multiple analysis passes:
+The engine performs multiple analysis passes:
 - **Security Analysis**: Identifies potential vulnerabilities and security anti-patterns
 - **Performance Analysis**: Detects inefficient code patterns and optimization opportunities
 - **Architecture Analysis**: Evaluates code organization and adherence to best practices
@@ -32,6 +34,8 @@ Finally, the engine generates human-readable feedback:
 - Specific line-by-line comments with suggested fixes
 - Summary of overall PR quality
 - Prioritized list of issues by severity
+
+---
 
 ## Key Features
 
@@ -51,55 +55,120 @@ function fetchUserData(userId) {
 
 ### Language Support
 
-The AI Review Engine supports:
-- JavaScript / TypeScript
-- Python
-- Go
-- Java
-- Ruby
-- Rust
-- And more...
+The AI Review Engine supports all major programming languages:
 
-### Custom Rules
+| Language | Support Level |
+|----------|---------------|
+| JavaScript / TypeScript | Full analysis |
+| Python | Full analysis |
+| Go | Full analysis |
+| Java | Full analysis |
+| Ruby | Full analysis |
+| Rust | Full analysis |
+| C# / .NET | Full analysis |
+| PHP | Full analysis |
+| And more... | 20+ languages |
 
-Define custom review rules that match your team's standards:
+---
 
-```yaml
-# mesrai.config.yaml
-rules:
-  custom:
-    - name: "no-console-log"
-      pattern: "console.log"
-      message: "Remove console.log statements before merging"
-      severity: "warning"
-```
+## Configuration via Platform
 
-## Configuration
+<Callout type="info">
+All configuration is done through the **[Mesrai Dashboard](https://app.mesrai.com)** — no config files needed!
+</Callout>
 
-Enable or customize the AI Review Engine in your `mesrai.config.yaml`:
+### Repository-Level Rules
 
-```yaml
-review:
-  ai_engine:
-    enabled: true
-    model: "advanced"  # Options: basic, standard, advanced
+Configure review rules for each repository directly from the Mesrai platform:
 
-  analysis:
-    security: strict
-    performance: moderate
-    architecture: enabled
-    style: enabled
-```
+1. **Go to [app.mesrai.com](https://app.mesrai.com)** and sign in
+2. **Select your repository** from the dashboard
+3. **Navigate to Settings → Review Rules**
+4. **Configure your preferences**:
+   - Enable/disable specific analysis types
+   - Set severity levels for different issue types
+   - Add custom instructions for your team
+
+### Custom Instructions
+
+You can provide custom instructions to guide how Mesrai reviews your code:
+
+- **Coding standards** — Tell Mesrai about your team's conventions
+- **Focus areas** — Prioritize security, performance, or other aspects
+- **Ignore patterns** — Specify files or patterns to skip
+- **Team preferences** — Add context about your project requirements
+
+### How to Configure
+
+1. Open **[app.mesrai.com](https://app.mesrai.com)**
+2. Select your **Organization** or **Repository**
+3. Go to **Settings**
+4. Configure:
+   - **Review Settings** — Enable/disable review types
+   - **Instructions** — Add custom guidance for reviews
+   - **Exclusions** — Specify files to ignore
+
+<Callout>
+Changes take effect immediately on new pull requests.
+</Callout>
+
+---
+
+## Review Settings
+
+### Analysis Types
+
+Control which types of analysis are performed:
+
+| Setting | Description |
+|---------|-------------|
+| **Security** | Vulnerability detection, secrets scanning |
+| **Performance** | Inefficient patterns, optimization suggestions |
+| **Architecture** | Design patterns, code organization |
+| **Best Practices** | Language-specific recommendations |
+
+### Severity Levels
+
+Configure how strictly Mesrai reviews your code:
+
+| Level | Behavior |
+|-------|----------|
+| **Strict** | Flag all potential issues |
+| **Moderate** | Balance between thoroughness and noise |
+| **Relaxed** | Focus on critical issues only |
+
+---
 
 ## Best Practices
 
-1. **Start with default settings** - The engine is pre-configured for common use cases
-2. **Add custom rules gradually** - Begin with a few critical rules and expand over time
-3. **Review AI suggestions** - While highly accurate, always verify suggestions match your intent
-4. **Provide feedback** - Use the 👍/👎 buttons to help improve the engine's accuracy
+1. **Start with default settings** — The engine is pre-configured for common use cases
+2. **Add custom instructions gradually** — Begin with key guidelines and expand over time
+3. **Review AI suggestions** — While highly accurate, always verify suggestions match your intent
+4. **Provide feedback** — Use the 👍/👎 buttons on comments to help improve accuracy
+
+---
+
+## Feedback Loop
+
+Help improve Mesrai's reviews for your codebase:
+
+- **👍 Helpful** — Mark suggestions that were useful
+- **👎 Not Helpful** — Flag suggestions that missed the mark
+- **Comment** — Add context to help Mesrai learn your preferences
+
+Your feedback helps Mesrai provide better, more relevant reviews over time.
+
+---
 
 ## Next Steps
 
-- [Configure Context Awareness](/features/context-awareness)
-- [Set up Architectural Analysis](/features/architectural-analysis)
-- [Integrate with GitHub](/integrations/github)
+- [Configure Context Awareness](/features/context-awareness) — Enhance review accuracy
+- [Set up Architectural Analysis](/features/architectural-analysis) — Deep design analysis
+- [Integrate with GitHub](/integrations/github) — Connect your repositories
+- [View Dashboard](https://app.mesrai.com) — Configure your settings
+
+---
+
+<Callout>
+**Need help configuring?** Check our [FAQ](/faq) or [contact support](https://mesrai.com/contact).
+</Callout>

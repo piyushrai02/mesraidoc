@@ -144,14 +144,22 @@ export default {
   },
 
   // Banner for announcements
-  banner: {
-    dismissible: true,
-    key: 'mesrai-v2-banner',
-    content: (
-      <a href="/features/architectural-analysis" className="flex items-center justify-center gap-2 text-sm">
-        🎉 <span>Architectural Analysis v2.0 is now available!</span>
-        <span className="font-medium underline">Learn more →</span>
-      </a>
-    )
-  }
+banner: {
+  dismissible: true,
+  key: 'mesrai-early-access',
+  content: (
+    <a
+      href="/roadmap"
+      className="flex items-center justify-center gap-2 text-sm"
+    >
+      🚧 <span>
+        Mesrai is in <strong>free early access</strong> and evolving rapidly.
+        You may notice occasional incomplete reviews as we refine the system.
+      </span>
+      <span className="font-medium underline">
+        See what’s coming →
+      </span>
+    </a>
+  )
+}
 }

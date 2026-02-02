@@ -1,4 +1,7 @@
 export default {
   "overview": "Overview",
-  "token-usage": "Token Usage & Optimization"
+  "token-usage": {
+    title: "Token Usage",
+    display: "hidden"
+  }
 }

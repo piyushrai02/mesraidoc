@@ -1,11 +1,15 @@
 ---
 title: Team Analytics
-description: Monitor team performance and resource usage
+description: Monitor team performance and code review activity
 ---
+
+import DevelopmentNote from '../../../components/DevelopmentNote'
 
 # Team Analytics
 
-Team Analytics provides real-time insights into your team's code review activity and AI usage.
+<DevelopmentNote />
+
+Measure your team's performance with deep insights and metrics.
 
 ## Available Metrics
 
@@ -23,23 +27,13 @@ Total PRs that have been analyzed by Mesrai's AI reviewer.
 #### Comments Generated
 Total AI-generated review comments across all PRs.
 
-#### Tokens Consumed
-Total AI tokens used for code analysis. Helps track usage against plan quotas.
-
 ### Efficiency Metrics
 
 The analytics dashboard calculates efficiency indicators:
 
-```typescript
-// Average Comments per PR
-avgCommentsPerPR = commentsGenerated / pullRequestsReviewed
-
-// Average Tokens per PR
-avgTokensPerPR = tokensConsumed / pullRequestsReviewed
-
-// PRs per Member
-prsPerMember = pullRequestsReviewed / memberCount
-```
+- **Average Comments per PR**: Feedback density across reviews
+- **PRs per Member**: Individual contribution tracking
+- **Review Velocity**: PRs reviewed per day/week
 
 ## Viewing Analytics
 
@@ -68,15 +62,14 @@ The analytics page displays metrics in an organized grid:
 | Repository Count | Connected repos | Scope of coverage |
 | PRs Reviewed | Total analyzed PRs | Activity volume |
 | Comments Generated | AI review comments | Feedback quantity |
-| Tokens Consumed | AI token usage | Cost tracking |
 
 ### Activity Timeline
 
 View team activity over time:
 - Daily PR review counts
-- Token consumption trends
 - Peak usage periods
 - Member contribution patterns
+- Weekly trends
 
 ### Performance Indicators
 
@@ -84,7 +77,6 @@ Key performance indicators (KPIs) help assess team efficiency:
 
 - **Review Velocity**: PRs reviewed per day
 - **Comment Density**: Average comments per PR
-- **Token Efficiency**: Tokens used per PR
 - **Member Productivity**: PRs per member
 
 ## Exporting Analytics
@@ -101,21 +93,20 @@ Export team analytics for reporting:
 #### CSV Export
 Comma-separated values for spreadsheet analysis:
 ```csv
-Date,PRs Reviewed,Comments,Tokens,Members
-2025-01-01,45,234,12500,8
-2025-01-02,52,287,15200,8
+Date,PRs Reviewed,Comments,Members
+2025-01-01,45,234,8
+2025-01-02,52,287,8
 ```
 
 #### JSON Export
-Structured data for programmatic access:
+Structured data for analysis:
 ```json
 {
   "team": "Engineering",
   "period": "2025-01",
   "metrics": {
     "prsReviewed": 450,
-    "comments": 2340,
-    "tokens": 125000
+    "comments": 2340
   }
 }
 ```
@@ -131,47 +122,39 @@ Configure alerts for metric thresholds:
 
 ### Alert Examples
 
-**High Token Usage**
-```yaml
-alert:
-  name: Token Quota Warning
-  condition: tokens > 80% of quota
-  action: email + slack notification
-```
+**Low Activity Alert**
+- Trigger: Less than 10 PRs reviewed in 7 days
+- Action: Email notification to team owner
 
-**Low Activity**
-```yaml
-alert:
-  name: Inactive Team
-  condition: prsReviewed < 10 in 7 days
-  action: email to team owner
-```
+**High Volume Alert**
+- Trigger: More than 100 PRs in a day
+- Action: Slack notification to team channel
 
 ## Analytics Best Practices
 
 ### 1. Regular Monitoring
 Check analytics weekly to track:
 - Team productivity trends
-- Resource utilization
+- Review activity patterns
 - Potential bottlenecks
 
 ### 2. Set Baselines
 Establish baseline metrics for:
 - Expected PRs per week
-- Average tokens per PR
 - Target comment density
+- Review velocity goals
 
 ### 3. Review Anomalies
 Investigate unusual patterns:
-- Sudden token spikes
 - Drop in PR reviews
+- Unusual activity spikes
 - Member inactivity
 
 ### 4. Share with Team
 Use analytics to:
 - Celebrate milestones
 - Identify improvement areas
-- Justify resource allocation
+- Track progress over time
 
 ## Troubleshooting
 
@@ -185,16 +168,6 @@ Use analytics to:
 3. Check webhook status
 4. Verify repository connections
 
-### Incorrect Token Counts
-
-**Problem**: Token usage doesn't match expectations
-
-**Solutions**:
-1. Recalculate analytics
-2. Check for failed reviews
-3. Verify PR scope settings
-4. Contact support if persists
-
 ### Missing PR Data
 
 **Problem**: Some PRs not showing in analytics
@@ -204,27 +177,6 @@ Use analytics to:
 2. Check date range filters
 3. Ensure repository is connected
 4. Refresh analytics data
-
-## API Access
-
-Access analytics programmatically via API:
-
-```bash
-# Get team analytics
-curl -H "Authorization: Bearer $TOKEN" \
-  https://api.mesrai.com/v1/teams/{teamId}/analytics
-
-# Response
-{
-  "teamId": "team_123",
-  "memberCount": 8,
-  "repositoryCount": 12,
-  "pullRequestsReviewed": 450,
-  "commentsGenerated": 2340,
-  "tokensConsumed": 125000,
-  "lastActivity": "2025-01-15T10:30:00Z"
-}
-```
 
 ## Next Steps
 

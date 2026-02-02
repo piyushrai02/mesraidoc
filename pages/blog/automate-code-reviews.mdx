@@ -330,190 +330,56 @@ test:
 
 ### Level 3: AI-Powered Automation (Week 3-4)
 
-Add intelligent AI review:
+Add intelligent AI review with Mesrai:
 
 #### Setup Mesrai Integration
 
-```bash
-# 1. Install Mesrai GitHub App
-# Visit: https://github.com/apps/mesraipilot
+1. **Install the Mesrai GitHub App**
+   - Visit [github.com/apps/mesraipilot](https://github.com/apps/mesraipilot)
+   - Click "Install" and select your repositories
 
-# 2. Configure automated review
-cat > .mesrai/config.yml << EOF
-# Automated AI Review Configuration
+2. **Configure in the Dashboard**
+   - Go to [app.mesrai.com](https://app.mesrai.com)
+   - Select your repository
+   - Navigate to **Settings** to configure:
+     - Security analysis (strict/moderate/relaxed)
+     - Performance checks
+     - Best practices enforcement
+     - Custom instructions for your team
 
-automation:
-  enabled: true
-  auto_review_on_pr: true
-  inline_comments: true
+3. **Reviews start automatically**
+   - Every new PR triggers an AI review
+   - Get inline comments with suggestions
+   - See summary with actionable feedback
 
-checks:
-  security:
-    enabled: true
-    severity: high
-    block_on_critical: true
+#### What You Can Configure
 
-  performance:
-    enabled: true
-    check_complexity: true
-    check_n_plus_one: true
-    check_inefficient_loops: true
+From the Mesrai dashboard, you can set up:
 
-  best_practices:
-    enabled: true
-    enforce_error_handling: true
-    enforce_logging: true
-    check_naming_conventions: true
+- **Analysis Settings** — Enable/disable security, performance, architecture checks
+- **Severity Levels** — Choose how strict reviews should be
+- **Custom Instructions** — Add team-specific guidelines
+- **File Exclusions** — Skip certain files or folders
+- **Notification Preferences** — Get alerts on critical issues
 
-  testing:
-    enabled: true
-    min_coverage: 80
-    require_tests_for_new_code: true
+### Level 4: Continuous Improvement (Ongoing)
 
-auto_approve:
-  enabled: true
-  conditions:
-    - score >= 90
-    - no_security_issues
-    - no_performance_issues
-    - pr_size < 200
+#### Feedback Loop
 
-notifications:
-  slack_webhook: \${SLACK_WEBHOOK_URL}
-  notify_on:
-    - critical_issues
-    - review_complete
-EOF
-```
+Help Mesrai learn your preferences:
 
-#### Configure Auto-approve Rules
+- **👍 Helpful** — Mark good suggestions
+- **👎 Not Helpful** — Flag irrelevant feedback
+- This feedback improves future reviews for your codebase
 
-```yaml
-# .mesrai/auto-approve.yml
-rules:
-  # Auto-approve documentation changes
-  - name: Documentation updates
-    conditions:
-      - files_match: "**/*.md"
-      - no_code_changes: true
-    action: approve
+#### Team Analytics
 
-  # Auto-approve dependency updates
-  - name: Dependency updates
-    conditions:
-      - files_match: "package.json,package-lock.json"
-      - author: "dependabot"
-      - tests_passing: true
-    action: approve
+Track your team's progress in the dashboard:
 
-  # Auto-approve minor fixes
-  - name: Minor fixes
-    conditions:
-      - pr_size < 50
-      - ai_score >= 95
-      - no_security_issues: true
-      - author_trust_level: "high"
-    action: approve
-```
-
-### Level 4: Advanced Automation (Ongoing)
-
-#### Custom Rules Engine
-
-Create team-specific rules:
-
-```javascript
-// .mesrai/custom-rules.js
-module.exports = {
-  rules: {
-    // Enforce API versioning
-    "api-versioning": {
-      test: (file) => {
-        if (file.path.includes("/api/")) {
-          const hasVersion = /\/v\d+\//.test(file.content);
-          if (!hasVersion) {
-            return {
-              passed: false,
-              message: "API endpoints must include version (e.g., /v1/)",
-              severity: "error",
-            };
-          }
-        }
-        return { passed: true };
-      },
-    },
-
-    // Require error logging
-    "error-logging": {
-      test: (file) => {
-        const hasTryCatch = /try\s*\{[\s\S]*?\}\s*catch/.test(file.content);
-        const hasLogging = /logger\.(error|warn)/.test(file.content);
-
-        if (hasTryCatch && !hasLogging) {
-          return {
-            passed: false,
-            message: "Error handling must include logging",
-            severity: "warning",
-          };
-        }
-        return { passed: true };
-      },
-    },
-
-    // Database migration must have rollback
-    "migration-rollback": {
-      test: (file) => {
-        if (file.path.includes("/migrations/")) {
-          const hasUp = /\.up\(/.test(file.content);
-          const hasDown = /\.down\(/.test(file.content);
-
-          if (hasUp && !hasDown) {
-            return {
-              passed: false,
-              message: "Migration must include rollback (down) method",
-              severity: "error",
-            };
-          }
-        }
-        return { passed: true };
-      },
-    },
-  },
-};
-```
-
-#### Integration with Project Management
-
-Connect reviews to your PM tools:
-
-```javascript
-// .mesrai/integrations.js
-module.exports = {
-  jira: {
-    enabled: true,
-    // Auto-create tickets for issues
-    createTicketsFor: ["security_critical", "performance_regression"],
-    // Update story status on PR
-    updateStoryOnPR: true,
-  },
-
-  slack: {
-    enabled: true,
-    // Notify on critical issues
-    channels: {
-      critical: "#code-review-urgent",
-      standard: "#code-review",
-      approved: "#deployments",
-    },
-  },
-
-  pagerduty: {
-    enabled: true,
-    // Alert on critical security issues
-    alertOn: ["security_critical"],
-  },
-};
-```
+- Review completion times
+- Common issues detected
+- Code quality trends
+- Team productivity metrics
 
 ## Measuring Automation ROI
 

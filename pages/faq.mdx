@@ -48,7 +48,7 @@ import { FAQPageSchema } from '../components/seo/JsonLd'
   },
   {
     question: "What security measures does Mesrai implement?",
-    answer: "Mesrai implements enterprise-grade security including end-to-end encryption, SOC 2 compliance, regular security audits, secure OAuth authentication, role-based access control (RBAC), and encrypted data storage. We never store your source code permanently and process reviews in secure, isolated environments."
+    answer: "Mesrai implements strong security practices including encrypted communications (TLS 1.3), secure OAuth authentication via GitHub, role-based access control, and isolated sandbox environments for code analysis. Most importantly, we never store your source code - it's processed in memory and deleted immediately after review."
   },
   {
     question: "How do I switch between Organizations?",
@@ -56,11 +56,7 @@ import { FAQPageSchema } from '../components/seo/JsonLd'
   },
   {
     question: "What analytics does Mesrai provide?",
-    answer: "Mesrai provides comprehensive analytics including review metrics, code quality trends, team performance, token usage statistics, response time analysis, and issue detection rates. Analytics are available at both team and organization levels."
-  },
-  {
-    question: "How does token usage work?",
-    answer: "Mesrai uses AI tokens to process code reviews. Each review consumes tokens based on the size and complexity of the code. Your plan includes a monthly token allowance, and you can track usage in real-time through the dashboard. Additional tokens can be purchased if needed."
+    answer: "Mesrai provides comprehensive analytics including review metrics, code quality trends, team performance, response time analysis, and issue detection rates. Analytics are available at both team and organization levels."
   },
   {
     question: "Can I export my data from Mesrai?",
@@ -126,10 +122,6 @@ Mesrai is a cloud-based platform that requires:
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Internet connection
 - GitHub App installation permissions
-
-### How do I configure environment variables?
-
-See our [Environment Setup Guide](/setup/environment) for detailed configuration instructions.
 
 ## Features
 
@@ -201,10 +193,6 @@ If you exceed your plan limits, you'll receive a notification. You can either:
 
 We provide grace periods to ensure uninterrupted service.
 
-### How does token usage work?
-
-Mesrai uses AI tokens to process code reviews. Each review consumes tokens based on the size and complexity of the code. Your plan includes a monthly token allowance, and you can track usage in real-time through the dashboard. See [Token Usage](/ai-review/token-usage) for details.
-
 ## GitHub Integration
 
 ### How does Mesrai integrate with GitHub?
@@ -236,15 +224,13 @@ Most issues are resolved by reinstalling the GitHub App or updating permissions.
 
 ### Is my code secure?
 
-Yes! Mesrai implements enterprise-grade security including:
-- End-to-end encryption
-- SOC 2 compliance
-- Regular security audits
-- Secure OAuth authentication
-- Role-based access control (RBAC)
-- Encrypted data storage
+Yes! Mesrai implements strong security practices:
+- Encrypted communications (TLS 1.3)
+- Secure OAuth authentication via GitHub
+- Role-based access control
+- Isolated sandbox environments for code analysis
 
-We **never store your source code permanently** and process reviews in secure, isolated environments.
+Most importantly, we **never store your source code** — it's processed in memory and deleted immediately after review.
 
 ### What permissions does Mesrai need?
 
@@ -286,7 +272,6 @@ Mesrai provides comprehensive analytics including:
 - Review metrics and trends
 - Code quality scores
 - Team performance data
-- Token usage statistics
 - Response time analysis
 - Issue detection rates
 
@@ -302,29 +287,16 @@ Yes, Mesrai allows you to export:
 
 You can export data in various formats including CSV, JSON, and PDF for reporting and compliance purposes.
 
-## API & Integrations
+## Integrations
 
-### Does Mesrai provide an API?
-
-Yes, Mesrai provides a comprehensive REST API for programmatic access. See our [API Reference](/api-reference/auth-api) for documentation.
-
-### Does Mesrai support webhooks?
-
-Yes, Mesrai supports webhooks for real-time notifications. You can configure webhooks to receive events for:
-- New reviews
-- Completed reviews
-- Issue detections
-- Team activity
-
-Webhooks are useful for integrating Mesrai with your existing CI/CD pipeline and tools.
-
-### What third-party integrations are available?
+### What integrations are available?
 
 Currently, Mesrai integrates with:
-- GitHub (primary integration)
+- **GitHub** (fully supported)
+- GitLab (coming soon)
+- Bitbucket (coming soon)
 - Slack (coming soon)
 - Jira (coming soon)
-- Discord (coming soon)
 
 Check our [Integrations](/integrations) page for the latest integrations.
 

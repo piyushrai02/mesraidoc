@@ -3,9 +3,13 @@ title: Managing Organization Members
 description: Add, remove, and manage organization member roles and permissions
 ---
 
-# Managing Organization Members
+import DevelopmentNote from '../../../components/DevelopmentNote'
 
-Comprehensive guide to managing organization members, roles, and permissions.
+# Managing Members
+
+<DevelopmentNote />
+
+Learn how to invite, manage, and remove members from your organization.
 
 ## Member Overview
 
@@ -248,7 +252,6 @@ Track member activity:
 - **Repositories Accessed**: Repos viewed
 - **Teams Joined**: Team memberships
 - **Last Active**: Most recent action
-- **Token Usage**: AI token consumption
 
 ### Activity Timeline
 
@@ -329,7 +332,6 @@ POST /v1/organizations/{orgId}/members/{memberId}/keys
 **Review Settings**
 - Auto-assign reviews: Yes/No
 - Review focus areas: Security, Performance, etc.
-- Daily token limit: 1000 tokens
 
 **Access Restrictions**
 - Allowed repositories: All or specific

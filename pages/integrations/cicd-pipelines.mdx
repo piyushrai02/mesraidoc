@@ -1,6 +1,6 @@
 ---
 title: CI/CD Pipelines
-description: Integrate Mesrai into your CI/CD pipelines for automated code review on every build.
+description: Integrate Mesrai into your GitHub Actions workflow for automated code review.
 ---
 
 import { Callout } from 'nextra/components'
@@ -9,14 +9,20 @@ import { Callout } from 'nextra/components'
 
 Integrate Mesrai directly into your CI/CD pipeline to automate code reviews as part of your build process.
 
+<Callout type="info">
+Currently, Mesrai supports **GitHub Actions** for CI/CD integration. Support for other platforms is coming soon.
+</Callout>
+
 ## Overview
 
 Running Mesrai in your CI/CD pipeline enables:
 
-- **Automated reviews** on every PR/MR
+- **Automated reviews** on every PR
 - **Quality gates** that block merges for critical issues
 - **Consistent standards** across all code changes
 - **Detailed reports** as build artifacts
+
+---
 
 ## GitHub Actions
 
@@ -45,7 +51,7 @@ jobs:
           mesrai-token: ${{ secrets.MESRAI_TOKEN }}
 ```
 
-### Advanced Configuration
+### With Quality Gates
 
 ```yaml
 name: Mesrai Code Review
@@ -71,9 +77,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           mesrai-token: ${{ secrets.MESRAI_TOKEN }}
-          severity-threshold: medium
-          fail-on-issues: true
-          config-file: .mesrai.yaml
+          fail-on-critical: true
 
       - name: Upload Report
         uses: actions/upload-artifact@v3
@@ -83,271 +87,109 @@ jobs:
           path: mesrai-report.json
 ```
 
-## GitLab CI
+---
 
-```yaml
-# .gitlab-ci.yml
-stages:
-  - review
-  - test
-  - deploy
+## Setting Up GitHub Actions
 
-mesrai-review:
-  stage: review
-  image: mesrai/cli:latest
-  script:
-    - |
-      mesrai review \
-        --mr $CI_MERGE_REQUEST_IID \
-        --project $CI_PROJECT_ID \
-        --output report.json
-  artifacts:
-    reports:
-      codequality: report.json
-    paths:
-      - report.json
-  only:
-    - merge_requests
-  variables:
-    MESRAI_TOKEN: $MESRAI_API_TOKEN
-```
+### Step 1: Get Your API Token
 
-## Bitbucket Pipelines
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Navigate to **Settings → API Tokens**
+3. Click **Generate New Token**
+4. Copy the token
 
-```yaml
-# bitbucket-pipelines.yml
-image: mesrai/cli:latest
+### Step 2: Add Repository Secret
 
-pipelines:
-  pull-requests:
-    '**':
-      - step:
-          name: Mesrai Code Review
-          script:
-            - mesrai review --bitbucket
-          artifacts:
-            - mesrai-report.json
+1. Go to your GitHub repository
+2. Navigate to **Settings → Secrets and variables → Actions**
+3. Click **New repository secret**
+4. Name: `MESRAI_TOKEN`
+5. Value: Paste your API token
 
-definitions:
-  caches:
-    mesrai: ~/.mesrai/cache
-```
+### Step 3: Create Workflow File
 
-## Jenkins
+Create `.github/workflows/mesrai.yml` with the configuration above.
 
-### Jenkinsfile (Declarative)
+---
 
-```groovy
-pipeline {
-    agent any
+## Configuration
 
-    environment {
-        MESRAI_TOKEN = credentials('mesrai-api-token')
-    }
+<Callout type="info">
+Review settings are configured through the **[Mesrai Dashboard](https://app.mesrai.com)**, not in the workflow file.
+</Callout>
 
-    stages {
-        stage('Code Review') {
-            when {
-                changeRequest()
-            }
-            steps {
-                script {
-                    docker.image('mesrai/cli:latest').inside {
-                        sh '''
-                            mesrai review \
-                                --pr ${CHANGE_ID} \
-                                --repo ${GIT_URL} \
-                                --output mesrai-report.json
-                        '''
-                    }
-                }
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: 'mesrai-report.json'
-                    publishHTML target: [
-                        reportDir: '.',
-                        reportFiles: 'mesrai-report.html',
-                        reportName: 'Mesrai Review Report'
-                    ]
-                }
-            }
-        }
-    }
-}
-```
+### Available Action Inputs
 
-## Azure DevOps
+| Input | Description | Required |
+|-------|-------------|----------|
+| `github-token` | GitHub token for PR access | Yes |
+| `mesrai-token` | Your Mesrai API token | Yes |
+| `fail-on-critical` | Fail the action if critical issues found | No |
 
-```yaml
-# azure-pipelines.yml
-trigger: none
-
-pr:
-  - main
-  - develop
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-  - checkout: self
-    fetchDepth: 0
-
-  - task: Docker@2
-    displayName: 'Run Mesrai Review'
-    inputs:
-      command: 'run'
-      arguments: |
-        --rm
-        -v $(Build.SourcesDirectory):/code
-        -e MESRAI_TOKEN=$(MESRAI_TOKEN)
-        mesrai/cli:latest
-        review --path /code --output /code/report.json
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: 'report.json'
-      artifactName: 'MesraiReport'
-```
-
-## CircleCI
-
-```yaml
-# .circleci/config.yml
-version: 2.1
-
-orbs:
-  mesrai: mesrai/code-review@1.0
-
-workflows:
-  review:
-    jobs:
-      - mesrai/review:
-          context: mesrai-credentials
-          filters:
-            branches:
-              ignore: main
-```
-
-### Manual Configuration
-
-```yaml
-version: 2.1
-
-jobs:
-  mesrai-review:
-    docker:
-      - image: mesrai/cli:latest
-    steps:
-      - checkout
-      - run:
-          name: Run Code Review
-          command: |
-            mesrai review \
-              --pr $CIRCLE_PULL_REQUEST \
-              --output report.json
-      - store_artifacts:
-          path: report.json
-
-workflows:
-  pr-review:
-    jobs:
-      - mesrai-review:
-          filters:
-            branches:
-              ignore: main
-```
-
-## CLI Reference
-
-### Common Commands
-
-```bash
-# Review a pull request
-mesrai review --pr 123
-
-# Review local changes
-mesrai review --local
-
-# Generate report only (no comments)
-mesrai review --report-only --output report.json
-
-# Set severity threshold
-mesrai review --severity-threshold high
-
-# Fail on issues
-mesrai review --fail-on-issues
-```
-
-### Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | Review passed |
-| 1 | Review found issues above threshold |
-| 2 | Configuration error |
-| 3 | Authentication error |
-| 4 | Network error |
+---
 
 ## Quality Gates
 
-<Callout type="info">
-  Quality gates can block merges until issues are resolved, ensuring code quality standards are met.
-</Callout>
+Quality gates can block merges until issues are resolved. Configure them in the Mesrai dashboard:
 
-### Configuring Gates
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Select your **Repository**
+3. Navigate to **Settings → Quality Gates**
+4. Configure your rules
 
-```yaml
-# mesrai.config.yaml
-quality_gates:
-  enabled: true
-
-  rules:
-    - name: "No Critical Issues"
-      condition: "critical_count == 0"
-      block: true
-
-    - name: "Security Check"
-      condition: "security_issues == 0"
-      block: true
-
-    - name: "Coverage Threshold"
-      condition: "coverage >= 80"
-      block: false  # Warning only
-```
-
-### Gate Results
+### Example Gate Results
 
 ```
 Quality Gate Results
 ━━━━━━━━━━━━━━━━━━━━━
 ✅ No Critical Issues      PASSED
 ✅ Security Check          PASSED
-⚠️ Coverage Threshold      FAILED (75% < 80%)
+⚠️ Coverage Threshold      WARNING (75% < 80%)
 
-Overall: ✅ PASSED (warnings present)
+Overall: ✅ PASSED
 ```
 
-## Caching
+---
 
-Speed up reviews by caching analysis data:
+## Coming Soon
 
-```yaml
-# GitHub Actions
-- uses: actions/cache@v3
-  with:
-    path: ~/.mesrai/cache
-    key: mesrai-${{ hashFiles('**/package-lock.json') }}
+We're working on support for additional CI/CD platforms:
 
-# GitLab CI
-cache:
-  paths:
-    - .mesrai/cache/
-```
+| Platform | Status |
+|----------|--------|
+| GitHub Actions | ✅ Available |
+| GitLab CI | 🚧 Coming Soon |
+| Bitbucket Pipelines | 🚧 Coming Soon |
+| CircleCI | 📅 Planned |
+| Jenkins | 📅 Planned |
+| Azure DevOps | 📅 Planned |
+
+---
+
+## Troubleshooting
+
+### Action Not Running
+
+1. Verify the workflow file is in `.github/workflows/`
+2. Check that the trigger events match your PR actions
+3. Ensure secrets are correctly configured
+
+### Authentication Errors
+
+1. Verify `MESRAI_TOKEN` is set correctly
+2. Check the token hasn't expired
+3. Ensure the token has the required permissions
+
+### Reviews Not Appearing
+
+1. Check the action logs for errors
+2. Verify the repository is connected in Mesrai dashboard
+3. Ensure the PR has code changes (not just config files)
+
+---
 
 ## Next Steps
 
 - [Configure Webhooks](/api-reference/webhooks)
-- [Use the SDK](/api-reference/sdks)
 - [View API Reference](/api-reference/overview)
+- [Set up GitHub Integration](/integrations/github)

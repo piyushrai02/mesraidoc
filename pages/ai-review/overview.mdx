@@ -114,7 +114,7 @@ Mesrai offers different review depths based on your needs:
 - **Use case**: Enterprise with specific needs
 
 <Callout type="info">
-Configure review depth in your `.mesrai.yml` config file or via the dashboard.
+Configure review depth via the [Mesrai Dashboard](https://app.mesrai.com) under Settings → Review Depth.
 </Callout>
 
 ## Review Triggers
@@ -128,41 +128,21 @@ Mesrai automatically reviews PRs when:
 ✅ Specific labels are added (configurable)
 
 ### Manual Triggers
-You can also request reviews manually:
+You can also request reviews manually via GitHub comments:
 
-```bash
-# Via CLI
-mesrai review --pr 123
-
-# Via GitHub comment
+```
 @mesrai review
 
-# Re-review with different depth
-@mesrai review --depth deep
+@mesrai review --deep
 ```
 
 ### Conditional Triggers
-Configure when reviews should run:
+Configure when reviews should run via the [Dashboard](https://app.mesrai.com) under Settings → Review Triggers:
 
-```yaml
-# .mesrai.yml
-triggers:
-  # Always review these branches
-  branches:
-    - main
-    - production
-    - develop
-  
-  # Only review if certain files change
-  paths:
-    - 'src/**/*.ts'
-    - '!**/*.test.ts'  # Ignore tests
-  
-  # Skip reviews for certain users
-  skip_users:
-    - dependabot
-    - renovate
-```
+- **Branch filters**: Always review main, production, develop
+- **Path filters**: Only review when specific files change (e.g., `src/**/*.ts`)
+- **Ignore patterns**: Skip test files (e.g., `**/*.test.ts`)
+- **Skip users**: Exclude bot accounts (dependabot, renovate)
 
 ## Review Output
 
@@ -263,15 +243,7 @@ await mesrai.feedback({
 - **False Positive Reduction**: Reduces noise over time
 
 ### Custom Training
-Enterprise customers can fine-tune models on their codebase:
-
-```bash
-# Train custom model
-mesrai train --dataset ./reviews --epochs 10
-
-# Use custom model
-mesrai review --model custom-v2 --pr 123
-```
+Enterprise customers can work with our team to fine-tune models on their codebase. Contact sales@mesrai.com for more information.
 
 <Callout type="warning">
 **Privacy Note**: Your code is never used to train public models. Custom training is private to your organization.
@@ -279,55 +251,25 @@ mesrai review --model custom-v2 --pr 123
 
 ## Review Settings
 
+Configure review behavior via the [Mesrai Dashboard](https://app.mesrai.com):
+
 ### Configure Review Behavior
 
-```yaml
-# .mesrai.yml
-review:
-  # Review depth
-  depth: standard  # quick | standard | deep | custom
-  
-  # What to check
-  checks:
-    - bugs
-    - security
-    - performance
-    - style
-    - tests
-  
-  # Severity threshold
-  min_severity: medium  # Only show medium+ issues
-  
-  # Auto-approve safe PRs
-  auto_approve:
-    enabled: true
-    conditions:
-      - max_files: 3
-      - no_critical_issues: true
-      - has_tests: true
-```
+Navigate to Settings → Review Settings:
+
+- **Review depth**: Quick, Standard, Deep, or Custom
+- **Checks enabled**: Bugs, Security, Performance, Style, Tests
+- **Severity threshold**: Filter to show only Medium+ issues
+- **Auto-approve**: Enable for safe PRs (small files, no critical issues, has tests)
 
 ### Team Preferences
 
-```yaml
-# Team-level configuration
-team:
-  # Preferred code style
-  style_guide: airbnb  # airbnb | google | standard
-  
-  # Language-specific rules
-  typescript:
-    strict_null_checks: true
-    no_any: warn
-  
-  # Custom rules
-  custom_rules:
-    - name: "No TODO in production"
-      pattern: "TODO|FIXME"
-      severity: error
-      branches: [main, production]
-```
+Navigate to Settings → Team Preferences:
+
+- **Style guide**: Choose Airbnb, Google, or Standard
+- **Language rules**: TypeScript strict mode, no-any warnings
+- **Custom rules**: Add patterns like "No TODO in production" for specific branches
 
 ---
 
-**Next**: Learn about [token usage optimization](/ai-review/token-usage) →
+**Next**: Learn about [GitHub Integration](/integrations/github) →

@@ -1,327 +1,229 @@
 ---
-title: Core Architecture
-description: Deep dive into Mesrai's technical architecture including the AI review pipeline, worker system, and infrastructure design.
+title: "Core Architecture"
+description: "How Mesrai AI delivers intelligent, context-aware code reviews"
 ---
 
-import { Callout, Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
 # Core Architecture
 
-Understanding Mesrai's architecture helps you leverage the platform effectively and troubleshoot issues when they arise.
+Mesrai AI is built on a modern, enterprise-grade architecture designed to deliver intelligent code reviews at scale. Our platform seamlessly integrates with your existing workflow while providing deep, context-aware analysis.
 
-## System Overview
+## How It Works
 
-Mesrai is built as a distributed, event-driven system optimized for performance and scalability.
-
-```mermaid
-graph TB
-    A[GitHub Webhook] --> B[API Gateway]
-    B --> C{Event Type}
-    C -->|PR Event| D[Review Queue]
-    C -->|Auth Event| E[User Service]
-    D --> F[Worker Pool]
-    F --> G[Context Extractor]
-    G --> H[Call Graph Builder]
-    H --> I[LLM Service]
-    I --> J[Review Formatter]
-    J --> K[GitHub API]
-    K --> L[PR Comment]
-    
-    F --> M[(Redis Cache)]
-    F --> N[(PostgreSQL)]
-    
-    style D fill:#007AFF
-    style I fill:#007AFF
-```
-
-## Core Components
-
-### 1. API Gateway
-**Technology**: Node.js + Express  
-**Purpose**: Entry point for all requests
-
-- **Request Routing**: Directs traffic to appropriate services
-- **Authentication**: Validates GitHub tokens and API keys
-- **Rate Limiting**: Prevents abuse (1000 req/min per user)
-- **Load Balancing**: Distributes load across workers
-
-```javascript
-// Simplified API Gateway flow
-app.post('/webhook/github', async (req, res) => {
-  const signature = verifyGitHubSignature(req)
-  const event = parseGitHubEvent(req.body)
-  
-  await queue.add('review', {
-    prNumber: event.pull_request.number,
-    repo: event.repository.full_name
-  })
-  
-  res.status(202).send({ queued: true })
-})
-```
-
-### 2. Review Queue
-**Technology**: BullMQ + Redis  
-**Purpose**: Asynchronous job processing
-
-<Callout type="info">
-Queue priority ensures critical PRs (production branches, security fixes) are reviewed first.
-</Callout>
-
-**Queue Priorities**:
-- **Critical**: Production hotfixes (priority 1)
-- **High**: Main/master branch PRs (priority 2)  
-- **Normal**: Feature branches (priority 3)
-- **Low**: Draft PRs (priority 4)
-
-### 3. Worker Pool
-**Technology**: Node.js clusters  
-**Purpose**: Parallel review processing
-
-**Worker Capabilities**:
-- **Auto-scaling**: Scales from 2 to 50 workers based on queue depth
-- **Fault Tolerance**: Failed jobs retry up to 3 times
-- **Resource Management**: Each worker has dedicated CPU/memory limits
-- **Health Monitoring**: Workers report status every 30 seconds
-
-```typescript
-// Worker configuration
-const workerConfig = {
-  concurrency: 5,
-  maxMemory: '2GB',
-  timeout: 300000, // 5 minutes
-  retries: 3,
-  backoff: {
-    type: 'exponential',
-    delay: 2000
-  }
-}
-```
-
-### 4. Context Extractor
-**Technology**: TreeSitter + Git  
-**Purpose**: Extract relevant code context
-
-<Steps>
-
-### Parse PR Diff
-Extract changed files and line numbers from the pull request
-
-### Build File Dependency Graph
-Identify which files import/use the changed files
-
-### Extract Relevant Context
-Pull in related functions, classes, and modules
-
-### Optimize Token Budget
-Compress context to fit LLM token limits
-
-</Steps>
-
-**Context Selection Strategy**:
-```javascript
-const contextPriority = [
-  'changed_lines',           // Highest priority
-  'changed_functions',
-  'direct_dependencies',
-  'type_definitions',
-  'imported_modules',
-  'related_tests',          // Lowest priority
-]
-```
-
-### 5. Call Graph Builder
-**Technology**: Custom AST parser  
-**Purpose**: Map function relationships
-
-The call graph shows how functions depend on each other:
+Mesrai follows a streamlined review process that delivers actionable insights within seconds of opening a pull request.
 
 ```mermaid
-graph LR
-    A[handleCheckout] --> B[validateCart]
-    A --> C[processPayment]
-    C --> D[chargeStripe]
-    C --> E[updateInventory]
-    B --> F[checkStock]
-    
-    style A fill:#007AFF
-    style C fill:#007AFF
+flowchart LR
+    A[Your PR] --> B[Mesrai Analysis]
+    B --> C[AI Review]
+    C --> D[Actionable Feedback]
+
+    style A fill:#4F46E5,color:#fff
+    style B fill:#7C3AED,color:#fff
+    style C fill:#DB2777,color:#fff
+    style D fill:#059669,color:#fff
 ```
 
-**Graph Metrics**:
-- **Depth**: How many levels of calls (max: 5)
-- **Breadth**: Number of functions called (avg: 8)
-- **Complexity**: Cyclomatic complexity score
-- **Coverage**: Percentage of codebase mapped
+### The Review Process
 
-### 6. LLM Service
-**Technology**: OpenAI GPT-4 + Claude  
-**Purpose**: AI-powered code analysis
-
-**Model Selection**:
-| Use Case | Model | Token Limit | Response Time |
-|----------|-------|-------------|---------------|
-| Quick reviews | GPT-4-Turbo | 128K | 2-5s |
-| Deep analysis | Claude-3 Opus | 200K | 10-15s |
-| Security scan | GPT-4 + rules | 128K | 3-7s |
-
-**Prompt Engineering**:
-```typescript
-const reviewPrompt = `
-You are an expert code reviewer analyzing a pull request.
-
-Context:
-${callGraph}
-${dependencies}
-${changedFiles}
-
-Tasks:
-1. Identify potential bugs
-2. Suggest architectural improvements
-3. Check for security vulnerabilities
-4. Recommend performance optimizations
-
-Format: Provide specific line-by-line feedback.
-`
-```
-
-### 7. Review Formatter
-**Technology**: Markdown + GitHub API  
-**Purpose**: Format and post reviews
-
-**Comment Structure**:
-```markdown
-## 🤖 Mesrai AI Review
-
-### 🐛 Potential Issues (2)
-- Line 45: Possible null pointer dereference
-- Line 89: Inefficient database query in loop
-
-### ✨ Suggestions (3)
-- Consider using async/await for better error handling
-- Extract validation logic to separate function
-- Add unit tests for edge cases
-
-### 📊 Metrics
-- Complexity Score: 12 (Medium)
-- Test Coverage: 78%
-- Security Score: A
-```
-
-## Data Flow
-
-### Pull Request Review Flow
-
-<Steps>
-
-### PR Created/Updated
-Developer pushes code, GitHub sends webhook
-
-### Event Processing
-API Gateway validates and queues the review job
-
-### Context Extraction
-Worker extracts relevant code context (2-3s)
-
-### Call Graph Building
-System maps function dependencies (1-2s)
-
-### AI Analysis
-LLM analyzes code and generates feedback (5-10s)
-
-### Review Posting
-Formatted comments posted to GitHub (1s)
-
-</Steps>
-
-**Total Time**: 10-15 seconds for average PR
-
-## Infrastructure
-
-### Deployment Architecture
-
-```mermaid
-graph TB
-    A[Cloudflare CDN] --> B[Vercel Edge]
-    B --> C[API Servers]
-    C --> D[Worker Cluster]
-    D --> E[(Redis)]
-    D --> F[(PostgreSQL)]
-    D --> G[LLM APIs]
-    
-    H[GitHub] -.->|Webhooks| C
-    C -.->|Comments| H
-```
-
-### Technology Stack
-
-**Frontend**:
-- Next.js 15 (Dashboard)
-- React 19
-- TailwindCSS
-- Vercel Edge
-
-**Backend**:
-- Node.js 20
-- Express.js
-- TypeScript
-- BullMQ
-
-**Database**:
-- PostgreSQL (primary data)
-- Redis (cache + queues)
-- S3 (file storage)
-
-**Infrastructure**:
-- Vercel (hosting)
-- AWS (databases)
-- Cloudflare (CDN)
-
-### Scaling Strategy
-
-<Callout type="warning">
-**Auto-scaling triggers**:
-- Queue depth > 100 jobs → Add workers
-- API latency > 500ms → Scale servers
-- Cache hit rate < 80% → Increase Redis memory
-</Callout>
-
-**Current Capacity**:
-- **API**: 10K requests/second
-- **Reviews**: 1000 PRs/hour
-- **Workers**: 2-50 (auto-scale)
-- **Storage**: Unlimited
-
-## Performance Optimizations
-
-### Caching Strategy
-
-```typescript
-// Multi-layer caching
-const review = await cache.get(`pr:${prId}:review`)
-
-if (!review) {
-  // Check call graph cache
-  const callGraph = await cache.get(`repo:${repoId}:graph`)
-  
-  if (!callGraph) {
-    // Build and cache
-    callGraph = await buildCallGraph(repo)
-    await cache.set(`repo:${repoId}:graph`, callGraph, '24h')
-  }
-  
-  review = await generateReview(callGraph, pr)
-  await cache.set(`pr:${prId}:review`, review, '1h')
-}
-```
-
-### Database Optimization
-
-- **Connection Pooling**: 20 connections per instance
-- **Query Optimization**: Indexed on PR number, repo ID
-- **Read Replicas**: Separate read/write databases
-- **Partitioning**: PRs partitioned by month
+1. **Connect** — Install the Mesrai GitHub App on your repositories
+2. **Open a PR** — Create a pull request as you normally would
+3. **Automatic Analysis** — Mesrai instantly analyzes your changes
+4. **Get Feedback** — Receive intelligent, actionable review comments
 
 ---
 
-**Next Steps**: Learn how to [install and configure Mesrai](/setup/installation) →
+## Multi-Agent Review System
+
+Mesrai uses specialized AI agents that work together to provide comprehensive code reviews from multiple perspectives.
+
+```mermaid
+flowchart TB
+    subgraph review[Mesrai Review Engine]
+        direction TB
+        A[Security Analysis]
+        B[Code Quality]
+        C[Architecture Review]
+        D[Best Practices]
+    end
+
+    PR[Pull Request] --> review
+    review --> Results[Review Comments]
+
+    style PR fill:#4F46E5,color:#fff
+    style Results fill:#059669,color:#fff
+```
+
+### What We Analyze
+
+| Focus Area | What You Get |
+|------------|--------------|
+| **Security** | Vulnerability detection, secrets scanning, auth issues |
+| **Code Quality** | Complexity analysis, maintainability suggestions |
+| **Architecture** | Design patterns, dependency analysis, SOLID principles |
+| **Best Practices** | Language-specific recommendations, performance tips |
+
+<Callout type="info">
+Each review is tailored to your codebase context, ensuring relevant and actionable feedback.
+</Callout>
+
+---
+
+## Intelligent Context Awareness
+
+Unlike simple pattern matching tools, Mesrai understands your entire codebase to provide contextually relevant reviews.
+
+### What Makes Us Different
+
+- **Full Codebase Understanding** — We analyze your entire repository, not just the diff
+- **Historical Context** — Learn from your team's patterns and preferences
+- **Cross-File Analysis** — Understand how changes impact related code
+- **Language Intelligence** — Deep understanding of language-specific patterns
+
+```mermaid
+flowchart TB
+    subgraph context[Context Layer]
+        A[Repository Structure]
+        B[Coding Patterns]
+        C[Dependencies]
+    end
+
+    subgraph analysis[Analysis]
+        D[Your Changes]
+    end
+
+    context --> analysis
+    analysis --> E[Contextual Review]
+
+    style E fill:#059669,color:#fff
+```
+
+---
+
+## Supported Languages
+
+Mesrai provides deep semantic analysis for all major programming languages:
+
+| Language | Analysis Depth |
+|----------|----------------|
+| **TypeScript / JavaScript** | Full AST analysis, type checking |
+| **Python** | PEP compliance, type hints, patterns |
+| **Java** | Design patterns, Spring/Maven support |
+| **Go** | Idiomatic Go, concurrency patterns |
+| **Ruby** | Rails conventions, gem analysis |
+| **C# / .NET** | .NET patterns, async analysis |
+| **And more...** | 20+ languages supported |
+
+---
+
+## Review Quality
+
+Every review goes through multiple quality checks to ensure you receive only actionable, high-value feedback.
+
+### Our Quality Promise
+
+<Callout type="info">
+**What you can expect:**
+- No false positives or noisy alerts
+- Actionable suggestions with code examples
+- Context-aware recommendations
+- Consistent review quality across your team
+</Callout>
+
+### Review Verdicts
+
+| Verdict | What It Means |
+|---------|---------------|
+| **Approved** | Your code looks great, no issues found |
+| **Suggestions** | Optional improvements to consider |
+| **Changes Requested** | Important issues that should be addressed |
+
+---
+
+## Enterprise Ready
+
+Mesrai is built for teams of all sizes, from startups to large enterprises.
+
+### Security & Privacy
+
+- **Zero Code Storage** — Your code is never stored after analysis
+- **Sandbox Processing** — Code analyzed in isolated environments
+- **Encryption** — All data encrypted in transit (TLS 1.3)
+- **Access Control** — Fine-grained permissions via GitHub OAuth
+
+### Scalability
+
+- Handle thousands of PRs per day
+- Consistent performance at any scale
+- 99.9% uptime SLA for enterprise plans
+
+```mermaid
+flowchart LR
+    subgraph your[Your Team]
+        A[Developer 1]
+        B[Developer 2]
+        C[Developer N]
+    end
+
+    your --> M[Mesrai]
+    M --> R[Instant Reviews]
+
+    style M fill:#4F46E5,color:#fff
+    style R fill:#059669,color:#fff
+```
+
+---
+
+## Integration
+
+Mesrai integrates seamlessly with your existing development workflow.
+
+### GitHub Integration
+
+| Feature | Description |
+|---------|-------------|
+| **PR Comments** | Inline suggestions on your code |
+| **Check Runs** | CI/CD status integration |
+| **Auto-Review** | Automatic reviews on every PR |
+| **Chat Commands** | Interact with Mesrai in PR comments |
+
+### Coming Soon
+
+- GitLab Integration
+- Bitbucket Integration
+- Azure DevOps Integration
+
+---
+
+## Configuration
+
+Customize Mesrai to match your team's standards and preferences via the [Mesrai Dashboard](https://app.mesrai.com):
+
+1. Go to **Settings** → Select your repository
+2. Configure review options
+
+### What You Can Configure
+
+- Review focus areas and severity levels
+- File and folder exclusions
+- Custom rules and patterns
+- Team-specific preferences
+- Notification settings
+
+---
+
+## Getting Started
+
+Ready to experience intelligent code reviews?
+
+- [Quick Start Guide](/setup/quick-start) — Get up and running in minutes
+- [Installation](/setup/installation) — Step-by-step setup instructions
+- [Configuration](/setup/configuration) — Customize Mesrai for your team
+- [GitHub Integration](/integrations/github) — Connect your repositories
+
+---
+
+<Callout>
+**Questions?** Check out our [FAQ](/faq) or [contact our team](https://mesrai.com/contact) for help.
+</Callout>

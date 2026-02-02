@@ -49,20 +49,11 @@ def process_data(data: List[Dict]) -> pd.DataFrame:
 
 ### 1. Smart Context Selection
 
-Mesrai only includes relevant files:
+Mesrai only includes relevant files. Configure via [dashboard](https://app.mesrai.com):
 
-```yaml
-# .mesrai.yml
-context:
-  # Only include files related to changes
-  smart_selection: true
-
-  # Maximum files to include
-  max_files: 50
-
-  # Include dependencies
-  include_imports: true
-```
+- **Smart Selection**: Only files related to changes
+- **Max Files**: Limit files included (default: 50)
+- **Include Dependencies**: Analyze imported modules
 
 ### 2. Diff-Based Analysis
 
@@ -126,62 +117,33 @@ Files are prioritized by relevance:
 
 ## Configuration
 
+Configure token usage via the [Mesrai Dashboard](https://app.mesrai.com):
+
 ### Context Depth
 
-Control how much context is included:
+Control how much context is included (Settings → Review Depth):
 
-```yaml
-# .mesrai.yml
-reviews:
-  context_depth: medium  # quick | medium | deep
-
-  quick:
-    max_tokens: 2000
-    max_files: 10
-
-  medium:
-    max_tokens: 8000
-    max_files: 30
-
-  deep:
-    max_tokens: 25000
-    max_files: 100
-```
+| Mode | Max Tokens | Max Files | Use Case |
+|------|------------|-----------|----------|
+| Quick | 2,000 | 10 | Fast feedback |
+| Medium | 8,000 | 30 | Standard reviews |
+| Deep | 25,000 | 100 | Comprehensive analysis |
 
 ### File Exclusions
 
-Exclude files to save tokens:
+Exclude files to save tokens (Settings → File Exclusions):
 
-```yaml
-exclude:
-  # Exclude by pattern
-  patterns:
-    - "**/*.test.js"
-    - "dist/**"
-    - "node_modules/**"
-
-  # Exclude by size
-  max_file_size: 100000  # bytes
-
-  # Exclude generated files
-  generated: true
-```
+- Exclude by pattern: `**/*.test.js`, `dist/**`, `node_modules/**`
+- Exclude by size: Files larger than 100KB
+- Exclude generated files automatically
 
 ### Smart Limits
 
-Set automatic limits:
+Set automatic limits (Settings → Token Limits):
 
-```yaml
-limits:
-  # Max tokens per review
-  max_tokens: 10000
-
-  # Max tokens per file
-  max_tokens_per_file: 2000
-
-  # Warn when approaching limit
-  warn_at: 8000
-```
+- **Max tokens per review**: Set upper bound
+- **Max tokens per file**: Limit individual files
+- **Warning threshold**: Get notified at 80%
 
 ## Monitoring Usage
 
@@ -416,7 +378,7 @@ A: 5,000-10,000 tokens for typical PRs (50-200 lines changed)
 A: Yes, failed reviews don't count toward quota
 
 **Q: Can I set hard limits?**
-A: Yes, configure `max_tokens` in `.mesrai.yml`
+A: Yes, configure max tokens in the dashboard under Settings → Token Limits
 
 **Q: What happens when I exceed quota?**
 A: Reviews pause until next billing cycle or upgrade

@@ -16,13 +16,13 @@ export const Hero = () => {
       <div className="max-w-5xl mx-auto text-center relative z-10">
         {/* Announcement badge */}
         <a
-          href="/features/architectural-analysis"
+          href="/roadmap"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm hover:bg-violet-500/15 hover:border-violet-500/30 transition-all duration-300 mb-8 group"
         >
           <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-xs font-bold tracking-wide uppercase">
-            New
+            Early Access
           </span>
-          <span className="text-gray-700 dark:text-gray-300 font-medium">Architectural Analysis v2.0 is live</span>
+          <span className="text-gray-700 dark:text-gray-300 font-medium">Context-Aware AI Code Reviews</span>
           <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

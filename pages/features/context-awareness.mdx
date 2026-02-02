@@ -3,20 +3,22 @@ title: Context Awareness
 description: Understand how Mesrai builds contextual understanding of your entire codebase.
 ---
 
+import { Callout } from 'nextra/components'
+
 # Context Awareness
 
 Mesrai's context awareness system goes beyond simple pattern matching. It builds a deep understanding of your codebase structure, relationships, and patterns.
 
 ## How Context Works
 
-### Codebase Indexing
+### Codebase Understanding
 
 When you connect a repository, Mesrai:
 
-1. **Scans your codebase** - Indexes all source files and their relationships
-2. **Builds a call graph** - Maps how functions and classes interact
+1. **Analyzes your codebase** - Understands all source files and their relationships
+2. **Maps dependencies** - Tracks how functions and classes interact
 3. **Identifies patterns** - Learns your coding conventions and architecture
-4. **Tracks dependencies** - Understands external library usage
+4. **Tracks libraries** - Understands external library usage
 
 ### Real-Time Updates
 
@@ -31,33 +33,19 @@ The context is continuously updated:
 
 Understanding of individual file structure:
 
-```
-File: src/services/auth.js
-├── Imports: jwt, bcrypt, UserModel
-├── Exports: login, logout, validateToken
-├── Functions:
-│   ├── login(email, password) -> Promise<Token>
-│   ├── logout(token) -> void
-│   └── validateToken(token) -> User | null
-└── Dependencies:
-    └── Called by: routes/api.js, middleware/auth.js
-```
+- Imports and exports
+- Functions and their signatures
+- Dependencies and relationships
+- How the file is used across the codebase
 
 ### Project Context
 
 Understanding of overall project architecture:
 
-```
-Project Structure:
-├── Architecture: Microservices
-├── Framework: Express.js + React
-├── Database: PostgreSQL
-├── Auth: JWT-based
-└── Key Patterns:
-    ├── Repository pattern for data access
-    ├── Service layer for business logic
-    └── Controller layer for API endpoints
-```
+- Project structure and organization
+- Frameworks and libraries in use
+- Database and authentication patterns
+- Design patterns used in your code
 
 ### Historical Context
 
@@ -73,10 +61,10 @@ Learning from past reviews:
 
 With full context, Mesrai can:
 
-- **Catch breaking changes** - Knows when a function signature change affects callers
-- **Suggest consistent patterns** - Recommends code that matches existing style
-- **Identify dead code** - Finds unused functions and variables
-- **Predict impact** - Estimates the risk level of changes
+- **Catch breaking changes** — Knows when a function signature change affects callers
+- **Suggest consistent patterns** — Recommends code that matches existing style
+- **Identify dead code** — Finds unused functions and variables
+- **Predict impact** — Estimates the risk level of changes
 
 ### Reduced False Positives
 
@@ -89,39 +77,43 @@ Context awareness dramatically reduces noise:
 const config = require('./config');
 ```
 
+---
+
 ## Configuration
 
-### Context Depth
+<Callout type="info">
+All context settings are configured through the **[Mesrai Dashboard](https://app.mesrai.com)** — no config files needed!
+</Callout>
 
-Control how much context is gathered:
+### How to Configure
 
-```yaml
-# mesrai.config.yaml
-context:
-  depth: full  # Options: minimal, standard, full
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Select your **Repository**
+3. Navigate to **Settings → Context**
+4. Configure your preferences:
+   - **Context depth** — How much of your codebase to analyze
+   - **Include/exclude patterns** — Specify which files to include
+   - **Privacy settings** — Exclude sensitive files from analysis
 
-  include:
-    - "src/**/*"
-    - "lib/**/*"
+### Context Settings
 
-  exclude:
-    - "node_modules/**"
-    - "dist/**"
-    - "*.test.js"
-```
+| Setting | Description |
+|---------|-------------|
+| **Full Context** | Analyze entire codebase for maximum accuracy |
+| **Standard Context** | Balance between speed and accuracy |
+| **Minimal Context** | Focus only on changed files |
 
 ### Privacy Controls
 
-Sensitive files can be excluded from context:
+You can exclude sensitive files from context analysis:
 
-```yaml
-context:
-  privacy:
-    exclude_patterns:
-      - "**/*.env*"
-      - "**/secrets/**"
-      - "**/*.key"
-```
+- Environment files (`.env`, `.env.*`)
+- Secret directories (`secrets/`, `credentials/`)
+- Key files (`*.key`, `*.pem`)
+
+Configure these exclusions in **Settings → Privacy** on the dashboard.
+
+---
 
 ## Context in Action
 
@@ -129,10 +121,10 @@ context:
 
 When reviewing a new API endpoint, Mesrai considers:
 
-1. **Authentication patterns** - How other endpoints handle auth
-2. **Error handling** - Standard error response format
-3. **Validation** - Input validation patterns used elsewhere
-4. **Database access** - How similar queries are structured
+1. **Authentication patterns** — How other endpoints handle auth
+2. **Error handling** — Standard error response format
+3. **Validation** — Input validation patterns used elsewhere
+4. **Database access** — How similar queries are structured
 
 ```javascript
 // New endpoint being reviewed
@@ -147,6 +139,8 @@ app.post('/api/users', async (req, res) => {
 // - Wrap in try-catch (pattern from /api/orders)
 // - Sanitize output (remove password field like /api/profile)
 ```
+
+---
 
 ## Next Steps
 

@@ -35,31 +35,15 @@ The Mesrai GitHub App requires the following permissions:
 
 ### 3. Configure Repository Settings
 
-After installation, configure per-repository settings:
+After installation, configure per-repository settings via the [Mesrai Dashboard](https://app.mesrai.com):
 
-```yaml
-# .mesrai.yml
-version: 1
-reviews:
-  enabled: true
-  auto_review: true
-  review_on:
-    - pull_request
-    - push_to_main
-
-  ignore_patterns:
-    - "*.md"
-    - "docs/**"
-    - "test/fixtures/**"
-
-  context:
-    include_dependencies: true
-    max_context_files: 50
-
-  feedback:
-    style: conversational
-    severity_threshold: medium
-```
+1. Go to **Repositories** → Select your repo → **Settings**
+2. Configure review options:
+   - **Auto-review**: Enable automatic reviews on PRs
+   - **Review triggers**: Pull requests, push to main
+   - **Ignore patterns**: `*.md`, `docs/**`, `test/fixtures/**`
+   - **Context settings**: Include dependencies, max files (50)
+   - **Feedback style**: Conversational with medium severity threshold
 
 ### 4. Test the Integration
 
@@ -81,23 +65,13 @@ Toggle AI reviews per repository in your [Mesrai Dashboard](https://app.mesrai.c
 
 ### Custom Review Rules
 
-Create custom rules for your team's workflow:
+Create custom rules for your team's workflow via the dashboard:
 
-```yaml
-# .mesrai.yml
-rules:
-  security:
-    enabled: true
-    block_on: critical
-
-  performance:
-    enabled: true
-    monitor_complexity: true
-
-  style:
-    enabled: true
-    follow_conventions: true
-```
+1. Go to **Settings** → **Custom Rules**
+2. Configure rule categories:
+   - **Security**: Enable and block on critical issues
+   - **Performance**: Monitor complexity metrics
+   - **Style**: Enforce coding conventions
 
 ## Webhook Configuration
 
@@ -136,7 +110,7 @@ Trigger reviews manually by commenting on a PR:
 
 1. Verify webhook deliveries in repository settings
 2. Check Mesrai dashboard for repository status
-3. Ensure `.mesrai.yml` config is valid
+3. Verify auto-review is enabled in dashboard settings
 4. Confirm subscription is active
 
 ### Permission Errors
@@ -156,7 +130,7 @@ Trigger reviews manually by commenting on a PR:
 **Solutions**:
 
 1. Check [Status Page](https://status.mesrai.com)
-2. Reduce context size in `.mesrai.yml`
+2. Reduce context size in dashboard settings
 3. Contact support if issue persists
 
 ## Advanced Configuration
@@ -201,11 +175,9 @@ Your data will be retained for 30 days as per our [privacy policy](https://mesra
 ## Next Steps
 
 - [Understand AI Review Process](/ai-review/overview)
-- [Configure Token Usage](/ai-review/token-usage)
 - [View Performance Metrics](/performance/overview)
 
 ## Need Help?
 
 - [Join our Discord](https://discord.gg/mesrai)
 - [Email support](mailto:support@mesrai.com)
-- [View API Documentation](/api-reference/auth-api)

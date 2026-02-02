@@ -1,6 +1,6 @@
 ---
 title: Bitbucket Integration
-description: Connect Mesrai to your Bitbucket repositories for automated AI code reviews.
+description: Bitbucket integration for Mesrai AI code reviews - Coming Soon
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,209 +8,44 @@ import { Callout } from 'nextra/components'
 # Bitbucket Integration
 
 <Callout type="warning">
-  **Beta Feature** - Bitbucket integration is currently in beta. Some features may be limited.
+  **Coming Soon** — Bitbucket integration is currently under development and will be available soon.
 </Callout>
 
-Connect Mesrai to your Bitbucket Cloud or Bitbucket Data Center repositories for AI-powered code reviews.
+## Overview
 
-## Supported Platforms
+We're working on bringing Mesrai's AI-powered code reviews to Bitbucket. Once available, you'll be able to:
 
-| Platform | Status | Features |
-|----------|--------|----------|
-| Bitbucket Cloud | ✅ Beta | PR comments, inline feedback |
-| Bitbucket Data Center | ✅ Beta | PR comments, inline feedback |
-| Bitbucket Server | ⏳ Coming Soon | - |
+- Receive automatic reviews on Pull Requests
+- Get inline comments with suggestions
+- Configure review settings from the Mesrai dashboard
+- Track code quality metrics
 
-## Setup for Bitbucket Cloud
+## Planned Features
 
-### 1. Install the Mesrai App
+| Feature | Status |
+|---------|--------|
+| Bitbucket Cloud | 🚧 In Development |
+| Pull Request Reviews | 🚧 In Development |
+| Inline Comments | 🚧 In Development |
+| Bitbucket Data Center | 📅 Planned |
 
-1. Go to your Bitbucket workspace settings
-2. Navigate to **Installed apps** → **Find new apps**
-3. Search for "Mesrai Code Review"
-4. Click **Install** and authorize the requested permissions
+## Get Notified
 
-### 2. Connect Repositories
+Want to know when Bitbucket integration is available?
 
-1. Go to [Mesrai Dashboard](https://app.mesrai.com) → **Integrations**
-2. Click **Connect Bitbucket**
-3. Authorize Mesrai to access your workspace
-4. Select the repositories you want to enable
+1. **Join our waitlist** — [Sign up here](https://mesrai.com/waitlist)
+2. **Follow us on Twitter** — [@mesrai](https://twitter.com/mesrai)
+3. **Join Discord** — [discord.gg/mesrai](https://discord.gg/mesrai)
 
-### 3. Configure Settings
+## Current Integration
 
-After connecting, configure review settings:
+In the meantime, you can use Mesrai with **GitHub**:
 
-```yaml
-# mesrai.config.yaml
-bitbucket:
-  # Enable/disable features
-  pr_comments: true
-  inline_comments: true
+- [Set up GitHub Integration](/integrations/github) — Full support available now
+- [GitHub App Installation](/integrations/github-app-installation) — Step-by-step guide
 
-  # Build status integration
-  build_status:
-    enabled: true
-    context: "Mesrai Code Review"
-```
+---
 
-## Setup for Bitbucket Data Center
-
-### 1. Create an Application Link
-
-1. Go to **Administration** → **Application Links**
-2. Create a new application link:
-   - **Application URL**: `https://api.mesrai.com`
-   - **Application Name**: `Mesrai`
-   - **Application Type**: Generic Application
-
-### 2. Generate Access Token
-
-1. Navigate to **Personal Settings** → **HTTP Access Tokens**
-2. Create a new token with these permissions:
-   - `Repository read`
-   - `Repository write`
-   - `Pull request read`
-   - `Pull request write`
-
-### 3. Configure in Mesrai
-
-1. Go to Mesrai Dashboard → **Integrations** → **Bitbucket Data Center**
-2. Enter your Bitbucket Data Center URL
-3. Paste your access token
-4. Test the connection
-
-## Pull Request Integration
-
-When a pull request is created, Mesrai:
-
-1. **Analyzes the changes** - Scans all modified files
-2. **Runs AI review** - Evaluates code quality, security, and best practices
-3. **Posts feedback** - Adds comments directly to the PR
-
-### Comment Format
-
-```markdown
-## 🤖 Mesrai Code Review
-
-**Status**: 🟡 Needs Attention
-
-### Summary
-Added new user registration endpoint with some improvements needed.
-
-### Findings
-
-| Severity | Count |
-|----------|-------|
-| 🔴 Critical | 0 |
-| 🟠 High | 1 |
-| 🟡 Medium | 3 |
-| 🔵 Low | 2 |
-
-### Top Issues
-
-1. **Missing input validation** - `src/routes/register.js:23`
-   Consider validating email format before database insertion.
-
-2. **Hardcoded configuration** - `src/config.js:15`
-   Move API keys to environment variables.
-
-[View Full Report →](https://app.mesrai.com/reviews/...)
-```
-
-## Bitbucket Pipelines Integration
-
-Add Mesrai to your pipeline:
-
-```yaml
-# bitbucket-pipelines.yml
-pipelines:
-  pull-requests:
-    '**':
-      - step:
-          name: Mesrai Code Review
-          image: mesrai/cli:latest
-          script:
-            - mesrai review --bitbucket
-          artifacts:
-            - mesrai-report.json
-```
-
-### Environment Variables
-
-Set these in your repository settings:
-
-| Variable | Description |
-|----------|-------------|
-| `MESRAI_API_TOKEN` | Your Mesrai API token |
-| `MESRAI_PROJECT_ID` | Your project ID (optional) |
-
-## Configuration Options
-
-### Review Settings
-
-```yaml
-# mesrai.config.yaml
-review:
-  # When to run reviews
-  triggers:
-    - pull_request
-    - push_to_main
-
-  # Review strictness
-  severity_threshold: medium  # low, medium, high, critical
-
-  # Auto-approve clean PRs
-  auto_approve: false
-```
-
-### Notification Settings
-
-```yaml
-notifications:
-  # Slack integration
-  slack:
-    webhook_url: ${SLACK_WEBHOOK}
-    channels:
-      - "#code-reviews"
-
-  # Email notifications
-  email:
-    enabled: true
-    recipients:
-      - team@company.com
-```
-
-## Known Limitations (Beta)
-
-During the beta period, some features are limited:
-
-- ⚠️ Large PRs (>1000 lines) may have delayed reviews
-- ⚠️ Binary file analysis not yet supported
-- ⚠️ Draft PRs reviewed only on request
-
-## Troubleshooting
-
-### Common Issues
-
-**Reviews not appearing**
-1. Check webhook configuration
-2. Verify access token permissions
-3. Ensure the repository is connected in Mesrai
-
-**Authentication errors**
-1. Regenerate access token
-2. Verify token has not expired
-3. Check if IP restrictions block Mesrai
-
-### Getting Help
-
-For beta support:
-- Email: beta-support@mesrai.com
-- Discord: [#bitbucket-beta](https://discord.gg/mesrai)
-
-## Next Steps
-
-- [Configure CI/CD Pipelines](/integrations/cicd-pipelines)
-- [Explore API Reference](/api-reference/overview)
-- [View Changelog](/changelog)
+<Callout>
+**Have questions?** [Contact us](https://mesrai.com/contact) to learn more about our Bitbucket integration timeline.
+</Callout>

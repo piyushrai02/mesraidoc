@@ -26,16 +26,17 @@ export const EnterpriseCard = () => {
 
         {/* Description */}
         <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          SOC 2 Type II compliant. Self-hosted options available. Dedicated support and custom integrations for your team.
+         Mesrai is built with enterprise expectations in mind — even while in early access.
+          We prioritize security, control, and scalability from day one.
         </p>
 
         {/* Features list */}
         <ul className="space-y-2 mb-6">
           {[
-            'SSO & SAML authentication',
-            'On-premise deployment',
-            'Custom SLAs & support',
-            'Advanced analytics',
+            'Security-First Architecture',
+            'Privacy-Respecting by Default',
+            'Deployment Flexibility (Planned)',
+            'Team-Ready Foundations',
           ].map((feature) => (
             <li key={feature} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
               <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

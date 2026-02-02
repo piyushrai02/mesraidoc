@@ -1,165 +1,70 @@
 ---
 title: Performance Overview
-description: Learn how Mesrai achieves sub-5ms response times and handles 1000+ PRs per day
+description: Learn how Mesrai delivers fast, reliable AI-powered code reviews at scale
 ---
 
 # Performance Overview
 
-Mesrai is built for speed and scale. Our infrastructure handles thousands of PRs daily while maintaining sub-5ms response times.
+Mesrai is built for speed and reliability. Our infrastructure delivers fast reviews while maintaining high availability.
 
-## Performance Metrics
+## Performance Highlights
 
-### Response Times
-- **TTFB (Time to First Byte)**: < 5ms (edge cached)
-- **PR Review Time**: 5-30 seconds (based on depth)
-- **Webhook Processing**: < 100ms
-- **API Response**: < 50ms (p95)
+### Speed
+- **Review Time**: 5-30 seconds (based on PR size)
+- **Webhook Processing**: Near-instant
+- **Global Coverage**: Edge nodes worldwide for low latency
 
-### Scalability
-- **Concurrent Reviews**: 1000+ simultaneous reviews
-- **Daily PR Volume**: 10,000+ PRs processed
+### Reliability
 - **Uptime**: 99.9% SLA
-- **Global Coverage**: Edge nodes in 200+ cities
+- **Concurrent Reviews**: Handles thousands of simultaneous reviews
+- **Daily Volume**: Processes 10,000+ PRs daily
 
-## Architecture
+## How We Achieve Performance
 
-### Edge Computing
-We use Cloudflare Workers for edge computing:
+### Global Infrastructure
+Mesrai uses a globally distributed infrastructure to ensure fast response times regardless of your location:
 
-```typescript
-// Edge worker handles routing
-export default {
-  async fetch(request: Request) {
-    // Route to nearest region
-    const region = getOptimalRegion(request)
-    return await handleRequest(request, region)
-  }
-}
-```
+- Requests are routed to the nearest region
+- Edge caching for frequently accessed data
+- Redundant systems for high availability
 
-### Caching Strategy
+### Smart Processing
+Our AI review system is optimized for speed:
 
-#### Multi-Layer Caching
-1. **Edge Cache**: Static assets and API responses (CDN)
-2. **Redis Cache**: Review results and user data
-3. **Database**: Persistent storage with read replicas
+- **Incremental Analysis**: Only analyzes changed code
+- **Parallel Processing**: Reviews multiple files simultaneously
+- **Intelligent Caching**: Reuses context for faster subsequent reviews
 
-#### Cache Invalidation
-```yaml
-# Smart cache invalidation
-cache:
-  ttl:
-    reviews: 3600      # 1 hour
-    api_responses: 300 # 5 minutes
-    user_data: 1800    # 30 minutes
-  
-  invalidation:
-    - on_new_commit
-    - on_pr_close
-    - on_manual_trigger
-```
+## Review Speed by Type
 
-### Database Optimization
+| Review Type | Typical Time | Best For |
+|-------------|--------------|----------|
+| Quick | 5-10 seconds | Draft PRs, quick feedback |
+| Standard | 10-20 seconds | Regular PRs |
+| Deep | 20-30 seconds | Critical changes, releases |
 
-#### Query Performance
-- **Read Replicas**: 5 regional read replicas
-- **Connection Pooling**: PgBouncer for connection management
-- **Indexing Strategy**: Optimized indexes on hot paths
+## Best Practices for Faster Reviews
 
-#### Example: Optimized Query
-```sql
--- Optimized query with proper indexing
-SELECT r.*, p.title, u.name 
-FROM reviews r
-INNER JOIN pull_requests p ON r.pr_id = p.id
-INNER JOIN users u ON p.author_id = u.id
-WHERE r.repo_id = $1
-  AND r.created_at > NOW() - INTERVAL '24 hours'
-ORDER BY r.created_at DESC
-LIMIT 50;
+### Keep PRs Small
+- Smaller PRs (under 400 lines) review faster
+- Break large changes into multiple PRs
+- Focus each PR on a single concern
 
--- Index: idx_reviews_repo_created (repo_id, created_at DESC)
-```
+### Configure File Exclusions
+- Exclude generated files and vendor code
+- Skip test fixtures and mock data
+- Configure via the dashboard at Settings → File Exclusions
 
-## Token Optimization
+### Use Appropriate Review Depth
+- Use **Quick** reviews for draft PRs and iterations
+- Use **Standard** for regular development
+- Reserve **Deep** reviews for critical changes
 
-### Context Selection
-Mesrai uses intelligent context selection to minimize token usage:
+## Monitoring & Status
 
-1. **Relevance Scoring**: Only include relevant code
-2. **Deduplication**: Remove duplicate context
-3. **Compression**: Smart compression of large files
-
-### Cost Efficiency
-```typescript
-// Token usage optimization
-const context = await optimizeContext({
-  diff: prDiff,
-  maxTokens: 8000,
-  relevanceThreshold: 0.7,
-  includeTests: false
-})
-
-// Result: 30-50% token reduction
-```
-
-## Worker Architecture
-
-### Job Queue
-- **Bull Queue**: Redis-based job queue
-- **Priority Levels**: Critical, high, normal, low
-- **Retry Logic**: Exponential backoff
-
-### Parallel Processing
-```typescript
-// Process multiple files in parallel
-const reviews = await Promise.all(
-  changedFiles.map(file => 
-    reviewFile(file, {
-      parallel: true,
-      timeout: 30000
-    })
-  )
-)
-```
-
-## Monitoring
-
-### Real-Time Metrics
-We track key performance indicators:
-
-- **Request Duration**: p50, p95, p99
-- **Error Rates**: 5xx, 4xx by endpoint
-- **Queue Depth**: Job queue size
-- **Token Usage**: Per review, per user
-
-### Alerting
-```yaml
-alerts:
-  high_latency:
-    threshold: 100ms
-    duration: 5m
-    action: page_oncall
-  
-  error_rate:
-    threshold: 1%
-    duration: 2m
-    action: slack_alert
-```
-
-## Best Practices
-
-### For Faster Reviews
-1. **Use Shallow Reviews** for quick iterations
-2. **Enable Caching** for repeated patterns
-3. **Configure File Filters** to skip irrelevant files
-4. **Batch Similar PRs** for efficiency
-
-### For Cost Optimization
-1. **Set Token Limits** per review
-2. **Use Cheaper Models** for simple checks
-3. **Enable Smart Caching** for common patterns
-4. **Configure Review Depth** appropriately
+Check our system status at any time:
+- [Status Page](https://status.mesrai.com)
+- Real-time performance metrics in your dashboard
 
 ---
 

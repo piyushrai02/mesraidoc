@@ -97,57 +97,6 @@ Mesrai requests the following permissions:
 
 Click **Install & Authorize** to finish setup.
 
-## Post-Installation Setup
-
-### Configure Review Settings (Optional)
-
-Create a `.mesrai.yml` file in your repository root:
-
-```yaml
-# .mesrai.yml
-version: 1
-
-# Review configuration
-review:
-  depth: standard
-  auto_review: true
-
-# What to check
-checks:
-  - bugs
-  - security
-  - performance
-  - style
-
-# Branch configuration
-branches:
-  main:
-    depth: deep
-    require_approval: true
-  develop:
-    depth: standard
-```
-
-### Test Your Installation
-
-Create a test PR to verify Mesrai is working:
-
-```bash
-# Create a test branch
-git checkout -b test-mesrai
-
-# Make a simple change
-echo "console.log('test')" >> test.js
-
-# Commit and push
-git add test.js
-git commit -m "Test Mesrai installation"
-git push origin test-mesrai
-
-# Create PR on GitHub
-# Mesrai will automatically review it!
-```
-
 ## Verification
 
 ### Check Installation Status
@@ -215,4 +164,4 @@ Ensure webhooks are configured:
 
 ---
 
-**Next Steps**: Learn about [environment setup](/setup/environment) →
+**Next Steps**: Learn about [GitHub Integration](/integrations/github) →

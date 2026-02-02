@@ -1,7 +1,7 @@
-
-const meta = {
+export default {
   "installation": "Installation",
-  "environment": "Environment Setup"
+  "environment": {
+    title: "Environment Setup",
+    display: "hidden"
+  }
 }
-
-export default meta

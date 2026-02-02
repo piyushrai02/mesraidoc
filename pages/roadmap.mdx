@@ -1,65 +1,131 @@
 ---
 title: Product Roadmap
-description: Explore Mesrai's upcoming features and long-term vision for AI-powered code review.
+description: Mesrai’s development roadmap and early-access vision for AI-powered code review.
 ---
 
 # Product Roadmap
 
-Our vision is to make code review faster, smarter, and more accessible for every development team.
+Mesrai is currently available in **free early access** and under active development.  
+Our goal during this phase is to work closely with real engineering teams, validate
+core workflows, and continuously improve review quality, performance, and reliability.
 
-## Q4 2025 🚀
-
-### Multi-Language Support
-- Python, Java, Go, Rust support
-- Language-specific best practices
-- Framework-aware suggestions (Django, Spring, etc.)
-
-### Advanced Security
-- SAST integration
-- Dependency vulnerability scanning
-- Secret detection in code
-
-### Team Collaboration
-- Review assignment rules
-- Team-specific custom rules
-- Shared review templates
-
-## Q1 2026 🎯
-
-### Self-Hosted Option
-- On-premise deployment
-- Air-gapped environments
-- Custom model training
-
-### IDE Integration
-- VS Code extension
-- JetBrains plugin
-- Real-time code suggestions
-
-### Analytics Dashboard
-- Team productivity metrics
-- Code quality trends
-- Review effectiveness scores
-
-## Q2 2026 ✨
-
-### Auto-Fix Capabilities
-- One-click fixes for common issues
-- Automated PR updates
-- Safe refactoring suggestions
-
-### GitLab & Bitbucket
-- Expand beyond GitHub
-- Multi-platform support
-- Unified review experience
-
-## Long-Term Vision 🌟
-
-- **AI Pair Programmer**: Real-time coding assistant
-- **Automated Testing**: Generate tests based on code changes
-- **Architecture Advisor**: System-level design recommendations
-- **Knowledge Base**: Learn from all reviews across projects
+This roadmap outlines what is **available today**, what is **actively being built**,
+and where Mesrai is heading next.
 
 ---
 
-Vote on features: [feedback.mesrai.com](https://feedback.mesrai.com)
+## Current Focus (Early Access)
+
+These capabilities are available today and actively improving based on usage and feedback:
+
+### Core AI Review Pipeline
+
+- Pull request reviews triggered automatically via GitHub
+- Context-aware analysis across multiple files
+- Incremental review support for follow-up commits
+- Review summaries with verdicts and inline comments
+
+### Review Intelligence
+
+- Code quality and maintainability analysis
+- Security-focused checks for common risks
+- Architecture-aware change detection (early stage)
+- Review depth selection based on PR size and scope
+
+### Reliability & Safety
+
+- No source code storage beyond the review lifecycle
+- Secure webhook handling and access controls
+- Graceful degradation when reviews partially fail
+- Transparent review execution status
+
+> During early access, some reviews may be incomplete or skipped as we refine strategy
+> selection and agent coordination.
+
+---
+
+## Near-Term Roadmap
+
+### Q4 2025 🚀
+
+#### Multi-Language Expansion
+
+- Python, Java, Go, and Rust support
+- Language-aware review heuristics
+- Framework-sensitive suggestions (e.g., Django, Spring)
+
+#### Security Enhancements
+
+- Static analysis expansion (SAST-style checks)
+- Dependency risk awareness
+- Improved secret and credential detection
+
+#### Team-Level Controls
+
+- Organization and repository review settings
+- Team-specific rules and thresholds
+- Shared review standards across teams
+
+---
+
+## Mid-Term Roadmap
+
+### Q1 2026 🎯
+
+#### Self-Hosted & Private Deployments
+
+- On-premise and isolated environments
+- Air-gapped review execution
+- Custom model routing (Enterprise)
+
+#### Developer Experience
+
+- VS Code and JetBrains IDE integrations
+- Early feedback before PR creation
+- Review previews inside the editor
+
+#### Analytics & Insights
+
+- Review quality trends over time
+- Issue detection metrics
+- Review turnaround and effectiveness tracking
+
+---
+
+## Longer-Term Vision
+
+### Q2 2026 and Beyond ✨
+
+- **Auto-Fix Suggestions**  
+  Safe, reviewable code changes suggested directly in PRs
+
+- **Cross-Repository Intelligence**  
+  Learn from patterns across multiple services and teams
+
+- **Architecture Advisor**  
+  System-level insights for large-scale changes
+
+- **Test Intelligence**  
+  Test gap detection and test generation recommendations
+
+---
+
+## How You Can Influence the Roadmap
+
+Mesrai’s roadmap is **feedback-driven**.
+
+If you are using Mesrai during early access:
+
+- Report review gaps or failures
+- Share false positives or missed issues
+- Suggest workflows that would save your team time
+
+👉 Submit feedback or vote on features at  
+**contact@mesrai.com**
+
+---
+
+> Mesrai is built with transparency by design.  
+> Early access allows us to move fast **without compromising code safety or trust**.
+
+**Next:** Learn how Mesrai reviews code in detail → [Core Architecture](/introduction/core-architecture)

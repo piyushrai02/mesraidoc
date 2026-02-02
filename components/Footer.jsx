@@ -63,7 +63,7 @@ export const Footer = () => {
           {/* Resources */}
           <FooterSection title="Resources">
             <FooterLink href="/introduction/what-is-mesrai">Documentation</FooterLink>
-            <FooterLink href="/api-reference/overview">API Reference</FooterLink>
+            {/* <FooterLink href="/api-reference/overview">API Reference</FooterLink> */}
             <FooterLink href="/integrations/overview">Integrations</FooterLink>
             <FooterLink href="/changelog">Changelog</FooterLink>
           </FooterSection>

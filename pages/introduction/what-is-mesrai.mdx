@@ -1,110 +1,165 @@
 ---
 title: What is Mesrai?
-description: Learn about Mesrai, the AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent PR reviews.
+description: Mesrai is an AI-powered pull request review platform that provides consistent, context-aware code reviews for modern engineering teams.
 ---
 
 # What is Mesrai?
 
-Mesrai is an **AI-powered code review platform** designed for modern engineering teams. We help you ship code 3x faster by providing intelligent, context-aware PR reviews that analyze your entire codebase—not just pattern matching.
+**Mesrai** is an AI-powered Pull Request review platform built for modern engineering teams.  
+It delivers **consistent, context-aware, and production-grade code reviews** by analyzing not only the diff, but the **surrounding codebase, architecture, and historical context**.
 
-## The Problem We Solve
+Mesrai integrates directly into your GitHub workflow and provides actionable feedback as part of every pull request—helping teams ship faster **without sacrificing quality, security, or maintainability**.
 
-Traditional code review is slow and inconsistent:
+---
 
-- **Manual Reviews Take Hours**: Developers spend 20-30% of their time reviewing code
-- **Inconsistent Quality**: Review depth varies based on reviewer availability and expertise
-- **Shallow Analysis**: Most tools only do pattern matching, missing architectural issues
-- **Context Loss**: Reviewers lack full codebase context when reviewing changes
+## The Problem Mesrai Solves
+
+Code review is essential, but it does not scale well.
+
+Most engineering teams face the same challenges:
+
+- **Manual reviews are slow**  
+  Developers spend 20–30% of their time reviewing code, often blocking merges.
+
+- **Review quality is inconsistent**  
+  The depth of reviews varies based on reviewer availability, expertise, and time pressure.
+
+- **Existing tools are shallow**  
+  Many tools rely on pattern matching or linting and miss cross-file and architectural issues.
+
+- **Context is lost**  
+  Reviewers rarely have full codebase context or visibility into downstream impact.
+
+Mesrai is designed to solve these problems by making code reviews **system-aware and repeatable**.
+
+---
 
 ## How Mesrai Works
 
-Mesrai combines advanced AI with deep code understanding to deliver superhuman code reviews:
+Mesrai combines advanced AI models with deep codebase understanding to deliver reliable and explainable reviews.
 
-### 1. **Deep Code Analysis**
+### 1. Deep Codebase Analysis
 
-We don't just scan for patterns. Our AI builds a complete understanding of your codebase:
+Before reviewing changes, Mesrai builds an internal representation of your repository:
 
-- **Call Graph Mapping**: Track function dependencies and relationships
-- **Architectural Insights**: Understand design patterns and code structure
-- **Impact Analysis**: See how changes affect the entire system
+- **Call graph mapping** to understand function and module relationships
+- **Architectural signals** to identify components, boundaries, and patterns
+- **Impact analysis** to determine how changes affect the wider system
 
-### 2. **Context-Aware Reviews**
+This allows Mesrai to review changes **in context**, not in isolation.
 
-Every review includes:
+---
 
-- Full codebase context (not just the diff)
+### 2. Context-Aware Reviews
+
+Each review is generated using:
+
+- The full pull request diff
 - Related files and dependencies
-- Historical patterns and team conventions
-- Security and performance implications
+- Previously analyzed snapshots (for incremental reviews)
+- Repository conventions and historical patterns
 
-### 3. **Intelligent Feedback**
+This enables Mesrai to reason about:
 
-Get actionable suggestions:
+- Architectural consistency
+- Security implications
+- Performance risks
+- Long-term maintainability
 
-- Architecture improvements
-- Security vulnerabilities
-- Performance optimizations
-- Best practice recommendations
+---
+
+### 3. Intelligent, Actionable Feedback
+
+Mesrai focuses on **signal over noise**.
+
+Reviews include:
+
+- Inline comments tied to exact lines of code
+- Clear explanations with severity levels
+- Actionable suggestions instead of generic advice
+- A structured review summary with verdict and scope
+
+Mesrai never invents issues and clearly states **what was and was not reviewed**.
+
+---
 
 ## Key Features
 
-### 🔗 Seamless GitHub Integration
+### Seamless GitHub Integration
 
-- Install as a GitHub App in 30 seconds
-- Automatic PR reviews on every push
-- Inline comments on specific code lines
-- Status checks and blocking capabilities
+- Install as a GitHub App in minutes
+- Automatic reviews on pull requests and updates
+- Inline comments on specific lines
+- Review summaries posted as a single PR review
+- Compatible with required status checks and branch protection rules
 
-### 🧠 AI-Powered Intelligence
+---
 
-- Advanced LLM-based code understanding
-- Multi-file context analysis
-- Smart token optimization
-- Continuous learning from your codebase
+### AI-Powered Review Engine
 
-### ⚡ High Performance
+- Multi-file and cross-module analysis
+- Semantic chunking for large pull requests
+- Incremental reviews using snapshots
+- Cost-aware and token-optimized execution
+- Multiple specialized agents (quality, security, performance)
 
-- Sub-5ms response times
-- Edge-based architecture
-- Redis caching for instant results
-- Scales to handle 1000+ PRs/day
+---
 
-### 💳 Flexible Pricing
+### Built for Performance and Scale
 
-- **Free**: 10 reviews/month for small teams
-- **Pro**: Unlimited reviews, priority support
-- **Enterprise**: Custom limits, dedicated infrastructure
+- Designed for high-throughput repositories
+- Handles large PRs and monorepos
+- Optimized execution paths to minimize latency
+- Supports hundreds to thousands of PRs per day
+
+---
+
+### Flexible Plans
+
+- **Free** – Limited reviews for evaluation and small teams
+- **Pro** – Unlimited reviews with advanced strategies
+- **Enterprise** – Custom limits, dedicated infrastructure, and compliance support
+
+(Exact limits and behavior are documented per plan.)
+
+---
 
 ## Who Uses Mesrai?
 
 ### Startups
 
-Move fast without breaking things. Get enterprise-level code reviews from day one.
+Move fast without sacrificing quality. Get consistent code reviews from day one, even with a small team.
 
-### Scale-ups
+### Growing Teams
 
-Maintain code quality as your team grows. Onboard new developers faster with consistent feedback.
+Scale development safely as your codebase and contributors grow. Reduce onboarding time with predictable review standards.
 
 ### Enterprises
 
-Handle massive codebases with confidence. Meet compliance requirements with automated security scanning.
-
-## Real-World Impact
-
-> "Mesrai reduced our code review time by 60% while catching critical issues our team missed."
-> — Engineering Lead Team
-
-> "The architectural insights helped us refactor our monolith into microservices safely."
-> — Engineering Lead Team
-
-## Getting Started
-
-Ready to ship code faster? Here's what's next:
-
-1. [Install Mesrai](/setup/installation) - Connect your GitHub account
-2. [Configure Your First Review](/integrations/github-app-installation) - Set up preferences
-3. [Understand the AI Pipeline](/ai-review/overview) - Learn how reviews work
+Apply consistent review standards across large repositories. Improve security posture and architectural consistency with automated analysis.
 
 ---
 
-**Next Steps**: Learn about [Mesrai's key capabilities](/introduction/key-capabilities) →
+## What Mesrai Is Not
+
+Mesrai is not:
+
+- A linter replacement
+- A static rule engine
+- A human reviewer replacement
+
+Mesrai is designed to **augment human judgment**, reduce review fatigue, and raise the baseline quality of every pull request.
+
+---
+
+## Getting Started
+
+Ready to start reviewing pull requests with Mesrai?
+
+1. [Install Mesrai](/setup/installation) — Connect your GitHub account
+2. [Configure Your Organization](/organizations/overview) — Set review rules and policies
+3. [Understand the Review Engine](/ai-review/overview) — Learn how reviews are generated
+
+---
+
+**Next**: Learn about [Mesrai’s key capabilities](/introduction/key-capabilities) →

@@ -11,27 +11,28 @@ Mesrai is built with security and privacy as core principles. We understand that
 
 ## Security Overview
 
-### SOC 2 Type II Certified
+### Our Security Commitment
 
 <Callout type="info">
-  Mesrai has achieved SOC 2 Type II certification, demonstrating our commitment to security, availability, and confidentiality.
+Your code is **never stored** on our servers. We process code in memory and delete it immediately after analysis.
 </Callout>
 
-Our security program includes:
-- Annual third-party security audits
-- Continuous compliance monitoring
-- Incident response procedures
-- Employee security training
+Our security practices include:
+- Code processed in isolated sandbox environments
+- No permanent storage of source code
+- Encrypted communications (TLS 1.3)
+- Secure authentication via GitHub OAuth
 
 ### Infrastructure Security
 
 | Component | Security Measure |
 |-----------|------------------|
-| Data at Rest | AES-256 encryption |
-| Data in Transit | TLS 1.3 |
-| Authentication | OAuth 2.0 + SAML |
-| Access Control | Role-based (RBAC) |
-| Logging | Immutable audit logs |
+| Data in Transit | TLS 1.3 encryption |
+| Code Processing | Isolated sandbox environment |
+| Authentication | OAuth 2.0 via GitHub |
+| Access Control | Role-based permissions |
+
+---
 
 ## Data Handling
 
@@ -39,87 +40,68 @@ Our security program includes:
 
 When you connect a repository, Mesrai accesses:
 
-- ✅ Source code in pull requests
+- ✅ Source code in pull requests (temporarily, for analysis)
 - ✅ PR metadata (title, description, author)
 - ✅ File change history for context
 - ❌ We never access credentials or secrets
 - ❌ We never store your code permanently
 
-### Data Retention
+### Code Processing
 
-| Data Type | Retention Period |
-|-----------|-----------------|
-| PR Analysis | 90 days |
-| Review Comments | Until PR closed |
-| Usage Metrics | 1 year |
-| Audit Logs | 7 years |
+Your code is processed securely:
 
-### Code Storage
+1. **Fetched on demand** — Code is retrieved only when a PR is opened
+2. **Processed in memory** — Analysis runs in isolated sandbox
+3. **Immediately deleted** — Source code is never saved to disk
+4. **Only results saved** — We store review comments, not your code
 
-Your code is processed in memory and is **never permanently stored**:
+<Callout>
+**Zero code retention** — Your source code never leaves the analysis sandbox and is deleted immediately after review.
+</Callout>
 
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Your PR   │────▶│   Analysis   │────▶│   Review    │
-│   (GitHub)  │     │   (Memory)   │     │  Comments   │
-└─────────────┘     └──────────────┘     └─────────────┘
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │   Deleted    │
-                    │   After PR   │
-                    └──────────────┘
-```
+### What We Store
+
+| Data Type | What's Stored |
+|-----------|---------------|
+| Review Comments | The feedback we provide on your PRs |
+| Usage Metrics | How many PRs reviewed, tokens used |
+| Account Data | Your login and preferences |
+| **Source Code** | **Never stored** |
+
+---
 
 ## Privacy Controls
 
+<Callout type="info">
+All privacy settings are configured through the **[Mesrai Dashboard](https://app.mesrai.com)**.
+</Callout>
+
+### How to Configure
+
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Select your **Organization** or **Repository**
+3. Navigate to **Settings → Privacy**
+4. Configure your preferences
+
 ### Repository-Level Settings
 
-Control what Mesrai can access:
+Control what Mesrai can access for each repository:
 
-```yaml
-# mesrai.config.yaml
-privacy:
-  # Exclude sensitive directories
-  exclude_paths:
-    - "secrets/**"
-    - "config/credentials/**"
-    - "*.env*"
+| Setting | Description |
+|---------|-------------|
+| **Exclude Paths** | Directories to skip (e.g., `secrets/`, `config/`) |
+| **Exclude Patterns** | File patterns to ignore (e.g., `*.env`, `*.key`) |
+| **Sensitive File Detection** | Auto-detect and skip sensitive files |
 
-  # Disable analysis for sensitive files
-  sensitive_patterns:
-    - "**/*password*"
-    - "**/*secret*"
-    - "**/*key*"
-```
+### Organization Settings
 
-### Team Privacy Settings
+Administrators can configure organization-wide settings:
 
-Administrators can configure organization-wide privacy:
+- **File exclusions** — Skip certain files across all repos
+- **Team permissions** — Control who can access what
+- **Audit logging** — Track activity in your organization
 
-- **Data residency** - Choose US or EU data centers
-- **IP allowlisting** - Restrict access to specific IPs
-- **SSO enforcement** - Require SSO for all team members
-- **Audit logging** - Enable detailed access logs
-
-## Compliance
-
-### Supported Frameworks
-
-| Framework | Status |
-|-----------|--------|
-| SOC 2 Type II | ✅ Certified |
-| GDPR | ✅ Compliant |
-| CCPA | ✅ Compliant |
-| HIPAA | ⏳ In Progress |
-| ISO 27001 | ⏳ In Progress |
-
-### Data Processing Agreement
-
-Enterprise customers can request a custom DPA:
-- Standard contractual clauses (SCCs)
-- Custom data retention policies
-- Specific security requirements
+---
 
 ## Security Features
 
@@ -145,64 +127,54 @@ Automatic detection of accidentally committed secrets:
 - Private keys
 - OAuth secrets
 
-### Dependency Scanning
+When detected, Mesrai alerts you immediately so you can revoke and rotate the exposed credentials.
 
-Check dependencies for known vulnerabilities:
+---
 
-```bash
-Dependency Analysis:
-━━━━━━━━━━━━━━━━━━━
-⚠️ lodash@4.17.15 - Prototype Pollution (CVE-2020-8203)
-   Upgrade to: lodash@4.17.21
+## Enterprise Options
 
-❌ express@4.17.0 - Critical vulnerability (CVE-2022-24999)
-   Upgrade to: express@4.18.2
-```
+For teams with specific security requirements:
 
-## Enterprise Security
+- **SSO Integration** — Okta, Azure AD, Google Workspace
+- **Custom data retention** — Configure how long data is kept
+- **Dedicated support** — Direct access to our security team
 
-### Self-Hosted Option
+[Contact us](https://mesrai.com/contact) to discuss your security requirements.
 
-For maximum security, deploy Mesrai in your own infrastructure:
+---
 
-- Run on your own Kubernetes cluster
-- Keep all data within your network
-- Full control over updates and configuration
+## Frequently Asked Questions
 
-### SSO Integration
+### Is my code stored on your servers?
 
-Support for enterprise identity providers:
-- Okta
-- Azure AD
-- Google Workspace
-- OneLogin
-- Custom SAML 2.0
+**No.** Your code is processed in memory and deleted immediately after analysis. We never store source code on disk or in databases.
 
-### Audit Logging
+### Can Mesrai access private repositories?
 
-Comprehensive audit trail:
+Only repositories you explicitly grant access to via the GitHub App. You control which repos Mesrai can see.
 
-```json
-{
-  "timestamp": "2024-01-15T10:30:00Z",
-  "actor": "user@company.com",
-  "action": "repository.connect",
-  "resource": "org/repo",
-  "ip_address": "192.168.1.1",
-  "user_agent": "Mozilla/5.0..."
-}
-```
+### What happens if I revoke access?
 
-## Reporting Vulnerabilities
+All data associated with your repositories is deleted. Review comments remain on GitHub as they're stored by GitHub, not us.
+
+### How is data transmitted?
+
+All data is encrypted in transit using TLS 1.3. We never transmit code over unencrypted connections.
+
+---
+
+## Reporting Security Issues
 
 Found a security issue? We appreciate responsible disclosure:
 
-- Email: security@mesrai.com
-- PGP Key: Available on our [security page](https://mesrai.com/security)
-- Bug Bounty: Active program for qualified researchers
+- **Email**: security@mesrai.com
+
+We take all reports seriously and will respond promptly.
+
+---
 
 ## Next Steps
 
-- [Configure GitHub Integration](/integrations/github)
-- [Set up SSO](/features/organizations/settings)
-- [Contact Sales for Enterprise](https://mesrai.com/contact)
+- [Set up GitHub Integration](/integrations/github)
+- [Configure your Repository](/integrations/github-app-installation)
+- [Contact us for Enterprise](https://mesrai.com/contact)

@@ -321,70 +321,40 @@ The most effective strategy combines both:
 ### Two-Tier Review Process
 
 #### Tier 1: AI First Pass (Automated)
-AI handles the heavy lifting:
-```yaml
-ai_review:
-  automated_checks:
-    - Security scanning
-    - Performance analysis
-    - Code style enforcement
-    - Complexity metrics
-    - Test coverage validation
-    - Documentation completeness
+AI handles the heavy lifting with automated checks:
+- Security scanning
+- Performance analysis
+- Code style enforcement
+- Complexity metrics
+- Test coverage validation
+- Documentation completeness
 
-  threshold:
-    - Block merge if critical issues found
-    - Flag warnings for human review
-    - Auto-approve if score > 90%
-```
+Configure thresholds via the [Mesrai Dashboard](https://app.mesrai.com):
+- Block merge if critical issues found
+- Flag warnings for human review
+- Auto-approve if score > 90%
 
 #### Tier 2: Human Strategic Review (Selective)
 Humans focus on what matters:
-```markdown
-Human review focuses on:
-□ Business logic correctness
-□ Architectural decisions
-□ User experience implications
-□ API design and contracts
-□ Scalability considerations
-□ Team knowledge sharing
-```
+- Business logic correctness
+- Architectural decisions
+- User experience implications
+- API design and contracts
+- Scalability considerations
+- Team knowledge sharing
 
 ### Implementation Example
 
-Here's how to implement hybrid review:
+Here's how to implement hybrid review via the [Mesrai Dashboard](https://app.mesrai.com):
 
-```yaml
-# .mesrai/config.yml
-review_strategy: hybrid
+**AI Review Settings** (Settings → Review Rules):
+- Enable automatic reviews
+- Set blocking issues: security critical, performance regression, test coverage drop
+- Configure auto-approve criteria: score >= 90, no warnings, PR size < 200 lines
 
-ai_review:
-  automatic: true
-  blocking_issues:
-    - security_critical
-    - performance_regression
-    - test_coverage_drop
-
-  auto_approve_if:
-    - score >= 90
-    - no_warnings
-    - pr_size < 200_lines
-    - author_is_senior
-
-human_review:
-  required_for:
-    - architectural_changes
-    - api_changes
-    - database_migrations
-    - critical_paths
-    - pr_size > 500_lines
-
-  optional_for:
-    - minor_fixes
-    - documentation
-    - test_updates
-    - style_changes
-```
+**Human Review Requirements** (Settings → Review Workflow):
+- Required for: architectural changes, API changes, database migrations, critical paths, large PRs (500+ lines)
+- Optional for: minor fixes, documentation, test updates, style changes
 
 ### Workflow in Practice
 
@@ -512,23 +482,21 @@ Week 5-6: Automate
 
 ### Step 2: Define Clear Guidelines
 
-Document when each type applies:
+Document when each type applies via dashboard settings:
 
-```yaml
-auto_approve_criteria:
-  - ai_score >= 90
-  - no_security_issues
-  - no_performance_regressions
-  - pr_size < 200_lines
-  - only_additive_changes
+**Auto-Approve Criteria:**
+- AI score >= 90
+- No security issues
+- No performance regressions
+- PR size < 200 lines
+- Only additive changes
 
-require_human_review:
-  - api_changes
-  - database_schema_changes
-  - security_critical_code
-  - architectural_changes
-  - pr_size > 500_lines
-```
+**Require Human Review:**
+- API changes
+- Database schema changes
+- Security-critical code
+- Architectural changes
+- PR size > 500 lines
 
 ### Step 3: Measure and Iterate
 
@@ -582,7 +550,7 @@ When selecting an AI code review tool, consider:
 Mesrai offers all of the above plus:
 - 🤖 Advanced AI models trained on millions of repos
 - ⚡ Sub-60-second reviews
-- 🔒 SOC 2 Type II certified security
+- 🔒 Zero code storage, sandbox processing, TLS 1.3 encryption
 - 📊 Comprehensive team analytics
 - 🎯 95%+ accuracy rate
 - 💰 Transparent pricing with free tier

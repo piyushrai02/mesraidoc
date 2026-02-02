@@ -54,38 +54,25 @@ GitHub status checks show review results:
 
 ### Repository Settings
 
-Configure per-repository via `.mesrai.yml`:
+Configure your repository via the [Mesrai Dashboard](https://app.mesrai.com):
 
-```yaml
-# .mesrai.yml
-version: 1
-github:
-  enabled: true
-  auto_review: true
-
-  # Review triggers
-  on:
-    pull_request: true
-    push_to_main: false
-
-  # Comment settings
-  comments:
-    style: conversational
-    inline: true
-    summary: true
-```
+1. Go to **app.mesrai.com** → Select your repository
+2. Navigate to **Settings** → **Review Settings**
+3. Configure options:
+   - Enable/disable auto-review
+   - Set review triggers (pull requests, push to main)
+   - Configure comment style (conversational, inline, summary)
 
 ### Ignored Files
 
-Exclude files from reviews:
+Exclude files from reviews via the dashboard:
 
-```yaml
-ignore:
-  - "**/*.test.js"
-  - "dist/**"
-  - "node_modules/**"
-  - "*.md"
-```
+1. Go to **Settings** → **File Exclusions**
+2. Add patterns to ignore:
+   - Test files: `**/*.test.js`
+   - Build output: `dist/**`
+   - Dependencies: `node_modules/**`
+   - Documentation: `*.md`
 
 ## Integration Types
 
@@ -178,10 +165,9 @@ Target specific concerns:
 
 Let Mesrai review every PR automatically:
 
-```yaml
-# .mesrai.yml
-auto_review: true
-```
+1. Go to **app.mesrai.com** → Repository **Settings**
+2. Enable **Auto-Review** toggle
+3. Reviews will trigger automatically on every PR
 
 ### 2. Set Up Branch Protection
 
@@ -194,14 +180,12 @@ Require Mesrai checks before merging:
 
 ### 3. Configure Review Depth
 
-Balance speed vs thoroughness:
+Balance speed vs thoroughness via the dashboard:
 
-```yaml
-reviews:
-  context_depth: medium # quick | medium | deep
-  max_files: 50
-  include_dependencies: true
-```
+1. Go to **Settings** → **Review Depth**
+2. Choose context depth: **Quick**, **Medium**, or **Deep**
+3. Set max files to analyze (default: 50)
+4. Enable/disable dependency analysis
 
 ### 4. Use Labels
 
@@ -215,40 +199,30 @@ Trigger specific reviews with labels:
 
 ### Custom Rules
 
-Define team-specific rules:
+Define team-specific rules via the dashboard:
 
-```yaml
-rules:
-  - name: No console.log
-    pattern: "console\\.log"
-    severity: warning
-    message: "Remove console.log before merging"
+1. Go to **app.mesrai.com** → Repository **Settings** → **Custom Rules**
+2. Add rules with:
+   - **Pattern**: Regex to match (e.g., `console\.log`)
+   - **Severity**: warning, error, or info
+   - **Message**: Custom feedback message
 
-  - name: TODO comments
-    pattern: "TODO:"
-    severity: info
-    message: "Create a GitHub issue for this TODO"
-```
+Example rules you can configure:
+- "No console.log" - Flag debugging statements
+- "TODO comments" - Track incomplete work
+- "Large functions" - Enforce function size limits
 
 ### Review Templates
 
-Create consistent review formats:
+Configure review sections via the dashboard:
 
-```yaml
-templates:
-  default:
-    sections:
-      - summary
-      - security
-      - performance
-      - suggestions
-
-  security_focused:
-    sections:
-      - security
-      - vulnerabilities
-      - best_practices
-```
+1. Go to **Settings** → **Review Format**
+2. Choose which sections to include:
+   - Summary
+   - Security analysis
+   - Performance insights
+   - Suggestions
+   - Best practices
 
 ### Metrics & Analytics
 
@@ -285,7 +259,7 @@ Mesrai optimizes API usage to stay within limits.
 
 1. Check webhook deliveries in repo settings
 2. Verify repository is in app installation
-3. Confirm `.mesrai.yml` is valid YAML
+3. Confirm auto-review is enabled in dashboard settings
 4. Check [Status Page](https://status.mesrai.com)
 
 ### Permission Issues
@@ -304,10 +278,10 @@ Mesrai optimizes API usage to stay within limits.
 
 Mesrai takes security seriously:
 
-- **Code Privacy**: Your code never leaves our secure servers
+- **Code Privacy**: Your code is processed in isolated sandbox environments
 - **Encrypted Transfer**: All data encrypted in transit (TLS 1.3)
-- **No Storage**: Code is analyzed in memory only
-- **SOC 2 Certified**: Annual compliance audits
+- **No Storage**: Code is analyzed in memory only and never persisted
+- **Secure Authentication**: OAuth via GitHub with minimal permissions
 - **GDPR Compliant**: EU data protection standards
 
 [Read full security policy →](https://mesrai.com/security)
@@ -322,7 +296,7 @@ Migrating from other code review tools:
 
 1. Uninstall CodeRabbit GitHub App
 2. Install Mesrai GitHub App
-3. Copy configuration to `.mesrai.yml`
+3. Configure settings via dashboard
 4. Test on a sample PR
 
 #### From GitHub Copilot Reviews
@@ -335,7 +309,6 @@ Migrating from other code review tools:
 
 - [Complete Installation Guide](/integrations/github-app-installation)
 - [Configure Review Settings](/ai-review/overview)
-- [View API Reference](/api-reference/auth-api)
 - [Join Discord Community](https://discord.com/users/mesrai)
 
 ## Support

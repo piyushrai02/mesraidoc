@@ -1,6 +1,6 @@
 ---
 title: Architectural Analysis
-description: Analyze code architecture, detect anti-patterns, and enforce architectural boundaries with Mesrai.
+description: Analyze code architecture, detect anti-patterns, and maintain clean code with Mesrai.
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,87 +8,30 @@ import { Callout } from 'nextra/components'
 # Architectural Analysis
 
 <Callout type="info">
-  **New in v2.0** - Architectural Analysis has been completely rebuilt with improved detection algorithms and visualization tools.
+  **New in v2.0** — Architectural Analysis has been completely rebuilt with improved detection and insights.
 </Callout>
 
-Mesrai's Architectural Analysis helps you maintain clean, scalable code architecture by detecting anti-patterns and enforcing architectural boundaries.
+Mesrai's Architectural Analysis helps you maintain clean, scalable code architecture by detecting anti-patterns and providing design recommendations.
 
 ## Overview
 
 Architectural Analysis goes beyond line-by-line code review to evaluate:
 
-- **Layer violations** - Ensuring proper separation of concerns
-- **Circular dependencies** - Detecting and preventing dependency cycles
-- **Coupling analysis** - Identifying tightly coupled components
-- **Cohesion metrics** - Ensuring modules have focused responsibilities
+- **Layer violations** — Ensuring proper separation of concerns
+- **Circular dependencies** — Detecting and preventing dependency cycles
+- **Coupling analysis** — Identifying tightly coupled components
+- **Cohesion metrics** — Ensuring modules have focused responsibilities
 
 ## Key Features
 
-### Dependency Graph Visualization
+### Dependency Analysis
 
-Mesrai generates interactive dependency graphs:
+Mesrai analyzes your codebase to understand:
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Application Layer                     │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐          │
-│  │Controllers│───▶│ Services │───▶│   API    │          │
-│  └──────────┘    └──────────┘    └──────────┘          │
-│        │              │                                  │
-│        ▼              ▼                                  │
-│  ┌─────────────────────────────────────┐               │
-│  │          Domain Layer               │               │
-│  │  ┌─────────┐    ┌─────────┐        │               │
-│  │  │ Entities│    │  Rules  │        │               │
-│  │  └─────────┘    └─────────┘        │               │
-│  └─────────────────────────────────────┘               │
-│                      │                                  │
-│                      ▼                                  │
-│  ┌─────────────────────────────────────┐               │
-│  │        Infrastructure Layer          │               │
-│  │  ┌─────────┐    ┌─────────┐        │               │
-│  │  │Database │    │ External│        │               │
-│  │  └─────────┘    └─────────┘        │               │
-│  └─────────────────────────────────────┘               │
-└─────────────────────────────────────────────────────────┘
-```
-
-### Layer Boundary Enforcement
-
-Define and enforce architectural layers:
-
-```yaml
-# mesrai.config.yaml
-architecture:
-  layers:
-    - name: presentation
-      paths:
-        - "src/components/**"
-        - "src/pages/**"
-      can_depend_on:
-        - application
-
-    - name: application
-      paths:
-        - "src/services/**"
-        - "src/hooks/**"
-      can_depend_on:
-        - domain
-        - infrastructure
-
-    - name: domain
-      paths:
-        - "src/models/**"
-        - "src/entities/**"
-      can_depend_on: []  # Domain should have no dependencies
-
-    - name: infrastructure
-      paths:
-        - "src/db/**"
-        - "src/api/**"
-      can_depend_on:
-        - domain
-```
+- How modules depend on each other
+- Potential circular dependency issues
+- Overly complex dependency chains
+- Unused or redundant dependencies
 
 ### Anti-Pattern Detection
 
@@ -102,100 +45,121 @@ Mesrai detects common architectural anti-patterns:
 | Shotgun Surgery | Changes requiring many small edits | Medium |
 | Long Parameter List | Functions with too many parameters | Low |
 
-## Usage
+### Layer Boundary Checks
+
+Mesrai validates that your code follows proper architectural layers:
+
+- Presentation layer shouldn't directly access database
+- Business logic should be separate from UI components
+- Infrastructure code should be isolated
+
+---
+
+## How It Works
 
 ### Automatic Analysis
 
 Architectural analysis runs automatically on every PR:
 
-```bash
+```
 PR #123: Add user management feature
 
 Architecture Analysis Results:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Layer boundaries respected
 ✅ No circular dependencies introduced
-⚠️  UserService cohesion score: 0.45 (threshold: 0.6)
-   Consider splitting authentication logic into AuthService
-❌ Layer violation: presentation → infrastructure
-   src/components/UserList.jsx imports src/db/queries.js
+✅ Code follows established patterns
+⚠️ Consider splitting UserService - it handles both auth and profile
 ```
 
-### CLI Commands
+### Review Comments
 
-Analyze architecture locally:
+When architectural issues are found, Mesrai provides:
 
-```bash
-# Full architecture analysis
-npx mesrai architecture analyze
+- Clear explanation of the issue
+- Why it matters for maintainability
+- Suggestions for improvement
+- Links to best practices
 
-# Check specific layer
-npx mesrai architecture check --layer domain
-
-# Generate dependency graph
-npx mesrai architecture graph --output deps.svg
-
-# Validate against rules
-npx mesrai architecture validate
-```
-
-### IDE Integration
-
-View architecture insights directly in your IDE:
-
-- VS Code extension shows layer violations inline
-- Hover over imports to see dependency chain
-- Quick fixes for common violations
+---
 
 ## Configuration
 
-### Threshold Settings
+<Callout type="info">
+All settings are configured through the **[Mesrai Dashboard](https://app.mesrai.com)** — no config files needed!
+</Callout>
 
-Customize detection thresholds:
+### How to Configure
 
-```yaml
-architecture:
-  thresholds:
-    max_file_dependencies: 10
-    max_function_length: 50
-    min_cohesion: 0.6
-    max_coupling: 0.3
-    max_depth: 4
-```
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Select your **Repository**
+3. Navigate to **Settings → Architecture**
+4. Configure your preferences
 
-### Ignore Patterns
+### Available Settings
 
-Exclude specific patterns from analysis:
+| Setting | Description |
+|---------|-------------|
+| **Enable/Disable** | Turn architectural analysis on or off |
+| **Strictness Level** | How strict the analysis should be |
+| **Focus Areas** | Which patterns to prioritize |
+| **Exclusions** | Files or folders to skip |
 
-```yaml
-architecture:
-  ignore:
-    patterns:
-      - "**/*.test.js"
-      - "**/__mocks__/**"
-    violations:
-      - rule: "circular-dependency"
-        paths: ["src/legacy/**"]  # Legacy code exemption
-```
+### Strictness Levels
+
+| Level | Behavior |
+|-------|----------|
+| **Strict** | Flag all potential architectural issues |
+| **Moderate** | Balance between thoroughness and noise |
+| **Relaxed** | Focus on critical issues only |
+
+---
+
+## What Gets Analyzed
+
+### Code Organization
+
+- Module structure and boundaries
+- File and folder organization
+- Naming conventions
+- Code grouping
+
+### Dependencies
+
+- Import/export relationships
+- Third-party library usage
+- Internal module dependencies
+- Circular reference detection
+
+### Design Patterns
+
+- Proper use of design patterns
+- SOLID principle adherence
+- Clean architecture practices
+- Separation of concerns
+
+---
 
 ## Best Practices
 
-1. **Start with defaults** - Begin with standard thresholds and adjust based on your codebase
-2. **Incremental adoption** - Don't try to fix all violations at once
-3. **Document exceptions** - When ignoring violations, add comments explaining why
-4. **Review regularly** - Run full architecture analysis monthly
+1. **Start with moderate settings** — Begin with standard strictness and adjust based on your codebase
+2. **Incremental adoption** — Don't try to fix all issues at once
+3. **Review regularly** — Check architectural insights periodically
+4. **Team alignment** — Ensure your team agrees on architectural standards
 
-## Metrics Dashboard
+---
 
-Track architectural health over time:
+## Metrics & Insights
 
-- **Dependency count** - Total and per-module dependencies
-- **Cohesion trend** - How focused your modules remain
-- **Coupling score** - Inter-module dependency strength
-- **Layer violations** - Count and trend over time
+Track architectural health over time in your dashboard:
+
+- **Dependency count** — Total and per-module dependencies
+- **Issue trends** — How architectural issues change over time
+- **Common patterns** — Most frequent issues in your codebase
+- **Improvement tracking** — Progress on fixing issues
+
+---
 
 ## Next Steps
 
 - [Configure Privacy & Security](/features/privacy-security)
-- [Set up CI/CD Integration](/integrations/cicd-pipelines)
-- [View API Reference](/api-reference/overview)
+- [Set up GitHub Integration](/integrations/github)

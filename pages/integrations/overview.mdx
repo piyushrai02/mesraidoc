@@ -1,64 +1,86 @@
 ---
 title: Integrations Overview
-description: Connect Mesrai with your favorite tools and services
+description: Connect Mesrai with your development tools and services
 ---
+
+import { Callout } from 'nextra/components'
 
 # Integrations Overview
 
-Mesrai integrates seamlessly with popular development tools and services to fit into your existing workflow.
+Mesrai integrates with your development workflow to provide seamless AI-powered code reviews.
 
 ## Available Integrations
 
-### Version Control
+### GitHub (Available Now)
 
-#### GitHub
-- **GitHub App**: Install our GitHub App for automatic PR reviews
-- **Webhook Support**: Real-time PR notifications
-- **OAuth Integration**: Secure authentication
+<Callout type="info">
+GitHub is our primary supported platform with full feature support.
+</Callout>
 
-#### GitLab
-- **GitLab Integration**: Connect your GitLab repositories
-- **Merge Request Reviews**: Automatic reviews on MRs
-- **Self-Hosted**: Support for GitLab self-hosted instances
+| Feature | Status |
+|---------|--------|
+| Pull Request Reviews | ✅ Available |
+| Inline Comments | ✅ Available |
+| Review Summaries | ✅ Available |
+| GitHub App | ✅ Available |
+| GitHub Actions | ✅ Available |
 
-### Communication
-
-#### Slack
-- **Review Notifications**: Get notified when reviews are complete
-- **Interactive Commands**: Trigger reviews from Slack
-- **Channel Integration**: Post summaries to team channels
-
-#### Discord
-- **Bot Integration**: Add Mesrai bot to your server
-- **Webhook Support**: Custom notification channels
-
-### CI/CD
-
-#### GitHub Actions
-- **Pre-built Actions**: Easy integration with workflows
-- **Custom Triggers**: Review on specific events
-
-#### CircleCI
-- **Orb Integration**: Use our CircleCI orb
-- **Pipeline Integration**: Add reviews to your pipeline
-
-### Project Management
-
-#### Jira
-- **Issue Linking**: Link reviews to Jira issues
-- **Status Updates**: Automatic status sync
-
-#### Linear
-- **Issue Integration**: Connect reviews to Linear issues
-- **Bi-directional Sync**: Keep everything in sync
-
-## Coming Soon
-
-- Bitbucket support
-- Azure DevOps integration
-- Microsoft Teams notifications
-- Jenkins plugin
+**Get started:**
+- [GitHub Integration Guide](/integrations/github)
+- [GitHub App Installation](/integrations/github-app-installation)
 
 ---
 
-**Next**: Learn how to [set up GitHub integration](/integrations/github) →
+## Coming Soon
+
+We're actively working on expanding our platform support:
+
+### GitLab
+
+| Feature | Status |
+|---------|--------|
+| Merge Request Reviews | 🚧 In Development |
+| GitLab.com | 🚧 In Development |
+| Self-Hosted GitLab | 📅 Planned |
+
+[Learn more about GitLab integration →](/integrations/gitlab)
+
+### Bitbucket
+
+| Feature | Status |
+|---------|--------|
+| Bitbucket Cloud | 🚧 In Development |
+| Bitbucket Data Center | 📅 Planned |
+
+[Learn more about Bitbucket integration →](/integrations/bitbucket)
+
+### Azure DevOps
+
+| Feature | Status |
+|---------|--------|
+| Azure Repos | 📅 Planned |
+| Pull Request Reviews | 📅 Planned |
+
+---
+
+## Get Notified
+
+Want to know when new integrations are available?
+
+1. **Join our waitlist** — [Sign up here](https://mesrai.com/waitlist)
+2. **Follow us on Twitter** — [@mesrai](https://twitter.com/mesrai)
+3. **Join Discord** — [discord.gg/mesrai](https://discord.gg/mesrai)
+
+---
+
+## Configuration
+
+All integration settings are managed through the **[Mesrai Dashboard](https://app.mesrai.com)**:
+
+1. Go to **[app.mesrai.com](https://app.mesrai.com)**
+2. Navigate to **Settings → Integrations**
+3. Connect and configure your repositories
+
+---
+
+**Next**: [Set up GitHub integration](/integrations/github) →

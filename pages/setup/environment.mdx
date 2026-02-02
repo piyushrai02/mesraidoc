@@ -65,101 +65,41 @@ Get your API key from [Mesrai Dashboard](https://app.mesrai.com/settings/api).
 
 ### 3. Initialize Project
 
-Navigate to your project directory:
+Navigate to your project directory and link it with Mesrai:
 
 ```bash
 cd your-project
 mesrai init
 ```
 
-This creates:
-
-- `.mesrai.yml` - Configuration file
-- `.mesraiignore` - Files to exclude
+This will:
+- Link your project to your Mesrai account
+- Enable automatic reviews on PRs
 
 ## Configuration
 
+All configuration is done through the [Mesrai Dashboard](https://app.mesrai.com):
+
 ### Basic Configuration
 
-Edit `.mesrai.yml`:
-
-```yaml
-# .mesrai.yml
-version: 1
-
-# Project settings
-project:
-  name: my-awesome-app
-  language: javascript
-  framework: react
-
-# Review settings
-reviews:
-  enabled: true
-  auto_review: true
-
-  # When to trigger reviews
-  on:
-    pull_request: true
-    push_to_main: false
-
-# Context configuration
-context:
-  max_files: 50
-  include_dependencies: true
-
-  # Ignore patterns
-  exclude:
-    - "node_modules/**"
-    - "dist/**"
-    - "build/**"
-    - "**/*.test.js"
-    - "**/*.spec.ts"
-```
+1. Go to **app.mesrai.com** → Select your repository
+2. Navigate to **Settings** → **Review Settings**
+3. Configure:
+   - **Project name**: my-awesome-app
+   - **Language**: JavaScript/TypeScript/Python
+   - **Framework**: React/Vue/Next.js
+   - **Auto-review**: Enable automatic PR reviews
+   - **Review triggers**: Pull requests, push to main
+   - **File exclusions**: `node_modules/**`, `dist/**`, `**/*.test.js`
 
 ### Advanced Configuration
 
-```yaml
-# .mesrai.yml
-version: 1
+Navigate to **Settings** → **Advanced**:
 
-# Multi-language support
-languages:
-  - javascript
-  - typescript
-  - python
-
-# Custom rules
-rules:
-  security:
-    enabled: true
-    severity: high
-
-  performance:
-    enabled: true
-    check_complexity: true
-
-  style:
-    enabled: true
-    enforce_conventions: true
-
-# Token optimization
-optimization:
-  context_depth: medium
-  max_tokens: 10000
-  caching: true
-
-# Notifications
-notifications:
-  slack:
-    enabled: true
-    webhook_url: ${SLACK_WEBHOOK_URL}
-
-  email:
-    enabled: true
-    recipients:
-      - team@example.com
-```
+- **Multi-language support**: Enable multiple languages per repo
+- **Custom rules**: Security (high severity), Performance (complexity checks), Style enforcement
+- **Token optimization**: Context depth, max tokens, caching
+- **Notifications**: Slack webhooks, email recipients
 
 ## Environment Variables
 
@@ -258,7 +198,7 @@ mesrai review --debug
 Output:
 
 ```
-[DEBUG] Loading configuration from .mesrai.yml
+[DEBUG] Loading configuration from dashboard
 [DEBUG] Authenticating with API key: mr_***************
 [DEBUG] Fetching changed files...
 [DEBUG] Found 5 changed files
@@ -556,17 +496,13 @@ mesrai login
 
 ### Configuration Errors
 
-**Error**: `Invalid .mesrai.yml`
+**Error**: `Invalid configuration`
 
 **Solution**:
 
-```bash
-# Validate configuration
-mesrai config validate
-
-# Fix common issues
-mesrai config fix
-```
+1. Verify your repository is linked in the dashboard
+2. Check repository settings at app.mesrai.com
+3. Re-run `mesrai init` to re-link your project
 
 ### Network Issues
 
@@ -611,10 +547,12 @@ npm uninstall -g @mesrai/cli
 rm -rf ~/.mesrai
 ```
 
-### Remove Project Config
+### Remove Project Linking
+
+Unlink your project via the dashboard or CLI:
 
 ```bash
-rm .mesrai.yml .mesraiignore
+mesrai unlink
 ```
 
 ## Next Steps

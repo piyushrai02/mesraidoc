@@ -1,4 +1,7 @@
 export default {
   "subscription-model": "Subscription Model",
-  "stripe-integration": "Stripe Integration"
+  "stripe-integration": {
+    title: "Stripe Integration",
+    display: "hidden"
+  }
 }

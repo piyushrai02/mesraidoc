@@ -1,174 +1,171 @@
 ---
 title: Key Capabilities
-description: Explore Mesrai's core capabilities including AI-powered reviews, GitHub integration, performance optimization, and enterprise billing.
+description: Discover Mesrai’s core capabilities for AI-powered pull request reviews, team-level controls, performance, and enterprise readiness.
 ---
-
-import { Callout } from "nextra/components";
 
 # Key Capabilities
 
-Mesrai provides enterprise-grade capabilities designed for modern software development teams. Here's what makes us different.
+Mesrai is built to support modern engineering teams at scale.  
+Our capabilities focus on **review quality, reliability, and developer trust**—without slowing teams down.
 
-## 🧠 AI-Powered Code Reviews
+---
 
-### Superhuman Context Understanding
+## 🧠 AI-Powered Pull Request Reviews
 
-Unlike basic linters, Mesrai builds a complete mental model of your codebase:
+### Deep, Context-Aware Analysis
 
-- **Call Graph Analysis**: Maps function dependencies across your entire repository
-- **Architectural Pattern Recognition**: Identifies design patterns and suggests improvements
-- **Cross-File Impact Analysis**: Understands how changes in one file affect others
-- **Historical Context**: Learns from your team's coding patterns and conventions
+Mesrai reviews pull requests with a broader understanding than traditional tools.
 
-### Advanced LLM Integration
+Instead of analyzing files in isolation, Mesrai considers:
 
-We use state-of-the-art language models optimized for code:
+- Related files and dependencies
+- Cross-file changes introduced in the PR
+- Code structure and usage patterns
+- Common engineering best practices
 
-```mermaid
-graph LR
-    A[PR Created] --> B[Context Extraction]
-    B --> C[Call Graph Build]
-    C --> D[Token Optimization]
-    D --> E[LLM Analysis]
-    E --> F[Review Posted]
-```
+This allows Mesrai to surface **meaningful feedback**, not just style or syntax issues.
 
-<Callout type="info">
-  **Smart Token Management**: Mesrai optimizes context to fit within token
-  limits while maintaining review quality. We prioritize the most relevant code
-  sections.
-</Callout>
+### Actionable Feedback
 
-## 🔗 GitHub Integration
+Mesrai focuses on **signal over noise**:
+
+- Clear explanations of potential issues
+- Suggestions that are practical and relevant
+- Comments placed directly on affected code
+- No auto-generated “LGTM” or misleading approvals
+
+> Mesrai never pretends a review happened.  
+> Every PR receives a visible, explicit review outcome.
+
+---
+
+## 🔍 Review Outcomes You Can Trust
+
+Every pull request processed by Mesrai ends in one of the following **explicit states**:
+
+- **Review Completed** – Feedback and insights were generated
+- **Review Completed (No Issues Found)** – Analysis ran successfully with no actionable findings
+- **Review Skipped or Limited** – Mesrai explains _why_ (for example: permissions, limits, or configuration)
+- **Review Failed** – A clear failure reason is shown instead of silent success
+
+This ensures teams are never left guessing whether a review actually ran.
+
+---
+
+## 🔗 Native GitHub Integration
 
 ### Seamless Setup
 
-Install Mesrai as a GitHub App in less than 30 seconds:
+Mesrai integrates as a GitHub App and works automatically with your existing workflow:
 
-1. **One-Click Installation**: Add to your organization or personal account
-2. **Repository Selection**: Choose which repos to enable
-3. **Automatic Configuration**: Mesrai configures webhooks and permissions
-4. **Instant Reviews**: Start getting AI reviews on your next PR
+- Install once at the organization or repository level
+- Reviews trigger automatically on pull request activity
+- No CLI tools or manual steps required
 
-### Powerful Automation
+### First-Class GitHub Experience
 
-- **Auto-Review on Push**: Every commit triggers intelligent analysis
-- **Inline Comments**: Suggestions appear directly on code lines
-- **Status Checks**: Block merges for critical issues
-- **Team Mentions**: Tag specific developers for human review
+- Inline comments on changed lines
+- Pull request status checks
+- Merge blocking for critical findings (configurable)
+- Works with GitHub teams and permissions
 
-### Webhook Architecture
+Mesrai behaves like a **native GitHub reviewer**, not an external tool.
 
-```javascript
-// Mesrai listens to GitHub webhook events
-{
-  "event": "pull_request",
-  "action": "opened",
-  "pr": {
-    "number": 123,
-    "head": "feature-branch",
-    "files_changed": 15
-  }
-}
-```
+---
 
-## ⚡ Performance & Scalability
+## ⚙️ Organization & Team Controls
 
-### Edge-First Architecture
+Mesrai supports **organization-level configuration**, allowing teams to tailor reviews to their workflow.
 
-- **Sub-5ms TTFB**: Content served from edge locations worldwide
-- **Redis Caching**: Instant results for frequently accessed data
-- **Worker Queues**: Asynchronous processing for complex reviews
-- **Load Balancing**: Automatic scaling during traffic spikes
+You can configure:
 
-### Optimization Features
+- Review strictness and sensitivity
+- Which issue types matter most to your team
+- Merge blocking behavior
+- Repository-specific overrides
+- Team-wide conventions and preferences
 
-| Feature                  | Impact        | Details                                             |
-| ------------------------ | ------------- | --------------------------------------------------- |
-| **Smart Caching**        | 90% faster    | Cache review results, dependencies, and call graphs |
-| **Incremental Analysis** | 70% reduction | Only analyze changed files and their dependencies   |
-| **Token Compression**    | 60% savings   | Optimize context without losing quality             |
-| **Parallel Processing**  | 3x throughput | Review multiple PRs simultaneously                  |
+These settings are applied consistently across all pull requests in your organization.
 
-<Callout type="warning">
-  **Performance Tip**: For large PRs (>50 files), enable incremental review mode
-  to focus on critical changes first.
-</Callout>
+---
 
-## 💳 Enterprise Billing
+## ⚡ Performance & Reliability
 
-### Flexible Plans
+Mesrai is designed to stay fast—even as teams and repositories grow.
 
-Choose the plan that fits your team:
+- Reviews are processed asynchronously
+- Large pull requests are handled safely without blocking development
+- Scales across multiple repositories and teams
+- Designed for predictable behavior under load
 
-**Free Tier**
+> Mesrai prioritizes **reliability over speed claims**.  
+> If analysis is delayed or limited, users are informed transparently.
 
-- 10 reviews/month
-- Public repositories
-- Community support
-- Basic features
+---
 
-**Pro Plan** ($49/user/month)
+## 🔒 Security & Privacy
 
-- Unlimited reviews
-- Private repositories
-- Priority support
-- Advanced features
-- Custom integrations
+Mesrai is built with security as a first-class concern.
 
-**Enterprise** (Custom pricing) (Still In Progress)
+- No training on your private code
+- Secure communication for all review operations
+- Repository access limited to approved scopes
+- Enterprise options for stricter data control (coming soon)
 
-- Dedicated infrastructure
-- SLA guarantees
-- On-premise deployment
-- SSO/SAML authentication
-- Compliance certifications
+Your code remains **your code**.
 
-### Usage-Based Billing
+---
 
-Pay only for what you use:
+## 📊 Review Visibility & Insights
 
-```typescript
-// Billing calculation
-const monthlyBill = (basePrice * users) + (overageReviews * overageRate)
+Mesrai helps teams understand how reviews impact quality over time.
 
-// Example: Pro plan with overages
-const bill = (49 * 10) + (150 * 0.50) = $565
-```
+Available insights include:
 
-### Stripe Integration
+- Review coverage across pull requests
+- Types of issues detected
+- Trends in recurring feedback
+- Visibility into review outcomes
 
-- **Secure Payments**: PCI-compliant processing
-- **Auto-Billing**: Automatic monthly charges
-- **Usage Alerts**: Notifications before overages
-- **Invoice Management**: Detailed usage breakdowns
+These insights help teams **improve code quality without micromanagement**.
 
-## 🔒 Security & Compliance
+---
 
-### Code Security
+## 🏢 Built for Teams of Any Size
 
-- **Private by Default**: Your code never leaves your infrastructure (Enterprise)
-- **Encrypted Transit**: TLS 1.3 for all communications
-- **Zero Data Retention**: Reviews are not stored long-term
-- **Access Controls**: Fine-grained permission management
+### Startups
 
-### Compliance Ready (Certification & Implementation in progress)
+Ship faster with consistent, automated reviews from day one.
 
-- SOC 2 Type II certified (Not )
-- GDPR compliant
-- HIPAA available (Enterprise)
-- ISO 27001 in progress
+### Growing Teams
 
-## 📊 Analytics & Insights
+Maintain quality as contributors and repositories increase.
 
-### Review Metrics
+### Enterprises
 
-Track team performance and code quality trends:
+Apply consistent review standards across large organizations with confidence.
 
-- **Review Coverage**: Percentage of PRs reviewed
-- **Issue Detection**: Types and severity of issues found
-- **Time to Review**: Average review completion time
-- **Team Velocity**: PRs merged per week
+---
+
+## What Mesrai Is — and Is Not
+
+Mesrai is designed to **assist and accelerate human reviewers**, not replace them.
+
+- ✔ Provides high-quality automated feedback
+- ✔ Flags risks early
+- ✔ Improves review consistency
+- ❌ Does not approve code on your behalf
+- ❌ Does not guarantee bug-free software
+
+Mesrai strengthens engineering teams—it does not override human judgment.
+
+---
+
+## Getting More from Mesrai
+
+- Learn how reviews work: [AI Review Overview](/ai-review/overview)
+- Configure your organization: [Organization Settings](/features/organizations/introduction)
+- Install Mesrai: [GitHub App Setup](/setup/installation)
 
 ---
 
