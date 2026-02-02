@@ -2,7 +2,7 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://docs.mesrai.com',
   generateRobotsTxt: true,
-  generateIndexSitemap: true,
+  generateIndexSitemap: false,
   sitemapSize: 7000,
   changefreq: 'weekly',
   priority: 0.7,
@@ -78,9 +78,6 @@ module.exports = {
         userAgent: 'PerplexityBot',
         allow: '/',
       },
-    ],
-    additionalSitemaps: [
-      'https://docs.mesrai.com/sitemap.xml',
     ],
   },
 }
