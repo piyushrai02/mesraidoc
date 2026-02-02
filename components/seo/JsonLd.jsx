@@ -9,7 +9,7 @@ export function OrganizationSchema() {
     "@type": "Organization",
     "name": "Mesrai",
     "url": "https://docs.mesrai.com",
-    "logo": "https://docs.mesrai.com/logo.png",
+    "logo": "https://docs.mesrai.com/android-chrome-512x512.png",
     "description": "AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and GitHub integration.",
     "foundingDate": "2024",
     "contactPoint": {
@@ -128,7 +128,7 @@ export function ArticleSchema({ title, description, datePublished, dateModified,
         "url": "https://docs.mesrai.com/logo.png"
       }
     },
-    "image": image || "https://docs.mesrai.com/og-image.png"
+    "image": image || "https://docs.mesrai.com/android-chrome-512x512.png"
   };
 
   return (
@@ -153,10 +153,7 @@ export function WebSiteSchema() {
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://docs.mesrai.com/search?q={search_term_string}"
-      },
+      "target": "https://docs.mesrai.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -245,13 +242,13 @@ export function HowToSchema({ title, description, steps, totalTime }) {
 }
 
 // Speakable schema for voice search and LLM optimization
-export function SpeakableSchema({ cssSelectors = ["h1", "h2", "h3", "article p:first-of-type"] }) {
+export function SpeakableSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "speakable": {
       "@type": "SpeakableSpecification",
-      "cssSelector": cssSelectors
+      "cssSelector": ["h1", "h2", "h3"]
     }
   };
 

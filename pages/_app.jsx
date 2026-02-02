@@ -58,40 +58,39 @@ export default function App({ Component, pageProps }) {
 
         {/* Dynamic Open Graph URL */}
         <meta property="og:url" content={canonicalUrl} key="og:url" />
-
-        {/* Global JSON-LD Structured Data */}
-        <OrganizationSchema />
-        <WebSiteSchema />
-
-        {/* Speakable Schema for Voice Search & LLM Optimization */}
-        <SpeakableSchema />
-
-        {/* Page Specific Structured Data */}
-        {isHomePage && <ProductSchema />}
-
-        {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
-
-        {/* TechArticle Schema for Documentation Pages */}
-        {isDocPage && pageProps.frontMatter && (
-          <TechArticleSchema
-            title={pageProps.frontMatter.title}
-            description={pageProps.frontMatter.description}
-            datePublished={pageProps.frontMatter.date || new Date().toISOString()}
-            dateModified={pageProps.frontMatter.lastModified}
-            keywords={pageProps.frontMatter.keywords}
-          />
-        )}
-
-        {/* Article Schema for Blog Posts */}
-        {isBlogPost && pageProps.frontMatter && (
-          <ArticleSchema
-            title={pageProps.frontMatter.title}
-            description={pageProps.frontMatter.description}
-            datePublished={pageProps.frontMatter.date}
-            author={pageProps.frontMatter.author}
-          />
-        )}
       </Head>
+
+      {/* JSON-LD Structured Data - Must be outside Head for proper rendering */}
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <SpeakableSchema />
+
+      {/* Page Specific Structured Data */}
+      {isHomePage && <ProductSchema />}
+
+      {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
+
+      {/* TechArticle Schema for Documentation Pages */}
+      {isDocPage && pageProps.frontMatter && (
+        <TechArticleSchema
+          title={pageProps.frontMatter.title}
+          description={pageProps.frontMatter.description}
+          datePublished={pageProps.frontMatter.date || new Date().toISOString()}
+          dateModified={pageProps.frontMatter.lastModified}
+          keywords={pageProps.frontMatter.keywords}
+        />
+      )}
+
+      {/* Article Schema for Blog Posts */}
+      {isBlogPost && pageProps.frontMatter && (
+        <ArticleSchema
+          title={pageProps.frontMatter.title}
+          description={pageProps.frontMatter.description}
+          datePublished={pageProps.frontMatter.date}
+          author={pageProps.frontMatter.author}
+        />
+      )}
+
       <Component {...pageProps} />
       <Analytics />
     </>

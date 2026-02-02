@@ -48,11 +48,11 @@ export default {
       <meta property="og:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
       <meta property="og:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
       <meta property="og:site_name" content="Mesrai Documentation" />
-      <meta property="og:url" content="https://docs.mesrai.com" />
-      <meta property="og:image" content="https://docs.mesrai.com/og-image.png" />
+      {/* og:url is set dynamically in _app.jsx */}
+      <meta property="og:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
       <meta property="og:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="512" />
+      <meta property="og:image:height" content="512" />
       <meta property="og:locale" content="en_US" />
 
       {/* Twitter Card Meta Tags */}
@@ -61,7 +61,7 @@ export default {
       <meta name="twitter:creator" content="@mesraiofficial" />
       <meta name="twitter:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
       <meta name="twitter:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
-      <meta name="twitter:image" content="https://docs.mesrai.com/og-image.png" />
+      <meta name="twitter:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
       <meta name="twitter:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
 
       {/* Additional SEO */}
