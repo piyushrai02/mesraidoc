@@ -6,8 +6,8 @@
 
 :root {
   --primary: #101820;
-  --accent: #6366F1;
-  --accent-light: #818CF8;
+  --accent: #E8772E;
+  --accent-light: #F0944D;
   --bg-light: #FAFAFA;
   --bg-dark: #0B0C0E;
   --bg-card: #141517;
@@ -26,14 +26,14 @@ html {
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+  background: linear-gradient(135deg, #E8772E 0%, #F0944D 50%, #D4651F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899, #6366F1);
+  background: linear-gradient(135deg, #E8772E, #F0944D, #D4651F, #E8772E);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -59,8 +59,8 @@ html {
 }
 
 .nextra-callout.info {
-  background-color: rgba(99, 102, 241, 0.1);
-  border-color: #6366F1;
+  background-color: rgba(232, 119, 46, 0.1);
+  border-color: #E8772E;
 }
 
 .nextra-callout.warning {
@@ -98,7 +98,7 @@ pre {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  background: linear-gradient(135deg, #E8772E, #F0944D);
   color: white;
   border-radius: 9999px;
   margin-left: 0.5rem;
@@ -127,7 +127,7 @@ pre {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  background: linear-gradient(135deg, #E8772E, #F0944D);
   color: white;
   border-radius: 9999px;
   margin-left: 0.375rem;
@@ -161,6 +161,18 @@ pre {
   max-width: 100% !important;
 }
 
+/* Prevent Nextra article styles from overriding landing page button colors */
+.landing-page a[style] {
+  color: inherit !important;
+  border-bottom: none !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+.landing-page a.no-underline {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
 /* Card hover effects */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -168,7 +180,7 @@ pre {
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 8px 30px rgba(232, 119, 46, 0.15);
 }
 
 /* Purple gradient border effect */
@@ -184,7 +196,7 @@ pre {
   inset: 0;
   border-radius: 1rem;
   padding: 1px;
-  background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899);
+  background: linear-gradient(135deg, #E8772E, #F0944D, #D4651F);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;

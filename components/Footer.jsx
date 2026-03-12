@@ -57,7 +57,7 @@ export const Footer = () => {
             <FooterLink href="/introduction/what-is-mesrai">Overview</FooterLink>
             <FooterLink href="/features/ai-review-engine">AI Review Engine</FooterLink>
             <FooterLink href="/features/architectural-analysis">Architectural Analysis</FooterLink>
-            <FooterLink href="https://mesrai.com/pricing" external>Pricing</FooterLink>
+            <FooterLink href="/setup/installation">Quick Setup</FooterLink>
           </FooterSection>
 
           {/* Resources */}

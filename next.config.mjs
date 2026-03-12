@@ -14,6 +14,7 @@ const withNextra = nextra({
 
 export default withNextra({
   reactStrictMode: false,
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },

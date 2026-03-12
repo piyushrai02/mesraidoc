@@ -39,6 +39,9 @@ module.exports = {
   },
 
   robotsTxtOptions: {
+    additionalSitemaps: [
+      'https://docs.mesrai.com/sitemap.xml',
+    ],
     policies: [
       {
         userAgent: '*',

@@ -11,8 +11,8 @@ module.exports = {
       colors: {
         primary: '#101820',
         accent: {
-          DEFAULT: '#6366F1',
-          light: '#818CF8',
+          DEFAULT: '#E8772E',
+          light: '#F0944D',
         },
         background: {
           DEFAULT: '#0B0C0E',
@@ -44,9 +44,9 @@ module.exports = {
             maxWidth: 'none',
             color: '#374151',
             a: {
-              color: '#6366F1',
+              color: '#E8772E',
               '&:hover': {
-                color: '#818CF8',
+                color: '#F0944D',
               },
             },
           },
@@ -79,9 +79,9 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)',
-        'card-gradient': 'linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 100%)',
-        'border-gradient': 'linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899)',
+        'hero-gradient': 'linear-gradient(135deg, #E8772E 0%, #F0944D 50%, #D4651F 100%)',
+        'card-gradient': 'linear-gradient(180deg, rgba(232, 119, 46, 0.1) 0%, rgba(232, 119, 46, 0) 100%)',
+        'border-gradient': 'linear-gradient(135deg, #E8772E, #F0944D, #D4651F)',
       },
     },
   },

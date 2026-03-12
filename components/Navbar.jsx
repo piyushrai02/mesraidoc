@@ -73,7 +73,7 @@ const NavDropdown = ({ label, items }) => {
                 {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}
               >
                 {item.icon && (
-                  <span className="flex-shrink-0 w-5 h-5 text-indigo-500">
+                  <span className="flex-shrink-0 w-5 h-5 text-orange-500">
                     {item.icon}
                   </span>
                 )}
@@ -109,10 +109,25 @@ const InstallButton = () => (
     href="https://github.com/apps/mesraipilot"
     target="_blank"
     rel="noopener noreferrer"
-    className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+    className="hidden md:inline-flex items-center gap-2 text-sm font-semibold tracking-wide rounded-xl transition-all duration-200 no-underline"
+    style={{
+      padding: '8px 20px',
+      backgroundColor: '#E8772E',
+      color: '#ffffff',
+      border: '1px solid #E8772E',
+      boxShadow: '0 2px 8px rgba(232,119,46,0.2)',
+    }}
+    onMouseEnter={e => {
+      e.currentTarget.style.backgroundColor = '#D4651F';
+      e.currentTarget.style.boxShadow = '0 4px 12px rgba(232,119,46,0.3)';
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.backgroundColor = '#E8772E';
+      e.currentTarget.style.boxShadow = '0 2px 8px rgba(232,119,46,0.2)';
+    }}
   >
     Install Mesrai
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-4 h-4" style={{ color: '#ffffff' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
     </svg>
   </a>
@@ -201,8 +216,8 @@ export const NavbarExtra = () => {
       {/* Navigation links - hidden on mobile */}
       <nav className="hidden lg:flex items-center gap-6">
         <NavDropdown label="Product" items={productItems} />
-        <NavLink href="https://mesrai.com/pricing" external>
-          Pricing
+        <NavLink href="/setup/installation">
+          Quick Setup
         </NavLink>
         <NavLink href="/integrations/overview">
           Integrations

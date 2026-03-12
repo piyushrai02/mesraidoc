@@ -100,7 +100,7 @@ export const Logo = ({
               y1="18"
               x2="200"
               y2="48"
-              stroke="#6366F1"
+              stroke="#E8772E"
               strokeWidth="2"
               opacity="0.5"
             />
@@ -111,7 +111,7 @@ export const Logo = ({
               fontFamily={LOGO_TEXT.fontFamily}
               fontSize="24"
               fontWeight="600"
-              fill="#6366F1"
+              fill="#E8772E"
               letterSpacing="2"
             >
               DOCS

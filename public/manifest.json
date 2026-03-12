@@ -8,7 +8,7 @@
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "browser"],
   "background_color": "#0B0C0E",
-  "theme_color": "#6366F1",
+  "theme_color": "#E8772E",
   "orientation": "any",
   "lang": "en-US",
   "dir": "ltr",

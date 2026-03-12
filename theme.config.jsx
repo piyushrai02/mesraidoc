@@ -1,106 +1,120 @@
+import { useRouter } from 'next/router'
 import { Logo } from './components/Logo'
 import { Footer } from './components/Footer'
 import { NavbarExtra } from './components/Navbar'
 
+const SITE_NAME = 'Mesrai Docs'
+const SITE_DESCRIPTION = 'Complete documentation for Mesrai - AI-powered code review platform. Learn to integrate GitHub, manage teams, automate reviews, and ship code 3x faster.'
+const SITE_URL = 'https://docs.mesrai.com'
+const OG_IMAGE = `${SITE_URL}/android-chrome-512x512.png`
+
 export default {
   logo: <Logo width={140} height={36} />,
 
-  head: (
-    <>
-      {/* Viewport and Basic Meta Tags */}
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Complete documentation for Mesrai - AI-powered code review platform. Learn to integrate GitHub, manage teams, automate reviews, and ship code 3x faster." />
-      <meta name="keywords" content="Mesrai, AI code review, automated code review, GitHub integration, code quality, continuous integration, pull request review, developer tools, team collaboration, code analysis, security scanning, performance optimization" />
-      <meta name="author" content="Mesrai" />
-      <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
-      <meta name="distribution" content="global" />
-      <meta name="rating" content="general" />
+  // Dynamic <title> tag — critical for SEO
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath === '/') {
+      return { titleTemplate: 'Mesrai Docs – AI-Powered Code Review Platform' }
+    }
+    return { titleTemplate: `%s – ${SITE_NAME}` }
+  },
 
-      {/* Favicon Links */}
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  // Dynamic head — generates per-page meta tags
+  head: function Head() {
+    const { asPath, pathname } = useRouter()
+    const url = `${SITE_URL}${asPath.split('?')[0].replace(/\/$/, '') || '/'}`
 
-      {/* Apple Touch Icon */}
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    return (
+      <>
+        {/* Viewport */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      {/* Android Chrome Icons */}
-      <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-      <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+        {/* Fallback description — Nextra overrides with frontmatter description when available */}
+        <meta name="description" content={SITE_DESCRIPTION} />
+        <meta name="keywords" content="Mesrai, AI code review, automated code review, GitHub integration, code quality, continuous integration, pull request review, developer tools, team collaboration, code analysis, security scanning, performance optimization" />
+        <meta name="author" content="Mesrai" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
 
-      {/* Web App Manifest */}
-      <link rel="manifest" href="/manifest.json" />
+        {/* Favicons */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+        <link rel="manifest" href="/manifest.json" />
 
-      {/* Microsoft Tiles */}
-      <meta name="msapplication-config" content="/browserconfig.xml" />
-      <meta name="msapplication-TileColor" content="#6366F1" />
+        {/* Microsoft */}
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="msapplication-TileColor" content="#E8772E" />
 
-      {/* Theme Color */}
-      <meta name="theme-color" content="#0B0C0E" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0C0E" />
+        {/* Theme Color */}
+        <meta name="theme-color" content="#0B0C0E" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0C0E" />
 
-      {/* Open Graph Meta Tags */}
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
-      <meta property="og:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
-      <meta property="og:site_name" content="Mesrai Documentation" />
-      {/* og:url is set dynamically in _app.jsx */}
-      <meta property="og:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
-      <meta property="og:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
-      <meta property="og:image:width" content="512" />
-      <meta property="og:image:height" content="512" />
-      <meta property="og:locale" content="en_US" />
+        {/* Open Graph — og:url is in _app.jsx to avoid duplicates */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta property="og:locale" content="en_US" />
 
-      {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@mesraiofficial" />
-      <meta name="twitter:creator" content="@mesraiofficial" />
-      <meta name="twitter:title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
-      <meta name="twitter:description" content="Complete documentation for Mesrai. Learn to automate code reviews, integrate with GitHub, and ship code 3x faster with AI-powered insights." />
-      <meta name="twitter:image" content="https://docs.mesrai.com/android-chrome-512x512.png" />
-      <meta name="twitter:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@mesraiofficial" />
+        <meta name="twitter:creator" content="@mesraiofficial" />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <meta name="twitter:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
 
-      {/* Additional SEO */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="bingbot" content="index, follow" />
+        {/* Robots */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="bingbot" content="index, follow" />
 
-      {/* LLM and AI Discovery Meta Tags */}
-      <meta name="ai-content-declaration" content="human-written" />
-      <meta name="citation_title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
-      <meta name="citation_author" content="Mesrai" />
-      <meta name="citation_publisher" content="Mesrai" />
-      <meta name="citation_online_date" content="2024" />
-      <meta name="dc.title" content="Mesrai Documentation" />
-      <meta name="dc.creator" content="Mesrai" />
-      <meta name="dc.subject" content="AI code review, automated code review, GitHub integration, developer tools" />
-      <meta name="dc.description" content="Complete documentation for Mesrai - AI-powered code review platform that helps engineering teams ship code 3x faster." />
-      <meta name="dc.publisher" content="Mesrai" />
-      <meta name="dc.type" content="Documentation" />
-      <meta name="dc.format" content="text/html" />
-      <meta name="dc.language" content="en" />
+        {/* LLM / AI Discovery */}
+        <meta name="ai-content-declaration" content="human-written" />
+        <meta name="citation_title" content="Mesrai Documentation - AI-Powered Code Review Platform" />
+        <meta name="citation_author" content="Mesrai" />
+        <meta name="citation_publisher" content="Mesrai" />
+        <meta name="citation_online_date" content="2024" />
 
-      {/* Additional Discovery */}
-      <meta name="application-name" content="Mesrai Documentation" />
-      <meta name="apple-mobile-web-app-title" content="Mesrai Docs" />
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        {/* Dublin Core */}
+        <meta name="dc.title" content="Mesrai Documentation" />
+        <meta name="dc.creator" content="Mesrai" />
+        <meta name="dc.subject" content="AI code review, automated code review, GitHub integration, developer tools" />
+        <meta name="dc.description" content={SITE_DESCRIPTION} />
+        <meta name="dc.publisher" content="Mesrai" />
+        <meta name="dc.type" content="Documentation" />
+        <meta name="dc.format" content="text/html" />
+        <meta name="dc.language" content="en" />
 
-      {/* Geo and Language Tags */}
-      <meta name="geo.region" content="US" />
-      <meta name="geo.placename" content="United States" />
-      <meta httpEquiv="content-language" content="en-US" />
+        {/* Mobile Web App */}
+        <meta name="application-name" content="Mesrai Documentation" />
+        <meta name="apple-mobile-web-app-title" content="Mesrai Docs" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-      {/* Cache Control for Freshness */}
-      <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
-    </>
-  ),
+        {/* Geo & Language */}
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <meta httpEquiv="content-language" content="en-US" />
+
+        {/* Cache */}
+        <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
+      </>
+    )
+  },
 
   search: {
     placeholder: 'Search docs... ⌘K',
@@ -121,7 +135,6 @@ export default {
     defaultMenuCollapseLevel: 2,
     toggleButton: true,
     titleComponent({ title, type, route }) {
-      // Custom badge rendering for NEW/BETA items
       const badges = {
         '/features/architectural-analysis': 'NEW',
         '/integrations/bitbucket': 'BETA',
@@ -156,41 +169,37 @@ export default {
     component: <Footer />
   },
 
-  // Enable dark mode toggle
   darkMode: true,
 
-  // Theme configuration - Indigo primary color
-  primaryHue: 239,
-  primarySaturation: 84,
+  // Orange primary color matching main website
+  primaryHue: 27,
+  primarySaturation: 82,
 
-  // Next Themes configuration
   nextThemes: {
     defaultTheme: 'dark',
     storageKey: 'mesrai-theme'
   },
 
-  // Better navbar
   navbar: {
     extraContent: <NavbarExtra />
   },
 
-  // Banner for announcements
-banner: {
-  dismissible: true,
-  key: 'mesrai-early-access',
-  content: (
-    <a
-      href="/roadmap"
-      className="flex items-center justify-center gap-2 text-sm"
-    >
-      🚧 <span>
-        Mesrai is in <strong>free early access</strong> and evolving rapidly.
-        You may notice occasional incomplete reviews as we refine the system.
-      </span>
-      <span className="font-medium underline">
-        See what’s coming →
-      </span>
-    </a>
-  )
-}
+  banner: {
+    dismissible: true,
+    key: 'mesrai-early-access',
+    content: (
+      <a
+        href="/roadmap"
+        className="flex items-center justify-center gap-2 text-sm"
+      >
+        🚧 <span>
+          Mesrai is in <strong>free early access</strong> and evolving rapidly.
+          You may notice occasional incomplete reviews as we refine the system.
+        </span>
+        <span className="font-medium underline">
+          See what's coming →
+        </span>
+      </a>
+    )
+  }
 }

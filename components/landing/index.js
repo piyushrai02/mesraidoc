@@ -9,3 +9,4 @@ export { GetStartedSteps } from './GetStartedSteps';
 export { ConfigSection } from './ConfigSection';
 export { EnterpriseCard } from './EnterpriseCard';
 export { CommunityCard } from './CommunityCard';
+export { VideoSection } from './VideoSection';

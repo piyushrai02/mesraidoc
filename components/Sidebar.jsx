@@ -123,7 +123,7 @@ const Icons = {
 // Badge component
 const Badge = ({ type }) => {
   const styles = {
-    NEW: 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white',
+    NEW: 'bg-gradient-to-r from-orange-500 to-orange-400 text-white',
     BETA: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
   };
 
@@ -148,7 +148,7 @@ const MenuItem = ({ href, icon: Icon, label, badge, isActive, hasChildren, isOpe
             w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium
             transition-all duration-200 group
             ${active
-              ? 'bg-indigo-500/10 text-indigo-400'
+              ? 'bg-orange-500/10 text-orange-400'
               : 'text-zinc-400 hover:text-white hover:bg-white/5'
             }
           `}
@@ -177,14 +177,14 @@ const MenuItem = ({ href, icon: Icon, label, badge, isActive, hasChildren, isOpe
         flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium mb-0.5
         transition-all duration-200 group
         ${active
-          ? 'bg-indigo-500/10 text-indigo-400 border-l-2 border-indigo-500 -ml-[2px] pl-[14px]'
+          ? 'bg-orange-500/10 text-orange-400 border-l-2 border-orange-500 -ml-[2px] pl-[14px]'
           : 'text-zinc-400 hover:text-white hover:bg-white/5'
         }
       `}
       style={{ paddingLeft: depth > 0 ? `${12 + depth * 12}px` : undefined }}
     >
       {Icon && (
-        <span className={`${active ? 'text-indigo-400' : 'text-zinc-500 group-hover:text-zinc-300'} transition-colors`}>
+        <span className={`${active ? 'text-orange-400' : 'text-zinc-500 group-hover:text-zinc-300'} transition-colors`}>
           <Icon />
         </span>
       )}
