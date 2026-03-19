@@ -113,6 +113,16 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
   ),
+  Monitor: () => (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
+  VSCode: () => (
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.583 2.214L12.02 7.018 7.47 3.819 3.825 5.476v13.048l3.645 1.657 4.55-3.2 5.563 4.805 2.592-1.24V3.454l-2.592-1.24zM7.47 14.98l-1.645-.95V9.97l1.645-.95 3.12 2.98-3.12 2.98zm10.113 1.6l-1.645.95-3.12-2.98 3.12-2.98 1.645.95v4.06z"/>
+    </svg>
+  ),
   Webhook: () => (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -258,6 +268,11 @@ export const Sidebar = () => {
           icon={Icons.Setup}
           label="Quick Start"
         />
+
+        <CollapsibleSection icon={Icons.Monitor} label="IDE Setup" defaultOpen>
+          <MenuItem href="/ide-setup/overview" label="Overview" depth={1} />
+          <MenuItem href="/ide-setup/vscode" icon={Icons.VSCode} label="VS Code" badge="NEW" depth={1} />
+        </CollapsibleSection>
 
         {/* Core Concepts */}
         <SectionHeader title="Core Concepts" />

@@ -3,7 +3,7 @@ title: Managing Organization Members
 description: Add, remove, and manage organization member roles and permissions
 ---
 
-import DevelopmentNote from '../../../components/DevelopmentNote'
+import DevelopmentNote from "../../../components/DevelopmentNote";
 
 # Managing Members
 
@@ -14,6 +14,7 @@ Learn how to invite, manage, and remove members from your organization.
 ## Member Overview
 
 View all organization members:
+
 - Member name and email
 - Organization role
 - Team memberships
@@ -36,6 +37,7 @@ Member (lowest privilege)
 ### Owner Permissions
 
 Full administrative control:
+
 - ✅ All Admin permissions
 - ✅ Delete organization
 - ✅ Transfer ownership
@@ -49,6 +51,7 @@ Full administrative control:
 ### Admin Permissions
 
 Team and repository management:
+
 - ✅ All Member permissions
 - ✅ Invite/remove members (except Owners)
 - ✅ Create/delete teams
@@ -63,6 +66,7 @@ Team and repository management:
 ### Member Permissions
 
 Basic access:
+
 - ✅ View organization information
 - ✅ Join teams (if invited)
 - ✅ Access assigned repositories
@@ -85,6 +89,7 @@ Basic access:
 7. Click **Send Invitations**
 
 Example:
+
 ```
 Emails: alice@acme.com, bob@acme.com
 Role: Member
@@ -129,6 +134,7 @@ Members sync automatically from identity provider.
 Import multiple members via CSV:
 
 1. Prepare CSV file:
+
 ```csv
 email,role,teams
 alice@acme.com,ADMIN,"Engineering,Backend"
@@ -154,6 +160,7 @@ charlie@acme.com,MEMBER,"QA"
 ### Consequences of Removal
 
 When member is removed from organization:
+
 - ✅ Loses access to all organization repositories
 - ✅ Removed from all organization teams
 - ✅ Can't view organization analytics
@@ -247,6 +254,7 @@ Teams can invite organization members:
 ### Activity Metrics
 
 Track member activity:
+
 - **Reviews Participated**: PRs reviewed
 - **Comments Made**: Feedback given
 - **Repositories Accessed**: Repos viewed
@@ -256,6 +264,7 @@ Track member activity:
 ### Activity Timeline
 
 View chronological actions:
+
 ```
 2025-01-15 10:30 - Joined Engineering team
 2025-01-15 11:45 - Reviewed PR #234
@@ -266,6 +275,7 @@ View chronological actions:
 ### Inactive Members
 
 Identify inactive members:
+
 - No activity in 30+ days
 - No reviews participated
 - No teams joined
@@ -280,10 +290,12 @@ Consider removing or reaching out.
 Control repository access:
 
 **Organization-Level**
+
 - All members can access all repos (default)
 - Restrict to team-based access only
 
 **Member-Level Override**
+
 ```yaml
 member: alice@acme.com
 repositories:
@@ -296,15 +308,15 @@ repositories:
 
 Control feature availability:
 
-| Feature | Owner | Admin | Member |
-|---------|-------|-------|--------|
-| View Analytics | ✅ | ✅ | ✅ (read-only) |
-| Export Data | ✅ | ✅ | ❌ |
-| Manage Teams | ✅ | ✅ | ❌ |
-| Connect Repos | ✅ | ✅ | ❌ |
-| API Access | ✅ | ✅ | Limited |
-| Webhooks | ✅ | ✅ | ❌ |
-| Billing | ✅ | ❌ | ❌ |
+| Feature        | Owner | Admin | Member         |
+| -------------- | ----- | ----- | -------------- |
+| View Analytics | ✅    | ✅    | ✅ (read-only) |
+| Export Data    | ✅    | ✅    | ❌             |
+| Manage Teams   | ✅    | ✅    | ❌             |
+| Connect Repos  | ✅    | ✅    | ❌             |
+| API Access     | ✅    | ✅    | Limited        |
+| Webhooks       | ✅    | ✅    | ❌             |
+| Billing        | ✅    | ❌    | ❌             |
 
 ### API Key Management
 
@@ -325,15 +337,18 @@ POST /v1/organizations/{orgId}/members/{memberId}/keys
 ### Per-Member Configuration
 
 **Notification Preferences**
+
 - Email frequency: Real-time, Daily, Weekly
 - Slack mentions: Enabled/Disabled
 - In-app alerts: Enabled/Disabled
 
 **Review Settings**
+
 - Auto-assign reviews: Yes/No
 - Review focus areas: Security, Performance, etc.
 
 **Access Restrictions**
+
 - Allowed repositories: All or specific
 - API access level: Full, Limited, None
 - IP whitelist: Optional
@@ -343,6 +358,7 @@ POST /v1/organizations/{orgId}/members/{memberId}/keys
 ### Search Members
 
 Find members quickly:
+
 - Search by name
 - Search by email
 - Search by team
@@ -351,6 +367,7 @@ Find members quickly:
 ### Filter Members
 
 Apply filters:
+
 - **By Role**: Owner, Admin, Member
 - **By Status**: Active, Inactive, Invited
 - **By Team**: Engineering, Product, etc.
@@ -396,6 +413,7 @@ Send message to multiple members:
 **Problem**: Member sees "Access Denied"
 
 **Solutions**:
+
 1. Verify member accepted invitation
 2. Check member's email matches invitation
 3. Ensure member is not removed
@@ -406,6 +424,7 @@ Send message to multiple members:
 **Problem**: Role dropdown disabled
 
 **Solutions**:
+
 1. Check your role (need Owner or Admin)
 2. Can't demote last Owner
 3. Admins can't promote to Owner
@@ -416,6 +435,7 @@ Send message to multiple members:
 **Problem**: Member overwhelmed with notifications
 
 **Solutions**:
+
 1. Update notification preferences
 2. Configure email digest instead of real-time
 3. Disable certain notification types
@@ -426,6 +446,7 @@ Send message to multiple members:
 **Problem**: SSO enabled but user can't join
 
 **Solutions**:
+
 1. Verify SSO configuration
 2. Check user email domain matches verified domains
 3. Ensure user authenticated via SSO
@@ -436,6 +457,7 @@ Send message to multiple members:
 ### 1. Least Privilege Principle
 
 Start with minimal access:
+
 - New members → Member role
 - Promote based on needs
 - Regular role audits
@@ -444,6 +466,7 @@ Start with minimal access:
 ### 2. Regular Audits
 
 Quarterly review:
+
 - Remove inactive members
 - Verify role appropriateness
 - Check team memberships
@@ -452,6 +475,7 @@ Quarterly review:
 ### 3. Clear Onboarding
 
 When new member joins:
+
 1. ✅ Send welcome email
 2. ✅ Share organization guidelines
 3. ✅ Assign to relevant teams
@@ -461,6 +485,7 @@ When new member joins:
 ### 4. Proper Offboarding
 
 When member leaves:
+
 1. ✅ Remove organization access
 2. ✅ Transfer resource ownership
 3. ✅ Revoke API keys
@@ -530,6 +555,6 @@ POST /v1/organizations/{orgId}/members/bulk-invite
 
 Need help managing members?
 
-- [Discord Community](https://discord.gg/mesrai)
+- [Discord Community](https://discordapp.com/users/1436265373757341699)
 - [Email Support](mailto:support@mesrai.com)
 - [Documentation](/features/organizations/introduction)

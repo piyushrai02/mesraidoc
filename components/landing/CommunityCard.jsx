@@ -37,7 +37,7 @@ export const CommunityCard = () => {
 
       {/* CTA - Consistent orange button with inline styles for guaranteed visibility */}
       <a
-        href="https://discord.gg/mesrai"
+        href="https://discordapp.com/users/1436265373757341699"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2.5 font-semibold text-sm tracking-wide rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 no-underline"

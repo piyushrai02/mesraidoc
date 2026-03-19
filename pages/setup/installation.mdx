@@ -11,9 +11,27 @@ import { Steps, Callout, Tabs } from "nextra/components";
 
 Watch the complete installation and setup process:
 
-<div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', marginTop: '1rem', marginBottom: '2rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--mesrai-border, #27272A)', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+<div
+  style={{
+    position: "relative",
+    width: "100%",
+    paddingBottom: "56.25%",
+    marginTop: "1rem",
+    marginBottom: "2rem",
+    borderRadius: "12px",
+    overflow: "hidden",
+    border: "1px solid var(--mesrai-border, #27272A)",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+  }}
+>
   <iframe
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    }}
     src="https://www.youtube.com/embed/4SJ_XPc-sIw?rel=0&modestbranding=1"
     title="Mesrai Installation & Setup Guide"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -75,29 +93,33 @@ Before installing Mesrai, ensure you have:
 Click **Continue with GitHub** to authenticate.
 
 **First-time users:**
+
 - GitHub will ask you to authorize Mesrai
 - Review the permissions (read code, post comments, etc.)
 - Click **Authorize** to continue
 
 **Returning users:**
+
 - If you've already authorized Mesrai, you'll skip this step
 - You'll go directly to the Mesrai setup page
 
 <Callout type="info">
-  **Privacy Note:** Mesrai never stores your source code. All analysis happens in memory and is deleted immediately after review.
+  **Privacy Note:** Mesrai never stores your source code. All analysis happens
+  in memory and is deleted immediately after review.
 </Callout>
 
 #### Step 3: Choose Setup Option
 
 On the setup page, you'll see two options:
 
-| Option | Description | Best For |
-| --- | --- | --- |
+| Option                   | Description                                                          | Best For                    |
+| ------------------------ | -------------------------------------------------------------------- | --------------------------- |
 | **Connect Repositories** | Installs the GitHub App immediately. Start reviewing code instantly. | Fastest setup (Recommended) |
-| **Skip for Now** | Takes you to the dashboard. Install the GitHub App later. | Exploring settings first |
+| **Skip for Now**         | Takes you to the dashboard. Install the GitHub App later.            | Exploring settings first    |
 
 <Callout type="info">
-  For this guide, we'll choose **Connect Repositories** for the fastest setup. Click the **Connect Repositories** button.
+  For this guide, we'll choose **Connect Repositories** for the fastest setup.
+  Click the **Connect Repositories** button.
 </Callout>
 
 #### Step 4: Install GitHub App
@@ -120,12 +142,14 @@ Choose where to install Mesrai:
 Next, select which repositories Mesrai should review:
 
 **Option A: All Repositories** (Recommended)
+
 - Mesrai reviews all current repositories
 - Automatically includes future repositories
 - Simplest setup for teams
 - You can exclude specific repos later in settings
 
 **Option B: Only Select Repositories**
+
 - Choose specific repositories
 - More granular control
 - Add more repositories anytime
@@ -138,6 +162,7 @@ For this guide, select **All repositories** to enable Mesrai everywhere.
 Click the blue **Install** button at the bottom of the page.
 
 What happens next:
+
 1. GitHub installs the Mesrai App (takes 2-3 seconds)
 2. Webhooks are automatically configured
 3. You're redirected back to [app.mesrai.com](https://app.mesrai.com)
@@ -147,13 +172,15 @@ What happens next:
 You're now on the **Mesrai Dashboard!**
 
 You'll see:
+
 - List of all connected repositories
 - Installation status: **Active**
 - Repository sync status
 - Ready to review PRs
 
 <Callout type="info">
-  Click **Sync Repositories** if you don't see all your repos immediately — this refreshes the connection.
+  Click **Sync Repositories** if you don't see all your repos immediately — this
+  refreshes the connection.
 </Callout>
 
 ---
@@ -172,12 +199,12 @@ From now on, Mesrai will automatically review:
 
 When a PR is opened:
 
-| Stage | Time |
-| --- | --- |
-| **Detection** — Mesrai receives webhook from GitHub | 1-2 seconds |
-| **Analysis** — AI reviews code changes | 8-10 seconds |
-| **Findings Posted** — Comments appear on GitHub | 2-3 seconds |
-| **Total Time** | **~12-15 seconds** |
+| Stage                                               | Time               |
+| --------------------------------------------------- | ------------------ |
+| **Detection** — Mesrai receives webhook from GitHub | 1-2 seconds        |
+| **Analysis** — AI reviews code changes              | 8-10 seconds       |
+| **Findings Posted** — Comments appear on GitHub     | 2-3 seconds        |
+| **Total Time**                                      | **~12-15 seconds** |
 
 ### What You'll See on GitHub
 
@@ -212,12 +239,12 @@ To verify (optional):
 
 Expected configuration:
 
-| Setting | Value |
-| --- | --- |
-| Payload URL | `https://api.mesrai.com/webhooks/github` |
-| Content type | `application/json` |
-| Events | Pull requests, Push, Pull request reviews |
-| Status | Recent deliveries successful (green checkmark) |
+| Setting      | Value                                          |
+| ------------ | ---------------------------------------------- |
+| Payload URL  | `https://api.mesrai.com/webhooks/github`       |
+| Content type | `application/json`                             |
+| Events       | Pull requests, Push, Pull request reviews      |
+| Status       | Recent deliveries successful (green checkmark) |
 
 ### Test Your First Review
 
@@ -248,6 +275,7 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 #### Problem: "Authorize" button doesn't work
 
 **Solution:**
+
 1. Disable browser extensions (especially ad blockers)
 2. Try incognito/private mode
 3. Clear browser cache and cookies
@@ -256,6 +284,7 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 #### Problem: Stuck on "Redirecting..."
 
 **Solution:**
+
 1. Check if pop-ups are blocked (allow pop-ups for mesrai.com)
 2. Wait 30 seconds — sometimes GitHub authorization takes time
 3. Refresh the page and try again
@@ -264,6 +293,7 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 #### Problem: Don't see repositories after installation
 
 **Solution:**
+
 1. Click the **Sync Repositories** button on the dashboard
 2. Wait 10-20 seconds for sync to complete
 3. Refresh the page
@@ -277,25 +307,30 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 **Possible causes & solutions:**
 
 **1. Repository not synced**
+
 - Go to Mesrai dashboard → Repositories
 - Verify repository shows **Active** status
 - Click **Sync** if status is **Pending**
 
 **2. Webhook delivery failed**
+
 - Go to GitHub repo → Settings → Webhooks
 - Click on Mesrai webhook → "Recent Deliveries"
 - Check if deliveries show errors
 - Solution: Re-install the GitHub App
 
 **3. PR from forked repository**
+
 - GitHub security prevents automatic triggers from forks
 - Solution: Manually approve workflow in GitHub (coming soon)
 
 **4. First review taking longer**
+
 - First reviews can take 20-30 seconds (codebase indexing)
 - Solution: Wait a bit longer, refresh PR page
 
 **5. Only non-code files changed**
+
 - Mesrai skips PRs with only README, config, or documentation changes
 - This is expected behavior
 
@@ -304,16 +339,19 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 #### Problem: "Insufficient permissions" or "Access denied"
 
 **1. Verify admin access**
+
 - You need admin/owner role on the repository
 - Check: Repository → Settings → Manage Access
 - Solution: Ask repo admin to grant you access or install Mesrai
 
 **2. Organization restrictions**
+
 - Your organization may restrict third-party apps
 - Check: Organization Settings → Third-party application access policy
 - Solution: Ask org admin to approve Mesrai
 
 **3. Re-authorize the app**
+
 - Go to [github.com/settings/installations](https://github.com/settings/installations)
 - Find **Mesrai** → Click **Configure**
 - Add missing repositories
@@ -324,6 +362,7 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 #### Problem: Webhook shows errors in GitHub
 
 **Check webhook status:**
+
 1. GitHub repo → Settings → Webhooks
 2. Click on Mesrai webhook
 3. Go to **Recent Deliveries** tab
@@ -331,12 +370,12 @@ Mesrai will detect the SQL injection vulnerability and post a comment with a fix
 
 **Common errors:**
 
-| Error | Cause | Solution |
-| --- | --- | --- |
-| **Connection timeout** | Temporary network issue | GitHub retries automatically, wait a few minutes |
-| **404 Not Found** | Webhook URL incorrect or outdated | Re-install the GitHub App |
-| **401 Unauthorized** | Authentication expired | Re-authorize Mesrai in your dashboard settings |
-| **500 Internal Server Error** | Temporary server issue | Check [status.mesrai.com](https://status.mesrai.com) or contact support |
+| Error                         | Cause                             | Solution                                                                |
+| ----------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
+| **Connection timeout**        | Temporary network issue           | GitHub retries automatically, wait a few minutes                        |
+| **404 Not Found**             | Webhook URL incorrect or outdated | Re-install the GitHub App                                               |
+| **401 Unauthorized**          | Authentication expired            | Re-authorize Mesrai in your dashboard settings                          |
+| **500 Internal Server Error** | Temporary server issue            | Check [status.mesrai.com](https://status.mesrai.com) or contact support |
 
 ---
 
@@ -373,13 +412,14 @@ Customize per repository:
 ### Support Channels
 
 - **Email:** [support@mesrai.com](mailto:support@mesrai.com)
-- **Discord:** [discord.gg/mesrai](https://discord.gg/mesrai)
+- **Discord:** [discord.gg/mesrai](https://discordapp.com/users/1436265373757341699)
 - **Documentation:** [docs.mesrai.com](https://docs.mesrai.com)
 - **Bug Reports:** [github.com/mesrai/issues](https://github.com/mesrai/issues)
 
 ### When Contacting Support
 
 Please include:
+
 - GitHub username or organization name
 - Repository name (if applicable)
 - Pull request number (if applicable)
@@ -405,61 +445,75 @@ Now that Mesrai is installed:
 
 export const InstallationFlow = () => {
   const steps = [
-    'Visit mesrai.com',
-    'Click Console',
-    'Continue with GitHub',
-    'GitHub Authorization',
-    'Connect Repositories',
-    'GitHub App Installation',
-    'Select Organization',
-    'Choose Repositories',
-    'Click Install',
-    'Redirected to Dashboard',
-    'View Connected Repos',
-    'Installation Complete',
-  ]
+    "Visit mesrai.com",
+    "Click Console",
+    "Continue with GitHub",
+    "GitHub Authorization",
+    "Connect Repositories",
+    "GitHub App Installation",
+    "Select Organization",
+    "Choose Repositories",
+    "Click Install",
+    "Redirected to Dashboard",
+    "View Connected Repos",
+    "Installation Complete",
+  ];
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '10px', margin: '1.5rem 0' }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+        gap: "10px",
+        margin: "1.5rem 0",
+      }}
+    >
       {steps.map((label, i) => (
         <div
           key={i}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            padding: '12px 16px',
-            borderRadius: '10px',
-            border: '1px solid var(--mesrai-border, #27272A)',
-            background: i === steps.length - 1
-              ? 'linear-gradient(135deg, rgba(232,119,46,0.12), rgba(240,148,77,0.06))'
-              : 'var(--mesrai-bg-card, #141517)',
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            padding: "12px 16px",
+            borderRadius: "10px",
+            border: "1px solid var(--mesrai-border, #27272A)",
+            background:
+              i === steps.length - 1
+                ? "linear-gradient(135deg, rgba(232,119,46,0.12), rgba(240,148,77,0.06))"
+                : "var(--mesrai-bg-card, #141517)",
           }}
         >
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '13px',
-            fontWeight: 700,
-            flexShrink: 0,
-            background: i === steps.length - 1
-              ? 'linear-gradient(135deg, #E8772E, #F0944D)'
-              : 'rgba(232,119,46,0.1)',
-            color: i === steps.length - 1 ? '#fff' : '#E8772E',
-          }}>
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "13px",
+              fontWeight: 700,
+              flexShrink: 0,
+              background:
+                i === steps.length - 1
+                  ? "linear-gradient(135deg, #E8772E, #F0944D)"
+                  : "rgba(232,119,46,0.1)",
+              color: i === steps.length - 1 ? "#fff" : "#E8772E",
+            }}
+          >
             {i + 1}
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 600 }} className="text-gray-900 dark:text-white">
+          <span
+            style={{ fontSize: "13px", fontWeight: 600 }}
+            className="text-gray-900 dark:text-white"
+          >
             {label}
           </span>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 <InstallationFlow />
 

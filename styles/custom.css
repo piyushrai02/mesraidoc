@@ -520,6 +520,37 @@ html:not(.dark) .landing-page a[style] span {
   -webkit-text-fill-color: unset !important;
 }
 
+/* Override for CTA buttons in article content (e.g. IDE setup install buttons) */
+article a.no-underline[style] {
+  border-bottom: none !important;
+  color: #ffffff !important;
+}
+
+article a.no-underline[style] span,
+article a.no-underline[style] svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Extension cards - prevent article link color override */
+article a.ext-card {
+  color: inherit !important;
+  border-bottom: none !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+article a.ext-card:hover {
+  color: inherit !important;
+}
+
+/* Extension card grid - single row on desktop, stack on mobile */
+@media (max-width: 767px) {
+  .max-md\:\!grid-cols-1 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Lists */
 html.dark ul,
 html.dark ol {

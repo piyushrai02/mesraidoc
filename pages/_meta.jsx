@@ -5,6 +5,7 @@ export default {
   },
   introduction: 'Introduction',
   setup: 'Setup',
+  'ide-setup': 'IDE Setup',
   features: 'Features',
   'ai-review': 'AI Review',
   performance: 'Performance',

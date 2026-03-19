@@ -12,7 +12,7 @@ module.exports = {
   // Advanced priority settings based on page importance
   transform: async (config, path) => {
     // High priority pages
-    const highPriorityPages = ['/', '/introduction/what-is-mesrai', '/setup/installation', '/faq'];
+    const highPriorityPages = ['/', '/introduction/what-is-mesrai', '/setup/installation', '/ide-setup/overview', '/ide-setup/vscode', '/faq'];
     // Medium-high priority pages
     const mediumHighPages = ['/features', '/integrations', '/api-reference'];
 

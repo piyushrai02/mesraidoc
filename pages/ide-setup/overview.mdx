@@ -1,0 +1,191 @@
+---
+title: IDE Setup - Configure Mesrai in Your Code Editor
+description: Set up Mesrai AI-powered code review in your favorite IDE. Install extensions for VS Code, Cursor, Windsurf, and more. Get real-time inline review suggestions, quick fixes, and code analysis directly in your editor.
+---
+
+import { Callout } from "nextra/components";
+import { TechArticleSchema } from "../../components/seo/JsonLd";
+
+<TechArticleSchema
+  title="IDE Setup - Configure Mesrai in Your Code Editor"
+  description="Set up Mesrai AI-powered code review in your favorite IDE. Install extensions for VS Code, Cursor, Windsurf, and more."
+  datePublished="2025-01-15"
+  dateModified="2026-03-19"
+  keywords={[
+    "Mesrai IDE setup",
+    "VS Code extension",
+    "Cursor extension",
+    "Windsurf extension",
+    "AI code review IDE",
+    "code editor integration",
+    "inline code review",
+    "real-time code analysis",
+    "developer tools",
+    "IDE plugin",
+  ]}
+/>
+
+# IDE Setup
+
+Bring Mesrai's AI-powered code review directly into your development workflow. Install the Mesrai extension in your favorite IDE to get **real-time inline suggestions**, **quick fixes**, and **code analysis** without leaving your editor.
+
+## Available Extensions
+
+export const VSCodeIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+    <path d="M74.616 0.34L96.226 10.975c2.26 1.093 3.699 3.39 3.699 5.925v66.2c0 2.535-1.44 4.832-3.699 5.925L74.616 99.66a6.226 6.226 0 01-7.108-1.1L28.127 63.04 12.193 74.93a4.163 4.163 0 01-5.318-.261L1.222 69.4a4.168 4.168 0 01-.003-6.167L15.86 50 1.22 36.767a4.168 4.168 0 01.003-6.167l5.653-5.269a4.163 4.163 0 015.318-.261L28.127 36.96 67.508 1.44a6.226 6.226 0 017.108-1.1z" fill="#007ACC"/>
+    <path d="M96.226 89.025c2.26-1.093 3.699-3.39 3.699-5.925V16.9c0-2.535-1.44-4.832-3.699-5.925L74.616.34a6.226 6.226 0 00-7.108 1.1L28.127 36.96 12.193 25.07a4.163 4.163 0 00-5.318.261L1.222 30.6a4.168 4.168 0 00-.003 6.167L15.86 50 1.22 63.233a4.168 4.168 0 00.003 6.167l5.653 5.269a4.163 4.163 0 005.318.261L28.127 63.04l39.381 35.52a6.226 6.226 0 007.108 1.1l21.61-10.635z" fill="#0065A9"/>
+    <path d="M74.616 99.66a6.226 6.226 0 01-7.108-1.1L28.127 63.04 12.193 74.93a4.163 4.163 0 01-5.318-.261L1.222 69.4a4.168 4.168 0 01-.003-6.167L15.86 50 1.22 36.767a4.168 4.168 0 01.003-6.167l5.653-5.269a4.163 4.163 0 015.318-.261L28.127 36.96 67.508 1.44a6.226 6.226 0 017.108 1.1" fill="#007ACC"/>
+    <path fillRule="evenodd" clipRule="evenodd" d="M75.024 27.47L45.178 50l29.846 22.53V27.47z" fill="#fff" fillOpacity=".4"/>
+  </svg>
+);
+
+export const CursorIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 4l8 16 2.5-6.5L21 11 4 4z" fill="#999" stroke="#777" strokeWidth="1" strokeLinejoin="round"/>
+    <path d="M14.5 13.5l4 4" stroke="#777" strokeWidth="1" strokeLinecap="round"/>
+  </svg>
+);
+
+export const WindsurfIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text x="3" y="17" fontFamily="system-ui, sans-serif" fontSize="14" fontWeight="700" fill="#666" letterSpacing="-0.5">W</text>
+  </svg>
+);
+
+export const ExtensionCard = ({ name, icon, status, description, href }) => {
+  const Tag = href ? "a" : "div";
+  const linkProps = href ? { href } : {};
+  return (
+    <Tag
+      {...linkProps}
+      className={`ext-card block rounded-xl border transition-all duration-200 no-underline
+        ${href ? "cursor-pointer" : "cursor-default"}
+        border-gray-200 dark:border-zinc-800
+        bg-white dark:bg-zinc-900/60
+        hover:border-orange-400/50 dark:hover:border-orange-500/40
+        hover:shadow-md dark:hover:shadow-orange-500/5
+      `}
+      style={{ padding: "16px", textDecoration: "none" }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
+        <div
+          className={`flex items-center justify-center rounded-xl
+            ${status === "available"
+              ? "bg-blue-50 dark:bg-blue-500/10 border border-blue-200/60 dark:border-blue-500/20"
+              : "bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700"
+            }
+          `}
+          style={{ width: "44px", height: "44px", flexShrink: 0 }}
+        >
+          {icon}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+          <span style={{ fontSize: "15px", fontWeight: 700 }} className="text-gray-900 dark:text-white">
+            {name}
+          </span>
+          {status === "available" && (
+            <span
+              style={{
+                padding: "2px 8px",
+                borderRadius: "9999px",
+                fontSize: "10px",
+                fontWeight: 600,
+                background: "linear-gradient(135deg, #E8772E, #F0944D)",
+                color: "#fff",
+                letterSpacing: "0.03em",
+              }}
+            >
+              AVAILABLE
+            </span>
+          )}
+          {status === "coming-soon" && (
+            <span
+              className="text-gray-500 dark:text-zinc-500 bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700"
+              style={{
+                padding: "2px 8px",
+                borderRadius: "9999px",
+                fontSize: "10px",
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              COMING SOON
+            </span>
+          )}
+        </div>
+      </div>
+      <p style={{ fontSize: "13px", lineHeight: "1.55", margin: 0 }} className="text-gray-500 dark:text-zinc-400">
+        {description}
+      </p>
+    </Tag>
+  );
+};
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "14px",
+    margin: "1.5rem 0",
+  }}
+  className="max-md:!grid-cols-1"
+>
+  <ExtensionCard
+    name="VS Code"
+    icon={<VSCodeIcon />}
+    status="available"
+    description="Multi-agent analysis, inline diagnostics, one-click fixes, and four review modes."
+    href="/ide-setup/vscode"
+  />
+  <ExtensionCard
+    name="Cursor"
+    icon={<CursorIcon />}
+    status="coming-soon"
+    description="AI-native editor integration with Mesrai's review engine for enhanced code quality."
+  />
+  <ExtensionCard
+    name="Windsurf"
+    icon={<WindsurfIcon />}
+    status="coming-soon"
+    description="Seamless integration with Windsurf for inline code review and suggestions."
+  />
+</div>
+
+## Why Use Mesrai in Your IDE?
+
+### Catch Issues Before You Commit
+
+Get AI-powered feedback as you write code — before it ever reaches a pull request. Mesrai analyzes your changes in real-time and surfaces potential issues directly in your editor.
+
+### Key Benefits
+
+| Feature | Description |
+| --- | --- |
+| **Multi-Agent Analysis** | 7 specialized agents cover security, performance, architecture, code quality, best practices, error handling, and maintainability |
+| **Inline Diagnostics** | Native squiggly underlines and Problems panel entries — just like ESLint or TypeScript errors |
+| **One-Click Fixes** | Lightbulb quick fixes applied automatically — no copy-pasting |
+| **Four Review Modes** | Review & Commit, Review Uncommitted, Review Unpushed, and Review Current File |
+| **Sidebar Dashboard** | Account status, review actions, findings list with severity badges, and review statistics |
+| **Status Bar** | See review state at a glance — idle, reviewing, or open findings count |
+
+### How It Works
+
+1. **Install the extension** in your IDE
+2. **Sign in** with your Mesrai account via the Command Palette
+3. **Run a review** — right-click a file or use one of the four review modes
+4. **See findings** as native inline diagnostics with severity levels
+5. **Apply fixes** with one click via the lightbulb Quick Fix menu
+
+<Callout type="info">
+  IDE extensions work alongside Mesrai's GitHub integration. You get reviews
+  both in your editor during development and on pull requests when you push.
+</Callout>
+
+## Getting Started
+
+Choose your IDE above to follow the detailed setup guide. We recommend starting with the **[VS Code extension](/ide-setup/vscode)** — our most feature-rich integration.
+
+---
+
+**Want support for another IDE?** Let us know on [Discord](https://discordapp.com/users/1436265373757341699) or [GitHub](https://github.com/mesraiofficial) — we prioritize based on community demand.

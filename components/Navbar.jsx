@@ -87,6 +87,24 @@ const NavDropdown = ({ label, items }) => {
   );
 };
 
+const NavIconLink = ({ href, label, icon }) => (
+  <div className="relative group">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center w-9 h-9 rounded-lg transition-colors bg-gray-100 dark:bg-[#1A1A1A] hover:bg-gray-200 dark:hover:bg-[#252525] text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+      aria-label={label}
+    >
+      {icon}
+    </a>
+    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 text-xs font-medium text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-50 shadow-lg">
+      {label}
+      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 dark:bg-white rotate-45" />
+    </div>
+  </div>
+);
+
 const GitHubStars = () => (
   <a
     href="https://github.com/mesraiofficial"
@@ -227,11 +245,30 @@ export const NavbarExtra = () => {
         </NavLink>
       </nav>
 
-      {/* GitHub stars */}
-      {/* <GitHubStars /> */}
-
-      {/* Install CTA */}
-      <InstallButton />
+      {/* App links - icon only with tooltips */}
+      <div className="hidden md:flex items-center gap-1.5">
+        <NavIconLink
+          href="https://marketplace.visualstudio.com/items?itemName=MesraiDev.mesrai-vscode"
+          label="Get VS Code Extension"
+          icon={
+            <svg className="w-5 h-5" viewBox="0 0 100 100" fill="none">
+              <path d="M74.616 0.34L96.226 10.975c2.26 1.093 3.699 3.39 3.699 5.925v66.2c0 2.535-1.44 4.832-3.699 5.925L74.616 99.66a6.226 6.226 0 01-7.108-1.1L28.127 63.04 12.193 74.93a4.163 4.163 0 01-5.318-.261L1.222 69.4a4.168 4.168 0 01-.003-6.167L15.86 50 1.22 36.767a4.168 4.168 0 01.003-6.167l5.653-5.269a4.163 4.163 0 015.318-.261L28.127 36.96 67.508 1.44a6.226 6.226 0 017.108-1.1z" fill="#007ACC"/>
+              <path d="M96.226 89.025c2.26-1.093 3.699-3.39 3.699-5.925V16.9c0-2.535-1.44-4.832-3.699-5.925L74.616.34a6.226 6.226 0 00-7.108 1.1L28.127 36.96 12.193 25.07a4.163 4.163 0 00-5.318.261L1.222 30.6a4.168 4.168 0 00-.003 6.167L15.86 50 1.22 63.233a4.168 4.168 0 00.003 6.167l5.653 5.269a4.163 4.163 0 005.318.261L28.127 63.04l39.381 35.52a6.226 6.226 0 007.108 1.1l21.61-10.635z" fill="#0065A9"/>
+              <path d="M74.616 99.66a6.226 6.226 0 01-7.108-1.1L28.127 63.04 12.193 74.93a4.163 4.163 0 01-5.318-.261L1.222 69.4a4.168 4.168 0 01-.003-6.167L15.86 50 1.22 36.767a4.168 4.168 0 01.003-6.167l5.653-5.269a4.163 4.163 0 015.318-.261L28.127 36.96 67.508 1.44a6.226 6.226 0 017.108 1.1" fill="#007ACC"/>
+              <path fillRule="evenodd" clipRule="evenodd" d="M75.024 27.47L45.178 50l29.846 22.53V27.47z" fill="#fff" fillOpacity=".4"/>
+            </svg>
+          }
+        />
+        <NavIconLink
+          href="https://github.com/apps/mesraipilot"
+          label="Install GitHub App"
+          icon={
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd"/>
+            </svg>
+          }
+        />
+      </div>
 
       {/* Theme toggle */}
       <ThemeToggle />

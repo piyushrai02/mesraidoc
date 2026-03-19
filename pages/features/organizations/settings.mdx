@@ -3,7 +3,7 @@ title: Organization Settings
 description: Configure organization profile, security, integrations, and preferences
 ---
 
-import DevelopmentNote from '../../../components/DevelopmentNote'
+import DevelopmentNote from "../../../components/DevelopmentNote";
 
 # Organization Settings
 
@@ -22,27 +22,32 @@ Configure your organization's profile, security, and global preferences.
 ### Basic Information
 
 **Organization Name**
+
 - Unique identifier
 - 3-50 characters
 - Cannot be changed after creation
 - Used in URLs and API calls
 
 **Display Name**
+
 - Human-readable name
 - Can be changed anytime
 - Shown in UI and emails
 
 **Description**
+
 - Brief organization purpose
 - Max 500 characters
 - Visible to all members
 
 **Website**
+
 - Organization website URL
 - Optional
 - Displayed in profile
 
 Example:
+
 ```yaml
 name: acme-engineering
 display_name: ACME Engineering Team
@@ -55,12 +60,14 @@ website: https://engineering.acme.com
 Upload custom branding:
 
 **Logo Requirements**
+
 - Recommended size: 512x512 px
 - Formats: PNG, JPG, SVG
 - Max file size: 2 MB
 - Transparent background recommended
 
 **Upload Process**
+
 1. Click **Change Logo**
 2. Select image file
 3. Crop/adjust if needed
@@ -85,6 +92,7 @@ metadata:
 ### Default Role
 
 Set default role for new members:
+
 - **Owner**: Full control (not recommended)
 - **Admin**: Management access
 - **Member**: Read access (recommended)
@@ -94,14 +102,17 @@ Set default role for new members:
 Control how members join:
 
 **Auto-Approval**
+
 - Members join immediately upon invitation acceptance
 - Recommended for trusted domains
 
 **Manual Approval**
+
 - Require Owner/Admin approval before granting access
 - Extra security for sensitive organizations
 
 **Domain-Based Auto-Join**
+
 ```yaml
 auto_join:
   enabled: true
@@ -119,8 +130,8 @@ Configure member limits:
 ```yaml
 limits:
   max_members: 100
-  warn_at: 90  # Send warning at 90% capacity
-  enforce: true  # Block new members at limit
+  warn_at: 90 # Send warning at 90% capacity
+  enforce: true # Block new members at limit
 ```
 
 ## Security Settings
@@ -128,6 +139,7 @@ limits:
 ### Two-Factor Authentication
 
 **Require 2FA for all members**
+
 - Enforcement level: Required/Optional
 - Grace period: 7/14/30 days
 - Bypass for SSO users: Yes/No
@@ -143,11 +155,13 @@ two_factor:
 ### Session Management
 
 **Session Timeout**
+
 - Idle timeout: 15/30/60/120 minutes
 - Absolute timeout: 8/12/24 hours
 - Remember device: 30 days
 
 **Concurrent Sessions**
+
 - Max sessions per user: 1/3/5/unlimited
 - Force logout on password change: Yes/No
 
@@ -159,8 +173,8 @@ Restrict access by IP address:
 ip_whitelist:
   enabled: true
   allowed_ranges:
-    - 203.0.113.0/24  # Office network
-    - 198.51.100.0/24  # VPN
+    - 203.0.113.0/24 # Office network
+    - 198.51.100.0/24 # VPN
   block_all_others: true
 ```
 
@@ -169,6 +183,7 @@ ip_whitelist:
 ### API Security
 
 **API Key Restrictions**
+
 ```yaml
 api:
   require_ip_whitelist: true
@@ -178,6 +193,7 @@ api:
 ```
 
 **Rate Limiting**
+
 - Global: 1000 requests/hour
 - Per-key: 100 requests/hour
 - Burst: 50 requests/minute
@@ -187,11 +203,12 @@ api:
 ### GitHub Integration
 
 **GitHub App Configuration**
+
 ```yaml
 github:
   installation_id: 12345678
   organization: acme-corp
-  repositories: all  # or specific list
+  repositories: all # or specific list
   permissions:
     - pull_requests: read_write
     - contents: read
@@ -199,6 +216,7 @@ github:
 ```
 
 **Auto-Review Settings**
+
 ```yaml
 auto_review:
   enabled: true
@@ -218,6 +236,7 @@ auto_review:
 ### Slack Integration
 
 **Workspace Connection**
+
 ```yaml
 slack:
   workspace_id: T01234567
@@ -231,6 +250,7 @@ slack:
 ```
 
 **Custom Notifications**
+
 - Review completed → #code-reviews
 - Security issues → #security
 - High token usage → #engineering-leads
@@ -238,6 +258,7 @@ slack:
 ### Webhook Configuration
 
 **Organization Webhooks**
+
 ```yaml
 webhooks:
   - name: "Production Events"
@@ -252,6 +273,7 @@ webhooks:
 ```
 
 **Webhook Events**
+
 - `review.started`
 - `review.completed`
 - `review.failed`
@@ -264,6 +286,7 @@ webhooks:
 ### Other Integrations
 
 **Jira**
+
 ```yaml
 jira:
   site: acme.atlassian.net
@@ -272,6 +295,7 @@ jira:
 ```
 
 **PagerDuty**
+
 ```yaml
 pagerduty:
   service_key: xxxxxxxxxxxxx
@@ -283,12 +307,14 @@ pagerduty:
 ### Email Notifications
 
 **Notification Frequency**
+
 - Real-time (immediate)
 - Hourly digest
 - Daily digest
 - Weekly digest
 
 **Notification Types**
+
 ```yaml
 email:
   review_completed: real-time
@@ -302,6 +328,7 @@ email:
 ### In-App Notifications
 
 Configure in-app alerts:
+
 - Enable/disable per event type
 - Show desktop notifications
 - Play sound on notifications
@@ -310,6 +337,7 @@ Configure in-app alerts:
 ### Slack Notifications
 
 **Channel Routing**
+
 ```yaml
 slack_routing:
   default: "#code-reviews"
@@ -323,12 +351,14 @@ slack_routing:
 ### Subscription Plan
 
 Current plan information:
+
 - Plan name: Team/Enterprise
 - Monthly cost: $X/month
 - Billing cycle: Monthly/Annual
 - Next billing date: YYYY-MM-DD
 
 **Change Plan**
+
 1. Click **Upgrade/Downgrade**
 2. Select new plan
 3. Review changes
@@ -339,11 +369,13 @@ Current plan information:
 ### Payment Methods
 
 **Add Payment Method**
+
 - Credit/Debit card
 - ACH transfer (Enterprise)
 - Invoice billing (Enterprise)
 
 **Primary Payment Method**
+
 - Set default payment method
 - Backup payment methods
 - Auto-update expiring cards
@@ -351,15 +383,17 @@ Current plan information:
 ### Usage Limits
 
 **Token Limits**
+
 ```yaml
 usage_limits:
   monthly_tokens: 1000000
-  warn_at: 800000  # 80%
+  warn_at: 800000 # 80%
   hard_limit: true
   overage_allowed: false
 ```
 
 **Notifications**
+
 - 50% usage warning
 - 80% usage alert
 - 100% usage limit reached
@@ -378,6 +412,7 @@ usage_limits:
 **Configure SSO Provider**
 
 **SAML 2.0**
+
 ```yaml
 sso:
   enabled: true
@@ -385,10 +420,11 @@ sso:
   entity_id: https://acme.okta.com
   sso_url: https://acme.okta.com/app/mesrai/sso
   certificate: "-----BEGIN CERTIFICATE-----..."
-  enforce: true  # Require SSO for all members
+  enforce: true # Require SSO for all members
 ```
 
 **OIDC**
+
 ```yaml
 oidc:
   enabled: true
@@ -399,6 +435,7 @@ oidc:
 ```
 
 **SCIM Provisioning**
+
 ```yaml
 scim:
   enabled: true
@@ -413,15 +450,18 @@ scim:
 
 1. Choose subdomain: `reviews.acme.com`
 2. Add DNS records:
+
 ```
 CNAME reviews.acme.com → mesrai.com
 TXT   reviews.acme.com → mesrai-verification=xxxxx
 ```
+
 3. Verify domain ownership
 4. Enable SSL certificate
 5. Domain active in 24-48 hours
 
 **SSL Certificate**
+
 - Auto-provisioned via Let's Encrypt
 - Auto-renewal every 90 days
 - Custom certificate upload (Enterprise)
@@ -429,18 +469,20 @@ TXT   reviews.acme.com → mesrai-verification=xxxxx
 ### Audit Logging
 
 **Enable Audit Logs**
+
 ```yaml
 audit_logging:
   enabled: true
-  retention: 365  # days
+  retention: 365 # days
   events:
-    - all  # or specific events
+    - all # or specific events
   export:
     format: json
     destination: s3://acme-audit-logs/
 ```
 
 **Logged Events**
+
 - Member additions/removals
 - Role changes
 - Settings changes
@@ -449,6 +491,7 @@ audit_logging:
 - API key usage
 
 **Export Audit Logs**
+
 - Download as JSON/CSV
 - Export to SIEM
 - Schedule automatic exports
@@ -457,12 +500,14 @@ audit_logging:
 ### Data Residency
 
 **Choose Data Region**
+
 - US East (Virginia)
 - US West (Oregon)
 - EU (Frankfurt)
 - Asia Pacific (Singapore)
 
 **Data Transfer**
+
 - Request data export
 - Transfer between regions
 - Delete organization data
@@ -470,6 +515,7 @@ audit_logging:
 ### API Configuration
 
 **API Access**
+
 ```yaml
 api:
   enabled: true
@@ -485,6 +531,7 @@ api:
 ```
 
 **API Keys**
+
 - Organization-level keys
 - Member-level keys
 - Service account keys
@@ -495,6 +542,7 @@ api:
 ### Transfer Ownership
 
 Transfer organization to another Owner:
+
 1. Select new Owner
 2. Confirm with password
 3. New Owner must accept
@@ -511,6 +559,7 @@ Transfer organization to another Owner:
 5. Organization deleted immediately
 
 **What Gets Deleted**
+
 - ✅ All teams
 - ✅ All repositories connections
 - ✅ All members (removed from org)
@@ -519,6 +568,7 @@ Transfer organization to another Owner:
 - ✅ All billing data
 
 **What Remains**
+
 - ❌ Member personal accounts
 - ❌ GitHub repositories (not deleted)
 - ❌ Past invoices (available for download for 90 days)
@@ -568,6 +618,6 @@ PATCH /v1/organizations/{orgId}/settings
 
 Need help with settings?
 
-- [Discord Community](https://discord.gg/mesrai)
+- [Discord Community](https://discordapp.com/users/1436265373757341699)
 - [Email Support](mailto:support@mesrai.com)
 - [Documentation](/features/organizations/introduction)

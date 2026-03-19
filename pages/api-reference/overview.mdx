@@ -3,7 +3,7 @@ title: API Overview
 description: Complete guide to the Mesrai REST API - authentication, rate limits, error handling, and getting started.
 ---
 
-import { Callout, Tabs, Steps } from 'nextra/components'
+import { Callout, Tabs, Steps } from "nextra/components";
 
 # Mesrai API Overview
 
@@ -27,7 +27,8 @@ curl https://api.mesrai.com/v1/reviews \
 ```
 
 <Callout type="info">
-Get your API key from the [Mesrai Dashboard](https://app.mesrai.com/settings/api) under Settings → API Keys.
+  Get your API key from the [Mesrai
+  Dashboard](https://app.mesrai.com/settings/api) under Settings → API Keys.
 </Callout>
 
 ### Creating an API Key
@@ -37,10 +38,13 @@ Get your API key from the [Mesrai Dashboard](https://app.mesrai.com/settings/api
 Go to [Dashboard Settings](https://app.mesrai.com/settings/api)
 
 ### Generate New Key
+
 Click "Create API Key"
 
 ### Configure Permissions
+
 Select the scopes your key needs:
+
 - `review:read` - Read review data
 - `review:write` - Create and update reviews
 - `org:read` - Read organization data
@@ -49,7 +53,9 @@ Select the scopes your key needs:
 - `team:write` - Manage teams
 
 ### Save Securely
+
 Copy and store your API key securely. You won't be able to see it again!
+
 </Steps>
 
 ## API Versioning
@@ -128,43 +134,43 @@ All responses are returned in JSON format with this structure:
 
 ## HTTP Status Codes
 
-| Status Code | Description |
-|-------------|-------------|
-| `200 OK` | Request successful |
-| `201 Created` | Resource created successfully |
-| `204 No Content` | Request successful, no content returned |
-| `400 Bad Request` | Invalid request parameters |
-| `401 Unauthorized` | Missing or invalid API key |
-| `403 Forbidden` | Insufficient permissions |
-| `404 Not Found` | Resource not found |
-| `422 Unprocessable Entity` | Validation failed |
-| `429 Too Many Requests` | Rate limit exceeded |
-| `500 Internal Server Error` | Server error |
-| `503 Service Unavailable` | Service temporarily unavailable |
+| Status Code                 | Description                             |
+| --------------------------- | --------------------------------------- |
+| `200 OK`                    | Request successful                      |
+| `201 Created`               | Resource created successfully           |
+| `204 No Content`            | Request successful, no content returned |
+| `400 Bad Request`           | Invalid request parameters              |
+| `401 Unauthorized`          | Missing or invalid API key              |
+| `403 Forbidden`             | Insufficient permissions                |
+| `404 Not Found`             | Resource not found                      |
+| `422 Unprocessable Entity`  | Validation failed                       |
+| `429 Too Many Requests`     | Rate limit exceeded                     |
+| `500 Internal Server Error` | Server error                            |
+| `503 Service Unavailable`   | Service temporarily unavailable         |
 
 ## Error Codes
 
 Common error codes you might encounter:
 
-| Code | Description |
-|------|-------------|
-| `invalid_api_key` | API key is invalid or expired |
-| `insufficient_permissions` | API key lacks required scopes |
-| `rate_limit_exceeded` | You've exceeded your rate limit |
-| `invalid_request` | Request format is invalid |
-| `validation_error` | Request validation failed |
-| `resource_not_found` | Requested resource doesn't exist |
-| `conflict` | Resource conflict (e.g., duplicate) |
-| `internal_error` | Internal server error |
+| Code                       | Description                         |
+| -------------------------- | ----------------------------------- |
+| `invalid_api_key`          | API key is invalid or expired       |
+| `insufficient_permissions` | API key lacks required scopes       |
+| `rate_limit_exceeded`      | You've exceeded your rate limit     |
+| `invalid_request`          | Request format is invalid           |
+| `validation_error`         | Request validation failed           |
+| `resource_not_found`       | Requested resource doesn't exist    |
+| `conflict`                 | Resource conflict (e.g., duplicate) |
+| `internal_error`           | Internal server error               |
 
 ## Rate Limiting
 
 API requests are rate limited based on your plan:
 
-| Plan | Rate Limit |
-|------|------------|
-| Free | 100 requests/hour |
-| Pro | 1,000 requests/hour |
+| Plan       | Rate Limit           |
+| ---------- | -------------------- |
+| Free       | 100 requests/hour    |
+| Pro        | 1,000 requests/hour  |
 | Enterprise | 10,000 requests/hour |
 
 Rate limit information is included in response headers:
@@ -176,7 +182,8 @@ X-RateLimit-Reset: 1642377600
 ```
 
 <Callout type="warning">
-When you exceed your rate limit, you'll receive a `429 Too Many Requests` response. Wait until the reset time before making more requests.
+  When you exceed your rate limit, you'll receive a `429 Too Many Requests`
+  response. Wait until the reset time before making more requests.
 </Callout>
 
 ## Pagination
@@ -256,16 +263,17 @@ npm install @mesrai/sdk
 ```
 
 ```javascript
-import { Mesrai } from '@mesrai/sdk'
+import { Mesrai } from "@mesrai/sdk";
 
 const mesrai = new Mesrai({
-  apiKey: 'msr_live_...'
-})
+  apiKey: "msr_live_...",
+});
 
 const review = await mesrai.reviews.create({
-  pullRequestUrl: 'https://github.com/owner/repo/pull/123'
-})
+  pullRequestUrl: "https://github.com/owner/repo/pull/123",
+});
 ```
+
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -282,6 +290,7 @@ review = client.reviews.create(
     pull_request_url='https://github.com/owner/repo/pull/123'
 )
 ```
+
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -298,6 +307,7 @@ review, err := client.Reviews.Create(&mesrai.ReviewParams{
     PullRequestURL: "https://github.com/owner/repo/pull/123",
 })
 ```
+
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -314,6 +324,7 @@ review = client.reviews.create(
   pull_request_url: 'https://github.com/owner/repo/pull/123'
 )
 ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -326,13 +337,14 @@ msr_test_abc123...
 ```
 
 Test mode features:
+
 - No charges applied
 - Use test data
 - Predictable responses
 - No side effects
 
 <Callout type="info">
-Test API keys are prefixed with `msr_test_` while live keys use `msr_live_`.
+  Test API keys are prefixed with `msr_test_` while live keys use `msr_live_`.
 </Callout>
 
 ## Best Practices
@@ -352,34 +364,34 @@ echo ".env" >> .gitignore
 
 ```javascript
 try {
-  const review = await mesrai.reviews.create(params)
+  const review = await mesrai.reviews.create(params);
 } catch (error) {
   if (error.status === 429) {
     // Rate limit exceeded - wait and retry
-    await sleep(error.retryAfter * 1000)
-    return retry()
+    await sleep(error.retryAfter * 1000);
+    return retry();
   }
 
   if (error.status >= 500) {
     // Server error - log and alert
-    logger.error('Mesrai API error', error)
-    alertOncall()
+    logger.error("Mesrai API error", error);
+    alertOncall();
   }
 
   // Handle other errors
-  throw error
+  throw error;
 }
 ```
 
 ### 3. Use Idempotency Keys
 
 ```javascript
-const idempotencyKey = generateUUID()
+const idempotencyKey = generateUUID();
 
 const review = await mesrai.reviews.create({
   pullRequestUrl: prUrl,
-  idempotencyKey
-})
+  idempotencyKey,
+});
 ```
 
 ### 4. Implement Exponential Backoff
@@ -388,12 +400,12 @@ const review = await mesrai.reviews.create({
 async function retryWithBackoff(fn, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     try {
-      return await fn()
+      return await fn();
     } catch (error) {
-      if (i === maxRetries - 1) throw error
+      if (i === maxRetries - 1) throw error;
 
-      const delay = Math.pow(2, i) * 1000
-      await sleep(delay)
+      const delay = Math.pow(2, i) * 1000;
+      await sleep(delay);
     }
   }
 }
@@ -404,10 +416,10 @@ async function retryWithBackoff(fn, maxRetries = 3) {
 Track your API usage and set up alerts:
 
 ```javascript
-const usage = await mesrai.account.usage()
+const usage = await mesrai.account.usage();
 
 if (usage.rate_limit.remaining < 100) {
-  alert('Low API quota remaining')
+  alert("Low API quota remaining");
 }
 ```
 
@@ -424,12 +436,13 @@ if (usage.rate_limit.remaining < 100) {
 ### Help
 
 - 📧 Email: api@mesrai.com
-- 💬 Discord: [Join our community](https://discord.gg/mesrai)
+- 💬 Discord: [Join our community](https://discordapp.com/users/1436265373757341699)
 - 📖 API Status: [status.mesrai.com](https://status.mesrai.com)
 
 ### Changelog
 
 Stay updated with API changes:
+
 - [API Changelog](/changelog)
 - [Breaking Changes](/api-reference/breaking-changes)
 
@@ -438,31 +451,31 @@ Stay updated with API changes:
 Here's a complete example to get started:
 
 ```javascript
-import { Mesrai } from '@mesrai/sdk'
+import { Mesrai } from "@mesrai/sdk";
 
 const mesrai = new Mesrai({
-  apiKey: process.env.MESRAI_API_KEY
-})
+  apiKey: process.env.MESRAI_API_KEY,
+});
 
 // Create a review
 const review = await mesrai.reviews.create({
-  pullRequestUrl: 'https://github.com/owner/repo/pull/123',
-  autoReview: true
-})
+  pullRequestUrl: "https://github.com/owner/repo/pull/123",
+  autoReview: true,
+});
 
-console.log(`Review created: ${review.id}`)
-console.log(`Status: ${review.status}`)
-console.log(`Score: ${review.score}`)
+console.log(`Review created: ${review.id}`);
+console.log(`Status: ${review.status}`);
+console.log(`Score: ${review.score}`);
 
 // Wait for completion
-while (review.status !== 'completed') {
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  review = await mesrai.reviews.retrieve(review.id)
+while (review.status !== "completed") {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  review = await mesrai.reviews.retrieve(review.id);
 }
 
 // Get review comments
-const comments = await mesrai.reviews.comments.list(review.id)
-console.log(`Found ${comments.data.length} issues`)
+const comments = await mesrai.reviews.comments.list(review.id);
+console.log(`Found ${comments.data.length} issues`);
 ```
 
 Ready to build with Mesrai? [Get your API key →](https://app.mesrai.com/settings/api)

@@ -1,0 +1,218 @@
+---
+title: Mesrai VS Code Extension - AI Code Review in Visual Studio Code
+description: Install the Mesrai VS Code extension for AI-powered code review. Multi-agent analysis catches security flaws, performance issues, and architecture violations with inline diagnostics, one-click fixes, and four review modes.
+---
+
+import { Steps, Callout } from "nextra/components";
+import { TechArticleSchema, HowToSchema } from "../../components/seo/JsonLd";
+
+<TechArticleSchema
+  title="Mesrai VS Code Extension - AI Code Review in Visual Studio Code"
+  description="Install the Mesrai VS Code extension for AI-powered code review with multi-agent analysis, inline diagnostics, and one-click fixes."
+  datePublished="2025-01-15"
+  dateModified="2026-03-19"
+  keywords={[
+    "Mesrai VS Code extension",
+    "VS Code AI code review",
+    "Visual Studio Code extension",
+    "AI code review plugin",
+    "VS Code code analysis",
+    "inline code diagnostics",
+    "multi-agent code review",
+    "VS Code security scanning",
+    "code quality VS Code",
+    "Mesrai IDE integration",
+  ]}
+/>
+
+<HowToSchema
+  title="How to Install Mesrai VS Code Extension"
+  description="Step-by-step guide to install and configure the Mesrai AI code review extension in Visual Studio Code."
+  totalTime="PT3M"
+  steps={[
+    {
+      name: "Install the Extension",
+      text: "Install Mesrai - AI Code Review from the VS Code Marketplace or search for 'Mesrai' in the Extensions panel",
+    },
+    {
+      name: "Sign In",
+      text: "Open the Command Palette (Cmd+Shift+P / Ctrl+Shift+P) and run Mesrai: Log In to authorize the extension",
+    },
+    {
+      name: "Run Your First Review",
+      text: "Open any file with changes and right-click > Mesrai: Review Current File",
+    },
+  ]}
+/>
+
+# Mesrai for VS Code
+
+Mesrai doesn't just lint your code — it understands context. Each file is analyzed by **multiple specialized agents** that examine different dimensions of quality, delivering findings as native editor diagnostics directly in your workflow.
+
+<div style={{ margin: "1.5rem 0" }}>
+  <a
+    href="https://marketplace.visualstudio.com/items?itemName=MesraiDev.mesrai-vscode"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="no-underline"
+    style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "10px",
+      padding: "12px 24px",
+      borderRadius: "10px",
+      background: "linear-gradient(135deg, #E8772E, #F0944D)",
+      color: "#ffffff",
+      fontSize: "15px",
+      fontWeight: 700,
+      textDecoration: "none",
+      transition: "all 0.2s ease",
+    }}
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" style={{ fill: "#ffffff", flexShrink: 0 }}>
+      <path d="M17.583 2.214L12.02 7.018 7.47 3.819 3.825 5.476v13.048l3.645 1.657 4.55-3.2 5.563 4.805 2.592-1.24V3.454l-2.592-1.24zM7.47 14.98l-1.645-.95V9.97l1.645-.95 3.12 2.98-3.12 2.98zm10.113 1.6l-1.645.95-3.12-2.98 3.12-2.98 1.645.95v4.06z" />
+    </svg>
+    <span style={{ color: "#ffffff" }}>Install from VS Code Marketplace</span>
+  </a>
+</div>
+
+---
+
+## Key Features
+
+### Intelligent Code Analysis
+
+Each file is analyzed by multiple specialized agents that examine different dimensions of quality:
+
+| Agent | What It Catches |
+| --- | --- |
+| **Security** | SQL injection, XSS, hardcoded secrets, auth flaws |
+| **Performance** | N+1 queries, memory leaks, unnecessary re-renders |
+| **Architecture** | SOLID violations, circular dependencies, tight coupling |
+| **Code Quality** | Dead code, duplicated logic, naming issues |
+| **Best Practices** | Anti-patterns, deprecated API usage, missing edge cases |
+| **Error Handling** | Unhandled promises, swallowed exceptions, missing validation |
+| **Maintainability** | Complex functions, poor abstractions, missing documentation |
+
+### Inline Diagnostics
+
+Findings appear as **native editor diagnostics** — squiggly underlines in your code and entries in the Problems panel, just like ESLint or TypeScript errors.
+
+- **Red underline** — Critical or High severity
+- **Yellow underline** — Medium severity
+- **Blue underline** — Low or Informational
+
+### One-Click Fixes
+
+When Mesrai suggests a code fix, a **lightbulb icon** appears. Click **Quick Fix** to apply the suggestion automatically — no copy-pasting needed.
+
+### Inline Review Comments
+
+Findings appear as review comments attached directly to the relevant lines, similar to GitHub PR review comments. Each comment includes **severity**, **explanation**, and **suggested fix** when available.
+
+### Four Review Modes
+
+| Mode | Command | Use Case |
+| --- | --- | --- |
+| **Review & Commit** | `Mesrai: Review & Commit` | Gate your commits with an AI review |
+| **Review Uncommitted** | `Mesrai: Review Uncommitted Changes` | Check all working tree changes |
+| **Review Unpushed** | `Mesrai: Review Unpushed Commits` | Review everything before pushing |
+| **Review Current File** | Right-click > `Mesrai: Review Current File` | Quick check on a single file |
+
+### Sidebar Dashboard
+
+The Mesrai sidebar gives you a complete overview:
+
+- **Account status** — Plan tier, token usage, organization
+- **Review actions** — One-click access to all review modes
+- **Findings list** — Browse all issues with severity badges and click-to-navigate
+- **Review statistics** — Files analyzed, issues found, severity breakdown
+
+### Status Bar Integration
+
+The Mesrai indicator in your status bar shows the current state at a glance — **idle**, **reviewing**, or the **number of open findings**. Click it for quick access to all actions.
+
+---
+
+## Getting Started
+
+<Steps>
+
+### Install the Extension
+
+Install **Mesrai - AI Code Review** from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=MesraiDev.mesrai-vscode) or search for **"Mesrai"** in the Extensions panel.
+
+**Via Command Line:**
+
+```bash
+code --install-extension MesraiDev.mesrai-vscode
+```
+
+### Sign In
+
+Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **`Mesrai: Log In`**. You'll be redirected to your Mesrai dashboard to authorize the extension.
+
+<Callout type="info">
+  Don't have an account? [Sign up for free](https://app.mesrai.com) — no credit card required.
+</Callout>
+
+### Run Your First Review
+
+Open any file with changes and **right-click > Mesrai: Review Current File**. Your code will be analyzed and findings will appear inline within seconds.
+
+</Steps>
+
+---
+
+## Extension Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `mesrai.apiUrl` | `https://app.mesrai.com` | Mesrai API endpoint |
+| `mesrai.token` | — | IDE access token (`msr_...`) for manual auth |
+| `mesrai.preCommitReview` | `true` | Prompt for AI review before each commit |
+| `mesrai.severityThreshold` | `low` | Minimum severity level to display findings |
+
+---
+
+## Requirements
+
+| Requirement | Details |
+| --- | --- |
+| **VS Code** | 1.85 or later |
+| **Git** | Installed and a Git repository open in your workspace |
+| **Mesrai Account** | [Create one for free](https://app.mesrai.com) |
+
+---
+
+## Uninstall
+
+To remove the Mesrai extension:
+
+1. Open Extensions panel (`Cmd+Shift+X` / `Ctrl+Shift+X`)
+2. Search for **"Mesrai"**
+3. Click **Uninstall**
+
+Or via command line:
+
+```bash
+code --uninstall-extension MesraiDev.mesrai-vscode
+```
+
+---
+
+## Next Steps
+
+- **[Install the GitHub App](https://github.com/apps/mesraipilot)** — Get automatic PR reviews alongside your IDE
+- **[AI Review Overview](/ai-review/overview)** — Learn how Mesrai's review engine works
+- **[Privacy & Security](/features/privacy-security)** — How Mesrai handles your code
+
+---
+
+## Support
+
+Need help with the VS Code extension?
+
+- **[GitHub Issues](https://github.com/mesraiofficial/mesrai-vscode/issues)** — Report bugs and request features
+- **[Discord](https://discordapp.com/users/1436265373757341699)** — Chat with the community and Mesrai team
+- **[Email](mailto:support@mesrai.com)** — Reach our support team directly

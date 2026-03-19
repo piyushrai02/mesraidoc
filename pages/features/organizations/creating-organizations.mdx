@@ -3,7 +3,7 @@ title: Creating Organizations
 description: Step-by-step guide to creating and configuring your organization
 ---
 
-import DevelopmentNote from '../../../components/DevelopmentNote'
+import DevelopmentNote from "../../../components/DevelopmentNote";
 
 # Creating Organizations
 
@@ -14,6 +14,7 @@ Step-by-step guide to creating and setting up a new organization in Mesrai.
 ## Prerequisites
 
 Before creating an organization:
+
 - Active Mesrai account
 - Verified email address
 - Subscription plan (Starter or higher)
@@ -31,26 +32,31 @@ Before creating an organization:
 Provide organization details:
 
 **Organization Name** (required)
+
 - Unique, descriptive name
 - 3-50 characters
 - Letters, numbers, hyphens allowed
 - Examples: "acme-corp", "engineering-team", "client-alpha"
 
 **Display Name** (optional)
+
 - Human-readable name
 - Examples: "ACME Corporation", "Engineering Team", "Client Alpha"
 
 **Organization Slug** (auto-generated)
+
 - URL-safe identifier
 - Used in URLs: `app.mesrai.com/org/{slug}`
 - Cannot be changed after creation
 
 **Description** (optional)
+
 - Brief purpose or scope
 - Visible to all members
 - Max 500 characters
 
 Example:
+
 ```
 Name: acme-engineering
 Display Name: ACME Engineering
@@ -63,16 +69,19 @@ Description: Engineering department for ACME Corporation
 Configure initial preferences:
 
 **Default Member Role**
+
 - Owner (full control)
 - Admin (management access)
 - Member (read access)
 
 **Visibility**
+
 - Private (invite-only)
 - Internal (company members)
 - Public (discoverable)
 
 **Notifications**
+
 - Email notifications
 - Slack integration
 - In-app alerts
@@ -93,6 +102,7 @@ Can be skipped and done later.
 Set up integrations:
 
 **GitHub App**
+
 1. Click "Connect GitHub"
 2. Authorize Mesrai GitHub App
 3. Select organization
@@ -101,6 +111,7 @@ Set up integrations:
 [Learn more about GitHub integration →](/integrations/github-app-installation)
 
 **Other Integrations**
+
 - Slack notifications
 - Jira issue tracking
 - PagerDuty alerts
@@ -119,6 +130,7 @@ Set up billing for the organization:
 ### Step 7: Review and Create
 
 Review configuration:
+
 - Organization name and details
 - Member invitations
 - Connected integrations
@@ -132,12 +144,14 @@ Click **Create Organization** to finish.
 ### Profile Settings
 
 **Organization Logo**
+
 - Upload custom logo
 - Recommended: 512x512 px
 - Formats: PNG, JPG, SVG
 - Max size: 2 MB
 
 **Organization Details**
+
 ```yaml
 name: acme-engineering
 display_name: ACME Engineering
@@ -149,16 +163,18 @@ size: 50-100 employees
 ### Access Control
 
 **Single Sign-On (SSO)**
+
 ```yaml
 sso:
   enabled: true
   provider: okta
   domain: acme.okta.com
-  enforce: true  # Require SSO for all members
+  enforce: true # Require SSO for all members
 ```
 
 **Domain Verification**
 Verify email domains:
+
 ```
 Verified Domains:
   - acme.com ✓
@@ -170,11 +186,13 @@ Auto-join: Members with verified domains auto-join
 ### Security Settings
 
 **Two-Factor Authentication**
+
 - Require 2FA for all members
 - Grace period: 7 days
 - Enforcement level: Strict/Flexible
 
 **API Access**
+
 ```yaml
 api:
   enabled: true
@@ -185,6 +203,7 @@ api:
 ```
 
 **Audit Logging**
+
 - Log all actions
 - Retention: 90 days (Pro), 1 year (Enterprise)
 - Export to external SIEM
@@ -237,6 +256,7 @@ integrations:
 Use templates for common setups:
 
 ### Startup Template
+
 ```yaml
 template: startup
 members: 5-10
@@ -249,6 +269,7 @@ features:
 ```
 
 ### Enterprise Template
+
 ```yaml
 template: enterprise
 members: 100+
@@ -263,6 +284,7 @@ features:
 ```
 
 ### Agency Template
+
 ```yaml
 template: agency
 organizations: multiple (one per client)
@@ -302,14 +324,14 @@ Convert personal account to organization:
 
 ### What Gets Transferred
 
-| Item | Transferred | Notes |
-|------|-------------|-------|
-| Repositories | ✅ | Must reconnect GitHub App |
-| Review History | ✅ | All historical reviews preserved |
-| Analytics | ✅ | Historical data retained |
-| API Keys | ❌ | Generate new keys |
-| Webhooks | ❌ | Reconfigure webhooks |
-| Integrations | ❌ | Reconnect integrations |
+| Item           | Transferred | Notes                            |
+| -------------- | ----------- | -------------------------------- |
+| Repositories   | ✅          | Must reconnect GitHub App        |
+| Review History | ✅          | All historical reviews preserved |
+| Analytics      | ✅          | Historical data retained         |
+| API Keys       | ❌          | Generate new keys                |
+| Webhooks       | ❌          | Reconfigure webhooks             |
+| Integrations   | ❌          | Reconnect integrations           |
 
 ## Multi-Organization Setup
 
@@ -318,6 +340,7 @@ Managing multiple organizations:
 ### Organization Switcher
 
 Quick switch between organizations:
+
 1. Click organization name in sidebar
 2. Select from dropdown
 3. Context switches instantly
@@ -357,6 +380,7 @@ john@acme.com
 **Problem**: "Organization name is unavailable"
 
 **Solutions**:
+
 1. Try variations: add hyphens, numbers
 2. Use display name for branding
 3. Contact support if you own the trademark
@@ -366,6 +390,7 @@ john@acme.com
 **Problem**: "You've reached the organization limit"
 
 **Solutions**:
+
 1. Check your subscription plan limits
 2. Upgrade to higher tier
 3. Delete unused organizations
@@ -376,6 +401,7 @@ john@acme.com
 **Problem**: Can't connect GitHub to organization
 
 **Solutions**:
+
 1. Verify GitHub organization admin access
 2. Check Mesrai is authorized in GitHub
 3. Re-authorize GitHub App
@@ -388,6 +414,7 @@ john@acme.com
 **Problem**: Invited members can't see organization
 
 **Solutions**:
+
 1. Verify invitation was sent and accepted
 2. Check email domain restrictions
 3. Ensure member has verified email
@@ -398,6 +425,7 @@ john@acme.com
 ### 1. Clear Naming Convention
 
 Use consistent naming:
+
 - **Client-based**: `client-acme`, `client-techcorp`
 - **Department-based**: `engineering`, `product`, `data`
 - **Project-based**: `project-alpha`, `project-beta`
@@ -405,6 +433,7 @@ Use consistent naming:
 ### 2. Proper Isolation
 
 Separate organizations for:
+
 - Different clients (agencies)
 - Different legal entities
 - Independent billing requirements
@@ -413,6 +442,7 @@ Separate organizations for:
 ### 3. Documentation
 
 Document organization purpose:
+
 - Who should join
 - What repositories to connect
 - Billing responsibility
@@ -421,6 +451,7 @@ Document organization purpose:
 ### 4. Regular Audits
 
 Quarterly review:
+
 - Remove inactive members
 - Audit repository access
 - Review billing and usage
@@ -446,6 +477,7 @@ POST /v1/organizations
 ```
 
 Response:
+
 ```json
 {
   "id": "org_abc123",
@@ -487,6 +519,6 @@ DELETE /v1/organizations/{orgId}
 
 Need help creating organizations?
 
-- [Discord Community](https://discord.gg/mesrai)
+- [Discord Community](https://discordapp.com/users/1436265373757341699)
 - [Email Support](mailto:support@mesrai.com)
 - [Schedule Demo](https://mesrai.com/demo)

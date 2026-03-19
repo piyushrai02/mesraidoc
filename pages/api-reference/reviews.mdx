@@ -3,7 +3,7 @@ title: Reviews API
 description: Create, retrieve, and manage AI-powered code reviews via the Mesrai API. Complete reference with examples and best practices.
 ---
 
-import { Callout, Tabs } from 'nextra/components'
+import { Callout, Tabs } from "nextra/components";
 
 # Reviews API
 
@@ -46,18 +46,18 @@ The Reviews API allows you to programmatically create, retrieve, and manage AI-p
 
 ### Attributes
 
-| Attribute | Type | Description |
-|-----------|------|-------------|
-| `id` | string | Unique review identifier |
-| `pull_request` | object | Pull request details |
-| `status` | enum | Review status: `pending`, `in_progress`, `completed`, `failed` |
-| `score` | integer | Code quality score (0-100) |
-| `summary` | string | AI-generated review summary |
-| `stats` | object | Review statistics |
-| `created_at` | timestamp | When review was created |
-| `completed_at` | timestamp | When review was completed |
-| `organization_id` | string | Organization ID |
-| `team_id` | string | Team ID |
+| Attribute         | Type      | Description                                                    |
+| ----------------- | --------- | -------------------------------------------------------------- |
+| `id`              | string    | Unique review identifier                                       |
+| `pull_request`    | object    | Pull request details                                           |
+| `status`          | enum      | Review status: `pending`, `in_progress`, `completed`, `failed` |
+| `score`           | integer   | Code quality score (0-100)                                     |
+| `summary`         | string    | AI-generated review summary                                    |
+| `stats`           | object    | Review statistics                                              |
+| `created_at`      | timestamp | When review was created                                        |
+| `completed_at`    | timestamp | When review was completed                                      |
+| `organization_id` | string    | Organization ID                                                |
+| `team_id`         | string    | Team ID                                                        |
 
 ## Create a Review
 
@@ -69,14 +69,14 @@ POST /v1/reviews
 
 ### Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `pull_request_url` | string | Yes | GitHub PR URL |
-| `auto_review` | boolean | No | Start review automatically (default: true) |
-| `inline_comments` | boolean | No | Post inline comments (default: true) |
-| `check_security` | boolean | No | Include security scan (default: true) |
-| `check_performance` | boolean | No | Include performance analysis (default: true) |
-| `team_id` | string | No | Associate with specific team |
+| Parameter           | Type    | Required | Description                                  |
+| ------------------- | ------- | -------- | -------------------------------------------- |
+| `pull_request_url`  | string  | Yes      | GitHub PR URL                                |
+| `auto_review`       | boolean | No       | Start review automatically (default: true)   |
+| `inline_comments`   | boolean | No       | Post inline comments (default: true)         |
+| `check_security`    | boolean | No       | Include security scan (default: true)        |
+| `check_performance` | boolean | No       | Include performance analysis (default: true) |
+| `team_id`           | string  | No       | Associate with specific team                 |
 
 ### Example Request
 
@@ -103,7 +103,8 @@ const review = await mesrai.reviews.create({
 })
 
 console.log(`Review created: ${review.id}`)
-```
+
+````
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -115,7 +116,8 @@ review = client.reviews.create(
 )
 
 print(f'Review created: {review.id}')
-```
+````
+
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -127,7 +129,8 @@ review, err := client.Reviews.Create(&mesrai.ReviewParams{
 })
 
 fmt.Printf("Review created: %s\n", review.ID)
-```
+
+````
   </Tabs.Tab>
 </Tabs>
 
@@ -145,7 +148,7 @@ fmt.Printf("Review created: %s\n", review.ID)
     "created_at": "2025-01-15T10:00:00Z"
   }
 }
-```
+````
 
 ## Retrieve a Review
 
@@ -187,16 +190,16 @@ GET /v1/reviews
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `limit` | integer | Items per page (default: 25, max: 100) |
-| `after` | string | Cursor for pagination |
-| `status` | enum | Filter by status |
-| `team_id` | string | Filter by team |
-| `repository` | string | Filter by repository |
-| `created_after` | timestamp | Filter by creation date |
-| `created_before` | timestamp | Filter by creation date |
-| `sort` | string | Sort field (e.g., `-created_at`) |
+| Parameter        | Type      | Description                            |
+| ---------------- | --------- | -------------------------------------- |
+| `limit`          | integer   | Items per page (default: 25, max: 100) |
+| `after`          | string    | Cursor for pagination                  |
+| `status`         | enum      | Filter by status                       |
+| `team_id`        | string    | Filter by team                         |
+| `repository`     | string    | Filter by repository                   |
+| `created_after`  | timestamp | Filter by creation date                |
+| `created_before` | timestamp | Filter by creation date                |
+| `sort`           | string    | Sort field (e.g., `-created_at`)       |
 
 ### Example Request
 
@@ -317,16 +320,16 @@ curl https://api.mesrai.com/v1/reviews/rev_abc123/comments \
 
 ### Comment Object
 
-| Attribute | Type | Description |
-|-----------|------|-------------|
-| `id` | string | Comment identifier |
-| `type` | enum | `security`, `performance`, `style`, `bug`, `suggestion` |
-| `severity` | enum | `critical`, `important`, `warning`, `info` |
-| `message` | string | Comment message |
-| `file` | string | File path |
-| `line` | integer | Line number |
-| `suggestion` | string | Suggested fix |
-| `code_snippet` | string | Relevant code |
+| Attribute      | Type    | Description                                             |
+| -------------- | ------- | ------------------------------------------------------- |
+| `id`           | string  | Comment identifier                                      |
+| `type`         | enum    | `security`, `performance`, `style`, `bug`, `suggestion` |
+| `severity`     | enum    | `critical`, `important`, `warning`, `info`              |
+| `message`      | string  | Comment message                                         |
+| `file`         | string  | File path                                               |
+| `line`         | integer | Line number                                             |
+| `suggestion`   | string  | Suggested fix                                           |
+| `code_snippet` | string  | Relevant code                                           |
 
 ## Review Statistics
 
@@ -385,18 +388,18 @@ Reviews typically complete in 30-60 seconds. Poll the status:
 ```javascript
 async function waitForCompletion(reviewId) {
   while (true) {
-    const review = await mesrai.reviews.retrieve(reviewId)
+    const review = await mesrai.reviews.retrieve(reviewId);
 
-    if (review.status === 'completed') {
-      return review
+    if (review.status === "completed") {
+      return review;
     }
 
-    if (review.status === 'failed') {
-      throw new Error('Review failed')
+    if (review.status === "failed") {
+      throw new Error("Review failed");
     }
 
     // Wait 5 seconds before next check
-    await new Promise(resolve => setTimeout(resolve, 5000))
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 }
 ```
@@ -408,21 +411,21 @@ Instead of polling, use webhooks:
 ```javascript
 // Setup webhook
 await mesrai.webhooks.create({
-  url: 'https://your-app.com/webhooks/mesrai',
-  events: ['review.completed', 'review.failed']
-})
+  url: "https://your-app.com/webhooks/mesrai",
+  events: ["review.completed", "review.failed"],
+});
 
 // Handle webhook
-app.post('/webhooks/mesrai', (req, res) => {
-  const event = req.body
+app.post("/webhooks/mesrai", (req, res) => {
+  const event = req.body;
 
-  if (event.type === 'review.completed') {
-    const review = event.data
-    console.log(`Review ${review.id} completed with score ${review.score}`)
+  if (event.type === "review.completed") {
+    const review = event.data;
+    console.log(`Review ${review.id} completed with score ${review.score}`);
   }
 
-  res.sendStatus(200)
-})
+  res.sendStatus(200);
+});
 ```
 
 ### 3. Handle Errors Gracefully
@@ -448,12 +451,12 @@ try {
 ### 4. Use Idempotency for Safety
 
 ```javascript
-const idempotencyKey = `review-${prNumber}-${timestamp}`
+const idempotencyKey = `review-${prNumber}-${timestamp}`;
 
 const review = await mesrai.reviews.create({
   pullRequestUrl: prUrl,
-  idempotencyKey
-})
+  idempotencyKey,
+});
 ```
 
 ### 5. Batch Processing
@@ -462,22 +465,22 @@ Process multiple PRs efficiently:
 
 ```javascript
 const prs = [
-  'https://github.com/owner/repo/pull/1',
-  'https://github.com/owner/repo/pull/2',
-  'https://github.com/owner/repo/pull/3'
-]
+  "https://github.com/owner/repo/pull/1",
+  "https://github.com/owner/repo/pull/2",
+  "https://github.com/owner/repo/pull/3",
+];
 
 // Create reviews in parallel
 const reviews = await Promise.all(
-  prs.map(url => mesrai.reviews.create({ pullRequestUrl: url }))
-)
+  prs.map((url) => mesrai.reviews.create({ pullRequestUrl: url })),
+);
 
 // Wait for all to complete
 const completed = await Promise.all(
-  reviews.map(r => waitForCompletion(r.id))
-)
+  reviews.map((r) => waitForCompletion(r.id)),
+);
 
-console.log(`Completed ${completed.length} reviews`)
+console.log(`Completed ${completed.length} reviews`);
 ```
 
 ## Common Use Cases
@@ -512,22 +515,28 @@ jobs:
 Generate daily review reports:
 
 ```javascript
-const startOfDay = new Date()
-startOfDay.setHours(0, 0, 0, 0)
+const startOfDay = new Date();
+startOfDay.setHours(0, 0, 0, 0);
 
 const reviews = await mesrai.reviews.list({
   createdAfter: startOfDay.toISOString(),
-  status: 'completed',
-  limit: 100
-})
+  status: "completed",
+  limit: 100,
+});
 
 const stats = {
   total: reviews.data.length,
-  avgScore: reviews.data.reduce((sum, r) => sum + r.score, 0) / reviews.data.length,
-  criticalIssues: reviews.data.reduce((sum, r) => sum + r.stats.issues.critical, 0)
-}
+  avgScore:
+    reviews.data.reduce((sum, r) => sum + r.score, 0) / reviews.data.length,
+  criticalIssues: reviews.data.reduce(
+    (sum, r) => sum + r.stats.issues.critical,
+    0,
+  ),
+};
 
-console.log(`Daily Report: ${stats.total} reviews, avg score ${stats.avgScore}`)
+console.log(
+  `Daily Report: ${stats.total} reviews, avg score ${stats.avgScore}`,
+);
 ```
 
 ### Quality Gates
@@ -555,14 +564,14 @@ console.log('Quality gate passed ✓')
 
 Reviews API rate limits:
 
-| Plan | Rate Limit | Burst |
-|------|------------|-------|
-| Free | 10 reviews/hour | 20 reviews/day |
-| Pro | 100 reviews/hour | 500 reviews/day |
-| Enterprise | 1000 reviews/hour | Unlimited |
+| Plan       | Rate Limit        | Burst           |
+| ---------- | ----------------- | --------------- |
+| Free       | 10 reviews/hour   | 20 reviews/day  |
+| Pro        | 100 reviews/hour  | 500 reviews/day |
+| Enterprise | 1000 reviews/hour | Unlimited       |
 
 <Callout type="info">
-Rate limits are per organization. Contact sales for higher limits.
+  Rate limits are per organization. Contact sales for higher limits.
 </Callout>
 
 ## Next Steps
@@ -572,4 +581,4 @@ Rate limits are per organization. Contact sales for higher limits.
 - [Teams API](/api-reference/teams)
 - [Webhooks](/api-reference/webhooks)
 
-Need help? Contact api@mesrai.com or join our [Discord](https://discord.gg/mesrai).
+Need help? Contact api@mesrai.com or join our [Discord](https://discordapp.com/users/1436265373757341699).
