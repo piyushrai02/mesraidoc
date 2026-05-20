@@ -32,3 +32,22 @@ export function Snippet({ file, children }) {
 export function Icon({ icon, ...props }) {
   return <span className="mesrai-icon" aria-hidden="true" {...props}>●</span>;
 }
+
+/**
+ * Columns — Mintlify multi-column layout. Renders children in CSS grid.
+ */
+export function Columns({ cols = 2, children }) {
+  return (
+    <div
+      className="mesrai-columns"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+        gap: '1rem',
+        margin: '1.25rem 0',
+      }}
+    >
+      {children}
+    </div>
+  );
+}

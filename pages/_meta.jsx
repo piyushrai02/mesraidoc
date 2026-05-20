@@ -9,8 +9,5 @@ export default {
   operations: {
     title: 'Operations',
     display: 'hidden'
-  },
-  _snippets: {
-    display: 'hidden'
   }
 }
