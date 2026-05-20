@@ -58,7 +58,7 @@ export default withNextra({
     ]
   },
 
-  // Redirects for SEO + Kodus URL legacy
+  // Redirects for SEO + legacy URL preservation
   async redirects() {
     return [
       { source: '/docs', destination: '/', permanent: true },
@@ -68,6 +68,38 @@ export default withNextra({
       { source: '/how_to_deploy/en/:slug*', destination: '/operations/:slug*', permanent: true },
       { source: '/cookbook/en/:slug*', destination: '/recipes/:slug*', permanent: true },
       { source: '/knowledge_base/en/:slug*', destination: '/kb/:slug*', permanent: true },
+
+      // Legacy mesraidoc paths (pre-Mintlify port) — preserve Google-indexed URLs
+      { source: '/introduction', destination: '/guides/overview', permanent: true },
+      { source: '/introduction/what-is-mesrai', destination: '/guides/overview', permanent: true },
+      { source: '/introduction/core-architecture', destination: '/operations/mesrai_architecture', permanent: true },
+      { source: '/introduction/key-capabilities', destination: '/guides/overview', permanent: true },
+      { source: '/setup', destination: '/guides/quickstart', permanent: true },
+      { source: '/setup/installation', destination: '/guides/quickstart', permanent: true },
+      { source: '/setup/environment', destination: '/guides/quickstart', permanent: true },
+      { source: '/ide-setup', destination: '/kb/how-to-import-rules-from-ide-tools', permanent: true },
+      { source: '/ide-setup/overview', destination: '/kb/how-to-import-rules-from-ide-tools', permanent: true },
+      { source: '/ide-setup/vscode', destination: '/kb/how-to-import-rules-from-ide-tools', permanent: true },
+      { source: '/features', destination: '/guides/overview', permanent: true },
+      { source: '/features/ai-review-engine', destination: '/guides/code_review/flow', permanent: true },
+      { source: '/features/context-awareness', destination: '/guides/code_review/configs/mesrai_rules', permanent: true },
+      { source: '/features/architectural-analysis', destination: '/guides/code_review/flow', permanent: true },
+      { source: '/features/privacy-security', destination: '/guides/security/data_usage', permanent: true },
+      { source: '/ai-review', destination: '/guides/code_review/flow', permanent: true },
+      { source: '/ai-review/overview', destination: '/guides/code_review/flow', permanent: true },
+      { source: '/ai-review/token-usage', destination: '/guides/byok', permanent: true },
+      { source: '/performance', destination: '/guides/cockpit/overview', permanent: true },
+      { source: '/performance/overview', destination: '/guides/cockpit/overview', permanent: true },
+      { source: '/integrations', destination: '/kb/introduction', permanent: true },
+      { source: '/integrations/:slug*', destination: '/kb/introduction', permanent: true },
+      { source: '/api-reference', destination: '/guides/overview', permanent: true },
+      { source: '/api-reference/:slug*', destination: '/guides/overview', permanent: true },
+      { source: '/billing', destination: '/guides/pricing', permanent: true },
+      { source: '/billing/:slug*', destination: '/guides/pricing', permanent: true },
+      { source: '/faq', destination: '/guides/overview', permanent: true },
+      { source: '/roadmap', destination: '/', permanent: true },
+      { source: '/changelog', destination: '/', permanent: true },
+      { source: '/blog/:slug*', destination: '/', permanent: false },
 
       // Hidden self-host stubs → safe targets
       { source: '/kb/how-to-self-host-ai-code-review', destination: '/guides/overview', permanent: false },
