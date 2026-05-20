@@ -1,0 +1,109 @@
+---
+title: "Pricing"
+description: "Free, Pro, and Enterprise plans for Mesrai AI code review. INR billing, GST invoices, IST support."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+Three plans. Two price modes per tier: **AI Included** (Mesrai-managed model) or **BYOK** (bring your own LLM key, lower platform fee).
+
+## Plans at a glance
+
+- **Free** — ₹0. 3 active devs max. 25 AI Included PRs / month (org-wide) or **unlimited** BYOK reviews.
+- **Pro** — ₹999 / dev / mo (AI Included, 150 PR / dev / mo) **or** ₹499 / dev / mo (BYOK, unlimited PRs). Cockpit + Business Logic Validation + priority queue.
+- **Enterprise** — custom. 300 PR / dev / mo AI Included or unlimited BYOK. Self-hosted, SSO/SAML, Indian data residency, custom SLA.
+
+All plans: unlimited repositories, all VCS providers, Mesrai Learnings.
+
+## Comparison
+
+| Feature | Free | Pro | Enterprise |
+| --- | --- | --- | --- |
+| **AI Included price** | ₹0 | ₹999 / dev / mo (limited) | Custom |
+| **BYOK price** | ₹0 | ₹499 / dev / mo | Custom |
+| PR reviews / month (AI Included) | 25 (org total) | 150 / dev | 300 / dev |
+| PR reviews / month (BYOK) | Unlimited | Unlimited | Unlimited |
+| Repositories | Unlimited | Unlimited | Unlimited |
+| Active developers | 3 max | Unlimited | Unlimited |
+| Mesrai Rules | 10 | Unlimited | Unlimited |
+| Plugins / MCPs | 3 | Unlimited | Unlimited |
+| Model choice | — | 3 (Fast / Balanced / Premium) | All + custom |
+| Priority queue | — | ✓ | ✓ |
+| Engineering Metrics (Cockpit) | — | ✓ | ✓ |
+| Business Logic Validation | — | ✓ | ✓ |
+| GitHub / GitLab / Bitbucket | ✓ | ✓ | ✓ |
+| Self-hosted option | — | — | ✓ |
+| INR billing + GST invoice | — | ✓ | ✓ |
+| Email support (IST) | — | 1 business day | 48 hr SLA |
+| SSO / SAML | — | — | ✓ |
+| RBAC + audit logs | — | — | ✓ |
+| Indian data residency | — | — | ✓ |
+| Dedicated support hours | — | — | 5 hrs / month |
+| Onboarding session | — | — | ✓ |
+| TDS documentation | — | — | ✓ |
+| Custom SLA | — | — | ✓ |
+
+## AI Included vs BYOK
+
+Two ways to power reviews. Pick per tier:
+
+- **AI Included** — Mesrai supplies the LLM. One invoice covers seats + tokens. Capped by PR / dev / mo (25 org / 150 dev / 300 dev). Pro tier exposes 3 model classes (Fast / Balanced / Premium); Enterprise unlocks all models plus custom endpoints.
+- **BYOK** — Bring your own OpenAI, Anthropic, Vertex, Bedrock, or any OpenAI-compatible key. Lower platform fee. Token bill lands on your provider. Unlimited PR reviews. Switch providers anytime.
+
+| Mode | Free | Pro | Enterprise |
+| --- | --- | --- | --- |
+| **AI Included** | ₹0 (25 PR org/mo) | ₹999 / dev / mo (150 PR/dev/mo) | Custom (300 PR/dev/mo) |
+| **BYOK** | ₹0 (unlimited) | ₹499 / dev / mo (unlimited) | Custom (unlimited) |
+
+See the [BYOK guide](/guides/byok) for supported providers and setup.
+
+## How seats work
+
+Mesrai bills per **active developer** — anyone who opens a PR in the billing period. Non-coding members never count. Resize freely in settings — no minimum, no annual seat lock-in. Free caps at 3 active devs / org.
+
+## Pro plan — what each price covers
+
+**Pro AI Included (₹999 / dev / mo)** — Mesrai supplies the model. 150 reviews per dev per month. 3 model classes: Fast (cheap, style + lint), Balanced (default), Premium (frontier for security and complex logic).
+
+**Pro BYOK (₹499 / dev / mo)** — Platform fee only. You connect your own LLM provider, pay your provider directly, no token markup from Mesrai. Unlimited reviews.
+
+Both modes include over Free:
+
+- Unlimited Mesrai Rules (Free cap of 10 lifted)
+- Unlimited plugins / MCPs (Free cap of 3 lifted)
+- Unlimited active developers (Free cap of 3 lifted)
+- **Priority review queue** — Pro PRs reviewed ahead of Free traffic
+- **Mesrai Cockpit** — engineering metrics dashboard
+- **Business Logic Validation**
+- **GST invoice** and **INR billing**
+- Email support, IST, 1 business day response
+
+## Enterprise
+
+Enterprise is contract-priced. Same two modes:
+
+- **AI Included** — Mesrai-managed model, 300 PR / dev / mo, full model catalog plus custom endpoints.
+- **BYOK** — bring your own provider, unlimited reviews.
+
+Enterprise-only:
+
+- **Self-hosted deployment** in your VPC
+- **SSO / SAML**
+- **RBAC + audit logs**
+- **Indian data residency**
+- **Custom SLA**
+- **5 dedicated support hours / month**
+- **Onboarding session**
+- **TDS documentation**
+
+[Contact sales](mailto:sales@mesrai.com) for a quote.
+
+## Payments and billing
+
+- INR billing on Pro and Enterprise. GST invoice issued every transaction.
+- Enterprise includes TDS documentation on request.
+- Cancel anytime — change applies at end of current cycle.
+
+---
+
+Questions? Email [info@mesrai.com](mailto:info@mesrai.com) or check live tier details at [mesrai.com/pricing](https://mesrai.com/pricing).

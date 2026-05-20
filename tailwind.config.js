@@ -9,17 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#101820',
+        primary: '#0A0A0B',
         accent: {
-          DEFAULT: '#E8772E',
-          light: '#F0944D',
+          DEFAULT: '#FF6B35',
+          light: '#FFAF80',
+          dark: '#C2400A',
         },
         background: {
-          DEFAULT: '#0B0C0E',
+          DEFAULT: '#0A0A0B',
           card: '#141517',
           elevated: '#1A1B1E',
           light: '#FAFAFA',
-          dark: '#0B0C0E',
+          dark: '#0A0A0B',
         },
         surface: {
           DEFAULT: '#1A1A1A',
@@ -35,8 +36,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['Geist', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['Newsreader', 'Georgia', 'serif'],
+        mono: ['Geist Mono', 'ui-monospace', 'monospace'],
+        display: ['Newsreader', 'Georgia', 'serif'],
       },
       typography: {
         DEFAULT: {
@@ -44,9 +47,9 @@ module.exports = {
             maxWidth: 'none',
             color: '#374151',
             a: {
-              color: '#E8772E',
+              color: '#FF6B35',
               '&:hover': {
-                color: '#F0944D',
+                color: '#FFAF80',
               },
             },
           },
@@ -79,9 +82,9 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #E8772E 0%, #F0944D 50%, #D4651F 100%)',
-        'card-gradient': 'linear-gradient(180deg, rgba(232, 119, 46, 0.1) 0%, rgba(232, 119, 46, 0) 100%)',
-        'border-gradient': 'linear-gradient(135deg, #E8772E, #F0944D, #D4651F)',
+        'hero-gradient': 'linear-gradient(135deg, #FF6B35 0%, #FFAF80 50%, #C2400A 100%)',
+        'card-gradient': 'linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0) 100%)',
+        'border-gradient': 'linear-gradient(135deg, #FF6B35, #FFAF80, #C2400A)',
       },
     },
   },

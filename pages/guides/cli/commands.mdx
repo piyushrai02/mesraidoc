@@ -1,0 +1,530 @@
+---
+title: "Command Reference"
+description: "Complete reference for all Mesrai CLI commands, flags, and options."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## Global Flags
+
+These flags are available on all commands:
+
+| Flag              | Short | Default    | Description                                   |
+| ----------------- | ----- | ---------- | --------------------------------------------- |
+| `--format <fmt>`  | `-f`  | `terminal` | Output format: `terminal`, `json`, `markdown` |
+| `--output <file>` | `-o`  | —          | Save output to a file                         |
+| `--verbose`       | `-v`  | `false`    | Verbose output                                |
+| `--quiet`         | `-q`  | `false`    | Quiet mode (errors only)                      |
+| `--agent`         | —     | `false`    | Agent mode: deterministic machine-readable output |
+
+---
+
+## `mesrai review`
+
+Analyzes modified files for code quality issues, bugs, security vulnerabilities, and style violations.
+
+### Usage
+
+```bash
+mesrai review                          # Review working tree changes (interactive)
+mesrai review [files...]               # Review specific files
+mesrai review --staged                 # Review staged files only
+mesrai review --branch main            # Compare against a branch
+mesrai review --commit abc123          # Analyze a specific commit
+mesrai review --fix                    # Auto-apply all fixable issues
+mesrai review --prompt-only            # Output optimized for AI agents
+```
+
+### Flags
+
+| Flag                   | Short | Description                                                 |
+| ---------------------- | ----- | ----------------------------------------------------------- |
+| `--staged`             | `-s`  | Analyze only staged files                                   |
+| `--commit <sha>`       | `-c`  | Analyze diff from a specific commit                         |
+| `--branch <name>`      | `-b`  | Compare current branch against specified branch             |
+| `--rules-only`         | —     | Review using only configured rules (no general suggestions) |
+| `--fast`               | —     | Fast mode: quicker analysis with lighter checks             |
+| `--interactive`        | `-i`  | Interactive mode: navigate and apply fixes                  |
+| `--fix`                | —     | Automatically apply all fixable issues                      |
+| `--prompt-only`        | —     | Output optimized for AI agents                              |
+| `--fail-on <severity>` | —     | Exit with code 1 if issues meet or exceed severity          |
+| `--context <file>`     | —     | Custom context file to include in review                    |
+| `--fields <csv>`       | —     | Select response fields (JSON/agent mode), e.g. `summary,issues.file` |
+
+### Review Modes
+
+<Tabs>
+  <Tab title="Interactive (Default)">
+    Navigate files with issue counts, preview suggested fixes, and apply them one by one.
+
+    ```bash
+    mesrai review
+    ```
+
+  </Tab>
+  <Tab title="Auto-fix">
+    Applies all fixable issues at once with a confirmation prompt.
+
+    ```bash
+    mesrai review --fix
+    ```
+
+  </Tab>
+  <Tab title="AI Agent">
+    Minimal, structured output designed for Claude Code, Cursor, or Windsurf. Enables autonomous review-fix loops.
+
+    ```bash
+    mesrai review --prompt-only
+    ```
+
+  </Tab>
+</Tabs>
+
+---
+
+## `mesrai pr suggestions`
+
+Fetch AI-powered suggestions for open pull requests.
+
+### Usage
+
+```bash
+mesrai pr suggestions --pr-url https://github.com/org/repo/pull/42
+mesrai pr suggestions --pr-number 42 --repo-id <id>
+mesrai pr suggestions --pr-number 42 --repo-id <id> --severity error,warning
+mesrai pr suggestions --pr-number 42 --repo-id <id> --format json
+```
+
+### Flags
+
+| Flag                   | Description                                |
+| ---------------------- | ------------------------------------------ |
+| `--pr-url <url>`       | Pull request URL                           |
+| `--pr-number <number>` | Pull request number (requires `--repo-id`) |
+| `--repo-id <id>`       | Repository ID for the pull request         |
+| `--severity <list>`    | Comma-separated severities to include      |
+| `--category <list>`    | Comma-separated categories to include      |
+| `--fields <csv>`       | Select response fields (JSON/agent mode), e.g. `summary,issues.file` |
+
+---
+
+## `mesrai pr business-validation`
+
+Validate a local diff against the business rules/acceptance criteria of a task. Useful before merging to confirm the implementation matches the task intent.
+
+### Usage
+
+```bash
+mesrai pr business-validation --task-url https://linear.app/team/issue/KC-1441
+mesrai pr business-validation --task-id KC-1441 --staged
+mesrai pr business-validation --task-id KC-1441 --branch main
+mesrai pr business-validation --task-id KC-1441 --commit abc123
+mesrai pr business-validation --task-id KC-1441 --dry-run
+```
+
+### Flags
+
+| Flag                 | Short | Description                                                        |
+| -------------------- | ----- | ------------------------------------------------------------------ |
+| `--task-url <url>`   | —     | Task URL to append to the validation command                       |
+| `--task-id <id>`     | —     | Task ID or issue key (e.g. `KC-1441`) to append                    |
+| `--staged`           | `-s`  | Use only staged changes                                            |
+| `--commit <sha>`     | `-c`  | Use diff from a specific commit                                    |
+| `--branch <name>`    | `-b`  | Compare current branch against a base branch                       |
+| `--dry-run`          | —     | Print payload without executing the API call                       |
+
+---
+
+## `mesrai auth`
+
+Manage authentication with the Mesrai API.
+
+### `auth login`
+
+```bash
+mesrai auth login                              # Interactive login
+mesrai auth login -e user@mail.com -p password # Non-interactive
+```
+
+| Flag                    | Short | Description      |
+| ----------------------- | ----- | ---------------- |
+| `--email <email>`       | `-e`  | Account email    |
+| `--password <password>` | `-p`  | Account password |
+
+### `auth logout`
+
+```bash
+mesrai auth logout
+```
+
+Removes local authentication (login and team key).
+
+### `auth status`
+
+```bash
+mesrai auth status
+```
+
+Shows authentication mode, email, token validity, organizations, trial status, and usage limits.
+
+### `auth team-key`
+
+```bash
+mesrai auth team-key --key mesrai_xxxxx
+```
+
+Authenticate using a shared team API key. Can also be set via the `MESRAI_TEAM_KEY` environment variable.
+
+### `auth team-status`
+
+```bash
+mesrai auth team-status
+```
+
+Shows team authentication details (organization and team name).
+
+### `auth token`
+
+```bash
+mesrai auth token
+```
+
+Generates a CI/CD token for use in automated pipelines. Use with the `MESRAI_TOKEN` environment variable.
+
+---
+
+## `mesrai hook`
+
+Manage pre-push Git hooks for automatic code review before pushing.
+
+### `hook install`
+
+```bash
+mesrai hook install                    # Default: fail-on critical, fast mode enabled
+mesrai hook install --fail-on error    # Block pushes on error severity
+mesrai hook install --no-fast          # Disable fast mode
+mesrai hook install --force            # Overwrite existing hook
+```
+
+| Flag                   | Default    | Description                               |
+| ---------------------- | ---------- | ----------------------------------------- |
+| `--fail-on <severity>` | `critical` | Minimum severity to block push            |
+| `--fast` / `--no-fast` | `true`     | Enable/disable fast mode                  |
+| `--force`              | —          | Overwrite existing hook without prompting |
+
+### `hook uninstall`
+
+```bash
+mesrai hook uninstall
+```
+
+Removes the pre-push hook installed by Mesrai.
+
+### `hook status`
+
+```bash
+mesrai hook status
+```
+
+Shows hook status, fail-on severity, fast mode setting, and path.
+
+### Skipping the Hook
+
+```bash
+MESRAI_SKIP_HOOK=1 git push
+```
+
+---
+
+## `mesrai decisions`
+
+Capture and persist AI agent decisions into your repository for future reference. Decisions are stored as structured markdown in `.mesrai/`.
+
+### `decisions enable`
+
+```bash
+mesrai decisions enable                                    # All agents
+mesrai decisions enable --agents claude,cursor            # Specific agents
+mesrai decisions enable --agents codex --codex-config ~/.codex/config.toml
+mesrai decisions enable --force                           # Overwrite existing config
+```
+
+| Flag                    | Default                | Description                      |
+| ----------------------- | ---------------------- | -------------------------------- |
+| `--agents <agents>`     | `claude,cursor,codex`  | Comma-separated agent list       |
+| `--codex-config <path>` | `~/.codex/config.toml` | Path to Codex config             |
+| `--force`               | —                      | Overwrite existing `modules.yml` |
+
+### `decisions disable`
+
+```bash
+mesrai decisions disable
+```
+
+Removes all decision hooks. Preserved data in `.mesrai/` is not deleted.
+
+### `decisions status`
+
+```bash
+mesrai decisions status
+```
+
+Shows PR memory, sessions, last SHA, agent, and module config.
+
+### `decisions show`
+
+```bash
+mesrai decisions show                  # Current branch PR memory
+mesrai decisions show auth             # Module decisions for 'auth'
+mesrai decisions show feat/new-api     # PR decisions for a specific branch
+```
+
+### `decisions promote`
+
+```bash
+mesrai decisions promote                                   # Current branch, all modules
+mesrai decisions promote --branch feat/auth                # Specific branch
+mesrai decisions promote --branch feat/auth --modules auth,users
+```
+
+| Flag              | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `--branch <name>` | Branch name (default: current branch)             |
+| `--modules <ids>` | Comma-separated module IDs (default: all matched) |
+
+Promotes PR-level decisions to long-term module memory.
+
+---
+
+## `mesrai config centralized`
+
+Manage centralized configuration from the CLI.
+
+### Usage
+
+```bash
+mesrai config centralized status
+mesrai config centralized init [owner/repo] --sync-option <pr|manual>
+mesrai config centralized sync
+mesrai config centralized disable
+mesrai config centralized download --out ./centralized-config.zip
+```
+
+### Subcommands
+
+| Subcommand              | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `status`                | Show whether centralized config is enabled and the selected source repository |
+| `init [repository]`     | Enable centralized config for a selected repository                           |
+| `sync`                  | Run centralized config sync on demand                                         |
+| `disable`               | Disable centralized config and clear selected repository                      |
+| `download --out <path>` | Download centralized config ZIP bundle                                        |
+
+### Flags
+
+| Flag                           | Applies To                  | Description                       |
+| ------------------------------ | --------------------------- | --------------------------------- |
+| `--sync-option <pr \| manual>` | `init`                      | Sync strategy. Default is `pr`    |
+| `--out <path>`                 | `download`                  | Required output path for ZIP file |
+| `--json`                       | all centralized subcommands | Output structured JSON            |
+
+For a complete walkthrough, see: [/guides/code_review/configs/centralized_config#cli-dedicated-section](/guides/code_review/configs/centralized_config#cli-dedicated-section)
+
+---
+
+## `mesrai config repo`
+
+Inspect and update repository settings stored in Mesrai. Team-key auth is required. Use `.` to target the current repository.
+
+<Note>`mesrai config repo` and `mesrai config remote` are aliases for the same command group.</Note>
+
+### Usage
+
+```bash
+mesrai config repo add                                   # Add current repo to Mesrai
+mesrai config repo add owner/repo                        # Add a specific repo
+mesrai config repo list                                  # List configured repos
+mesrai config repo show                                  # Show current repo settings
+mesrai config repo setup                                 # Guided setup wizard
+mesrai config repo set . reviewEnabled true              # Set a setting directly
+mesrai config repo open                                  # Open the Mesrai dashboard
+mesrai config repo add-ignore-file . "**/*.generated.ts"
+mesrai config repo add-base-branch . "release/*"
+mesrai config repo add-ignore-title . "^WIP:"
+```
+
+### Subcommands
+
+| Subcommand                                         | Description                                                                 |
+| -------------------------------------------------- | --------------------------------------------------------------------------- |
+| `add [repository]`                                 | Add a repository to Mesrai (shortcut: `mesrai config -r [repository]`)       |
+| `list`                                             | List repositories configured in Mesrai                                       |
+| `show [repository]`                                | Show repository settings                                                    |
+| `setup [repository]`                               | Run a guided repository setup wizard                                        |
+| `set [repository] <key> <value>`                   | Set a repository setting directly                                           |
+| `open [repository]`                                | Open the Mesrai dashboard for advanced settings                              |
+| `add-pattern [repository] <field> <pattern>`       | Add a pattern to a list field (`ignore-files`, `base-branches`, `ignore-titles`) |
+| `remove-pattern [repository] <field> <pattern>`    | Remove a pattern from a list field                                          |
+| `add-ignore-file [repository] <pattern>`           | Shortcut: add a pattern to ignored file patterns                            |
+| `remove-ignore-file [repository] <pattern>`        | Shortcut: remove an ignored file pattern                                    |
+| `add-base-branch [repository] <pattern>`           | Shortcut: add a base branch pattern                                         |
+| `remove-base-branch [repository] <pattern>`        | Shortcut: remove a base branch pattern                                      |
+| `add-ignore-title [repository] <pattern>`          | Shortcut: add an ignored title pattern                                      |
+| `remove-ignore-title [repository] <pattern>`       | Shortcut: remove an ignored title pattern                                   |
+
+### Flags
+
+| Flag          | Applies To | Description                         |
+| ------------- | ---------- | ----------------------------------- |
+| `--no-prompt` | `add`      | Skip the post-add setup prompt      |
+
+---
+
+## `mesrai rules`
+
+Create, update, and view Mesrai Rules — structured rules that Mesrai applies during review.
+
+### Usage
+
+```bash
+mesrai rules view                                         # View all rules for your team
+mesrai rules view --repo-id <id>                          # Filter by repository
+mesrai rules view --uuid <rule-uuid>                      # Fetch a single rule
+mesrai rules create --title "No console.log" --rule "Avoid leaving console.log in committed code" --severity high
+mesrai rules update --uuid <rule-uuid> --severity critical
+```
+
+### Subcommands
+
+| Subcommand | Description            |
+| ---------- | ---------------------- |
+| `create`   | Create a new Mesrai Rule |
+| `update`   | Update an existing rule |
+| `view`     | View Mesrai Rules        |
+
+### `rules create` Flags
+
+| Flag                    | Default     | Description                                     |
+| ----------------------- | ----------- | ----------------------------------------------- |
+| `--title <title>`       | —           | Rule title                                      |
+| `--rule <rule>`         | —           | Rule content/description                        |
+| `--repo-id <id>`        | `global`    | Repository ID (or `global` to apply to all repos) |
+| `--severity <severity>` | `medium`    | `low`, `medium`, `high`, `critical`             |
+| `--scope <scope>`       | `file`      | `pull request` or `file`                        |
+| `--path <glob>`         | `**/*`      | Glob pattern for file targeting                 |
+| `--json`                | `false`     | Output created rule as JSON                     |
+
+### `rules update` Flags
+
+| Flag                    | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `--uuid <uuid>`         | Rule UUID to update (required)                  |
+| `--repo-id <id>`        | Updated repository ID                           |
+| `--title <title>`       | Updated title                                   |
+| `--rule <rule>`         | Updated content/description                     |
+| `--severity <severity>` | Updated severity                                |
+| `--scope <scope>`       | Updated scope                                   |
+| `--path <glob>`         | Updated glob pattern                            |
+| `--json`                | Output updated rule as JSON                     |
+
+### `rules view` Flags
+
+| Flag             | Description                    |
+| ---------------- | ------------------------------ |
+| `--uuid <uuid>`  | Fetch a single rule by UUID    |
+| `--repo-id <id>` | Filter rules by repository ID  |
+| `--json`         | Output rules as JSON           |
+
+---
+
+## `mesrai skills`
+
+Inspect and install the agent skills bundled with the CLI (Claude Code, Cursor, Codex).
+
+### Usage
+
+```bash
+mesrai skills list                                        # List bundled skills
+mesrai skills install                                     # Install into detected agent roots
+mesrai skills install --dry-run                           # Preview changes
+mesrai skills resync                                      # Re-sync bundled skills
+mesrai skills uninstall                                   # Remove bundled skills
+```
+
+### Subcommands
+
+| Subcommand  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `list`      | List bundled skills available in this CLI package                           |
+| `sync`      | Sync bundled skills to detected local agent directories                     |
+| `resync`    | Re-sync bundled skills to detected local agent directories                  |
+| `install`   | Install bundled skills into detected agent roots (creates dirs as needed)   |
+| `uninstall` | Uninstall bundled managed skills from detected agent directories            |
+
+### Flags
+
+| Flag        | Applies To                    | Description                                    |
+| ----------- | ----------------------------- | ---------------------------------------------- |
+| `--dry-run` | `install`, `sync`, `resync`, `uninstall` | Show planned changes without writing files |
+
+<Tip>For full multi-agent bootstrap, prefer the platform installer (`curl -fsSL https://review-skill.com/install | bash`). `mesrai skills` covers local re-sync and cleanup.</Tip>
+
+---
+
+## `mesrai status`
+
+Show a consolidated Mesrai status: auth mode, organization, repository, hook, decisions, bundled skills, and CLI version.
+
+```bash
+mesrai status
+```
+
+Useful as a first diagnostic when something misbehaves or when onboarding a new machine.
+
+---
+
+## `mesrai update`
+
+Update the Mesrai CLI to the latest version from npm.
+
+```bash
+mesrai update
+```
+
+Resolves the correct global install command for your package manager (`npm`, `yarn`, `pnpm`, `bun`) and runs it. If an installer script was used, the CLI points you to the re-run command instead.
+
+---
+
+## `mesrai subscribe`
+
+Opens the Mesrai pricing/upgrade page in your browser.
+
+```bash
+mesrai subscribe
+```
+
+---
+
+## Severity Levels
+
+Issues are categorized by severity, from most to least critical:
+
+| Level      | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+| `critical` | Major security or stability issues requiring immediate attention |
+| `error`    | Significant bugs or problems                                     |
+| `warning`  | Potential issues worth addressing                                |
+| `info`     | Suggestions and best practices                                   |
+
+## Issue Categories
+
+| Category                 | Description                            |
+| ------------------------ | -------------------------------------- |
+| `security_vulnerability` | Security-related issues                |
+| `bug`                    | Potential bugs                         |
+| `performance`            | Performance optimization opportunities |
+| `code_quality`           | Code quality improvements              |
+| `best_practices`         | Best practice violations               |
+| `complexity`             | Code complexity issues                 |
+| `maintainability`        | Maintainability concerns               |
+| `style`                  | Code style issues                      |

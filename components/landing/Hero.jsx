@@ -20,8 +20,8 @@ export const Hero = () => {
           href="/roadmap"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-sm hover:bg-orange-500/15 hover:border-orange-500/30 transition-all duration-300 mb-8 group no-underline"
         >
-          <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#E8772E] to-[#F0944D] text-white text-xs font-bold tracking-wide uppercase">
-            Early Access
+          <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#FF6B35] to-[#FFAF80] text-white text-xs font-bold tracking-wide uppercase">
+            AI Code Review
           </span>
           <span className="text-gray-700 dark:text-gray-300 font-medium">Context-Aware AI Code Reviews</span>
           <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ export const Hero = () => {
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
           <span className="text-gray-900 dark:text-white">Ship better code</span>
           <br />
-          <span className="gradient-text-animated">3x faster</span>
+          <span className="gradient-text-animated">on every PR</span>
         </h1>
 
         {/* Subtitle */}
@@ -58,11 +58,11 @@ export const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              backgroundColor: '#E8772E',
+              backgroundColor: '#FF6B35',
               color: '#ffffff',
               padding: '16px 32px',
               borderRadius: '12px',
-              boxShadow: '0 8px 32px rgba(232,119,46,0.3)',
+              boxShadow: '0 8px 32px rgba(255,107,53,0.3)',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '12px',
@@ -74,12 +74,12 @@ export const Hero = () => {
             }}
             className="group transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
             onMouseEnter={e => {
-              e.currentTarget.style.backgroundColor = '#D4651F';
-              e.currentTarget.style.boxShadow = '0 12px 40px rgba(232,119,46,0.4)';
+              e.currentTarget.style.backgroundColor = '#C2400A';
+              e.currentTarget.style.boxShadow = '0 12px 40px rgba(255,107,53,0.4)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.backgroundColor = '#E8772E';
-              e.currentTarget.style.boxShadow = '0 8px 32px rgba(232,119,46,0.3)';
+              e.currentTarget.style.backgroundColor = '#FF6B35';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255,107,53,0.3)';
             }}
           >
             <span style={{ color: '#ffffff' }}>Get Started Free</span>
@@ -109,7 +109,7 @@ export const Hero = () => {
             }}
             className="group transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = '#E8772E';
+              e.currentTarget.style.borderColor = '#FF6B35';
             }}
             onMouseLeave={e => {
               e.currentTarget.style.borderColor = '#9CA3AF';
@@ -125,10 +125,10 @@ export const Hero = () => {
 
         {/* Trust indicators */}
         <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm">
-          {['Free forever', 'No credit card', '30s setup'].map((text) => (
+          {['Free forever', 'No credit card', 'GitHub · GitLab · Bitbucket'].map((text) => (
             <div key={text} className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-              <div className="w-5 h-5 rounded-full bg-[#E8772E]/20 flex items-center justify-center">
-                <svg className="w-3 h-3 text-[#E8772E]" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+              <div className="w-5 h-5 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
+                <svg className="w-3 h-3 text-[#FF6B35]" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>

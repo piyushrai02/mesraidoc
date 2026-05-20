@@ -1,0 +1,85 @@
+---
+title: "Mesrai CLI"
+description: "Run the Mesrai review engine from your terminal — local diffs, branches, CI pipelines, or agent loops."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+The Mesrai CLI brings the cloud review engine onto your machine. Run it against your working tree, your staged diff, a feature branch, or as part of a CI step — same multi-agent reviewer, same Mesrai Rules, same models, just before the PR ever exists.
+
+## Who should use it
+
+- **Solo developers** wanting a sanity check before they push
+- **Teams** that want one rule set shared across every laptop, IDE, and CI runner — no per-developer login
+- **AI coding agents** (Claude Code, Cursor, Codex, Windsurf) running review-fix loops with machine-readable output
+- **CI/CD pipelines** failing builds on any finding above a severity threshold
+
+## What a run looks like
+
+`mesrai review` produces a structured report — files touched, findings grouped by severity, preview-able fix patches, and a script-friendly exit code.
+
+Pass `--prompt-only` to swap the human-friendly view for a compact, structured payload an agent can parse.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Interactive review" icon="terminal">
+    Step through files, preview each fix, apply or skip one by one.
+  </Card>
+  <Card title="Bulk auto-fix" icon="wand-magic-sparkles">
+    Apply every fixable finding in one shot with `--fix`.
+  </Card>
+  <Card title="Agent integration" icon="robot">
+    Pipe `--prompt-only` into Claude Code, Cursor, or Windsurf for a hands-off review-fix loop.
+  </Card>
+  <Card title="Pre-push hook" icon="shield-check">
+    Block a push on findings above a threshold — `mesrai hook install`.
+  </Card>
+  <Card title="Fetch PR suggestions" icon="code-pull-request">
+    Pull Mesrai's suggestions for an open PR straight into your terminal.
+  </Card>
+  <Card title="Business validation" icon="clipboard-check">
+    Check that a local diff actually satisfies a task's acceptance criteria.
+  </Card>
+  <Card title="Mesrai Rules" icon="scale-balanced">
+    Create, edit, and inspect the team rule set the reviewer applies.
+  </Card>
+  <Card title="Decision memory" icon="brain">
+    Persist agent decisions as structured files versioned next to your code.
+  </Card>
+</CardGroup>
+
+## Usage limits
+
+|                        | Anonymous trial | Signed-in account        |
+| ---------------------- | --------------- | ------------------------ |
+| Reviews per day        | 5               | Per your plan            |
+| Files per review       | 10              | 100                      |
+| Lines per file         | 500             | —                        |
+| Max diff size per file | 500 KB          | 500 KB                   |
+| Max content per file   | 2 MB            | 2 MB                     |
+
+Trial counters reset every 24h. Check current usage with `mesrai auth status`.
+
+## CLI vs web dashboard
+
+CLI and dashboard share the same engine, the same rules, and the same repo settings. Use the CLI when you want a review **before a PR exists** — on a working branch, a staged diff, or inside an agent loop. Use the dashboard for the post-PR experience: review thread, analytics, team config.
+
+Rule + config edits via `mesrai config repo` and `mesrai rules` propagate to both surfaces.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Getting started" icon="rocket" href="getting_started">
+    Install, log in, run your first review.
+  </Card>
+  <Card title="Command reference" icon="book" href="commands">
+    Every command, every flag.
+  </Card>
+  <Card title="AI agents" icon="robot" href="ai_agents">
+    Wire up autonomous review-fix loops with coding agents.
+  </Card>
+  <Card title="Troubleshooting" icon="life-ring" href="troubleshooting">
+    Common errors, exit codes, debug flags.
+  </Card>
+</CardGroup>

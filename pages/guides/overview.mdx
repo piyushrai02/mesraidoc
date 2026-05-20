@@ -1,0 +1,55 @@
+---
+title: "Introduction"
+description: "Mesrai is an AI code review platform built for engineering teams that take their craft seriously."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+A multi-agent reviewer reads your repository as a graph — not just the diff — and posts inline pull-request feedback your team can act on.
+
+## What you get
+
+<CardGroup cols={3}>
+  <Card title="Architecture-aware reviews" icon="sparkles">
+    Multi-agent analysis over an AST graph of your repo. Catches cross-file impact linters miss.
+  </Card>
+  <Card title="Mesrai Rules" icon="sliders">
+    Plain English or YAML. Apply per-org, per-repo, or per-directory. Override anywhere.
+  </Card>
+  <Card title="Bring your own LLM key" icon="hand-holding-dollar">
+    OpenAI, Anthropic, Vertex, Bedrock, or any compatible provider. Pay your provider directly.
+  </Card>
+  <Card title="Pick any model" icon="wand-magic-sparkles">
+    New model lands tomorrow — switch the same day. Provider-agnostic by design.
+  </Card>
+  <Card title="Full transparency" icon="magnifying-glass">
+    Every file read, every rule fired, every token used. Visible from the review trace.
+  </Card>
+  <Card title="Memories that stick" icon="brain">
+    Decisions tracked across reviews. Mesrai won't re-suggest a fix you already rejected.
+  </Card>
+</CardGroup>
+
+## Languages
+
+Mesrai reviews any language or file type. Semantic understanding from the LLM; repo-wide context from a code-search index that resolves identifiers across files.
+
+## Why teams pick Mesrai
+
+- **Reviews ship fast** — automate the routine, free seniors for the hard calls.
+- **Standards stay enforced** — rules you wrote, applied to every PR consistently.
+- **The system learns** — memories + auto-generated rules grow with your codebase.
+
+## Get started
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/guides/quickstart">
+    Connect a repo and see your first AI review in minutes.
+  </Card>
+  <Card title="Workspace roles" icon="users" href="/guides/workspace_roles">
+    Role-based access control for organizations of any size.
+  </Card>
+  <Card title="Pricing" icon="money-bill-wave" href="/guides/pricing">
+    Free for individuals. Fair tiers when your team needs analytics and governance.
+  </Card>
+</CardGroup>

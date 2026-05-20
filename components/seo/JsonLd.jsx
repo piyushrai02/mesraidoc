@@ -10,7 +10,7 @@ export function OrganizationSchema() {
     "name": "Mesrai",
     "url": "https://docs.mesrai.com",
     "logo": "https://docs.mesrai.com/android-chrome-512x512.png",
-    "description": "AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and GitHub integration.",
+    "description": "AI code review platform that catches bugs, security risks, and design issues on every pull request. Multi-agent reviewer over GitHub, GitLab, Bitbucket, and Azure Repos.",
     "foundingDate": "2024",
     "contactPoint": {
       "@type": "ContactPoint",
@@ -38,7 +38,7 @@ export function ProductSchema() {
     "@type": "SoftwareApplication",
     "name": "Mesrai",
     "applicationCategory": "DeveloperApplication",
-    "description": "AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and GitHub integration.",
+    "description": "AI code review platform that catches bugs, security risks, and design issues on every pull request. Multi-agent reviewer over GitHub, GitLab, Bitbucket, and Azure Repos.",
     "url": "https://docs.mesrai.com",
     "operatingSystem": "Web",
     "offers": {

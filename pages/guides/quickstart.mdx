@@ -1,0 +1,81 @@
+---
+title: "Quickstart"
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+You'll have Mesrai reviewing your first pull request in about five minutes. The flow:
+
+<Steps>
+  <Step title="Create your workspace">
+    Sign up with email + password, or with Google, GitHub, or GitLab single sign-on.
+  </Step>
+
+  <Step title="Connect your Git provider">
+    <AccordionGroup>
+        <Accordion title="GitHub" icon="github">
+            Two ways to connect — pick OAuth for cleaner audit trails:
+
+              - **OAuth (recommended)**: Click *Connect via OAuth*. GitHub redirects you to its consent screen.
+                - ✅ Reviews post as a dedicated Mesrai bot account
+                - ✅ Clean separation between human and AI comments
+                - Owner-level access required on the org
+                - Pick the repos you want Mesrai to see — adjust later
+              - **Token (PAT)**: Reviews post under your own user. See the <a href="/guides/code_review/general_config/github_pat">GitHub Token setup guide</a>.
+
+            <Note>On GitHub Enterprise Server? Allowlist Mesrai's IP `52.55.217.197` in your network firewall before you connect.</Note>
+        </Accordion>
+
+        <Accordion title="GitLab" icon="gitlab">
+            Same OAuth-or-token choice as GitHub:
+
+              - **OAuth (recommended)**: Click *Connect via OAuth* — GitLab handles consent.
+                - ✅ Reviews post as a dedicated Mesrai bot
+                - Pick repos at connection time
+              - **Token (PAT)**: Reviews post under your user. See the <a href="/guides/code_review/general_config/gitlab_pat">GitLab Token setup guide</a>.
+
+            <Note>Running self-hosted GitLab? Allowlist Mesrai's IP `52.55.217.197` in your firewall first.</Note>
+        </Accordion>
+
+        <Accordion title="Bitbucket" icon="bitbucket">
+            Connect with an app password:
+
+              - **Token**: See the <a href="/guides/code_review/general_config/bitbucket_pat">Bitbucket Token setup guide</a>.
+
+            <Note>On Bitbucket Data Center (self-hosted)? Allowlist `52.55.217.197` in your firewall.</Note>
+        </Accordion>
+
+        <Accordion title="Azure DevOps" icon="microsoft">
+            Connect with a PAT:
+
+              - **Token**: See the <a href="/guides/code_review/general_config/azure_devops_pat">Azure DevOps Token setup guide</a>.
+
+            <Note>On Azure DevOps Server? Allowlist `52.55.217.197` first.</Note>
+        </Accordion>
+    </AccordionGroup>
+  </Step>
+
+  <Step title="Pick repositories">
+    Tick the repos you want Mesrai to review. You can change the set anytime from settings.
+  </Step>
+
+  <Step title="Trigger your first review">
+    Choose a pull request and ask Mesrai to review it. Comments land on the PR directly. After this one-off run, Mesrai automatically reviews every new PR you open.
+  </Step>
+
+  <Step title="That's it 🔥">
+    Mesrai now sits on the webhook. Push a commit, open a PR — feedback shows up inline within seconds.
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={1}>
+  <Card
+    title="Codify your team's review standards"
+    icon="hand-love"
+    href="code_review/configs/mesrai_rules"
+  >
+    Write Mesrai Rules in plain English or YAML — your standards, enforced on every PR.
+  </Card>
+</CardGroup>

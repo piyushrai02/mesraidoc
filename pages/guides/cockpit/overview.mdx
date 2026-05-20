@@ -1,0 +1,40 @@
+---
+title: "Overview"
+description: "Engineering metrics, delivery analytics, and AI-suggestion adoption rates."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## What Cockpit is for
+
+Cockpit is the analytics surface inside Mesrai. It surfaces delivery metrics, code-quality signals, and AI-suggestion adoption rates so engineering leaders can see *how* the team ships, not just *what* it ships.
+
+<Warning>
+  Cockpit ships with the **Teams** and **Enterprise** plans on cloud. Free Community workspaces don't include Cockpit.
+</Warning>
+
+## Highlights
+
+- Refresh cadence: every 2 hours
+- Cloud-only, Teams + Enterprise tiers
+- Metric calculation runs over the same data Mesrai's reviewer already sees
+- Eight built-in DORA / quality / activity metrics out of the box
+
+## Metric categories
+
+- **Productivity** — deploy frequency, lead time, PR cycle time
+- **Quality** — PR size distribution, review effectiveness
+- **AI adoption** — Mesrai-suggestion implementation rate
+- **Team performance** — collaboration patterns, bottleneck spotting
+
+## How Cockpit identifies developers
+
+Cockpit ties activity to the **Git commit username**. That may not match:
+
+- GitHub / GitLab display name
+- Email address
+- Mesrai workspace login
+
+<Tip>
+  If a developer's numbers look off, check that their `git config user.name` is consistent across machines + their Git provider profile.
+</Tip>

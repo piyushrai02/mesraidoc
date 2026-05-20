@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
 
 :root {
-  --primary: #101820;
-  --accent: #E8772E;
-  --accent-light: #F0944D;
+  --primary: #0A0A0B;
+  --accent: #FF6B35;
+  --accent-light: #FFAF80;
+  --accent-dark: #C2400A;
   --bg-light: #FAFAFA;
-  --bg-dark: #0B0C0E;
+  --bg-dark: #0A0A0B;
   --bg-card: #141517;
   --bg-elevated: #1A1B1E;
   --surface: #1A1A1A;
@@ -21,19 +22,27 @@
 }
 
 html {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.nextra-content h1,
+.nextra-content h2,
+.nextra-content h3 {
+  font-family: 'Newsreader', Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #E8772E 0%, #F0944D 50%, #D4651F 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FFAF80 50%, #C2400A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #E8772E, #F0944D, #D4651F, #E8772E);
+  background: linear-gradient(135deg, #FF6B35, #FFAF80, #C2400A, #FF6B35);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -50,31 +59,8 @@ html {
   }
 }
 
-/* Callout styles */
-.nextra-callout {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border-left: 4px solid;
-}
-
-.nextra-callout.info {
-  background-color: rgba(232, 119, 46, 0.1);
-  border-color: #E8772E;
-}
-
-.nextra-callout.warning {
-  background-color: rgba(245, 158, 11, 0.1);
-  border-color: #f59e0b;
-}
-
-.nextra-callout.error {
-  background-color: rgba(239, 68, 68, 0.1);
-  border-color: #ef4444;
-}
-
 code {
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: 'Geist Mono', 'Monaco', 'Menlo', monospace;
   font-size: 0.9em;
 }
 
@@ -90,78 +76,41 @@ pre {
 }
 
 /* Badge styles */
-.badge-new {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #E8772E, #F0944D);
-  color: white;
-  border-radius: 9999px;
-  margin-left: 0.5rem;
-}
-
-.badge-beta {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: rgba(245, 158, 11, 0.2);
-  color: #F59E0B;
-  border-radius: 9999px;
-  margin-left: 0.5rem;
-}
-
-/* Sidebar badge styles */
+.badge-new,
 .sidebar-badge-new {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.375rem;
-  font-size: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #E8772E, #F0944D);
+  background: linear-gradient(135deg, #FF6B35, #FFAF80);
   color: white;
   border-radius: 9999px;
-  margin-left: 0.375rem;
+  margin-left: 0.5rem;
 }
 
+.badge-beta,
 .sidebar-badge-beta {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.375rem;
-  font-size: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   background: rgba(245, 158, 11, 0.2);
   color: #F59E0B;
   border-radius: 9999px;
-  margin-left: 0.375rem;
+  margin-left: 0.5rem;
 }
 
-/* Hide sidebar on landing page */
-.landing-page .nextra-sidebar-container {
-  display: none !important;
-}
-
+/* Landing page: keep sidebar visible so users can jump straight into docs */
 .landing-page .nextra-content {
   max-width: 100% !important;
-  padding: 0 !important;
 }
 
-.landing-page main {
-  max-width: 100% !important;
-}
-
-/* Prevent Nextra article styles from overriding landing page button colors */
 .landing-page a[style] {
   color: inherit !important;
   border-bottom: none !important;
@@ -173,17 +122,16 @@ pre {
   border-bottom: none !important;
 }
 
-/* Card hover effects */
+/* Card hover */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(232, 119, 46, 0.15);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.15);
 }
 
-/* Purple gradient border effect */
 .gradient-border {
   position: relative;
   background: #141517;
@@ -196,13 +144,12 @@ pre {
   inset: 0;
   border-radius: 1rem;
   padding: 1px;
-  background: linear-gradient(135deg, #E8772E, #F0944D, #D4651F);
+  background: linear-gradient(135deg, #FF6B35, #FFAF80, #C2400A);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
 
-/* Light mode gradient border */
 html:not(.dark) .gradient-border {
   background: #FFFFFF;
 }

@@ -1,0 +1,51 @@
+---
+title: "How to automate code review on GitHub, GitLab, and Bitbucket"
+description: "Set up AI-powered code review that runs automatically on every pull request across GitHub, GitLab, Bitbucket, and Azure DevOps."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+Manual code reviews create bottlenecks. Reviewers context-switch, PRs queue up, and feedback quality varies. AI-powered code review runs instantly on every PR, catching issues before a human reviewer even looks at the code.
+
+## How Mesrai automates code review
+
+Once connected, Mesrai automatically reviews every pull request. It analyzes code for security vulnerabilities, performance issues, error handling, maintainability, and your custom rules — then posts comments directly in the PR.
+
+### Supported platforms
+
+- **GitHub** — via GitHub App
+- **GitLab** — via OAuth + webhooks
+- **Bitbucket** — via webhooks
+- **Azure DevOps** — via webhooks
+
+### What gets analyzed
+
+By default, Mesrai checks for:
+- Security issues (SQL injection, XSS, hardcoded secrets)
+- Performance problems (N+1 queries, missing indexes)
+- Error handling gaps
+- Potential bugs (null pointers, resource leaks)
+- Code style and maintainability
+- Your custom Mesrai Rules
+- Business logic compliance (validates against linked task requirements)
+
+### Review cadence options
+
+| Mode | Behavior |
+|------|----------|
+| **Automatic** | Reviews every push — continuous feedback |
+| **Auto-pause** | Pauses during rapid pushes (e.g., 3 in 15 minutes) to avoid noise |
+| **Manual** | Only reviews when you comment `@mesrai start-review` |
+
+## Getting started
+
+1. Create a workspace at [mesrai.com](https://mesrai.com)
+2. Connect your Git provider (GitHub, GitLab, Bitbucket, or Azure DevOps)
+3. Select which repositories to monitor
+4. Open a PR — Mesrai reviews it automatically
+
+For platform-specific setup, see:
+- [GitHub setup](/kb/how-to-set-up-ai-code-review-on-github)
+- [GitLab setup](/kb/how-to-set-up-ai-code-review-on-gitlab)
+- [Azure DevOps setup](/kb/how-to-set-up-ai-code-review-on-azure-devops)
+- [Bitbucket setup](/operations/platforms/bitbucket/bitbucket_webhook)
