@@ -32,7 +32,7 @@ export default {
 
         {/* Fallback description — Nextra overrides with frontmatter description when available */}
         <meta name="description" content={SITE_DESCRIPTION} />
-        <meta name="keywords" content="Mesrai, AI code review, automated code review, GitHub integration, code quality, continuous integration, pull request review, developer tools, team collaboration, code analysis, security scanning, performance optimization" />
+        <meta name="keywords" content="Mesrai, AI code review, automated PR review, GitHub code review, GitLab code review, Bitbucket code review, Azure DevOps review, BYOK, India AI code review, INR billing, GST invoice, multi-agent code review, AST code review, pull request automation, code quality, security scanning, OWASP code review" />
         <meta name="author" content="Mesrai" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
@@ -105,10 +105,10 @@ export default {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-        {/* Geo & Language */}
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
-        <meta httpEquiv="content-language" content="en-US" />
+        {/* Geo & Language — India-first */}
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
+        <meta httpEquiv="content-language" content="en-IN" />
 
         {/* Cache */}
         <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
