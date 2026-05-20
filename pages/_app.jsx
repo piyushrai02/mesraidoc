@@ -17,11 +17,16 @@ const organizationSchema = {
   "url": "https://docs.mesrai.com",
   "logo": "https://docs.mesrai.com/android-chrome-512x512.png",
   "description": "AI code review platform that catches bugs, security risks, and design issues on every pull request. Multi-agent reviewer over GitHub, GitLab, Bitbucket, and Azure Repos.",
-  "foundingDate": "2024",
+  "foundingDate": "2025",
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "Customer Support",
-    "email": "support@mesrai.com"
+    "email": "info@mesrai.com",
+    "areaServed": ["IN", "Worldwide"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
   },
   "sameAs": [
     "https://twitter.com/mesraiofficial",
@@ -35,8 +40,8 @@ const webSiteSchema = {
   "@type": "WebSite",
   "name": "Mesrai Documentation",
   "url": "https://docs.mesrai.com",
-  "description": "Complete documentation for Mesrai - AI-powered code review platform",
-  "inLanguage": "en-US",
+  "description": "Documentation for Mesrai — multi-agent AI code review platform across GitHub, GitLab, Bitbucket, and Azure Repos. BYOK supported. INR billing.",
+  "inLanguage": "en-IN",
   "publisher": {
     "@type": "Organization",
     "name": "Mesrai"
@@ -56,20 +61,41 @@ const productSchema = {
   "description": "AI code review platform that catches bugs, security risks, and design issues on every pull request. Multi-agent reviewer over GitHub, GitLab, Bitbucket, and Azure Repos.",
   "url": "https://docs.mesrai.com",
   "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "description": "Free tier available with paid plans"
-  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Free",
+      "price": "0",
+      "priceCurrency": "INR",
+      "description": "Free forever for individuals — 3 active devs, unlimited BYOK PR reviews"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro (BYOK)",
+      "price": "499",
+      "priceCurrency": "INR",
+      "description": "Per active developer per month, unlimited PR reviews",
+      "billingIncrement": "P1M"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro (AI Included)",
+      "price": "999",
+      "priceCurrency": "INR",
+      "description": "Per active developer per month, 150 AI Included PR reviews / dev / month",
+      "billingIncrement": "P1M"
+    }
+  ],
   "featureList": [
-    "AI-powered code reviews",
-    "GitHub integration",
-    "Team collaboration",
-    "Organization management",
-    "Real-time notifications",
-    "Custom review rules",
-    "Performance analytics"
+    "Multi-agent AI code review on every pull request",
+    "Architecture-aware reviews over AST graph",
+    "BYOK — OpenAI, Anthropic, Vertex, Bedrock, OpenAI-compatible endpoints",
+    "GitHub, GitLab, Bitbucket, Azure Repos integrations",
+    "Mesrai Rules — plain English or YAML",
+    "Cockpit engineering metrics dashboard",
+    "Business Logic Validation against Jira / Linear / docs",
+    "Indian data residency option (Enterprise)",
+    "SSO/SAML, RBAC, audit logs (Enterprise)"
   ]
 }
 
