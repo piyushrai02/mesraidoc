@@ -4,7 +4,7 @@ import { Footer } from './components/Footer'
 import { NavbarExtra } from './components/Navbar'
 
 const SITE_NAME = 'Mesrai Docs'
-const SITE_DESCRIPTION = 'Complete documentation for Mesrai - AI-powered code review platform. Learn to integrate GitHub, manage teams, automate reviews, and ship code 3x faster.'
+const SITE_DESCRIPTION = 'Documentation for Mesrai — multi-agent AI code review across GitHub, GitLab, Bitbucket, and Azure Repos. BYOK supported. India-first billing.'
 const SITE_URL = 'https://docs.mesrai.com'
 const OG_IMAGE = `${SITE_URL}/android-chrome-512x512.png`
 
@@ -136,8 +136,7 @@ export default {
     toggleButton: true,
     titleComponent({ title, type, route }) {
       const badges = {
-        '/features/architectural-analysis': 'NEW',
-        '/integrations/bitbucket': 'BETA',
+        '/guides/cli/introduction': 'BETA',
       };
       const badge = badges[route];
 
@@ -171,9 +170,9 @@ export default {
 
   darkMode: true,
 
-  // Orange primary color matching main website
-  primaryHue: 27,
-  primarySaturation: 82,
+  // Mesrai brand orange #FF6B35 (HSL: 14, 100%, 60%)
+  primaryHue: 14,
+  primarySaturation: 100,
 
   nextThemes: {
     defaultTheme: 'dark',
@@ -185,21 +184,8 @@ export default {
   },
 
   banner: {
-    dismissible: true,
-    key: 'mesrai-early-access',
-    content: (
-      <a
-        href="/roadmap"
-        className="flex items-center justify-center gap-2 text-sm"
-      >
-        🚧 <span>
-          Mesrai is in <strong>free early access</strong> and evolving rapidly.
-          You may notice occasional incomplete reviews as we refine the system.
-        </span>
-        <span className="font-medium underline">
-          See what's coming →
-        </span>
-      </a>
-    )
+    dismissible: false,
+    key: 'mesrai-launch',
+    content: null
   }
 }

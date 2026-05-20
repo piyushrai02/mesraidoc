@@ -1,0 +1,51 @@
+---
+title: "Suggestion Control"
+description: "Control how Mesrai provides feedback in your PRs."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## Suggestion Limit
+
+### Limitation Type
+
+- By PR (default): Max suggestions in entire pull request
+- By File: Max suggestions per file
+
+### Maximum Suggestions
+
+Set how many suggestions Mesrai can make:
+
+- Minimum: 6 suggestions
+- Default: 10 suggestions
+- Set to 0 for unlimited
+
+Pro tip: Start with 10 and adjust based on your team's feedback. Too many suggestions can be overwhelming, too few might miss important issues.
+
+## Severity Levels
+
+### Minimum Severity
+
+Choose which issues Mesrai will report:
+
+- Low/All: Style issues, minor improvements
+- Medium: Common best practices, potential bugs
+- High: Significant issues, definite bugs
+- Critical: Security issues, major problems
+
+## Suggestion Grouping
+
+### Unified Comments (default)
+
+Combines similar issues into one comment, showing all affected files and lines. Great for:
+
+- Large PRs with repeated issues
+- Keeping discussions focused
+- Reducing notification noise
+
+### Individual Comments
+
+Separate comment for each issue. Better when:
+
+- You need direct links to each location
+- Team prefers focused, line-specific discussions

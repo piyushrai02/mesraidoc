@@ -1,0 +1,140 @@
+---
+title: "Code Review Flow"
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## What happens on a PR
+
+Mesrai listens on your repository webhook. When a PR opens (or a new commit lands), the reviewer wakes up, gathers context, scores the diff, and posts inline comments. This page walks the lifecycle end to end.
+
+## When Mesrai runs
+
+- A PR is opened
+- A new commit is pushed (subject to the configured cadence)
+- You manually invoke it from a PR comment: `@mesrai start-review`
+
+## When Mesrai skips
+
+- No new commits since the last run
+- Only merge commits, no effective code change
+- Every changed file matches an ignore pattern
+- PR exceeds the configured file ceiling (default 200)
+- Configuration is missing or invalid
+
+## Pipeline (what runs under the hood)
+
+1. **Resolve config** — merges global → repo → directory overrides and validates the result
+2. **Collect diff + context** — pulls the changed files plus the cross-file context needed for accurate review
+3. **Run PR-level checks** — your custom Mesrai Rules + cross-file analysis (when enabled)
+4. **Review each changed file** — focused on the diff, with surrounding context for intent
+5. **Filter + rank suggestions** — relevance, severity, dedupe, anti-noise safeguards
+6. **Post comments** — inline suggestions, plus a PR-level summary when enabled
+7. **Apply policy** — auto-approve or request-changes if your rules say so
+8. **Track last-reviewed commit** — so the next run is incremental, not duplicate
+
+## What lands on the PR
+
+- Inline comments with a recommended fix and rationale
+- Optional PR-level summary at the top
+- Optional review status: approved / changes-requested (when policy enabled)
+
+## Status reactions
+
+Mesrai uses emoji reactions on the PR description (or your trigger comment) so you can see review state at a glance. The reactor replaces the previous emoji each step — current state is always visible.
+
+<Note>
+  Reactions work on GitHub and GitLab. Azure DevOps and Bitbucket don't expose a reactions API, so the emoji is skipped there.
+</Note>
+
+### What each emoji means
+
+- 🚀 **In progress** — Mesrai is reading files, applying rules, generating suggestions
+- 🎉 **Done** — review finished, comments posted, ready for you
+- 👀 **Skipped** — common reasons:
+  - No new commits since the last run
+  - Only merge commits in the diff
+  - PR exceeds the file ceiling
+  - All files match an ignore pattern
+  - Branch not in the configured review scope
+  - PR is in draft mode (and drafts are configured to skip)
+- 👎 **No license** — the PR author isn't licensed:
+  - Mesrai needs a license for the PR author
+  - Assign one manually, or turn on [Auto License Assignment](/guides/auto_license_assignment)
+- 😕 **Error** — temporary failure:
+  - Retry with `@mesrai start-review`
+  - Persistent failure? Email [info@mesrai.com](mailto:info@mesrai.com)
+
+### Where the reaction appears
+
+- **Automatic review** (PR opened / new commit) — reaction lands on the PR description (top of the thread)
+- **Manual review** (`@mesrai start-review` comment) — reaction lands on your trigger comment
+
+### Example timelines
+
+- New PR (auto): 🚀 → 🎉
+- Manual trigger: 🚀 on your comment → 🎉
+- Nothing to review: 👀
+- Unlicensed author: 👎
+- Transient failure: 😕
+
+### FAQ
+
+**No reactions are showing**
+
+- GitHub / GitLab support reactions ✅. Azure DevOps + Bitbucket don't ❌.
+
+**The emoji keeps changing**
+
+- That's the design — each step replaces the previous status (🚀 → 🎉 / 👀 / 😕).
+
+**I see 👀 but wanted a review**
+
+- Mesrai skipped — likely no new commits, merge-only diff, ignored files, or file ceiling
+- Force a run: `@mesrai start-review`
+
+**I see 👎**
+
+- PR author has no license — assign one, or enable [Auto License Assignment](/guides/auto_license_assignment)
+
+**I see 😕**
+
+- Retry with `@mesrai start-review`. If it keeps failing, check [Troubleshooting](/guides/code_review/troubleshooting) or email [info@mesrai.com](mailto:info@mesrai.com).
+
+## Knobs you'll touch
+
+- Auto vs manual reviews + commit cadence
+- Ignore patterns + which base branches are in scope
+- Custom rules + cross-file analysis toggles
+- Suggestion controls — severity filter, grouping, max-per-PR
+- File ceiling + timeouts
+
+<CardGroup cols={2}>
+  <Card
+    title="General Config"
+    icon="sliders"
+    href="/guides/code_review/configs/general"
+  >
+    Review modes, cadence, branches, output knobs.
+  </Card>
+  <Card
+    title="Review Policy"
+    icon="shield-check"
+    href="/guides/code_review/policy"
+  >
+    Suggestion vs blocking modes — when to use each.
+  </Card>
+  <Card
+    title="Troubleshooting"
+    icon="triangle-exclamation"
+    href="/guides/code_review/troubleshooting"
+  >
+    Common failure modes + how to fix.
+  </Card>
+</CardGroup>
+
+## Practical tips
+
+- Keep PRs small — review quality drops sharply past ~400 lines of diff
+- Link the spec / ticket in the PR description so cross-file analysis has intent
+- After you address feedback, re-trigger with `@mesrai start-review`

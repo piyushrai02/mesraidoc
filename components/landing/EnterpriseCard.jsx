@@ -34,7 +34,7 @@ export const EnterpriseCard = () => {
           'Team-Ready Foundations',
         ].map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400" style={{ margin: 0 }}>
-            <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#E8772E' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#FF6B35' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             {feature}
@@ -50,18 +50,18 @@ export const EnterpriseCard = () => {
         className="inline-flex items-center gap-2.5 font-semibold text-sm tracking-wide rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 no-underline"
         style={{
           padding: '12px 24px',
-          border: '2px solid #E8772E',
-          color: '#E8772E',
+          border: '2px solid #FF6B35',
+          color: '#FF6B35',
           backgroundColor: 'transparent',
           display: 'inline-flex',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.backgroundColor = '#E8772E';
+          e.currentTarget.style.backgroundColor = '#FF6B35';
           e.currentTarget.style.color = '#ffffff';
         }}
         onMouseLeave={e => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#E8772E';
+          e.currentTarget.style.color = '#FF6B35';
         }}
       >
         Contact Sales

@@ -1,0 +1,129 @@
+---
+title: "Overview"
+description: "Track suggestions that didn't make it into a PR. Auto-resolve when they do."
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## At a glance
+
+- **Captured automatically** when a PR closes with un-implemented suggestions
+- **Auto-resolved** when a later PR fixes the same code path
+- **Filterable** by status, severity, category, repository
+- **Zero setup** — runs on top of the review workflow you already have
+
+## What Issues do
+
+Mesrai Issues turn every un-acted-on review suggestion into a tracked item. Each Issue carries the original suggestion, its file location, severity, and the PR it came from — so a recommendation that gets dismissed today doesn't quietly disappear.
+
+## Why it matters
+
+<CardGroup cols={2}>
+  <Card title="Nothing falls through" icon="eye">
+    Suggestions that were skipped today stay visible until you decide.
+  </Card>
+  <Card title="Quality you can rank" icon="chart-line">
+    Severity buckets surface the highest-impact fixes first.
+  </Card>
+  <Card title="Defense in depth" icon="shield-check">
+    Critical security or perf flags don't vanish into review history.
+  </Card>
+  <Card title="Fits your process" icon="users">
+    Severity + status are editable — match your team's vocabulary.
+  </Card>
+</CardGroup>
+
+## How it works
+
+### 1. Issue creation
+
+<Note>
+  Issues are minted only when a PR is **closed**. Open or in-progress PRs don't create Issues.
+</Note>
+
+<Warning>
+  Mesrai rules with scope **PR** don't produce Issues — only file-level, code-specific suggestions do.
+</Warning>
+
+- When a PR closes, Mesrai walks every suggestion it posted that wasn't applied
+- Each un-applied suggestion becomes an **Issue** linked to its repository
+- The Issue stores the original suggestion text, file path, line range, and severity
+
+### 2. Automatic resolution
+
+- If a future PR implements the same fix, Mesrai matches it and flips the Issue to **Resolved**
+- The matcher uses code analysis (not just text similarity) to track equivalence across refactors
+- No manual click required
+
+### 3. Manual triage
+
+#### Status
+
+- **Open** — newly captured, needs a decision
+- **Resolved** — auto-flipped when the fix lands
+- **Dismissed** — marked manually when the suggestion isn't relevant for your team
+
+#### Severity
+
+- Four levels: `Critical`, `High`, `Medium`, `Low`
+- Editable any time — promote or demote to match your priorities
+- Drives sort order in the dashboard
+
+### 4. Filtering + saved views
+
+<Warning>
+  Filters compound. Save views so the team lands on the same triage queue every morning.
+</Warning>
+
+- **Status** — Open / Resolved / Dismissed
+- **Severity** — Critical / High / Medium / Low
+- **Category** — Security, Performance, Style, etc.
+- **Repository** — focus on a single product
+- **Save custom views** for one-click recall
+
+## Who benefits
+
+### Developers
+
+- Never lose a useful suggestion to merge pressure
+- Order work by real impact, not by what scrolled past last
+- See patterns in what gets dismissed vs implemented
+
+### Engineering leaders
+
+- Quality trends across repos in one place
+- Spot bottlenecks in suggestion uptake
+- Measure follow-through on review feedback
+
+## Practical tips
+
+<CardGroup cols={1}>
+  <Card title="Weekly triage" icon="calendar">
+    Keep the Open queue from growing — 15 minutes a week is usually enough.
+  </Card>
+  <Card title="Severity playbook" icon="triangle-exclamation">
+    Write down what `Critical` actually means in your repo. Calibrates the team.
+  </Card>
+  <Card title="Dismissal rules" icon="circle-xmark">
+    Define when Dismissed is correct vs lazy — it's the most common mistake.
+  </Card>
+</CardGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Write Mesrai Rules"
+    icon="user-police"
+    href="/guides/code_review/configs/mesrai_rules"
+  >
+    Configure the rules that produce trackable Issues.
+  </Card>
+  <Card
+    title="How Mesrai learns"
+    icon="graduation-cap"
+    href="/guides/code_review/learning/mesrai_learning"
+  >
+    The feedback loop that improves suggestions over time.
+  </Card>
+</CardGroup>

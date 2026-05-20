@@ -58,14 +58,22 @@ export default withNextra({
     ]
   },
 
-  // Redirects for SEO
+  // Redirects for SEO + Kodus URL legacy
   async redirects() {
     return [
-      {
-        source: '/docs',
-        destination: '/',
-        permanent: true,
-      },
+      { source: '/docs', destination: '/', permanent: true },
+
+      // Old Kodus URL pattern → new Mesrai paths
+      { source: '/how_to_use/en/:slug*', destination: '/guides/:slug*', permanent: true },
+      { source: '/how_to_deploy/en/:slug*', destination: '/operations/:slug*', permanent: true },
+      { source: '/cookbook/en/:slug*', destination: '/recipes/:slug*', permanent: true },
+      { source: '/knowledge_base/en/:slug*', destination: '/kb/:slug*', permanent: true },
+
+      // Hidden self-host stubs → safe targets
+      { source: '/kb/how-to-self-host-ai-code-review', destination: '/guides/overview', permanent: false },
+      { source: '/guides/cli/self_hosted', destination: '/guides/cli/introduction', permanent: false },
+      { source: '/guides/cli/overview', destination: '/guides/cli/introduction', permanent: true },
+      { source: '/guides/cli/ci_cd', destination: '/guides/cli/ai_agents', permanent: true }
     ]
   },
 })

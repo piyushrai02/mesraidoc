@@ -3,23 +3,14 @@ export default {
     title: 'Home',
     display: 'hidden'
   },
-  introduction: 'Introduction',
-  setup: 'Setup',
-  'ide-setup': 'IDE Setup',
-  features: 'Features',
-  'ai-review': 'AI Review',
-  performance: 'Performance',
-  integrations: 'Integrations',
-  'api-reference': {
-    title: 'API Reference',
+  guides: 'Guides',
+  kb: 'Knowledge',
+  recipes: 'Recipes',
+  operations: {
+    title: 'Operations',
     display: 'hidden'
   },
-  billing: {
-    title: 'Billing',
+  _snippets: {
     display: 'hidden'
-  },
-  faq: 'FAQ',
-  blog: 'Blog',
-  roadmap: 'Roadmap',
-  changelog: 'Changelog'
+  }
 }

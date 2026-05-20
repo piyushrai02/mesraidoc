@@ -8,10 +8,10 @@
    ===================================================== */
 
 :root {
-  --mesrai-accent: #E8772E;
-  --mesrai-accent-light: #F0944D;
-  --mesrai-accent-dark: #D4651F;
-  --mesrai-accent-glow: rgba(232, 119, 46, 0.4);
+  --mesrai-accent: #FF6B35;
+  --mesrai-accent-light: #FFAF80;
+  --mesrai-accent-dark: #C2400A;
+  --mesrai-accent-glow: rgba(255, 107, 53, 0.4);
 
   /* Dark theme colors */
   --mesrai-bg-primary: #09090B;
@@ -22,7 +22,7 @@
 
   --mesrai-border: #27272A;
   --mesrai-border-light: #3F3F46;
-  --mesrai-border-accent: rgba(232, 119, 46, 0.3);
+  --mesrai-border-accent: rgba(255, 107, 53, 0.3);
 
   --mesrai-text-primary: #FAFAFA;
   --mesrai-text-secondary: #A1A1AA;
@@ -130,7 +130,7 @@ html:not(.dark) .nextra-search input {
 
 html:not(.dark) .nextra-search input:focus {
   border-color: var(--mesrai-accent);
-  box-shadow: 0 0 0 3px rgba(232, 119, 46, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
 }
 
 /* Search keyboard shortcut badge */
@@ -224,10 +224,10 @@ html.dark .nextra-sidebar-container a:hover {
 html.dark .nextra-sidebar-container a[data-active="true"],
 html.dark .nextra-sidebar-container a[aria-current="page"] {
   color: var(--mesrai-text-primary);
-  background: linear-gradient(135deg, rgba(232, 119, 46, 0.15) 0%, rgba(232, 119, 46, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 107, 53, 0.08) 100%);
   border-color: var(--mesrai-border-accent);
   font-weight: 500;
-  box-shadow: 0 0 12px rgba(232, 119, 46, 0.15);
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.15);
 }
 
 /* Active indicator bar */
@@ -246,7 +246,7 @@ html.dark .nextra-sidebar-container a[aria-current="page"]::before {
 
 html.dark .nextra-sidebar-container a[data-active="true"]:hover,
 html.dark .nextra-sidebar-container a[aria-current="page"]:hover {
-  background: linear-gradient(135deg, rgba(232, 119, 46, 0.2) 0%, rgba(232, 119, 46, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 107, 53, 0.12) 100%);
   transform: translateX(2px);
 }
 
@@ -269,8 +269,8 @@ html:not(.dark) .nextra-sidebar-container a:hover {
 html:not(.dark) .nextra-sidebar-container a[data-active="true"],
 html:not(.dark) .nextra-sidebar-container a[aria-current="page"] {
   color: var(--mesrai-accent);
-  background-color: rgba(232, 119, 46, 0.08);
-  border-color: rgba(232, 119, 46, 0.2);
+  background-color: rgba(255, 107, 53, 0.08);
+  border-color: rgba(255, 107, 53, 0.2);
   font-weight: 500;
 }
 
@@ -594,7 +594,7 @@ code {
 
 /* Inline code */
 html.dark :not(pre) > code {
-  background-color: rgba(232, 119, 46, 0.12);
+  background-color: rgba(255, 107, 53, 0.12);
   color: var(--mesrai-accent-light);
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
@@ -603,7 +603,7 @@ html.dark :not(pre) > code {
 }
 
 html:not(.dark) :not(pre) > code {
-  background-color: rgba(232, 119, 46, 0.08);
+  background-color: rgba(255, 107, 53, 0.08);
   color: var(--mesrai-accent);
 }
 
@@ -669,7 +669,7 @@ html.dark .nextra-callout {
 }
 
 html.dark .nextra-callout[data-type="info"] {
-  background-color: rgba(232, 119, 46, 0.1);
+  background-color: rgba(255, 107, 53, 0.1);
   border-color: var(--mesrai-accent);
 }
 
@@ -709,11 +709,11 @@ html:not(.dark) footer {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #E8772E 0%, #F0944D 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FFAF80 100%);
   color: white;
   border-radius: 9999px;
   margin-left: 8px;
-  box-shadow: 0 2px 8px rgba(232, 119, 46, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
   animation: pulse-glow 2s infinite;
 }
 
@@ -734,10 +734,10 @@ html:not(.dark) footer {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 2px 8px rgba(232, 119, 46, 0.4);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
   }
   50% {
-    box-shadow: 0 2px 16px rgba(232, 119, 46, 0.6);
+    box-shadow: 0 2px 16px rgba(255, 107, 53, 0.6);
   }
 }
 
@@ -782,7 +782,7 @@ html.dark .nextra-navigation-links a:hover {
   border-color: var(--mesrai-accent);
   background-color: var(--mesrai-bg-tertiary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 119, 46, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
 }
 
 /* =====================================================
@@ -934,12 +934,12 @@ html:not(.dark) .nextra-sidebar-footer button:hover {
    ===================================================== */
 
 ::selection {
-  background-color: rgba(232, 119, 46, 0.3);
+  background-color: rgba(255, 107, 53, 0.3);
   color: var(--mesrai-text-primary);
 }
 
 ::-moz-selection {
-  background-color: rgba(232, 119, 46, 0.3);
+  background-color: rgba(255, 107, 53, 0.3);
   color: var(--mesrai-text-primary);
 }
 

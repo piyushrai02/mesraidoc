@@ -26,9 +26,9 @@ const AppCard = ({ href, icon, title, subtitle, description, badge, badgeColor }
               style={{
                 background: badgeColor === 'green'
                   ? 'rgba(34,197,94,0.15)'
-                  : 'rgba(232,119,46,0.15)',
-                color: badgeColor === 'green' ? '#22C55E' : '#E8772E',
-                border: `1px solid ${badgeColor === 'green' ? 'rgba(34,197,94,0.3)' : 'rgba(232,119,46,0.3)'}`,
+                  : 'rgba(255,107,53,0.15)',
+                color: badgeColor === 'green' ? '#22C55E' : '#FF6B35',
+                border: `1px solid ${badgeColor === 'green' ? 'rgba(34,197,94,0.3)' : 'rgba(255,107,53,0.3)'}`,
               }}
             >
               {badge}

@@ -1,0 +1,43 @@
+---
+title: "AI Model Security"
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## Which models Mesrai uses
+
+The recommended catalog covers the major providers. You can bring any compatible model via BYOK:
+
+- **OpenAI GPT family** (GPT-5.4 + derivatives)
+- **Anthropic Claude family** (Sonnet 4.6, Opus 4.7 + derivatives)
+- **Google Gemini family** (Gemini 3.1 Pro + derivatives)
+- **OpenAI-compatible** providers — Moonshot, Z.ai, Fireworks, Together, Novita, OpenRouter, self-hosted Ollama / vLLM
+
+## How your code is handled
+
+Code is sent to the LLM only for the duration of the review, then discarded. It is never used to train any model:
+
+- Held only while a review is in flight
+- Dropped from memory the moment the review completes
+- Not used for training, fine-tuning, or evaluation
+- Privacy guarantees follow the agreement you have with each LLM provider
+
+## Provider data-handling terms
+
+Each provider publishes its own terms. Pick the link that matches the model you're using:
+
+- **OpenAI**: [Enterprise privacy](https://openai.com/enterprise-privacy/)
+- **Google Gemini**: [Gemini API terms](https://ai.google.dev/gemini-api/terms)
+- **Anthropic Claude**: [How Anthropic uses personal data](https://support.anthropic.com/en/articles/7996885-how-do-you-use-personal-data-in-model-training)
+
+## What Mesrai does on its side
+
+- **Encryption** — TLS in transit, AES-encrypted at rest
+- **Isolation** — review sandboxes are ephemeral, destroyed after each run
+- **Access control** — workspace roles + RBAC (see [Workspace Roles](/guides/workspace_roles))
+- **Regular audits** — security review cadence + dependency scanning
+- **Patch discipline** — security updates ship quickly, never sit in backlog
+
+## Questions
+
+Email [info@mesrai.com](mailto:info@mesrai.com).

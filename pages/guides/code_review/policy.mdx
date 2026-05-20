@@ -1,0 +1,35 @@
+---
+title: "Review Policy"
+---
+
+import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
+
+## What this page covers
+
+How Mesrai's review output interacts with your branch protection rules, and when to dial up enforcement versus stay advisory.
+
+## Three policy modes
+
+- **Advisory (default)** — Mesrai posts non-blocking comments. Your team decides what to act on.
+- **Request changes** — opt in. Mesrai marks the review as *changes requested* when it finds an issue above your severity threshold. Branch protection then blocks merge.
+- **Auto-approve** — opt in. Mesrai approves the PR when it finds nothing above threshold. Useful when an approval from the bot satisfies a required-reviewer count.
+
+<Note>
+  Enable the enforcement modes only once your team has aligned on the severity threshold and has CI you trust. Premature blocking creates friction; conservative thresholds buy trust.
+</Note>
+
+## When *Request changes* makes sense
+
+- Security-critical paths where a critical finding must never merge
+- Performance hot spots where regressions are expensive to roll back
+- Mature repositories with a settled set of review rules
+
+## When *Auto-approve* makes sense
+
+- Small, low-risk diffs (docs, tests, dependency bumps)
+- Teams with strong CI + high test coverage
+- Org policies that require a bot approval as one of several required approvals
+
+## Humans still own the call
+
+Mesrai accelerates the feedback loop — it does not replace human judgment. Final merge decisions belong to your team. The right blocking policy is the one your team will defend on a Friday afternoon.

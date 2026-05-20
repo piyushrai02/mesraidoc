@@ -69,7 +69,7 @@ export const FeaturesGrid = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section heading */}
         <div className="text-center mb-16">
-          <span className="inline-block px-3 py-1 rounded-full bg-orange-500/10 text-[#E8772E] text-xs font-semibold tracking-wide uppercase mb-4">
+          <span className="inline-block px-3 py-1 rounded-full bg-orange-500/10 text-[#FF6B35] text-xs font-semibold tracking-wide uppercase mb-4">
             Features
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -85,9 +85,9 @@ export const FeaturesGrid = () => {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group p-6 rounded-xl bg-gray-50 dark:bg-[#141517] border border-gray-200 dark:border-[#27272A] hover:border-[#E8772E]/40 transition-all duration-300"
+              className="group p-6 rounded-xl bg-gray-50 dark:bg-[#141517] border border-gray-200 dark:border-[#27272A] hover:border-[#FF6B35]/40 transition-all duration-300"
             >
-              <div className="w-11 h-11 rounded-lg bg-[#E8772E]/10 flex items-center justify-center mb-4 text-[#E8772E] group-hover:bg-[#E8772E]/20 transition-colors">
+              <div className="w-11 h-11 rounded-lg bg-[#FF6B35]/10 flex items-center justify-center mb-4 text-[#FF6B35] group-hover:bg-[#FF6B35]/20 transition-colors">
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
