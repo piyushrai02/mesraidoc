@@ -1,21 +1,21 @@
 ---
-title: "Custom Prompts"
+title: "Prompt Studio"
 description: "Customize Mesrai's review prompts for each category and severity level to match your team's needs"
 ---
 
 import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
 
-Custom Prompts give you complete control over how Mesrai analyzes your code and communicates findings. Tailor what the AI looks for in each review category, how it classifies severity, and how it presents suggestions to match your team's standards and communication style.
+Prompt Studio give you complete control over how Mesrai analyzes your code and communicates findings. Tailor what the AI looks for in each review category, how it classifies severity, and how it presents suggestions to match your team's standards and communication style.
 
 <Card
-  title="Access Custom Prompts Settings"
+  title="Access Prompt Studio Settings"
   icon="gear"
   href="https://app.mesrai.com/settings/code-review/global/custom-prompts"
 >
   Configure your custom prompts for all repositories in your organization
 </Card>
 
-## Why Use Custom Prompts?
+## Why Use Prompt Studio?
 
 <CardGroup cols={2}>
   <Card title="Team-Specific Standards" icon="users">
@@ -32,9 +32,9 @@ Custom Prompts give you complete control over how Mesrai analyzes your code and 
   </Card>
 </CardGroup>
 
-## How Custom Prompts Work
+## How Prompt Studio Work
 
-Custom Prompts operate at three levels:
+Prompt Studio operate at three levels:
 
 ### Category Prompts
 
@@ -149,18 +149,18 @@ Control how Mesrai communicates each individual suggestion. This customizes the 
 
 ```
 The new file 'create-or-update-issues-parameter.dto.ts' does not follow 
-the company's naming convention. According to the Mesrai Rules, all new files 
+the company's naming convention. According to the Mesrai Playbook, all new files 
 must use camelCase. Please rename the file to 'createOrUpdateIssuesParameter.dto.ts' 
 to adhere to the standard.
 ```
 
-Your custom prompt instructs Mesrai on how to write suggestion messages. The prompt receives context about the severity level, problem description, suggested code, and whether it's a Mesrai Rules violation. Mesrai uses this context along with your prompt to generate appropriate messages for each suggestion.
+Your custom prompt instructs Mesrai on how to write suggestion messages. The prompt receives context about the severity level, problem description, suggested code, and whether it's a Mesrai Playbook violation. Mesrai uses this context along with your prompt to generate appropriate messages for each suggestion.
 
 You can customize the tone, level of detail, and communication style based on your team's needs - from detailed explanations for critical issues to concise feedback for minor ones.
 
 ## External References
 
-All custom prompts—Category, Severity, Suggestion, and PR Summary—support referencing real files from the codebases Mesrai can access. When you save an update, Mesrai automatically detects external references and resolves them for future reviews.
+All custom prompts—Category, Severity, Suggestion, and Summary Style—support referencing real files from the codebases Mesrai can access. When you save an update, Mesrai automatically detects external references and resolves them for future reviews.
 
 - Use `@file:path/to/file.ts` to point at files in the repository you're editing; Mesrai will try to locate the path locally first.
 - Include `@repo:org/project` when referencing files from another repository or when editing prompts at the global level.
@@ -286,7 +286,7 @@ Only differentiate suggestion formats when there's a real reason:
 <Tabs>
   <Tab title="Good: Meaningful Difference">
     ```
-    For Mesrai Rules violations, use a stricter tone: 
+    For Mesrai Playbook violations, use a stricter tone: 
     "**Team Standard**: [problem]. Required: [code]"
     
     For standard suggestions, use a friendlier tone:
@@ -300,7 +300,7 @@ Only differentiate suggestion formats when there's a real reason:
   
   <Tab title="Bad: Superficial Label">
     ```
-    For Mesrai Rules, add "[RULE]" prefix before the problem.
+    For Mesrai Playbook, add "[RULE]" prefix before the problem.
     For suggestions, add "[SUGGESTION]" prefix before the problem.
     Otherwise format them the same way.
     ```
@@ -435,13 +435,13 @@ Only differentiate suggestion formats when there's a real reason:
   </Accordion>
 
   <Accordion title="Different Tone for Rules vs Suggestions">
-    **Scenario:** Mesrai Rules are strict requirements, suggestions are recommendations
+    **Scenario:** Mesrai Playbook are strict requirements, suggestions are recommendations
     
     **Custom Suggestion Prompt:**
     ```
     Use different tones based on the type:
     
-    For Mesrai Rules violations:
+    For Mesrai Playbook violations:
     - Start with "**Team Standard Violation**" in bold
     - State the problem
     - Add "This violates documented team standards."
@@ -522,7 +522,7 @@ Only differentiate suggestion formats when there's a real reason:
   </Accordion>
 
   <Accordion title="Can I customize prompts with mesrai-config.yml?">
-    No. Custom prompts are web-only to ensure intentional changes. Other settings (ignored paths, branches) can use `mesrai-config.yml`.
+    No. Prompt studio are web-only to ensure intentional changes. Other settings (ignored paths, branches) can use `mesrai-config.yml`.
   </Accordion>
 
   <Accordion title="Should I customize all prompts or just some?">
@@ -545,7 +545,7 @@ Only differentiate suggestion formats when there's a real reason:
     Mesrai will fall back to the default suggestion format and notify you of the error in settings.
   </Accordion>
 
-  <Accordion title="Do suggestion prompts work for both Mesrai Rules and standard suggestions?">
+  <Accordion title="Do suggestion prompts work for both Mesrai Playbook and standard suggestions?">
     Yes. Use the `isMesraiRule` variable to create different messages for rules vs suggestions in the same prompt.
   </Accordion>
 </AccordionGroup>

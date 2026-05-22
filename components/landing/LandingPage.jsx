@@ -128,7 +128,7 @@ export function LandingPage() {
               <Card title="How code review works" icon="sparkles" href="/guides/code_review/flow">
                 Multi-agent flow over an AST graph of your repo.
               </Card>
-              <Card title="Mesrai Rules" icon="sliders" href="/guides/code_review/configs/mesrai_rules">
+              <Card title="Mesrai Playbook" icon="sliders" href="/guides/code_review/configs/mesrai_rules">
                 Plain-English or YAML rules. Apply per-org, per-repo, per-directory.
               </Card>
               <Card title="BYOK" icon="hand-holding-dollar" href="/guides/byok">

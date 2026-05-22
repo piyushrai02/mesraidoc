@@ -1,6 +1,6 @@
 ---
 title: "Turn your best practices doc into review guardrails"
-description: "Convert your engineering handbook into living Mesrai Rules with optional MCP plugins."
+description: "Convert your engineering handbook into living Mesrai Playbook with optional MCP plugins."
 icon: "shield-check"
 ---
 
@@ -12,7 +12,7 @@ Every engineering team has a “best practices” doc somewhere. The problem is 
 
 We’ll focus on two building blocks:
 
-- [Mesrai Rules](/guides/code_review/configs/mesrai_rules) – encode each policy bullet as deterministic file-level or PR-level checks.
+- [Mesrai Playbook](/guides/code_review/configs/mesrai_rules) – encode each policy bullet as deterministic file-level or PR-level checks.
 - [Custom plugins](/recipes/custom-plugin-install) – fetch standards from remote MCP servers when the source of truth lives outside Git.
 
 Follow the flow and any repo can evolve from “handbook PDF” to “living policy pack.”
@@ -20,7 +20,7 @@ Follow the flow and any repo can evolve from “handbook PDF” to “living pol
 
 ## Pre-flight checklist
 
-- You have permission to edit **Code Review Settings → Mesrai Rules**.
+- You have permission to edit **Code Review Settings → Mesrai Playbook**.
 - The policy pack lives in the repo (e.g., `docs/engineering-standards.md`). If yours sits in another path, adjust accordingly. If it lives in Notion, Confluence, or Google Docs, plan to expose it through a remote MCP endpoint.
 - You know which topics should be evaluated at the file level (controllers, configs) versus PR level (feature flags, rollout narratives, architecture).
 
@@ -77,9 +77,9 @@ Only flag code that clearly violates those bullets. If the section is missing, s
 </Callout>
 
 
-## Phase 3 – Translate sections into Mesrai Rules
+## Phase 3 – Translate sections into Mesrai Playbook
 
-Open **Code Review Settings → Mesrai Rules** and map each policy section to the appropriate scope.
+Open **Code Review Settings → Mesrai Playbook** and map each policy section to the appropriate scope.
 
 | Policy section         | Rule type     | Scope example                     | Severity |
 | ---------------------- | ------------- | --------------------------------- | -------- |
@@ -119,7 +119,7 @@ Use @MCP:policy_pack.getSection({"id":"security"}) to fetch the latest restricte
 ```
 
 <Info>
-  Rules already understand variables (`fileDiff`, `pr_files_diff`, etc.), file references, and MCP invocations. See the full matrix in the [Mesrai Rules guide](/guides/code_review/configs/mesrai_rules).
+  Rules already understand variables (`fileDiff`, `pr_files_diff`, etc.), file references, and MCP invocations. See the full matrix in the [Mesrai Playbook guide](/guides/code_review/configs/mesrai_rules).
 </Info>
 
 
@@ -152,6 +152,6 @@ Now Mesrai enforces the same standards regardless of where the document lives.
 
 - [ ] `docs/engineering-standards.md` (or MCP equivalent) exists with scannable, tagged bullets.
 - [ ] Every rule references the policy pack via `@file` or `@MCP`, ensuring it reads the latest text.
-- [ ] File-level and PR-level Mesrai Rules cover your critical sections.
+- [ ] File-level and PR-level Mesrai Playbook cover your critical sections.
 - [ ] Optional MCP plugin mirrors off-repo standards when needed.
-- [ ] A dry-run PR confirmed the inline comments and PR summary before broad rollout.
+- [ ] A dry-run PR confirmed the inline comments and Summary style before broad rollout.

@@ -27,7 +27,7 @@ Mesrai listens on your repository webhook. When a PR opens (or a new commit land
 
 1. **Resolve config** — merges global → repo → directory overrides and validates the result
 2. **Collect diff + context** — pulls the changed files plus the cross-file context needed for accurate review
-3. **Run PR-level checks** — your custom Mesrai Rules + cross-file analysis (when enabled)
+3. **Run PR-level checks** — your custom Mesrai Playbook + cross-file analysis (when enabled)
 4. **Review each changed file** — focused on the diff, with surrounding context for intent
 5. **Filter + rank suggestions** — relevance, severity, dedupe, anti-noise safeguards
 6. **Post comments** — inline suggestions, plus a PR-level summary when enabled
@@ -107,7 +107,7 @@ Mesrai uses emoji reactions on the PR description (or your trigger comment) so y
 - Auto vs manual reviews + commit cadence
 - Ignore patterns + which base branches are in scope
 - Custom rules + cross-file analysis toggles
-- Suggestion controls — severity filter, grouping, max-per-PR
+- Noise controls — severity filter, grouping, max-per-PR
 - File ceiling + timeouts
 
 <CardGroup cols={2}>

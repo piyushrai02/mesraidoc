@@ -30,11 +30,11 @@ in @file:docs/api-conventions.md and use the base classes
 defined in @file:src/shared/base-controller.ts.
 ```
 
-### Custom prompts
+### Prompt studio
 
 Add project-specific instructions that Mesrai includes in every review:
 
-1. Go to **Code Review Settings** → **Custom Prompts**
+1. Go to **Code Review Settings** → **Prompt Studio**
 2. Add context like architecture descriptions, team guidelines, or domain knowledge
 3. Mesrai includes this in every code review analysis
 
@@ -52,6 +52,6 @@ Connect external tools to give Mesrai access to richer context:
 1. Define architecture rules via **Memories**: `@mesrai remember: we follow CQRS pattern in this service`
 2. Create **Review Rules** that reference your docs: `@file:docs/architecture.md`
 3. Connect **Jira** so Mesrai validates PRs against task requirements
-4. Add **Custom Prompts** for domain-specific knowledge
+4. Add **Prompt Studio** for domain-specific knowledge
 
-For details, see [Custom Prompts](/guides/code_review/configs/custom_prompts) and [Plugins](/guides/code_review/plugins).
+For details, see [Prompt Studio](/guides/code_review/configs/custom_prompts) and [Plugins](/guides/code_review/plugins).

@@ -91,7 +91,7 @@ const productSchema = {
     "Architecture-aware reviews over AST graph",
     "BYOK — OpenAI, Anthropic, Vertex, Bedrock, OpenAI-compatible endpoints",
     "GitHub, GitLab, Bitbucket, Azure Repos integrations",
-    "Mesrai Rules — plain English or YAML",
+    "Mesrai Playbook — plain English or YAML",
     "Cockpit engineering metrics dashboard",
     "Business Logic Validation against Jira / Linear / docs",
     "Indian data residency option (Enterprise)",
