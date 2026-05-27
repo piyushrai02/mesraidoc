@@ -64,10 +64,10 @@ const productSchema = {
   "offers": [
     {
       "@type": "Offer",
-      "name": "Free",
+      "name": "Free Trial",
       "price": "0",
       "priceCurrency": "INR",
-      "description": "Free forever for individuals — 3 active devs, unlimited BYOK PR reviews"
+      "description": "14-day Free Trial — every feature unlocked, 1,000 AI credits provided, no credit card"
     },
     {
       "@type": "Offer",
@@ -82,7 +82,7 @@ const productSchema = {
       "name": "Pro (AI Included)",
       "price": "999",
       "priceCurrency": "INR",
-      "description": "Per active developer per month, 150 AI Included PR reviews / dev / month",
+      "description": "Per active developer per month, 6,000 AI credits / dev / month",
       "billingIncrement": "P1M"
     }
   ],
