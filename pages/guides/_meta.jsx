@@ -25,11 +25,11 @@ export default {
   },
   cli: 'CLI',
 
-  '-- Cockpit --': {
+  '-- Pulse --': {
     type: 'separator',
-    title: 'Cockpit'
+    title: 'Pulse'
   },
-  cockpit: 'Cockpit',
+  cockpit: 'Pulse',
 
   '-- Issues --': {
     type: 'separator',
