@@ -66,7 +66,17 @@ const organizationSchema = {
     "https://www.linkedin.com/company/mesrai",
     "https://x.com/mesraiofficial",
     "https://www.youtube.com/@mesrai",
-    "https://www.instagram.com/mesraiofficial"
+    "https://www.instagram.com/mesraiofficial",
+    "https://www.wikidata.org/wiki/Q140030324"
+  ],
+  // Wikidata entity binding — see canonical Org schema in
+  // portfolio/src/lib/seo.ts for full rationale.
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "Wikidata",
+      "value": "Q140030324"
+    }
   ]
 }
 
