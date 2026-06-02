@@ -10,28 +10,63 @@ import { useMDXComponents } from '../mdx-components'
 const BASE_URL = 'https://docs.mesrai.com'
 
 // JSON-LD Schema Data
+// Canonical Mesrai Organization schema. Matches the same `@id`
+// emitted on mesrai.com, app.mesrai.com, and marketplace.mesrai.com
+// so Google's Knowledge Graph merges all 4 properties into one
+// entity. Update here = update lockstep in portfolio/lib/seo.ts,
+// mesrai-marketplace/lib/seo.ts, and mesrai-engine/apps/web layout.
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://mesrai.com/#organization",
   "name": "Mesrai",
-  "url": "https://docs.mesrai.com",
-  "logo": "https://docs.mesrai.com/android-chrome-512x512.png",
-  "description": "AI code review platform that catches bugs, security risks, and design issues on every pull request. Multi-agent reviewer over GitHub, GitLab, Bitbucket, and Azure Repos.",
-  "foundingDate": "2025",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Support",
-    "email": "info@mesrai.com",
-    "areaServed": ["IN", "Worldwide"]
+  "alternateName": "Mesrai AI",
+  "legalName": "Mesrai Technologies",
+  "url": "https://mesrai.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://mesrai.com/logo.png",
+    "width": "512",
+    "height": "512"
   },
+  "image": "https://mesrai.com/og-image.png",
+  "description": "Multi-agent AI code review for product engineering teams. India-first, BYOK supported, INR + GST billing.",
+  "foundingDate": "2025-01",
+  "founders": [
+    { "@type": "Person", "name": "Kajal Rai", "jobTitle": "Co-founder" }
+  ],
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Bangalore",
+    "addressRegion": "Karnataka",
     "addressCountry": "IN"
   },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "email": "contact@mesrai.com",
+      "contactType": "customer support",
+      "areaServed": ["IN", "Worldwide"],
+      "availableLanguage": ["English", "Hindi"]
+    },
+    {
+      "@type": "ContactPoint",
+      "email": "contact@mesrai.com",
+      "contactType": "sales",
+      "areaServed": ["IN", "Worldwide"],
+      "availableLanguage": ["English"]
+    }
+  ],
   "sameAs": [
-    "https://twitter.com/mesraiofficial",
-    "https://linkedin.com/company/mesrai",
-    "https://github.com/mesraiofficial"
+    "https://mesrai.com",
+    "https://app.mesrai.com",
+    "https://docs.mesrai.com",
+    "https://www.marketplace.mesrai.com",
+    "https://github.com/mesraiofficial",
+    "https://www.linkedin.com/company/mesrai",
+    "https://x.com/mesraiofficial",
+    "https://www.youtube.com/@mesrai",
+    "https://www.instagram.com/mesraiofficial"
   ]
 }
 
