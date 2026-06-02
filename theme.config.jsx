@@ -6,7 +6,14 @@ import { NavbarExtra } from './components/Navbar'
 const SITE_NAME = 'Mesrai Docs'
 const SITE_DESCRIPTION = 'Documentation for Mesrai — multi-agent AI code review across GitHub, GitLab, Bitbucket, and Azure Repos. BYOK supported. India-first billing.'
 const SITE_URL = 'https://docs.mesrai.com'
-const OG_IMAGE = `${SITE_URL}/android-chrome-512x512.png`
+// 1200×630 landscape PNG — the size every social platform crops
+// to. The earlier 512×512 square Android icon got cropped to a
+// tiny circle on LinkedIn / Slack / Twitter, producing previews
+// that looked broken. Twitter `summary_large_image` cards in
+// particular need the landscape aspect.
+const OG_IMAGE = `${SITE_URL}/og-default.png`
+const OG_IMAGE_WIDTH = '1200'
+const OG_IMAGE_HEIGHT = '630'
 
 export default {
   logo: <Logo width={140} height={36} />,
@@ -64,8 +71,8 @@ export default {
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:alt" content="Mesrai - AI-Powered Code Review Platform" />
-        <meta property="og:image:width" content="512" />
-        <meta property="og:image:height" content="512" />
+        <meta property="og:image:width" content={OG_IMAGE_WIDTH} />
+        <meta property="og:image:height" content={OG_IMAGE_HEIGHT} />
         <meta property="og:locale" content="en_US" />
 
         {/* Twitter Card */}
