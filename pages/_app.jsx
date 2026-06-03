@@ -61,7 +61,7 @@ const organizationSchema = {
     "https://mesrai.com",
     "https://app.mesrai.com",
     "https://docs.mesrai.com",
-    "https://www.marketplace.mesrai.com",
+    "https://marketplace.mesrai.com",
     "https://github.com/mesraiofficial",
     "https://www.linkedin.com/company/mesrai",
     "https://x.com/mesraiofficial",
