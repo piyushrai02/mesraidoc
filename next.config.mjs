@@ -119,9 +119,6 @@ export default withNextra({
       { source: '/billing', destination: '/guides/pricing', permanent: true },
       { source: '/billing/:slug*', destination: '/guides/pricing', permanent: true },
       { source: '/faq', destination: '/guides/overview', permanent: true },
-      { source: '/roadmap', destination: '/', permanent: true },
-      { source: '/changelog', destination: '/', permanent: true },
-      { source: '/blog/:slug*', destination: '/', permanent: false },
 
       // Hidden self-host stubs → safe targets
       { source: '/kb/how-to-self-host-ai-code-review', destination: '/guides/overview', permanent: false },

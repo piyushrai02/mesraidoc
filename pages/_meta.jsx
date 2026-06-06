@@ -9,5 +9,13 @@ export default {
   operations: {
     title: 'Operations',
     display: 'hidden'
+  },
+  roadmap: {
+    title: 'Roadmap',
+    display: 'hidden'
+  },
+  changelog: {
+    title: 'Changelog',
+    display: 'hidden'
   }
 }

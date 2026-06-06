@@ -330,7 +330,7 @@ export const Sidebar = () => {
           label="FAQ"
         />
         <MenuItem
-          href="/blog/superhuman-context"
+          href="https://mesrai.com/blog"
           icon={Icons.Newspaper}
           label="Blog"
         />
