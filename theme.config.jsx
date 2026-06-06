@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useConfig } from 'nextra-theme-docs'
 import { Logo } from './components/Logo'
 import { Footer } from './components/Footer'
 import { NavbarExtra } from './components/Navbar'
@@ -30,16 +31,23 @@ export default {
   // Dynamic head — generates per-page meta tags
   head: function Head() {
     const { asPath, pathname } = useRouter()
+    const { frontMatter } = useConfig()
     const url = `${SITE_URL}${asPath.split('?')[0].replace(/\/$/, '') || '/'}`
+    // Prefer the page's own frontmatter `description:` (set on every
+    // .mdx page) so each URL gets a unique meta description. Fall back
+    // to the site-wide blurb for the homepage / any page that doesn't
+    // declare one. `keywords` meta intentionally omitted — Google has
+    // ignored it for well over a decade and identical keyword sets on
+    // every page hurt more than they help.
+    const description = frontMatter?.description || SITE_DESCRIPTION
 
     return (
       <>
         {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {/* Fallback description — Nextra overrides with frontmatter description when available */}
-        <meta name="description" content={SITE_DESCRIPTION} />
-        <meta name="keywords" content="Mesrai, AI code review, automated PR review, GitHub code review, GitLab code review, Bitbucket code review, Azure DevOps review, BYOK, India AI code review, INR billing, GST invoice, multi-agent code review, AST code review, pull request automation, code quality, security scanning, OWASP code review" />
+        {/* Per-page description from .mdx frontmatter */}
+        <meta name="description" content={description} />
         <meta name="author" content="Mesrai" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
@@ -97,8 +105,7 @@ export default {
         {/* Dublin Core */}
         <meta name="dc.title" content="Mesrai Documentation" />
         <meta name="dc.creator" content="Mesrai" />
-        <meta name="dc.subject" content="AI code review, automated code review, GitHub integration, developer tools" />
-        <meta name="dc.description" content={SITE_DESCRIPTION} />
+        <meta name="dc.description" content={description} />
         <meta name="dc.publisher" content="Mesrai" />
         <meta name="dc.type" content="Documentation" />
         <meta name="dc.format" content="text/html" />
@@ -112,10 +119,8 @@ export default {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-        {/* Geo & Language — India-first */}
-        <meta name="geo.region" content="IN" />
-        <meta name="geo.placename" content="India" />
-        <meta httpEquiv="content-language" content="en-IN" />
+        {/* Language — global English, no geographic targeting */}
+        <meta httpEquiv="content-language" content="en" />
 
         {/* Cache */}
         <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
