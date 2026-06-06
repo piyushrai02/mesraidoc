@@ -58,6 +58,20 @@ export default withNextra({
     ]
   },
 
+  // Public-friendly URLs for the MCP server. The actual route handler
+  // lives at `pages/api/[transport].js` so it resolves to `/api/mcp`
+  // (and `/api/sse`, `/api/message`) internally; these rewrites let
+  // external clients reach the streamable-HTTP transport at the
+  // canonical `/mcp` path the way the managed-mcp-servers.json config
+  // entry `mesrai-docs-default` expects.
+  async rewrites() {
+    return [
+      { source: '/mcp', destination: '/api/mcp' },
+      { source: '/sse', destination: '/api/sse' },
+      { source: '/message', destination: '/api/message' },
+    ]
+  },
+
   // Redirects for SEO + legacy URL preservation
   async redirects() {
     return [
