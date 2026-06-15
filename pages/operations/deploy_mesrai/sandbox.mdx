@@ -17,7 +17,7 @@ graph is, and how the cache keeps PR-level reviews fast.
 
 ## How the AST graph works
 
-Mesrai uses [`@kodus/kodus-graph`](https://www.npmjs.com/package/@kodus/kodus-graph),
+Mesrai uses [`@mesrai/mesrai-graph`](https://www.npmjs.com/package/@mesrai/mesrai-graph),
 a CLI that walks a repository and emits a JSON graph (functions, classes,
 files, imports, calls). The CLI is **pre-installed in the worker image**
 (`mesrai-ai-worker`), so there is no extra setup step on `local` mode.

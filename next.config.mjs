@@ -77,7 +77,7 @@ export default withNextra({
     return [
       { source: '/docs', destination: '/', permanent: true },
 
-      // Old Kodus URL pattern → new Mesrai paths
+      // Legacy URL patterns → new Mesrai paths (preserves SEO + bookmarks)
       { source: '/how_to_use/en/:slug*', destination: '/guides/:slug*', permanent: true },
       { source: '/how_to_deploy/en/:slug*', destination: '/operations/:slug*', permanent: true },
       { source: '/cookbook/en/:slug*', destination: '/recipes/:slug*', permanent: true },
