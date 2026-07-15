@@ -135,7 +135,7 @@ export function LandingPage() {
                 Bring your own OpenAI, Anthropic, Vertex, Bedrock, or any compatible key.
               </Card>
               <Card title="Pricing" icon="money-bill-wave" href="/guides/pricing">
-                Free ₹0, Pro ₹999 AI Included / ₹499 BYOK, Enterprise custom.
+                Free ₹0, Pro ₹499 / $6 BYOK, Enterprise custom.
               </Card>
               <Card title="CLI" icon="terminal" href="/guides/cli/introduction">
                 Run Mesrai reviews from your terminal or CI agent.

@@ -112,7 +112,7 @@ const productSchema = {
       "name": "Free Trial",
       "price": "0",
       "priceCurrency": "INR",
-      "description": "14-day Free Trial — every feature unlocked, 1,000 AI credits provided, no credit card"
+      "description": "14-day Free Trial — every feature unlocked, connect your own AI key (BYOK), no credit card"
     },
     {
       "@type": "Offer",
@@ -120,14 +120,6 @@ const productSchema = {
       "price": "499",
       "priceCurrency": "INR",
       "description": "Per active developer per month, unlimited PR reviews",
-      "billingIncrement": "P1M"
-    },
-    {
-      "@type": "Offer",
-      "name": "Pro (AI Included)",
-      "price": "999",
-      "priceCurrency": "INR",
-      "description": "Per active developer per month, 6,000 AI credits / dev / month",
       "billingIncrement": "P1M"
     }
   ],
