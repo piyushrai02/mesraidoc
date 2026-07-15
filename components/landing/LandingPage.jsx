@@ -8,6 +8,13 @@ const FEED = [
   { sev: 'pass', dot: 'bg-green-500', label: 'text-green-500', rule: 'style/naming', file: 'core/auth.ts', msg: 'Identifier conventions match repo rules' },
 ];
 
+const CHIPS = [
+  'Multi-agent review',
+  'Architecture-aware (AST graph)',
+  'Bring your own key',
+  'Rules you write',
+];
+
 export function LandingPage() {
   return (
     <>
@@ -17,28 +24,42 @@ export function LandingPage() {
       </Head>
       <div className="landing-page -mx-6 md:-mx-8 lg:-mx-12">
         {/* HERO */}
-        <section className="relative w-full overflow-hidden px-6 pt-20 pb-16 md:pt-28 md:pb-20 bg-white dark:bg-[#09090B]">
-          <div className="mx-auto grid w-full max-w-7xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16">
+        <section className="relative isolate w-full overflow-hidden px-6 pt-20 pb-20 md:pt-28 md:pb-24 bg-white dark:bg-[#09090B]">
+          {/* Decorative background — brand glow + faint grid, both masked to fade */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+            <div
+              className="absolute -right-40 -top-48 h-[620px] w-[620px] rounded-full blur-3xl opacity-70 dark:opacity-100"
+              style={{ background: 'radial-gradient(circle, rgba(255,107,53,0.16), transparent 62%)' }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, rgba(130,130,140,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(130,130,140,0.06) 1px, transparent 1px)',
+                backgroundSize: '46px 46px',
+                WebkitMaskImage: 'radial-gradient(120% 100% at 30% 10%, black, transparent 72%)',
+                maskImage: 'radial-gradient(120% 100% at 30% 10%, black, transparent 72%)',
+              }}
+            />
+          </div>
+
+          <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,1fr)_460px] lg:gap-20">
             <article className="flex flex-col gap-7">
-              <header className="flex flex-col gap-4">
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-gray-900 dark:text-white">
-                    // mesrai · docs
-                  </span>
-                  <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-gray-500 dark:text-gray-500">
-                    ai code review · free for individuals
+              <header className="flex flex-col gap-5">
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#101014] px-3 py-1">
+                  <span className="inline-block size-1.5 rounded-full bg-[#FF6B35]" />
+                  <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-gray-600 dark:text-gray-400">
+                    Mesrai Docs · AI code review
                   </span>
                 </div>
 
-                <h1 className="font-serif text-5xl leading-[1.05] font-normal tracking-tight md:text-6xl text-gray-900 dark:text-white">
+                <h1 className="font-serif text-5xl leading-[1.04] font-normal tracking-tight md:text-6xl text-gray-900 dark:text-white">
                   AI code review that <em className="text-[#FF6B35] font-normal italic">understands your architecture</em>.
                 </h1>
 
-                <p className="max-w-[58ch] text-base leading-[1.6] md:text-lg text-gray-600 dark:text-gray-400">
+                <p className="max-w-[56ch] text-base leading-[1.6] md:text-lg text-gray-600 dark:text-gray-400">
                   Multi-agent reviewer reads your repo as a graph — not just the diff. Catches bugs, security risks, and design issues on every PR, with rules you write and the model you pick.
                 </p>
-
-                <div className="mt-1 h-px w-12 bg-gray-300 dark:bg-gray-700" />
               </header>
 
               <div className="flex flex-wrap items-center gap-3">
@@ -57,6 +78,18 @@ export function LandingPage() {
                 </a>
               </div>
 
+              {/* Feature chips */}
+              <ul className="flex flex-wrap gap-2">
+                {CHIPS.map((chip) => (
+                  <li
+                    key={chip}
+                    className="rounded-full border border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0F0F12] px-3 py-1 text-[12px] text-gray-600 dark:text-gray-400"
+                  >
+                    {chip}
+                  </li>
+                ))}
+              </ul>
+
               <footer className="border-t border-gray-200 dark:border-gray-800 mt-3 pt-5 flex flex-wrap items-center gap-3 font-mono text-[11px] tracking-wider uppercase text-gray-500 dark:text-gray-400">
                 <span className="inline-block size-1.5 shrink-0 rounded-full bg-green-500" />
                 <span>github · gitlab · bitbucket · azure repos</span>
@@ -64,53 +97,61 @@ export function LandingPage() {
             </article>
 
             {/* EXAMPLE PR REVIEW PANEL */}
-            <aside
-              className="hidden lg:flex flex-col overflow-hidden rounded-md border border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0F0F12] lg:sticky lg:top-32"
-              aria-label="Example Mesrai review"
-            >
-              <header className="border-b border-gray-200 dark:border-[#27272A] flex items-center justify-between gap-3 px-4 py-3">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] tracking-[0.14em] uppercase text-gray-900 dark:text-white font-medium">
-                    Mesrai review
+            <div className="relative hidden lg:block">
+              {/* soft glow behind the panel */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl blur-2xl opacity-60"
+                style={{ background: 'radial-gradient(60% 60% at 70% 30%, rgba(255,107,53,0.14), transparent 70%)' }}
+              />
+              <aside
+                className="flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0F0F12] shadow-xl shadow-black/5 dark:shadow-black/40 lg:sticky lg:top-32"
+                aria-label="Example Mesrai review"
+              >
+                <header className="border-b border-gray-200 dark:border-[#27272A] flex items-center justify-between gap-3 px-4 py-3">
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[11px] tracking-[0.14em] uppercase text-gray-900 dark:text-white font-medium">
+                      Mesrai review
+                    </span>
+                    <span className="font-mono text-[9.5px] tracking-[0.12em] uppercase text-gray-500">
+                      example · pull request #42
+                    </span>
+                  </div>
+                  <span className="rounded border border-gray-300 dark:border-gray-700 px-2 py-0.5 font-mono text-[9px] tracking-wider uppercase text-gray-500">
+                    demo
                   </span>
-                  <span className="font-mono text-[9.5px] tracking-[0.12em] uppercase text-gray-500">
-                    example · pull request #42
-                  </span>
-                </div>
-                <span className="rounded border border-gray-300 dark:border-gray-700 px-2 py-0.5 font-mono text-[9px] tracking-wider uppercase text-gray-500">
-                  demo
-                </span>
-              </header>
+                </header>
 
-              <ul className="flex flex-col">
-                {FEED.map((row, i) => (
-                  <li key={i} className="border-b border-gray-200 dark:border-[#27272A] flex flex-col gap-1.5 px-4 py-3 last:border-0">
-                    <div className="flex items-center gap-3">
-                      <span className={`inline-block size-1.5 shrink-0 rounded-full ${row.dot}`} />
-                      <span className={`shrink-0 font-mono text-[10px] tracking-[0.1em] uppercase ${row.label}`}>
-                        {row.sev}
-                      </span>
-                      <span className="text-gray-900 dark:text-white truncate font-mono text-[11px]">
-                        {row.rule}
-                      </span>
-                    </div>
-                    <div className="text-gray-600 dark:text-gray-400 truncate pl-[22px] text-[12px] leading-snug">
-                      <span className="text-gray-500 font-mono text-[10px]">{row.file}</span> — {row.msg}
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                <ul className="flex flex-col">
+                  {FEED.map((row, i) => (
+                    <li key={i} className="border-b border-gray-200 dark:border-[#27272A] flex flex-col gap-1.5 px-4 py-3 last:border-0 transition-colors hover:bg-gray-50 dark:hover:bg-[#141418]">
+                      <div className="flex items-center gap-3">
+                        <span className={`inline-block size-1.5 shrink-0 rounded-full ${row.dot}`} />
+                        <span className={`shrink-0 font-mono text-[10px] tracking-[0.1em] uppercase ${row.label}`}>
+                          {row.sev}
+                        </span>
+                        <span className="text-gray-900 dark:text-white truncate font-mono text-[11px]">
+                          {row.rule}
+                        </span>
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400 truncate pl-[22px] text-[12px] leading-snug">
+                        <span className="text-gray-500 font-mono text-[10px]">{row.file}</span> — {row.msg}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
 
-              <footer className="border-t border-gray-200 dark:border-[#27272A] flex items-center justify-between px-4 py-2 font-mono text-[10px] tracking-[0.12em] uppercase text-gray-500">
-                <span>4 findings · 2 pass · 1 warn · 1 info</span>
-                <span className="text-[#FF6B35]">illustration</span>
-              </footer>
-            </aside>
+                <footer className="border-t border-gray-200 dark:border-[#27272A] flex items-center justify-between px-4 py-2 font-mono text-[10px] tracking-[0.12em] uppercase text-gray-500">
+                  <span>4 findings · 2 pass · 1 warn · 1 info</span>
+                  <span className="text-[#FF6B35]">illustration</span>
+                </footer>
+              </aside>
+            </div>
           </div>
         </section>
 
         {/* DOC SECTIONS */}
-        <section className="px-6 py-16 md:py-20 bg-gray-50 dark:bg-[#0B0B0E]">
+        <section className="px-6 py-16 md:py-24 border-t border-gray-200 dark:border-[#18181B] bg-gray-50 dark:bg-[#0B0B0E]">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#FF6B35]">
@@ -119,6 +160,9 @@ export function LandingPage() {
               <h2 className="font-serif text-3xl md:text-4xl mt-3 text-gray-900 dark:text-white">
                 Pick where you want to start
               </h2>
+              <p className="mt-3 max-w-[58ch] text-gray-600 dark:text-gray-400 leading-relaxed">
+                From your first review to writing rules, bringing your own key, and running Mesrai in CI — jump straight to what you need.
+              </p>
             </div>
 
             <CardGroup cols={3}>
@@ -135,7 +179,7 @@ export function LandingPage() {
                 Bring your own OpenAI, Anthropic, Vertex, Bedrock, or any compatible key.
               </Card>
               <Card title="Pricing" icon="money-bill-wave" href="/guides/pricing">
-                Free ₹0, Pro ₹999 AI Included / ₹499 BYOK, Enterprise custom.
+                Free ₹0, Pro ₹499 / $6 BYOK, Enterprise custom.
               </Card>
               <Card title="CLI" icon="terminal" href="/guides/cli/introduction">
                 Run Mesrai reviews from your terminal or CI agent.
@@ -145,7 +189,7 @@ export function LandingPage() {
         </section>
 
         {/* LLM PROVIDERS */}
-        <section className="px-6 py-16 md:py-20 bg-white dark:bg-[#09090B]">
+        <section className="px-6 py-16 md:py-24 bg-white dark:bg-[#09090B]">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#FF6B35]">
@@ -194,7 +238,12 @@ export function LandingPage() {
         </section>
 
         {/* GET STARTED CTA */}
-        <section className="px-6 py-20 border-t border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#0B0B0E]">
+        <section className="relative overflow-hidden px-6 py-20 md:py-24 border-t border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#0B0B0E]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-70"
+            style={{ background: 'radial-gradient(50% 80% at 50% 0%, rgba(255,107,53,0.10), transparent 70%)' }}
+          />
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white">
               Start reviewing with Mesrai

@@ -1,32 +1,30 @@
 ---
 title: "Pricing"
-description: "14-day Free Trial, Pro, and Enterprise plans for Mesrai AI code review. INR billing in India, USD billing for international customers."
+description: "14-day Free Trial, Pro (BYOK), and Enterprise plans for Mesrai AI code review. INR billing in India, USD billing for international customers."
 ---
 
 import { Card, CardGroup, Steps, Step, Tabs, Tab, Accordion, AccordionGroup, Note, Info, Tip, Warning, Check, Frame, Snippet, Icon, Callout } from '@/components/mdx'
 
-Three plans. Two price modes per paid tier: **AI Included** (Mesrai-managed model) or **BYOK** (bring your own LLM key, lower platform fee). New accounts start on a 14-day Free Trial — every Pro feature unlocked, no card required.
+Three plans, all **BYOK** — you bring your own LLM key and pay your provider directly, with no token markup from Mesrai. New accounts start on a 14-day Free Trial — every Pro feature unlocked, no card required.
 
 <Note>**Currency** — Prices below are shown in both INR and USD. Indian customers are billed in INR (GST invoice issued). International customers are billed in USD. The price your account is charged is decided at checkout based on your billing country. Visit [mesrai.com/pricing](https://mesrai.com/pricing) for the auto-detected price in your local currency.</Note>
 
 ## Plans at a glance
 
-- **Free Trial** — ₹0 / $0 for 14 days. Every feature unlocked, 1,000 AI credits provided, no credit card. Unlimited developers, repos, rules, and plugins during the trial.
-- **Pro** — ₹999 / $12 per dev / mo (AI Included, 6,000 AI credits / dev / mo) **or** ₹499 / $6 per dev / mo (BYOK, unlimited PRs). Pulse + Business Logic Validation + priority queue.
-- **Enterprise** — custom. Custom AI allowance or unlimited BYOK. Self-hosted, SSO/SAML, Indian data residency, custom SLA.
+- **Free Trial** — ₹0 / $0 for 14 days. Every feature unlocked, no credit card. Connect your own AI key to run reviews. Unlimited developers, repos, rules, and plugins during the trial.
+- **Pro** — ₹499 / $6 per dev / mo (BYOK, unlimited PRs). Pulse + Business Logic Validation + priority queue.
+- **Enterprise** — custom. Unlimited BYOK reviews. Self-hosted, SSO/SAML, Indian data residency, custom SLA.
 
 All plans: unlimited repositories, all VCS providers, Mesrai Learnings.
 
-<Note>1 AI credit = 1,000 tokens of model spend on Mesrai's managed AI. Typical PR reviews consume anywhere from a handful of credits up to a few hundred depending on diff size.</Note>
+<Note>Mesrai is BYOK-only — you connect your own OpenAI, Anthropic, Gemini, Vertex, Bedrock, or any OpenAI-compatible provider and pay them directly at their rates. Mesrai charges a flat per-developer platform fee and never marks up tokens.</Note>
 
 ## Comparison
 
 | Feature | Free Trial | Pro | Enterprise |
 | --- | --- | --- | --- |
-| **AI Included price** | ₹0 / $0 (14 days) | ₹999 / $12 per dev / mo | Custom |
-| **BYOK price** | ₹0 / $0 (14 days) | ₹499 / $6 per dev / mo | Custom |
-| AI credits / month (AI Included) | 1,000 (trial total) | 6,000 / dev | Custom |
-| PR reviews / month (BYOK) | Unlimited | Unlimited | Unlimited |
+| **Price (BYOK)** | ₹0 / $0 (14 days) | ₹499 / $6 per dev / mo | Custom |
+| PR reviews / month | Unlimited | Unlimited | Unlimited |
 | Repositories | Unlimited | Unlimited | Unlimited |
 | Active developers | Unlimited (trial) | Unlimited | Unlimited |
 | Mesrai Playbook | Unlimited (trial) | Unlimited | Unlimited |
@@ -48,16 +46,12 @@ All plans: unlimited repositories, all VCS providers, Mesrai Learnings.
 | TDS documentation | — | — | ✓ |
 | Custom SLA | — | — | ✓ |
 
-## AI Included vs BYOK
+## How BYOK works
 
-Two ways to power reviews. Pick per paid tier:
+Mesrai runs reviews on **your own LLM key** — bring OpenAI, Anthropic, Vertex, Bedrock, or any OpenAI-compatible provider. You pay the provider directly at their rates; Mesrai never marks up tokens and charges only a flat per-developer platform fee. Reviews are unlimited on every tier, and you can switch providers anytime.
 
-- **AI Included** — Mesrai supplies the LLM. One invoice covers seats + tokens. Pro is capped by a monthly AI-credit allowance (6,000 credits / dev / mo); Enterprise allowance is sized per contract. Pro tier exposes 3 model classes (Fast / Balanced / Premium); Enterprise unlocks all models plus custom endpoints.
-- **BYOK** — Bring your own OpenAI, Anthropic, Vertex, Bedrock, or any OpenAI-compatible key. Lower platform fee. Token bill lands on your provider. Unlimited PR reviews. Switch providers anytime.
-
-| Mode | Free Trial | Pro | Enterprise |
+| Tier | Free Trial | Pro | Enterprise |
 | --- | --- | --- | --- |
-| **AI Included** | ₹0 / $0 (1,000 credits, 14 days) | ₹999 / $12 per dev / mo (6,000 credits / dev / mo) | Custom |
 | **BYOK** | ₹0 / $0 (unlimited, 14 days) | ₹499 / $6 per dev / mo (unlimited) | Custom (unlimited) |
 
 See the [BYOK guide](/guides/byok) for supported providers and setup.
@@ -68,31 +62,22 @@ Mesrai bills per **active developer** — anyone who opens a PR in the billing p
 
 ## Free Trial — how it works
 
-Every new account starts with a 14-day Free Trial. Every Pro feature is unlocked from day one, with 1,000 AI credits provided so you can run real PR reviews on real repos. No credit card required to start.
+Every new account starts with a 14-day Free Trial. Every Pro feature is unlocked from day one. Connect your own AI key under **Organization → BYOK** to run real PR reviews on real repos. No credit card required to start.
 
-When the trial ends — or when the 1,000 credits run out, whichever comes first — reviews pause until you either upgrade to Pro or configure a BYOK key under **Organization → BYOK**. Your settings, integrations, rules, and history are preserved.
+When the trial ends, reviews continue on Pro (₹499 / $6 per dev / mo) as long as a BYOK key is configured. Your settings, integrations, rules, and history are preserved.
 
-## Pro plan — what each price covers
+## Pro plan — what it covers
 
-**Pro AI Included (₹999 / $12 per dev / mo)** — Mesrai supplies the model. 6,000 AI credits per developer per month. 3 model classes: Fast (cheap, style + lint), Balanced (default), Premium (frontier for security and complex logic). When a developer's monthly credits run out, switch to BYOK to keep reviewing on your own AI key or wait for the next billing cycle.
+**Pro (₹499 / $6 per dev / mo)** — Platform fee only. You connect your own LLM provider and pay them directly, with no token markup from Mesrai. Unlimited reviews, plus:
 
-**Pro BYOK (₹499 / $6 per dev / mo)** — Platform fee only. You connect your own LLM provider, pay your provider directly, no token markup from Mesrai. Unlimited reviews.
-
-Both modes include over the trial baseline:
-
-- Ongoing reviews past the 14-day trial window
+- **3 model classes** — Fast (cheap, style + lint), Balanced (default), Premium (frontier for security and complex logic)
 - **Priority review queue** — Pro PRs reviewed ahead of trial traffic
 - **GST invoice** for INR billing in India, tax-compliant invoice for USD billing internationally
 - Email support, IST, 1 business day response
 
 ## Enterprise
 
-Enterprise is contract-priced. Same two modes:
-
-- **AI Included** — Mesrai-managed model, custom AI allowance sized to your team, full model catalog plus custom endpoints.
-- **BYOK** — bring your own provider, unlimited reviews.
-
-Enterprise-only:
+Enterprise is contract-priced — unlimited BYOK reviews, the full model catalog plus custom endpoints, and:
 
 - **Self-hosted deployment** in your VPC
 - **SSO / SAML**
