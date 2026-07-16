@@ -143,6 +143,21 @@ html.dark .nextra-search kbd {
 }
 
 /* =====================================================
+   APP SHELL — full-bleed
+
+   Nextra centers the whole app (navbar + sidebar + content) inside a
+   90rem box. On screens wider than 1440px that left an empty margin to
+   the LEFT of the sidebar, so the sidebar floated in from the edge.
+   Drop the cap so the navbar spans the full width and the sidebar is a
+   true flush-left rail. Content keeps its own reading width.
+   ===================================================== */
+.nextra-nav-container nav[class~="_max-w-[90rem]"],
+.nextra-nav-container-blur ~ nav[class~="_max-w-[90rem]"],
+div[class~="_max-w-[90rem]"] {
+  max-width: none !important;
+}
+
+/* =====================================================
    LEFT SIDEBAR — professional, fully theme-aware
 
    Structural rules (spacing, radius, type scale) are written once and
