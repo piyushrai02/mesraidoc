@@ -65,14 +65,14 @@ export function LandingPage() {
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="https://app.mesrai.com/login"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
+                  className="mesrai-cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
                 >
                   Start free
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
                 <a
                   href="/guides/quickstart"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
+                  className="mesrai-cta-secondary inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
                 >
                   Quickstart
                 </a>
@@ -254,14 +254,14 @@ export function LandingPage() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="https://app.mesrai.com/login"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
+                className="mesrai-cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
               >
                 Start free
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </a>
               <a
                 href="/guides/pricing"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
+                className="mesrai-cta-secondary inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
               >
                 See pricing
               </a>

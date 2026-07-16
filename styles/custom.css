@@ -274,24 +274,40 @@ html:not(.dark) .nextra-sidebar-container button:hover {
 }
 
 /* =====================================================
-   NESTED TREE (one level in)
+   TREE INDENT / GUIDE LINE
+
+   Nextra draws its own vertical guide line via a `::before` pseudo on
+   every folder's child <ul>, plus a left indent. The top-level GUIDES
+   list wraps the ENTIRE menu, so that line ran the full height and left
+   an empty gutter down the left edge. Kill Nextra's line + indent so
+   the menu sits flush, then add a quiet guide only for the children of
+   an actually-expanded folder (3rd list level in).
    ===================================================== */
-.nextra-sidebar-container ul ul {
-  margin-left: 0.75rem;
-  padding-left: 0.75rem;
+.nextra-sidebar-container .nextra-menu-desktop ul::before {
+  display: none !important;
+}
+.nextra-sidebar-container .nextra-menu-desktop ul {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Quiet indent + hairline for children of an expanded folder */
+.nextra-sidebar-container .nextra-menu-desktop ul ul ul {
+  padding-left: 0.6rem !important;
+  margin-left: 0.35rem !important;
   border-left: 1px solid transparent;
 }
-html.dark .nextra-sidebar-container ul ul { border-left-color: var(--mesrai-border); }
-html:not(.dark) .nextra-sidebar-container ul ul { border-left-color: #E4E4E7; }
+html.dark .nextra-sidebar-container .nextra-menu-desktop ul ul ul { border-left-color: var(--mesrai-border); }
+html:not(.dark) .nextra-sidebar-container .nextra-menu-desktop ul ul ul { border-left-color: #E4E4E7; }
 
-/* Nested links a touch smaller */
-.nextra-sidebar-container ul ul a {
+/* Links inside an expanded folder read a touch smaller */
+.nextra-sidebar-container ul ul ul a {
   font-size: 0.8125rem;
   padding: 0.4375rem 0.75rem;
 }
 
-/* Nested folder toggles (e.g. "Code Review", "Pulse") read as calm
-   title-case items — uppercase is reserved for the top-level headers. */
+/* Folder toggles (e.g. "Code Review", "Pulse") read as calm title-case
+   items — uppercase is reserved for the top-level GUIDES headers. */
 .nextra-sidebar-container ul ul button {
   text-transform: none;
   letter-spacing: normal;
@@ -460,6 +476,33 @@ html.dark article a:hover {
 
 html:not(.dark) article a {
   color: var(--mesrai-accent);
+}
+
+/* Landing hero/CTA buttons. The generic `article a` accent-link rule
+   above is unlayered, so it beats Tailwind's layered `text-white`
+   utility and tinted the button labels peach. Pin the label colors
+   explicitly. Primary = white on orange; secondary = theme foreground. */
+.landing-page a.mesrai-cta-primary,
+.landing-page a.mesrai-cta-primary:hover {
+  color: #ffffff !important;
+  border-bottom: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.landing-page a.mesrai-cta-primary svg {
+  color: #ffffff !important;
+}
+
+.landing-page a.mesrai-cta-secondary {
+  border-bottom: none !important;
+  -webkit-text-fill-color: unset !important;
+}
+html.dark .landing-page a.mesrai-cta-secondary,
+html.dark .landing-page a.mesrai-cta-secondary:hover {
+  color: #ffffff !important;
+}
+html:not(.dark) .landing-page a.mesrai-cta-secondary,
+html:not(.dark) .landing-page a.mesrai-cta-secondary:hover {
+  color: #111827 !important;
 }
 
 /* Override for landing page buttons - inline styles take priority */
