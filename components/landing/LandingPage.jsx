@@ -22,9 +22,9 @@ export function LandingPage() {
         <title>Mesrai Documentation</title>
         <meta name="description" content="Documentation for Mesrai — multi-agent AI code review built for engineering teams in India and beyond." />
       </Head>
-      <div className="landing-page -mx-6 md:-mx-8 lg:-mx-12">
+      <div className="landing-page w-full">
         {/* HERO */}
-        <section className="relative isolate w-full overflow-hidden px-6 pt-20 pb-20 md:pt-28 md:pb-24 bg-white dark:bg-[#09090B]">
+        <section className="relative isolate w-full overflow-hidden px-6 md:px-10 lg:px-14 pt-16 pb-16 md:pt-24 md:pb-20 bg-white dark:bg-[#09090B]">
           {/* Decorative background — brand glow + faint grid, both masked to fade */}
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
             <div
@@ -65,14 +65,14 @@ export function LandingPage() {
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="https://app.mesrai.com/login"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
+                  className="mesrai-cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
                 >
                   Start free
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
                 <a
                   href="/guides/quickstart"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
+                  className="mesrai-cta-secondary inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
                 >
                   Quickstart
                 </a>
@@ -151,7 +151,7 @@ export function LandingPage() {
         </section>
 
         {/* DOC SECTIONS */}
-        <section className="px-6 py-16 md:py-24 border-t border-gray-200 dark:border-[#18181B] bg-gray-50 dark:bg-[#0B0B0E]">
+        <section className="px-6 md:px-10 lg:px-14 py-16 md:py-20 border-t border-gray-200 dark:border-[#18181B] bg-gray-50 dark:bg-[#0B0B0E]">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#FF6B35]">
@@ -189,7 +189,7 @@ export function LandingPage() {
         </section>
 
         {/* LLM PROVIDERS */}
-        <section className="px-6 py-16 md:py-24 bg-white dark:bg-[#09090B]">
+        <section className="px-6 md:px-10 lg:px-14 py-16 md:py-20 bg-white dark:bg-[#09090B]">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#FF6B35]">
@@ -238,7 +238,7 @@ export function LandingPage() {
         </section>
 
         {/* GET STARTED CTA */}
-        <section className="relative overflow-hidden px-6 py-20 md:py-24 border-t border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#0B0B0E]">
+        <section className="relative overflow-hidden px-6 md:px-10 lg:px-14 py-20 border-t border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#0B0B0E]">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-70"
@@ -254,14 +254,14 @@ export function LandingPage() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="https://app.mesrai.com/login"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
+                className="mesrai-cta-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#FF6B35] text-white font-medium text-sm no-underline hover:bg-[#C2400A] transition-colors"
               >
                 Start free
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </a>
               <a
                 href="/guides/pricing"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
+                className="mesrai-cta-secondary inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-medium text-sm no-underline hover:border-[#FF6B35] transition-colors"
               >
                 See pricing
               </a>

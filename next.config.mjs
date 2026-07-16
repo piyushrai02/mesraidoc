@@ -15,6 +15,10 @@ const withNextra = nextra({
 export default withNextra({
   reactStrictMode: false,
   trailingSlash: false,
+  // Hide the floating Next.js dev badge (the black "N" circle at the
+  // bottom-left in `next dev`). It never ships to production, but it
+  // reads as a stray misplaced button while developing locally.
+  devIndicators: false,
   images: {
     unoptimized: true,
   },
