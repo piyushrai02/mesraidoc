@@ -143,227 +143,163 @@ html.dark .nextra-search kbd {
 }
 
 /* =====================================================
-   LEFT SIDEBAR - PROFESSIONAL ADVANCED STYLING
+   LEFT SIDEBAR — professional, fully theme-aware
+
+   Structural rules (spacing, radius, type scale) are written once and
+   apply to both themes. Only *colors* branch on html.dark /
+   html:not(.dark), so light and dark stay in lockstep by construction.
+   Hierarchy: top-level section headers (GUIDES) = small uppercase
+   eyebrow · separators (Getting Started) = Nextra group label · folder
+   toggles + links = calm title-case items.
    ===================================================== */
 
-/* Sidebar Container */
+/* --- Container --- */
 html.dark .nextra-sidebar-container {
-  background: linear-gradient(180deg, var(--mesrai-bg-secondary) 0%, rgba(15, 15, 18, 0.95) 100%);
+  background: var(--mesrai-bg-secondary);
   border-right: 1px solid var(--mesrai-border);
-  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.02);
 }
-
 html:not(.dark) .nextra-sidebar-container {
-  background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
-  border-right: 1px solid #E5E7EB;
+  background: #FBFBFC;
+  border-right: 1px solid #ECECEF;
 }
 
-/* Sidebar Inner Spacing */
-html.dark .nextra-sidebar-container > div {
-  padding: 0.75rem 0.5rem;
-}
-
-/* Custom Scrollbar */
-html.dark .nextra-sidebar-container::-webkit-scrollbar {
-  width: 5px;
-}
-
-html.dark .nextra-sidebar-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* --- Scrollbar --- */
+.nextra-sidebar-container::-webkit-scrollbar { width: 6px; }
+.nextra-sidebar-container::-webkit-scrollbar-track { background: transparent; }
 html.dark .nextra-sidebar-container::-webkit-scrollbar-thumb {
   background-color: var(--mesrai-border);
   border-radius: 10px;
 }
-
 html.dark .nextra-sidebar-container::-webkit-scrollbar-thumb:hover {
   background-color: var(--mesrai-border-light);
 }
-
-/* Sidebar Menu List */
-html.dark .nextra-sidebar-container ul {
-  padding: 0.25rem 0;
+html:not(.dark) .nextra-sidebar-container::-webkit-scrollbar-thumb {
+  background-color: #D4D4D8;
+  border-radius: 10px;
+}
+html:not(.dark) .nextra-sidebar-container::-webkit-scrollbar-thumb:hover {
+  background-color: #A1A1AA;
 }
 
-html.dark .nextra-sidebar-container li {
-  margin: 2px 0;
-}
+/* --- List spacing (structural) --- */
+.nextra-sidebar-container li { margin: 1px 0; }
 
 /* =====================================================
-   SIDEBAR NAVIGATION LINKS - ADVANCED
+   LEAF LINKS
    ===================================================== */
-
-/* Default Link State */
-html.dark .nextra-sidebar-container a {
+.nextra-sidebar-container a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
+  padding: 0.5rem 0.75rem;
   margin: 0 0.25rem;
-  border-radius: 8px;
+  border-radius: 7px;
   font-size: 0.875rem;
   font-weight: 450;
-  color: var(--mesrai-text-secondary);
   text-decoration: none;
   border: 1px solid transparent;
-  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  overflow: hidden;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Hover State - Subtle glow effect */
+/* Dark colors */
+html.dark .nextra-sidebar-container a { color: var(--mesrai-text-secondary); }
 html.dark .nextra-sidebar-container a:hover {
   color: var(--mesrai-text-primary);
   background-color: var(--mesrai-bg-hover);
-  border-color: var(--mesrai-border);
 }
-
-/* Active/Current Link State */
 html.dark .nextra-sidebar-container a[data-active="true"],
 html.dark .nextra-sidebar-container a[aria-current="page"] {
   color: var(--mesrai-text-primary);
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 107, 53, 0.08) 100%);
-  border-color: var(--mesrai-border-accent);
-  font-weight: 500;
+  background: rgba(255, 107, 53, 0.13);
+  font-weight: 550;
 }
 
-/* Active indicator bar */
-html.dark .nextra-sidebar-container a[data-active="true"]::before,
-html.dark .nextra-sidebar-container a[aria-current="page"]::before {
+/* Light colors */
+html:not(.dark) .nextra-sidebar-container a { color: #52525B; }
+html:not(.dark) .nextra-sidebar-container a:hover {
+  color: #18181B;
+  background-color: #F4F4F5;
+}
+html:not(.dark) .nextra-sidebar-container a[data-active="true"],
+html:not(.dark) .nextra-sidebar-container a[aria-current="page"] {
+  color: var(--mesrai-accent-dark);
+  background: rgba(255, 107, 53, 0.10);
+  font-weight: 550;
+}
+
+/* Active accent bar — same in both themes */
+.nextra-sidebar-container a[data-active="true"]::before,
+.nextra-sidebar-container a[aria-current="page"]::before {
   content: '';
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 3px;
-  height: 60%;
-  background: linear-gradient(180deg, var(--mesrai-accent) 0%, var(--mesrai-accent-light) 100%);
-  border-radius: 0 4px 4px 0;
-}
-
-html.dark .nextra-sidebar-container a[data-active="true"]:hover,
-html.dark .nextra-sidebar-container a[aria-current="page"]:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 107, 53, 0.12) 100%);
-}
-
-/* Light Mode Sidebar Links */
-html:not(.dark) .nextra-sidebar-container a {
-  color: #4B5563;
-  border-radius: 8px;
-  padding: 0.625rem 0.875rem;
-  margin: 0 0.25rem;
-  border: 1px solid transparent;
-  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
-}
-
-html:not(.dark) .nextra-sidebar-container a:hover {
-  color: #111827;
-  background-color: #F3F4F6;
-  border-color: #E5E7EB;
-}
-
-html:not(.dark) .nextra-sidebar-container a[data-active="true"],
-html:not(.dark) .nextra-sidebar-container a[aria-current="page"] {
-  color: var(--mesrai-accent);
-  background-color: rgba(255, 107, 53, 0.08);
-  border-color: rgba(255, 107, 53, 0.2);
-  font-weight: 500;
+  height: 55%;
+  background: var(--mesrai-accent);
+  border-radius: 0 3px 3px 0;
 }
 
 /* =====================================================
-   SIDEBAR FOLDER/SECTION BUTTONS - ADVANCED
+   FOLDER / SECTION TOGGLE BUTTONS
    ===================================================== */
-
-html.dark .nextra-sidebar-container button {
+.nextra-sidebar-container button {
   display: flex;
   align-items: center;
   width: calc(100% - 0.5rem);
-  padding: 0.625rem 0.875rem;
+  padding: 0.5rem 0.75rem;
   margin: 0 0.25rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--mesrai-text-primary);
+  border-radius: 7px;
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  /* top-level = small uppercase section eyebrow (GUIDES / KNOWLEDGE) */
   text-transform: uppercase;
-  letter-spacing: 0.025em;
-  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 700;
 }
-
+html.dark .nextra-sidebar-container button { color: var(--mesrai-text-muted); }
 html.dark .nextra-sidebar-container button:hover {
-  color: var(--mesrai-text-primary);
+  color: var(--mesrai-text-secondary);
   background-color: var(--mesrai-bg-hover);
-  border-color: var(--mesrai-border);
 }
-
-html:not(.dark) .nextra-sidebar-container button {
-  color: #1F2937;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  font-size: 0.75rem;
-}
-
+html:not(.dark) .nextra-sidebar-container button { color: #71717A; }
 html:not(.dark) .nextra-sidebar-container button:hover {
-  color: #111827;
-  background-color: #F3F4F6;
+  color: #3F3F46;
+  background-color: #F4F4F5;
 }
 
 /* =====================================================
-   NESTED ITEMS - TREE STRUCTURE
+   NESTED TREE (one level in)
    ===================================================== */
-
-html.dark .nextra-sidebar-container ul ul {
-  margin-left: 0.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--mesrai-border);
-  position: relative;
+.nextra-sidebar-container ul ul {
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid transparent;
 }
+html.dark .nextra-sidebar-container ul ul { border-left-color: var(--mesrai-border); }
+html:not(.dark) .nextra-sidebar-container ul ul { border-left-color: #E4E4E7; }
 
-/* Animated border on hover for nested items */
-html.dark .nextra-sidebar-container ul ul:hover {
-  border-left-color: var(--mesrai-accent);
-}
-
-html:not(.dark) .nextra-sidebar-container ul ul {
-  margin-left: 0.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid #E5E7EB;
-}
-
-html:not(.dark) .nextra-sidebar-container ul ul:hover {
-  border-left-color: var(--mesrai-accent);
-}
-
-/* Nested links - slightly smaller */
-html.dark .nextra-sidebar-container ul ul a {
+/* Nested links a touch smaller */
+.nextra-sidebar-container ul ul a {
   font-size: 0.8125rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4375rem 0.75rem;
 }
 
 /* Nested folder toggles (e.g. "Code Review", "Pulse") read as calm
-   title-case sub-items — uppercase is reserved for the top-level
-   GUIDES / KNOWLEDGE / RECIPES section headers so the hierarchy is
-   legible instead of a wall of shouting capitals. */
-html.dark .nextra-sidebar-container ul ul button,
-html:not(.dark) .nextra-sidebar-container ul ul button {
+   title-case items — uppercase is reserved for the top-level headers. */
+.nextra-sidebar-container ul ul button {
   text-transform: none;
   letter-spacing: normal;
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 550;
 }
-
-html.dark .nextra-sidebar-container ul ul button {
-  color: var(--mesrai-text-secondary);
-}
-
-html:not(.dark) .nextra-sidebar-container ul ul button {
-  color: #4B5563;
-}
+html.dark .nextra-sidebar-container ul ul button { color: var(--mesrai-text-secondary); }
+html:not(.dark) .nextra-sidebar-container ul ul button { color: #52525B; }
 
 /* =====================================================
    MAIN CONTENT AREA
