@@ -924,6 +924,30 @@ html:not(.dark) .nextra-sidebar-footer button:hover {
   color: #111827 !important;
 }
 
+/* The collapse control was inheriting the generic footer-button styling
+   and stretching into a wide empty box. Pin it to a compact square icon
+   button and let the theme toggle take the remaining width so the two
+   controls sit balanced: [ theme toggle .......... ] [▢]. */
+.nextra-sidebar-footer { gap: 0.5rem !important; }
+.nextra-sidebar-footer > div:first-child { flex: 1 1 auto !important; min-width: 0; }
+
+.nextra-sidebar-footer button[title="Hide sidebar"],
+.nextra-sidebar-footer button[title="Show sidebar"] {
+  flex: 0 0 auto !important;
+  width: 2.25rem !important;
+  min-width: 2.25rem !important;
+  height: 2.25rem !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.nextra-sidebar-footer button[title="Hide sidebar"] svg,
+.nextra-sidebar-footer button[title="Show sidebar"] svg {
+  width: 1rem;
+  height: 1rem;
+}
+
 /* =====================================================
    MOBILE RESPONSIVE ADJUSTMENTS
    ===================================================== */
