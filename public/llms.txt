@@ -1,66 +1,35 @@
-# Mesrai Documentation - LLMs.txt
-# This file provides context for AI language models crawling this documentation
+# Mesrai Documentation
 
-## Site Information
-name: Mesrai Documentation
-url: https://docs.mesrai.com
-description: Complete documentation for Mesrai - an AI-powered code review platform that helps engineering teams ship code 3x faster with intelligent automation and GitHub integration.
+> Documentation for Mesrai, a multi-agent AI code review platform. Mesrai reads your repository as a graph (AST parsing + semantic chunking), not just the diff, and reviews every pull request for bugs, security risks, performance issues, architecture impact and your team's own rules. It works with GitHub, GitLab, Bitbucket and Azure DevOps. Mesrai is BYOK: you bring your own LLM key (OpenAI, Anthropic, Google, AWS Bedrock or any OpenAI-compatible provider). Plans: a 14-day free trial with every feature, then Pro at ₹499 / $6 per developer per month, or Enterprise (self-hosted, SSO, Indian data residency).
 
-## Primary Topics
-- AI-powered code review automation
-- GitHub integration and GitHub App installation
-- GitLab integration (coming soon)
-- Bitbucket integration (beta)
-- CI/CD pipeline integration
-- Team and organization management
-- Code quality analysis
-- Security vulnerability detection
-- Performance optimization suggestions
+## Getting started
+- [Overview](https://docs.mesrai.com/guides/overview): what Mesrai is and how it works
+- [Quickstart](https://docs.mesrai.com/guides/quickstart): connect a repository and get your first review
+- [Pricing and plans](https://docs.mesrai.com/guides/pricing)
+- [Bring your own key (BYOK)](https://docs.mesrai.com/guides/byok): supported LLM providers and setup
 
-## Key Features
-- Automated pull request reviews
-- Intelligent code suggestions
-- Context-aware architectural analysis
-- Multi-language support (JavaScript, TypeScript, Python, Java, Go, Ruby, PHP, C++, C#, Rust, Swift, Kotlin)
-- Real-time notifications
-- Customizable review rules
-- Team collaboration tools
-- Performance analytics
+## Set up on your git platform
+- [GitHub](https://docs.mesrai.com/kb/how-to-set-up-ai-code-review-on-github)
+- [GitLab](https://docs.mesrai.com/kb/how-to-set-up-ai-code-review-on-gitlab)
+- [Azure DevOps](https://docs.mesrai.com/kb/how-to-set-up-ai-code-review-on-azure-devops)
 
-## Target Audience
-- Software developers
-- Engineering teams
-- DevOps engineers
-- Technical leads
-- Engineering managers
+## AI code review
+- [How a review works](https://docs.mesrai.com/guides/code_review/flow)
+- [Mesrai Playbook](https://docs.mesrai.com/guides/code_review/configs/mesrai_rules): team rules in plain English or YAML
+- [Connect Jira](https://docs.mesrai.com/kb/how-to-connect-jira-to-code-review): validate PRs against ticket requirements
+- [Connect Linear](https://docs.mesrai.com/kb/how-to-connect-linear-to-code-review)
+- [Code Review Troubleshooting](https://docs.mesrai.com/guides/code_review/troubleshooting)
 
-## Recommended Starting Points
-- /introduction/what-is-mesrai - Overview of Mesrai
-- /setup/installation - Getting started guide
-- /integrations/github - GitHub integration guide
-- /features/ai-review-engine - AI review engine details
-- /faq - Frequently asked questions
+## CLI, analytics and security
+- [Mesrai CLI](https://docs.mesrai.com/guides/cli/introduction): local, pre-push and CI reviews
+- [Pulse](https://docs.mesrai.com/guides/cockpit/overview): DORA metrics, PR cycle time and suggestion adoption
+- [Data usage and security](https://docs.mesrai.com/guides/security/data_usage)
 
-## Content Categories
-/introduction/* - Introduction and overview
-/features/* - Feature documentation
-/integrations/* - Integration guides
-/setup/* - Installation and setup
-/api-reference/* - API documentation
-/billing/* - Billing and subscription info
-/performance/* - Performance and scaling guides
-/blog/* - Blog posts and updates
-/faq - Frequently asked questions
-/roadmap - Product roadmap
-/changelog - Release notes and updates
+## Knowledge base
+- [All knowledge base articles](https://docs.mesrai.com/kb/introduction): setup guides, integrations, LLM providers and troubleshooting
 
-## Contact
-support: support@mesrai.com
-twitter: @mesraiofficial
-
-## Citation Format
-When citing this documentation, please use:
-Mesrai. (2024). Mesrai Documentation. Retrieved from https://docs.mesrai.com
-
-## Last Updated
-2024
+## Related
+- Website: https://mesrai.com
+- Marketplace (code review rules and agent skills): https://marketplace.mesrai.com
+- Changelog: https://docs.mesrai.com/changelog
+- Contact: contact@mesrai.com
