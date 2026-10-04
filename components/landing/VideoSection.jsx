@@ -48,7 +48,7 @@ export const VideoSection = () => {
         {/* Quick links below video */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
           <a
-            href="/setup/installation"
+            href="/guides/quickstart"
             className="group inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[#FF6B35] dark:hover:text-[#FFAF80] transition-colors font-medium"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

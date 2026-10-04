@@ -1,8 +1,28 @@
 import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
+import { getComponents, useConfig } from 'nextra-theme-docs'
 import { Logo } from './components/Logo'
 import { Footer } from './components/Footer'
 import { NavbarExtra } from './components/Navbar'
+
+// The theme's own layout wrapper (sidebar + TOC + body) and styled <h1>.
+const { wrapper: NextraWrapper, h1: ThemeH1 } = getComponents({})
+
+// Docs pages begin at `##`, so without this they render no <h1> at all.
+// Prepend the frontmatter `title:` as the page's single H1, using the
+// theme's h1 so it looks identical to a markdown `# Heading`. Pages with
+// no frontmatter title (which carry their own `#` heading) are untouched,
+// as is the landing page, which renders its own <h1>.
+function PageWrapper({ children, ...props }) {
+  const { frontMatter } = useConfig()
+  const { pathname } = useRouter()
+  const showH1 = Boolean(frontMatter?.title) && pathname !== '/'
+  return (
+    <NextraWrapper {...props}>
+      {showH1 && <ThemeH1>{frontMatter.title}</ThemeH1>}
+      {children}
+    </NextraWrapper>
+  )
+}
 
 const SITE_NAME = 'Mesrai Docs'
 const SITE_DESCRIPTION = 'Documentation for Mesrai — multi-agent AI code review across GitHub, GitLab, Bitbucket, and Azure Repos. BYOK supported. India-first billing.'
@@ -19,19 +39,14 @@ const OG_IMAGE_HEIGHT = '630'
 export default {
   logo: <Logo width={140} height={36} />,
 
-  // Dynamic <title> tag — critical for SEO
-  useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath === '/') {
-      return { titleTemplate: 'Mesrai Docs – AI-Powered Code Review Platform' }
-    }
-    return { titleTemplate: `%s – ${SITE_NAME}` }
+  components: {
+    wrapper: PageWrapper,
   },
 
-  // Dynamic head — generates per-page meta tags
+  // Dynamic head — generates per-page <title> and meta tags
   head: function Head() {
     const { asPath, pathname } = useRouter()
-    const { frontMatter } = useConfig()
+    const { frontMatter, title } = useConfig()
     const url = `${SITE_URL}${asPath.split('?')[0].replace(/\/$/, '') || '/'}`
     // Prefer the page's own frontmatter `description:` (set on every
     // .mdx page) so each URL gets a unique meta description. Fall back
@@ -41,8 +56,23 @@ export default {
     // every page hurt more than they help.
     const description = frontMatter?.description || SITE_DESCRIPTION
 
+    // Nextra 3's default `head` is what emits <title> + og:title. Supplying
+    // a custom `head` replaces it, so we must render the title ourselves —
+    // otherwise every page ships with no <title>. (`useNextSeoProps` was a
+    // Nextra 2 option and is ignored in v3.) `title` is Nextra's computed
+    // page title: frontmatter `title:`, else the first H1. The landing page
+    // sets its own <title> in components/landing/LandingPage.jsx.
+    const isHome = pathname === '/'
+    const pageTitle = isHome
+      ? title || SITE_NAME
+      : title ? `${title} – ${SITE_NAME}` : SITE_NAME
+
     return (
       <>
+        {!isHome && <title>{pageTitle}</title>}
+        <meta property="og:title" content={pageTitle} />
+        <meta name="twitter:title" content={pageTitle} />
+
         {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

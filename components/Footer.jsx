@@ -54,18 +54,18 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Product */}
           <FooterSection title="Product">
-            <FooterLink href="/introduction/what-is-mesrai">Overview</FooterLink>
-            <FooterLink href="/features/ai-review-engine">AI Review Engine</FooterLink>
-            <FooterLink href="/features/architectural-analysis">Architectural Analysis</FooterLink>
+            <FooterLink href="/guides/overview">Overview</FooterLink>
+            <FooterLink href="/guides/code_review/flow">AI Review Engine</FooterLink>
+            <FooterLink href="/guides/code_review/flow">Architectural Analysis</FooterLink>
             <FooterLink href="https://marketplace.mesrai.com" external>Marketplace</FooterLink>
-            <FooterLink href="/setup/installation">Quick Setup</FooterLink>
+            <FooterLink href="/guides/quickstart">Quick Setup</FooterLink>
           </FooterSection>
 
           {/* Resources */}
           <FooterSection title="Resources">
-            <FooterLink href="/introduction/what-is-mesrai">Documentation</FooterLink>
+            <FooterLink href="/guides/overview">Documentation</FooterLink>
             {/* <FooterLink href="/api-reference/overview">API Reference</FooterLink> */}
-            <FooterLink href="/integrations/overview">Integrations</FooterLink>
+            <FooterLink href="/kb/introduction">Integrations</FooterLink>
             <FooterLink href="/changelog">Changelog</FooterLink>
           </FooterSection>
 

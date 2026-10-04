@@ -67,7 +67,7 @@
       "name": "Getting Started",
       "short_name": "Start",
       "description": "Installation and setup guide",
-      "url": "/setup/installation",
+      "url": "/guides/quickstart",
       "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
     },
     {
