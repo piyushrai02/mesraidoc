@@ -78,7 +78,6 @@ module.exports = {
         allow: '/',
         disallow: [
           '/api/',
-          '/_next/',
           '/404',
           '/500',
           '/operations/',
