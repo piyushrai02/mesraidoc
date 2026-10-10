@@ -37,8 +37,8 @@ const organizationSchema = {
   ],
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Bangalore",
-    "addressRegion": "Karnataka",
+    "addressLocality": "Gurgaon",
+    "addressRegion": "Haryana",
     "addressCountry": "IN"
   },
   "contactPoint": [
@@ -120,7 +120,13 @@ const productSchema = {
       "price": "499",
       "priceCurrency": "INR",
       "description": "Per active developer per month, unlimited PR reviews",
-      "billingIncrement": "P1M"
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "499",
+        "priceCurrency": "INR",
+        "unitText": "per active developer per month",
+        "billingDuration": "P1M"
+      }
     }
   ],
   "featureList": [

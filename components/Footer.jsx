@@ -80,7 +80,7 @@ export const Footer = () => {
           {/* Legal */}
           <FooterSection title="Legal">
             <FooterLink href="https://mesrai.com/privacy-policy" external>Privacy Policy</FooterLink>
-            <FooterLink href="https://mesrai.com/terms-of-service" external>Terms of Service</FooterLink>
+            <FooterLink href="https://mesrai.com/terms-and-conditions" external>Terms of Service</FooterLink>
             {/* <FooterLink href="https://mesrai.com/security" external>Security</FooterLink>
             <FooterLink href="https://mesrai.com/dpa" external>DPA</FooterLink> */}
           </FooterSection>
