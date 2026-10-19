@@ -16,7 +16,7 @@ Decision Memory fixes this by:
 
 - **Capturing reasoning automatically** at every turn-complete event.
 - **Storing it in the repo** so the context travels with the code, not with a session.
-- **Scoping it by PR and by module** so you get both branch-level context and long-term module knowledge.
+- **Scoping it by pull request** so each branch carries the reasoning behind its own changes.
 
 ## How it works
 
@@ -25,12 +25,10 @@ When enabled, Mesrai installs hooks into your AI agent's turn-complete events. E
 ```
 .mesrai/
 ├── pr/by-sha/<head-sha>.md    # PR-level decisions (versioned with code)
-├── memory/<module-id>.md      # Module-level decisions (long-term)
 └── modules.yml                # Module configuration
 ```
 
 - **PR memory** lives on the branch. It's scoped to the current head SHA — as the branch evolves, new files are created for each meaningful state.
-- **Module memory** is long-term. It accumulates decisions per module over time.
 - **`modules.yml`** tells Mesrai how to map paths to modules (e.g., `src/auth/**` → `auth` module).
 
 ## Supported agents
@@ -54,16 +52,17 @@ mesrai decisions enable --agents claude,cursor
 mesrai decisions enable --agents codex --codex-config ~/.codex/config.toml
 ```
 
-If a previous config is in place, force a reinstall:
+To reinstall the integration files, disable and enable again:
 
 ```bash
-mesrai decisions enable --force
+mesrai decisions disable
+mesrai decisions enable
 ```
 
-Check what's wired up:
+Check what's wired up — the **Decision hooks** line shows the current state:
 
 ```bash
-mesrai decisions status
+mesrai status
 ```
 
 ## Workflow
@@ -80,19 +79,10 @@ mesrai decisions status
     As you (or your agent) work, each turn-complete event captures a decision to `.mesrai/pr/by-sha/<sha>.md`. Commit these files along with your code changes — the reasoning is now in version control.
   </Step>
   <Step title="Review captured decisions">
-    ```bash
-    mesrai decisions show                    # current branch PR memory
-    mesrai decisions show feat/auth          # decisions for a specific branch
-    mesrai decisions show auth               # module decisions for 'auth'
-    ```
-  </Step>
-  <Step title="Promote to long-term memory">
-    When a PR merges, promote its PR-level decisions to module-level memory so they persist beyond the branch:
+    Decisions are plain markdown files in your repository, so you can read them in your editor, in the pull request diff, or from the terminal:
 
     ```bash
-    mesrai decisions promote                               # current branch, all matched modules
-    mesrai decisions promote --branch feat/auth            # a specific branch
-    mesrai decisions promote --branch feat/auth --modules auth,users
+    ls .mesrai/pr/by-sha/
     ```
   </Step>
 </Steps>

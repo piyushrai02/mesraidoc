@@ -246,14 +246,12 @@ Capture and persist AI agent decisions into your repository for future reference
 mesrai decisions enable                                    # All agents
 mesrai decisions enable --agents claude,cursor            # Specific agents
 mesrai decisions enable --agents codex --codex-config ~/.codex/config.toml
-mesrai decisions enable --force                           # Overwrite existing config
 ```
 
 | Flag                    | Default                | Description                      |
 | ----------------------- | ---------------------- | -------------------------------- |
 | `--agents <agents>`     | `claude,cursor,codex`  | Comma-separated agent list       |
 | `--codex-config <path>` | `~/.codex/config.toml` | Path to Codex config             |
-| `--force`               | —                      | Overwrite existing `modules.yml` |
 
 ### `decisions disable`
 
@@ -263,36 +261,7 @@ mesrai decisions disable
 
 Removes all decision hooks. Preserved data in `.mesrai/` is not deleted.
 
-### `decisions status`
-
-```bash
-mesrai decisions status
-```
-
-Shows PR memory, sessions, last SHA, agent, and module config.
-
-### `decisions show`
-
-```bash
-mesrai decisions show                  # Current branch PR memory
-mesrai decisions show auth             # Module decisions for 'auth'
-mesrai decisions show feat/new-api     # PR decisions for a specific branch
-```
-
-### `decisions promote`
-
-```bash
-mesrai decisions promote                                   # Current branch, all modules
-mesrai decisions promote --branch feat/auth                # Specific branch
-mesrai decisions promote --branch feat/auth --modules auth,users
-```
-
-| Flag              | Description                                       |
-| ----------------- | ------------------------------------------------- |
-| `--branch <name>` | Branch name (default: current branch)             |
-| `--modules <ids>` | Comma-separated module IDs (default: all matched) |
-
-Promotes PR-level decisions to long-term module memory.
+To see whether decision hooks are installed, run `mesrai status`.
 
 ---
 

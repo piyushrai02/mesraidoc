@@ -102,11 +102,10 @@ When enabled, Mesrai installs hooks in Claude Code, Cursor, or Codex that fire o
 ```
 .mesrai/
 ├── pr/by-sha/<head-sha>.md    # PR-level decisions (versioned with code)
-├── memory/<module-id>.md      # Module-level decisions (long-term)
 └── modules.yml                # Module configuration
 ```
 
-PR-level memory lives on the branch. When a PR merges, promote its decisions to module-level memory (`mesrai decisions promote`) so future work on that module starts with the accumulated context.
+PR-level memory lives on the branch and is committed with your code, so the reasoning behind a change stays next to the change itself.
 
 Full walk-through: [Decision Memory](decision_memory).
 

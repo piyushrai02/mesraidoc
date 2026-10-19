@@ -91,8 +91,8 @@ mesrai review --verbose    # or any command with --verbose
   </Accordion>
 
   <Accordion title="Decisions (memory) hooks aren't capturing">
-    - Run `mesrai decisions status` to see which agents are wired up.
-    - Re-run `mesrai decisions enable --force` to reinstall integration files.
+    - Run `mesrai status` and check the **Decision hooks** line.
+    - Reinstall the integration files with `mesrai decisions disable` followed by `mesrai decisions enable`.
     - For Codex, ensure `~/.codex/config.toml` contains the `notify = ["mesrai", "decisions", "capture", ...]` line, or pass `--codex-config <path>`.
     - Check the agent actually emits turn-complete events (some older Claude Code configurations don't).
   </Accordion>
